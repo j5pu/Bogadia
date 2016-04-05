@@ -1,0 +1,2 @@
+/*Ocultar Carrito si no estaás logueado + estás fuera de la tienda + el carrito está vacío*/
+.shop-drop { display: none !important; }

@@ -41,16 +41,6 @@ if(get_cfield( 'related_posts') != '' ) {
 
 		<?php get_template_part( 'page-parts/posts-social-share' ); ?>
 
-		<!-- Logo comentarios en tablet y móvil -->
-		<?php 
-
-		$url_actual = home_url( add_query_arg( array(), $wp->request ) );
-		echo '<small class="meta-comment-count display-comments"><a href="'.$url_actual.'/#comments"><i class="icon-chat-1 hover-tip"></i></a></small>';
-
-		?>
-
-		<!-- Logo comentarios en tablet y móvil END-->
-
 		<!-- WP-PostRating - Muestra las estrellas para valorar el post -->
 		<?php if(function_exists('the_ratings')) { the_ratings(); } ?>
 		<!-- WP-PostRating - Muestra las estrellas para valorar el post END-->

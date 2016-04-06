@@ -378,7 +378,7 @@ function prefix_insert_post_ads( $content ) {
 }
 	$post_re = $post_re1.$post_re2.$post_re3;
 
-	$ad_code = '<div style="max-width: 180px; float: left; margin:0px 20px 20px 0px;"><h5 style="margin:0px auto; font-size: 14px; text-align: center;"><strong>ARTICULOS DE INTERES</strong></h5><hr style="margin: 0px 0px 5px 0px;" />'.$post_re.'</div>';	
+	$ad_code = '<div style="max-width: 180px; float: left; margin:0px 20px 20px 0px;"><h5 style="margin:0px auto; font-size: 14px; text-align: center;"><strong>ARTÍCULOS DE INTERÉS</strong></h5><hr style="margin: 0px 0px 5px 0px;" />'.$post_re.'</div>';
 
 	if ( is_single() && ! is_admin() && !is_product() && !in_category('Streetstyle') ) {
 		return prefix_insert_after_paragraph( $ad_code, 2, $content );

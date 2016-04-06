@@ -18,9 +18,9 @@ function insert_interstitial() {
 add_action('kleo_header', 'insert_interstitial');
 
 function assets(){
-    wp_register_style( 'boga_dfp_ads', 'assets/css/dfp_ads.css');
+    wp_register_style( 'boga_dfp_ads', '/wp-content/plugins/boga-ads/assets/css/dfp_ads.css');
     wp_enqueue_style( 'boga_dfp_ads' );
-    wp_register_script( 'boga_dfp_define_slots', 'assets/js/dfp_define_slots.js', array('jquery'));
+    wp_register_script( 'boga_dfp_define_slots', '/wp-content/plugins/boga-ads/assets/js/dfp_define_slots.js', array('jquery'));
     wp_enqueue_script( 'boga_dfp_define_slots' );
 }
 

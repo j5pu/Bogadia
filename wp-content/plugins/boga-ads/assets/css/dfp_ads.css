@@ -1,0 +1,112 @@
+/* Anuncios laterales */
+@media screen and (min-width: 1770px){
+    #div-gpt-ad-1457625928117-1 {
+        margin-right: 5%;
+    }
+    #div-gpt-ad-1457625928117-2 {
+        margin-left: 5%;
+    }
+}
+@media screen and (min-width: 1670px) and (max-width: 1769px){
+    #div-gpt-ad-1457625928117-1 {
+        margin-right: 2%;
+    }
+    #div-gpt-ad-1457625928117-2 {
+        margin-left: 2%;
+    }
+}
+@media screen and (min-width: 1600px) and (max-width: 1669px){
+    #div-gpt-ad-1457625928117-1 {
+        margin-right: 1%;
+    }
+    #div-gpt-ad-1457625928117-2 {
+        margin-left: 1%;
+    }
+}
+@media screen and (max-width: 1599px){
+    #div-gpt-ad-1457625928117-1 {
+        margin-right: 0%;
+    }
+    #div-gpt-ad-1457625928117-2 {
+        margin-left: 0%;
+    }
+}
+
+.sidebar.sidebar-main.col-sm-4.sidebar-right{
+    background-color: white;
+}
+@media screen and (max-width: 1635px){
+    #div-gpt-ad-1457625928117-1 {
+        display: none;
+    }
+    #div-gpt-ad-1457625928117-2 {
+        display: none;
+    }
+    #div-gpt-ad-1457722273425-0 {
+        display: block;
+    }
+    #div-gpt-ad-1457722273425-1 {
+        display: block;
+    }
+}
+@media screen and (min-width: 1636px){
+    #div-gpt-ad-1457625928117-1 {
+        display: block;
+    }
+    #div-gpt-ad-1457625928117-2 {
+        display: block;
+    }
+    #div-gpt-ad-1457722273425-0 {
+        display: none;
+    }
+    #div-gpt-ad-1457722273425-1 {
+        display: none;
+    }
+}
+
+@media screen and (min-width: 1430px) and (max-width: 1634px){
+    #div-gpt-ad-1457722273425-0 {
+        margin-right: 6%;
+    }
+    #div-gpt-ad-1457722273425-1 {
+        margin-left: 6%;
+    }
+}
+@media screen and (min-width: 1330px) and (max-width: 1429px){
+    #div-gpt-ad-1457722273425-0 {
+        margin-right: 3%;
+    }
+    #div-gpt-ad-1457722273425-1 {
+        margin-left: 3%;
+    }
+}
+@media screen and (max-width: 1329px){
+    #div-gpt-ad-1457722273425-0 {
+        margin-right: 0%;
+    }
+    #div-gpt-ad-1457722273425-1 {
+        margin-left: 0%;
+    }
+}
+@media screen and (max-width: 1239px){
+    #div-gpt-ad-1457722273425-0 {
+        display: none;
+    }
+    #div-gpt-ad-1457722273425-1 {
+        display: none;
+    }
+}
+
+.page-boxed, .kleo-navbar-fixed .page-boxed .kleo-main-header, .kleo-navbar-fixed.navbar-transparent .page-boxed #header{
+    max-width: 970px !important;
+}
+
+body.registration.register.buddypress > .page-boxed{
+    max-width: 100% !important;
+}
+body.registration.register.buddypress > .page-boxed > #main > #ads_container{
+    visibility: hidden !important;
+}
+body.woocommerce-page > .page-boxed > #main > #div-gpt-ad-1457625928117-1{
+    visibility: hidden !important;
+}

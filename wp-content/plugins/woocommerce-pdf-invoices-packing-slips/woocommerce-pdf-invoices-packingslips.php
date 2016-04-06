@@ -3,7 +3,7 @@
  * Plugin Name: WooCommerce PDF Invoices & Packing Slips
  * Plugin URI: http://www.wpovernight.com
  * Description: Create, print & email PDF invoices & packing slips for WooCommerce orders.
- * Version: 1.5.28
+ * Version: 1.5.29
  * Author: Ewout Fernhout
  * Author URI: http://www.wpovernight.com
  * License: GPLv2 or later
@@ -33,7 +33,7 @@ if ( !class_exists( 'WooCommerce_PDF_Invoices' ) ) {
 			self::$plugin_basename = plugin_basename(__FILE__);
 			self::$plugin_url = plugin_dir_url(self::$plugin_basename);
 			self::$plugin_path = trailingslashit(dirname(__FILE__));
-			self::$version = '1.5.28';
+			self::$version = '1.5.29';
 			
 			// load the localisation & classes
 			add_action( 'plugins_loaded', array( $this, 'translations' ) ); // or use init?
@@ -308,8 +308,12 @@ if ( !class_exists( 'WooCommerce_PDF_Invoices' ) ) {
 		 * Return/Show shop/company address if provided
 		 */
 		public function get_shop_address() {
-			if (isset($this->settings->template_settings['shop_address']))
-				return apply_filters( 'wpo_wcpdf_shop_address', wpautop( wptexturize( $this->settings->template_settings['shop_address'] ) ) );
+			$shop_address = apply_filters( 'wpo_wcpdf_shop_address', wpautop( wptexturize( $this->settings->template_settings['shop_address'] ) ) );
+			if (!empty($shop_address)) {
+				return $shop_address;
+			} else {
+				return false;
+			}
 		}
 		public function shop_address() {
 			echo $this->get_shop_address();

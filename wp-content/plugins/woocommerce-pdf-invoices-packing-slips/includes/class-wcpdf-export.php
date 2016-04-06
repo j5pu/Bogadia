@@ -239,6 +239,11 @@ if ( ! class_exists( 'WooCommerce_PDF_Invoices_Export' ) ) {
 			$this->template_type = $template_type;
 			$order_ids = apply_filters( 'wpo_wcpdf_process_order_ids', $order_ids, $template_type );
 
+			// custom function fix
+			if (function_exists('wpo_wcpdf_payment_form')) {
+				return false;
+			}
+
 			// filter out trashed orders
 			foreach ($order_ids as $key => $order_id) {
 				$order_status = get_post_status( $order_id );
@@ -262,7 +267,7 @@ if ( ! class_exists( 'WooCommerce_PDF_Invoices_Export' ) ) {
 				do_action( 'wpo_wcpdf_process_template_order', $template_type, $order_id );
 
 				$template = $this->template_path . '/' . $template_type . '.php';
-				$template = apply_filters( 'wpo_wcpdf_template_file', $template, $template_type );
+				$template = apply_filters( 'wpo_wcpdf_template_file', $template, $template_type, $this->order );
 
 				if (!file_exists($template)) {
 					throw new Exception('Template not found! Check if the following file exists: <pre>'.$template.'</pre><br/>');
@@ -654,6 +659,10 @@ if ( ! class_exists( 'WooCommerce_PDF_Invoices_Export' ) ) {
 					}
 				}
 				// die($invoice_number);
+
+				// invoice number logging
+				// $order_number = ltrim($this->order->get_order_number(), '#');
+				// $this->log( $order_id, "Invoice number {$invoice_number} set for order {$order_number} (id {$order_id})" );
 
 				update_post_meta($order_id, '_wcpdf_invoice_number', $invoice_number);
 				update_post_meta($order_id, '_wcpdf_formatted_invoice_number', $this->get_invoice_number( $order_id ) );

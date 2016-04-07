@@ -33,7 +33,7 @@ jQuery(document).ready(function(){
     jQuery('#share_msg').on('change', function(){
         msg = jQuery('#share_msg').val();
     });
-    jQuery("#compartir_opinion").delay( 1000 ).slideDown('slow');
+    jQuery("#compartir_opinion").delay( 5000 ).slideDown('slow');
     jQuery("#close_compartir_opinion").on('click', function(){
         jQuery("#compartir_opinion_desplegar").slideUp('slow');
         jQuery("#close_compartir_opinion").fadeOut('slow');
@@ -46,6 +46,7 @@ jQuery(document).ready(function(){
     });
     jQuery('#compartir_opinion_form').on('submit', function(event){
         event.preventDefault();
+        jQuery('#share_msg').blur();
         jQuery('#share_submit').click();
     });
     jQuery('.hide-alert').on('click', function(){

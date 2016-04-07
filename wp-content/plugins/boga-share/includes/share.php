@@ -19,4 +19,32 @@
     </div>
 </div>
 
+<?php if(is_user_logged_in()){ ?>
+<script>
+    // Additional JS functions here
+    window.fbAsyncInit = function() {
+        FB.init({
+            appId      : '<?php echo sq_option('fb_app_id'); ?>', // App ID
+            version    : 'v2.1',
+            status     : true, // check login status
+            cookie     : true, // enable cookies to allow the server to access the session
+            xfbml      : true,  // parse XFBML
+            oauth      : true
+        });
 
+        // Additional init code here
+        jQuery('#fb-root').trigger('facebook:init');
+
+    };
+
+    // Load the SDK asynchronously
+    (function(d, s, id) {
+        var js, fjs = d.getElementsByTagName(s)[0];
+        if (d.getElementById(id)) return;
+        js = d.createElement(s); js.id = id;
+        js.src = "//connect.facebook.net/<?php echo apply_filters('kleo_facebook_js_locale', 'en_US'); ?>/sdk.js";
+        fjs.parentNode.insertBefore(js, fjs);
+    }(document, 'script', 'facebook-jssdk'));
+
+</script>
+<?php } ?>

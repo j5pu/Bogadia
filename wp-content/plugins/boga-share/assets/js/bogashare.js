@@ -20,15 +20,13 @@ function myFacebookLogin() {
     });
 }
 function myFacebookShare() {
-    FB.login(function(response) {
-        FB.api('/me/feed', 'post', {message: msg, link: document.location.href}, function (response) {
-            if (!response || response.error) {
-                document.getElementById("danger").style.display = 'block';
-                // http://localhost/wp-content/plugins/boga-share/new_share.php
-            } else {
-                document.getElementById("success").style.display = 'block';
-            }
-        });
+    FB.api('/me/feed', 'post', {message: msg, link: document.location.href}, function (response) {
+        if (!response || response.error) {
+            document.getElementById("danger").style.display = 'block';
+            // http://localhost/wp-content/plugins/boga-share/new_share.php
+        } else {
+            document.getElementById("success").style.display = 'block';
+        }
     });
 }
 jQuery(document).ready(function(){

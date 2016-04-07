@@ -149,7 +149,7 @@
 					if( ! $image ) {
                         $image = $img_url;
                     }
-			echo '<a href="'. get_permalink() .'" class="element-wrap">'.get_the_post_thumbnail( $post_id, 'medium' ).'</a>';
+			echo '<a title="'.get_the_title().'" href="'. get_permalink() .'" class="element-wrap">'.get_the_post_thumbnail( $post_id, 'medium' ).'</a>';
 					
 					echo '</div><!--end post-image-->';
 				}
@@ -163,7 +163,7 @@
 		<div class="post-header">
 			
 			<?php if ($kleo_post_format != 'status'): ?>
-			<h3 class="post-title entry-title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h3>
+			<h3 class="post-title entry-title"><a title="<?php the_title();?>" href="<?php the_permalink();?>"><?php the_title();?></a></h3>
 			<?php endif; ?>
 
 		</div><!--end post-header-->

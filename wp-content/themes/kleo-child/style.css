@@ -48,12 +48,10 @@ License URI: license.txt
 }
 .portada_posts .title_home {
     text-align: center;
-    line-height: 22px;
-}
-.portada_posts .title_home {
+    line-height: 28px;
     color: #000 !important;
     text-align: center;
-    font-size: 22px;
+    font-size: 28px;
     margin: 10px;
 }
 .portada_posts a, .post-image a, .post-title a {

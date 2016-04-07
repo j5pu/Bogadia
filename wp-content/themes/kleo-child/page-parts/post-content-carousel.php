@@ -131,7 +131,7 @@ global $kleo_config;
 				$image = aq_resize( $img_url, 197);
 				//$image = aq_resize( $img_url, $kleo_config['post_gallery_img_width'], $kleo_config['post_gallery_img_height'], true, true, true );
 				if( $image ) {
-					echo '<a href="'. get_permalink() .'" class="element-wrap">'
+					echo '<a title="'.get_the_title().'" href="'. get_permalink() .'" class="element-wrap">'
 						. '<img src="'.$image.'" alt="'. get_the_title() .'">'
 						. '</a>';	
 				}
@@ -143,7 +143,7 @@ global $kleo_config;
 	?>
 
 		<div class="entry-content">
-			<h4 class="post-title entry-title"><a href="<?php the_permalink();?>"><?php the_title();?></a></h4>
+			<h4 class="post-title entry-title"><a title="<?php the_title();?>" href="<?php the_permalink();?>"><?php the_title();?></a></h4>
 		</div>
 
 	</article>

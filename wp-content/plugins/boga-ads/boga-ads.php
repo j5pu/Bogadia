@@ -31,6 +31,5 @@ function assets(){
         wp_enqueue_style( 'boga_dfp_ads' );
     }
 }
-
 add_action('wp_enqueue_scripts', 'assets');
 ?>

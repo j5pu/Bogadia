@@ -11,7 +11,7 @@ jQuery(document).ready(function(){
         var tracking_link = jQuery('.ad_link').attr('href');
         jQuery('#trackinglink').attr('href', tracking_link);
         jQuery('.shareaholic-share-buttons-container.floated').hide();
-        jQuery('#interstitialModal').modal({show:true, backdrop: 'static'});
+        jQuery('#interstitialModal').delay(100).modal({show:true, backdrop: 'static'});
         localStorage.setItem('bogatitial', 1);
     }
     jQuery('#close-buton').on('click', function(){

@@ -619,3 +619,10 @@ function zanox() {
 }
 add_action('wp_head', 'zanox');
 
+/*Añadir código Pinterest al <head>*/
+
+function pinterest() {
+	echo '<meta name="p:domain_verify" content="fd4dd19485ea9f51eccc6866100da866"/>' ;
+}
+add_action('wp_head', 'pinterest');
+

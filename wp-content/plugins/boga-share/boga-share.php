@@ -5,13 +5,11 @@ Description: Muestra el cajon de compartir a traves de api para el concurso de s
 */
 
 function show_bogashare_dialog() {
-    if(is_single()){
+    if(is_single(11826)){
         include 'share.php';
     }
 }
 add_action('wp_footer', 'show_bogashare_dialog');
-
-
 /*
  *
 CREATE TABLE `bogadia_produccion`.`wp_bogashare` (

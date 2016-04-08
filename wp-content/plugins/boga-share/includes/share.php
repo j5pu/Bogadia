@@ -1,20 +1,25 @@
-<div id="compartir_opinion" class="text-center" style="position: fixed; bottom: 0; z-index: 9999; background-color: white	; border-top: 1px solid #e5e5e5; display: none;width: 100%" data-postid="<?php echo get_the_ID(); ?>">
-    <h4 id="compartir_opinion_header">Y tú, ¿qué opinas?</h4>
-    <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner.gif" style="display: none;">
-    <div id="compartir_opinion_desplegar">
-        <p>¡Comparte tu opinión con tus amigos!</p>
-        <form id="compartir_opinion_form">
-            <input id="share_msg" placeholder="¡Me parece increible!" style="margin: 0 auto;margin-bottom: 15px;border: 1px solid lightgray;width: 90%;height: 40px;">
-            <input id="share_submit" type="submit" value="Publicar en Facebook" onclick=<?php if(!is_user_logged_in()){ ?>"myFacebookLogin()"<?php }else{  ?>"myFacebookShare()"<?php } ?> style="background-color: #3b5998; color: white;margin-bottom: 15px;border-color: #3b5998;width: 90%;height: 50px;"></input>
-        </form>
+<div id="compartir_opinion" class="text-center" data-postid="<?php echo get_the_ID(); ?>">
+    <h3 id="compartir_opinion_header">Y tú, ¿qué opinas?</h3>
+    <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none; width: 80px">
+    <div id="compartir_opinion_desplegar" class="row">
+        <div class="col-md-6">
+            <img id="bogashare_img" class="img-responsive" src="/wp-content/plugins/boga-share/assets/img/concursocream.jpg">
+        </div>
+        <div class="col-md-6">
+            <p id="bogashare_description">¡Solo tienes que compartir tu opinión con tus amigos para participar!</p>
+            <form id="compartir_opinion_form">
+                <input id="share_msg" placeholder="¡Me parece increible!" style="margin: 0 auto;margin-bottom: 15px;border: 1px solid lightgray;width: 90%;height: 40px;">
+                <input id="share_submit" type="submit" value="Publicar en Facebook" onclick=<?php if(!is_user_logged_in()){ ?>"myFacebookLogin()"<?php }else{  ?>"myFacebookShare()"<?php } ?> style="background-color: #3b5998; color: white;margin-bottom: 15px;border-color: #3b5998;width: 90%;height: 50px;"></input>
+            </form>
+        </div>
     </div>
-    <button id="close_compartir_opinion" style="right: 5px; top: 5px; position: absolute; background: none; border: none;"><em class="icon-angle-down" style="font-size: 25px;"></em></button>
-    <button id="open_compartir_opinion" style="right: 5px; top: 5px; position: absolute; background: none; border: none; display: none;"><em class="icon-angle-up" style="font-size: 25px;"></em></button>
-    <div id="success" class="alert alert-success" style="display: none;top: 0; position: absolute;">
+    <button id="close_compartir_opinion"><em class="icon-angle-down" style="font-size: 25px;"></em></button>
+    <button id="open_compartir_opinion" style="display: none;"><em class="icon-angle-up" style="font-size: 25px;"></em></button>
+    <div id="success" class="alert alert-success">
         <strong>¡Genial!</strong> Tú opinión se ha compartido con tus amigos.
         <div class="hide-alert"><p><strong>Quitar este aviso</strong></p></div>
     </div>
-    <div id="danger" class="alert alert-danger" style="display: none;top: 0; position: absolute;">
+    <div id="danger" class="alert alert-danger">
         <strong>¡Vaya!</strong> Se ha producido un error. Inténtalo de nuevo o escribe a valle@bogadia.com.
         <div class="hide-alert"><p><strong>Quitar este aviso</strong></p></div>
     </div>

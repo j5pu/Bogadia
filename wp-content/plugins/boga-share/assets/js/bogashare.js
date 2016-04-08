@@ -9,7 +9,7 @@ function check_response(response){
     } else {
         store_share_ajax_call();
         jQuery('#bogashare_spinner').fadeOut('slow');
-        jQuery("#success").delay( 2000 ).fadeOut('slow');
+        jQuery("#compartir_opinion").delay( 2000 ).fadeOut('slow');
     }
 }
 function fb_intialize_share(FB_response, token){

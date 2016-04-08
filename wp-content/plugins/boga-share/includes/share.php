@@ -1,5 +1,6 @@
 <div id="compartir_opinion" class="text-center" style="position: fixed; bottom: 0; z-index: 9999; background-color: white	; border-top: 1px solid #e5e5e5; display: none;width: 100%" data-postid="<?php echo get_the_ID(); ?>">
     <h4 id="compartir_opinion_header">Y tú, ¿qué opinas?</h4>
+    <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner.gif" style="display: none;">
     <div id="compartir_opinion_desplegar">
         <p>¡Comparte tu opinión con tus amigos!</p>
         <form id="compartir_opinion_form">

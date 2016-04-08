@@ -1,4 +1,16 @@
 var msg = '';
+var user_id = "";
+function check_response(response){
+    if (!response || response.error) {
+        jQuery('#bogashare_spinner').fadeOut('slow');
+        jQuery("#danger").fadeIn('slow');
+        jQuery('#compartir_opinion_desplegar').fadeIn('slow');
+    } else {
+        store_share_ajax_call();
+        jQuery('#bogashare_spinner').fadeOut('slow');
+
+    }
+}
 function fb_intialize_share(FB_response, token){
     FB.api( '/me', 'GET', {
             fields : 'id,email,verified,name',
@@ -27,29 +39,24 @@ function store_share_ajax_call(){
             url: "/wp-content/plugins/boga-share/new_share.php",
             data: {
                 post_id: jQuery('#compartir_opinion').data('postid'),
-                user_fb_id: FB.getUserID(),
+                user_fb_id: localStorage.getItem('fb_user_id'),
                 comment: msg,
             }
         })
         .done(function( msg ) {
-            document.getElementById("success").style.display = 'block';
-            alert( "Data Saved: " + msg );
+            jQuery("#success").fadeIn('slow');
         });
 }
 function myFacebookLogin() {
+    jQuery('#compartir_opinion_desplegar').fadeOut();
+    jQuery('#bogashare_spinner').delay(300).fadeIn('slow');
     FB.login(function(FB_response){
         if (FB_response.authResponse) {
+            localStorage.setItem('fb_user_id', FB_response.authResponse.userID);
             fb_intialize_share(FB_response, '');
         }
         FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
-            if (!response || response.error) {
-                document.getElementById("danger").style.display = 'block';
-                // http://localhost/wp-content/plugins/boga-share/new_share.php
-            } else {
-                store_share_ajax_call();
-                document.getElementById("success").style.display = 'block';
-
-            }
+            check_response(response);
         });
     },
     {
@@ -59,13 +66,10 @@ function myFacebookLogin() {
     });
 }
 function myFacebookShare() {
+    jQuery('#compartir_opinion_desplegar').fadeOut('slow');
+    jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     FB.api('/me/feed', 'post', {message: msg, link: document.location.href}, function (response) {
-        if (!response || response.error) {
-            document.getElementById("danger").style.display = 'block';
-            // http://localhost/wp-content/plugins/boga-share/new_share.php
-        } else {
-            store_share_ajax_call();
-        }
+        check_response(response);
     });
 }
 jQuery(document).ready(function(){

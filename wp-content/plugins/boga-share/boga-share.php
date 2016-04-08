@@ -27,7 +27,7 @@ function bogashare_install() {
     $sql = "CREATE TABLE $table_name (
         id int UNSIGNED NOT NULL AUTO_INCREMENT,
         post_id int(9) NULL,
-        user_fb_id int(20) NULL,
+        user_fb_id varchar(30) NULL,
         comment varchar(1000) NULL,
         date datetime NULL,
         PRIMARY KEY  (id),

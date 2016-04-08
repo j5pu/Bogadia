@@ -11,7 +11,7 @@ $results = $wpdb->insert(
     ),
     array(
         '%d',
-        '%d',
+        '%s',
         '%s',
         '%s'
     )

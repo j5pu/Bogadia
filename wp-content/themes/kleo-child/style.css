@@ -449,6 +449,15 @@ body.author div.template-page{
 }
 /*Fin author*/
 
+/*Pesonalizar Articulos relacionados del tema Kleo. Después del post*/
+.kleo-carousel-post .kleo-carousel li:nth-child(3)  {
+    clear: both;
+}
+.caroufredsel_wrapper {
+    height: 420px !important;
+}
+
+
 /*Pesonalización de título y subtitulo dentro de los posts*/
 .page-title {
     font-size: 38px;

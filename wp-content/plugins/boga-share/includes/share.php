@@ -1,4 +1,4 @@
-<div id="compartir_opinion" class="text-center" style="position: fixed; bottom: 0; z-index: 9999; background-color: white	; border-top: 1px solid #e5e5e5; display: none;width: 100%">
+<div id="compartir_opinion" class="text-center" style="position: fixed; bottom: 0; z-index: 9999; background-color: white	; border-top: 1px solid #e5e5e5; display: none;width: 100%" data-postid="<?php echo get_the_ID(); ?>">
     <h4 id="compartir_opinion_header">Y tú, ¿qué opinas?</h4>
     <div id="compartir_opinion_desplegar">
         <p>¡Comparte tu opinión con tus amigos!</p>
@@ -18,10 +18,8 @@
         <div class="hide-alert"><p><strong>Quitar este aviso</strong></p></div>
     </div>
 </div>
-
 <?php if(is_user_logged_in()){ ?>
 <script>
-    // Additional JS functions here
     window.fbAsyncInit = function() {
         FB.init({
             appId      : '<?php echo sq_option('fb_app_id'); ?>', // App ID
@@ -31,13 +29,8 @@
             xfbml      : true,  // parse XFBML
             oauth      : true
         });
-
-        // Additional init code here
         jQuery('#fb-root').trigger('facebook:init');
-
     };
-
-    // Load the SDK asynchronously
     (function(d, s, id) {
         var js, fjs = d.getElementsByTagName(s)[0];
         if (d.getElementById(id)) return;
@@ -45,6 +38,5 @@
         js.src = "//connect.facebook.net/<?php echo apply_filters('kleo_facebook_js_locale', 'en_US'); ?>/sdk.js";
         fjs.parentNode.insertBefore(js, fjs);
     }(document, 'script', 'facebook-jssdk'));
-
 </script>
 <?php } ?>

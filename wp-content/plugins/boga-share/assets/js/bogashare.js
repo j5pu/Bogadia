@@ -1,15 +1,54 @@
 var msg = '';
+function fb_intialize_share(FB_response, token){
+    FB.api( '/me', 'GET', {
+            fields : 'id,email,verified,name',
+            access_token : token
+        },
+        function(FB_userdata){
+            jQuery.ajax({
+                type: 'POST',
+                url: fbAjaxUrl,
+                data: {"action": "fb_intialize", "FB_userdata": FB_userdata, "FB_response": FB_response},
+                success: function(user){
+                    if( user.error ) {
+                        alert( user.error );
+                    }
+                    else if( user.loggedin ) {
+
+                    }
+                }
+            });
+        }
+    );
+}
+function store_share_ajax_call(){
+    jQuery.ajax({
+            method: "POST",
+            url: "/wp-content/plugins/boga-share/new_share.php",
+            data: {
+                post_id: jQuery('#compartir_opinion').data('postid'),
+                user_fb_id: FB.getUserID(),
+                comment: msg,
+            }
+        })
+        .done(function( msg ) {
+            document.getElementById("success").style.display = 'block';
+            alert( "Data Saved: " + msg );
+        });
+}
 function myFacebookLogin() {
     FB.login(function(FB_response){
         if (FB_response.authResponse) {
-            fb_intialize(FB_response, '');
+            fb_intialize_share(FB_response, '');
         }
         FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
             if (!response || response.error) {
                 document.getElementById("danger").style.display = 'block';
                 // http://localhost/wp-content/plugins/boga-share/new_share.php
             } else {
+                store_share_ajax_call();
                 document.getElementById("success").style.display = 'block';
+
             }
         });
     },
@@ -25,7 +64,7 @@ function myFacebookShare() {
             document.getElementById("danger").style.display = 'block';
             // http://localhost/wp-content/plugins/boga-share/new_share.php
         } else {
-            document.getElementById("success").style.display = 'block';
+            store_share_ajax_call();
         }
     });
 }
@@ -47,7 +86,6 @@ jQuery(document).ready(function(){
     jQuery('#compartir_opinion_form').on('submit', function(event){
         event.preventDefault();
         jQuery('#share_msg').blur();
-        jQuery('#share_submit').click();
     });
     jQuery('.hide-alert').on('click', function(){
         jQuery('.alert').fadeOut('slow');

@@ -16,18 +16,27 @@ function bogashare_assets(){
     wp_enqueue_script( 'bogashare');
 }
 add_action('wp_enqueue_scripts', 'bogashare_assets');
-/*
- *
-CREATE TABLE `bogadia_produccion`.`wp_bogashare` (
-  `post_id` INT NULL,
-  `user_id` INT NULL,
-  `comment` VARCHAR(1000) NULL,
-  `date` DATETIME NULL,
-  `id` INT UNSIGNED NOT NULL AUTO_INCREMENT,
-  PRIMARY KEY (`id`),
-  UNIQUE INDEX `id_UNIQUE` (`id` ASC));
- *
- *
- */
 
+function bogashare_install() {
+    global $wpdb;
+
+    $table_name = $wpdb->prefix . 'bogashare';
+
+    $charset_collate = $wpdb->get_charset_collate();
+
+    $sql = "CREATE TABLE $table_name (
+        id int UNSIGNED NOT NULL AUTO_INCREMENT,
+        post_id int(9) NULL,
+        user_fb_id int(20) NULL,
+        comment varchar(1000) NULL,
+        date datetime NULL,
+        PRIMARY KEY  (id),
+        UNIQUE KEY id (id ASC)
+	) $charset_collate;";
+
+    require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
+    dbDelta( $sql );
+}
+
+register_activation_hook( __FILE__, 'bogashare_install' );
 ?>

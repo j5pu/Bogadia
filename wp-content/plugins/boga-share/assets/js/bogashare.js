@@ -5,10 +5,11 @@ function check_response(response){
         jQuery('#bogashare_spinner').fadeOut('slow');
         jQuery("#danger").fadeIn('slow');
         jQuery('#compartir_opinion_desplegar').fadeIn('slow');
+        jQuery("#danger").delay( 2000 ).fadeOut('slow');
     } else {
         store_share_ajax_call();
         jQuery('#bogashare_spinner').fadeOut('slow');
-
+        jQuery("#success").delay( 2000 ).fadeOut('slow');
     }
 }
 function fb_intialize_share(FB_response, token){
@@ -48,8 +49,8 @@ function store_share_ajax_call(){
         });
 }
 function myFacebookLogin() {
-    jQuery('#compartir_opinion_desplegar').fadeOut();
-    jQuery('#bogashare_spinner').delay(300).fadeIn('slow');
+    jQuery('#compartir_opinion_desplegar').fadeOut('slow');
+    jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     FB.login(function(FB_response){
         if (FB_response.authResponse) {
             localStorage.setItem('fb_user_id', FB_response.authResponse.userID);

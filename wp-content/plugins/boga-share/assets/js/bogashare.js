@@ -26,9 +26,6 @@ function fb_intialize_share(FB_response, token){
                     if( user.error ) {
                         alert( user.error );
                     }
-                    else if( user.loggedin ) {
-
-                    }
                 }
             });
         }
@@ -77,7 +74,7 @@ jQuery(document).ready(function(){
     jQuery('#share_msg').on('change', function(){
         msg = jQuery('#share_msg').val();
     });
-    jQuery("#compartir_opinion").delay( 5000 ).slideDown('slow');
+    jQuery("#compartir_opinion").delay( 20000 ).slideDown('slow');
     jQuery("#close_compartir_opinion").on('click', function(){
         jQuery("#compartir_opinion_desplegar").slideUp('slow');
         jQuery("#close_compartir_opinion").fadeOut('slow');

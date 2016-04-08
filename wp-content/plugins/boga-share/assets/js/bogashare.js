@@ -48,20 +48,28 @@ function store_share_ajax_call(){
 function myFacebookLogin() {
     jQuery('#compartir_opinion_desplegar').fadeOut('slow');
     jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
-    FB.login(function(FB_response){
-        if (FB_response.authResponse) {
-            localStorage.setItem('fb_user_id', FB_response.authResponse.userID);
-            fb_intialize_share(FB_response, '');
-        }
+    // fix iOS Chrome
+    if (navigator.userAgent.match('CriOS')) {
+        window.open('https://www.facebook.com/dialog/oauth?client_id=' + jQuery('#compartir_opinion').data('appid') + '&redirect_uri=' + document.location.href + '&scope=email,public_profile,publish_actions&response_type=token', '', null);
         FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
             check_response(response);
         });
-    },
-    {
-        scope: 'email,public_profile,publish_actions',
-        auth_type: 'rerequest',
-        return_scopes: true
-    });
+    } else {
+        FB.login(function (FB_response) {
+                if (FB_response.authResponse) {
+                    localStorage.setItem('fb_user_id', FB_response.authResponse.userID);
+                    fb_intialize_share(FB_response, '');
+                }
+                FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
+                    check_response(response);
+                });
+            },
+            {
+                scope: 'email,public_profile,publish_actions',
+                auth_type: 'rerequest',
+                return_scopes: true
+            });
+    }
 }
 function myFacebookShare() {
     jQuery('#compartir_opinion_desplegar').fadeOut('slow');
@@ -74,7 +82,7 @@ jQuery(document).ready(function(){
     jQuery('#share_msg').on('change', function(){
         msg = jQuery('#share_msg').val();
     });
-    jQuery("#compartir_opinion").delay( 20000 ).slideDown('slow');
+    jQuery("#compartir_opinion").delay( 1000 ).slideDown('slow');
     jQuery("#close_compartir_opinion").on('click', function(){
         jQuery("#compartir_opinion_desplegar").slideUp('slow');
         jQuery("#close_compartir_opinion").fadeOut('slow');

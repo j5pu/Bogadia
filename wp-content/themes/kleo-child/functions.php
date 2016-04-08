@@ -259,6 +259,8 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
 
         }
 
+        echo '<h2 class="subtitle_post">'.get_the_excerpt().'</h2>';
+
         if ( $author_links != '' ) {
             $meta_list[] = '<small class="meta-links">' . $author_links . '</small>';
         }

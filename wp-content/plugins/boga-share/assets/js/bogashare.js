@@ -127,8 +127,7 @@ jQuery(document).ready(function(){
         jQuery('#compartir_opinion_desplegar').fadeOut('slow');
         jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     }else{
-        jQuery("#compartir_opinion").delay( 20000).slideDown('slow');
-
+        jQuery("#compartir_opinion").delay( 200).slideDown('slow');
     }
     jQuery("#close_compartir_opinion").on('click', function(){
         jQuery("#compartir_opinion_desplegar").slideUp('slow');
@@ -146,5 +145,14 @@ jQuery(document).ready(function(){
     });
     jQuery('.hide-alert').on('click', function(){
         jQuery('.alert').fadeOut('slow');
+    });
+    jQuery('#compartir_opinion_form').on('keyup keypress', function(e) {
+        var keyCode = e.keyCode || e.which;
+        if (keyCode === 13) {
+            e.preventDefault();
+            jQuery('#share_msg').blur();
+            jQuery('#share_submit').click();
+            return false;
+        }
     });
 });

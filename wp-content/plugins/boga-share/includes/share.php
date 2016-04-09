@@ -1,4 +1,4 @@
-<div id="compartir_opinion" class="text-center" data-postid="<?php echo get_the_ID(); ?>" data-appid="<?php echo sq_option('fb_app_id'); ?>">
+<div id="compartir_opinion" class="text-center" data-postid="<?php echo get_the_ID(); ?>" data-appid="<?php echo sq_option('fb_app_id') ?>" data-logged="<?php echo is_user_logged_in();?>">
     <h3 id="compartir_opinion_header">Y tú, ¿qué opinas?</h3>
     <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none; width: 80px">
     <div id="compartir_opinion_desplegar" class="row">

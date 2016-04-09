@@ -128,7 +128,7 @@ jQuery(document).ready(function(){
         jQuery('#compartir_opinion_desplegar').fadeOut('slow');
         jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     }else{
-        jQuery("#compartir_opinion").delay( 200).slideDown('slow');
+        jQuery("#compartir_opinion").delay( 20000).slideDown('slow');
 
     }
     jQuery("#close_compartir_opinion").on('click', function(){

@@ -6,7 +6,7 @@
             <img id="bogashare_img" class="img-responsive" src="/wp-content/plugins/boga-share/assets/img/concursocream.jpg">
         </div>
         <div class="col-md-6">
-            <p id="bogashare_description">¡Solo tienes que compartir tu opinión con tus amigos para participar!</p>
+            <p id="bogashare_description">¡Solo tienes que compartir tu opinión con tus amigos para participar! <strong><a target="_blank" href="https://www.bogadia.com/sorteos/gana-kit-productos-crea-m-solo-darnos-opinion/">Más info</a></strong></p>
             <form id="compartir_opinion_form">
                 <input id="share_msg" placeholder="¡Me parece increible!" style="margin: 0 auto;margin-bottom: 15px;border: 1px solid lightgray;width: 90%;height: 40px;">
                 <input id="share_submit" type="submit" value="Publicar en Facebook" onclick=<?php if(!is_user_logged_in()){ ?>"myFacebookLogin()"<?php }else{  ?>"myFacebookShare()"<?php } ?> style="background-color: #3b5998; color: white;margin-bottom: 15px;border-color: #3b5998;width: 90%;height: 50px;"></input>

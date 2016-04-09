@@ -49,28 +49,27 @@ function myFacebookLogin() {
     jQuery('#compartir_opinion_desplegar').fadeOut('slow');
     jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     // fix iOS Chrome
-/*
     if (navigator.userAgent.match('CriOS')) {
-*/  var ios_chrome = localStorage.getItem('ios_chrome');
-    if (ios_chrome == null){
-        localStorage.setItem('ios_chrome', '1')
-        localStorage.setItem('ios_chrome_msg', msg)
-        window.open('https://www.facebook.com/dialog/oauth?client_id=' + jQuery('#compartir_opinion').data('appid') + '&redirect_uri=' + document.location.href + '&scope=email,public_profile,publish_actions&response_type=token', '', null);
-        jQuery("#fb-root").bind("facebook:init", function () {
-            var accToken = jQuery.getUrlVar('#access_token');
-            if (accToken) {
-                var fbArr = {scopes: "email,public_profile,publish_actions"};
-                fb_intialize_share(fbArr, accToken);
-            }
-        });
-    }else{
-        localStorage.setItem('fb_user_id', FB.getUserID());
-        FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
-            check_response(response);
-        });
-        localStorage.removeItem('ios_chrome');
-    }
-/*    } else {
+        var ios_chrome = localStorage.getItem('ios_chrome');
+        if (ios_chrome == null){
+            localStorage.setItem('ios_chrome', '1');
+            localStorage.setItem('ios_chrome_msg', msg);
+            window.open('https://www.facebook.com/dialog/oauth?client_id=' + jQuery('#compartir_opinion').data('appid') + '&redirect_uri=' + document.location.href + '&scope=email,public_profile,publish_actions&response_type=token', '', null);
+            jQuery("#fb-root").bind("facebook:init", function () {
+                var accToken = jQuery.getUrlVar('#access_token');
+                if (accToken) {
+                    var fbArr = {scopes: "email,public_profile,publish_actions"};
+                    fb_intialize_share(fbArr, accToken);
+                }
+            });
+        }else{
+            localStorage.setItem('fb_user_id', FB.getUserID());
+            FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
+                check_response(response);
+            });
+            localStorage.removeItem('ios_chrome');
+        }
+    } else {
         FB.login(function (FB_response) {
                 if (FB_response.authResponse) {
                     localStorage.setItem('fb_user_id', FB_response.authResponse.userID);
@@ -85,7 +84,7 @@ function myFacebookLogin() {
                 auth_type: 'rerequest',
                 return_scopes: true
             });
-    }*/
+    }
 }
 function myFacebookShare() {
     jQuery('#compartir_opinion_desplegar').fadeOut('slow');

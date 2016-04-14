@@ -607,9 +607,9 @@ function streetstyle_script() {
 	}
 	    //wp_enqueue_script( 'script_child', '/wp-content/themes/kleo-child/assets/js/script_child.js',true);
 
-	if ( !is_user_logged_in() && !is_page('tienda/') && !is_page('tienda') && !is_page('por-que-bogadia') && !is_page('phetnia') && !is_page('manifiesto-neon')&& !is_page('maria-cidfuentes-2') && !is_page('lucrecia')&& !is_page('cart') && !is_product() && !is_woocommerce() && (WC()->cart->get_cart_contents_count()) == 0) { 
+	/*if ( !is_user_logged_in() && !is_page('tienda/') && !is_page('tienda') && !is_page('por-que-bogadia') && !is_page('phetnia') && !is_page('manifiesto-neon')&& !is_page('maria-cidfuentes-2') && !is_page('lucrecia')&& !is_page('cart') && !is_product() && !is_woocommerce() && (WC()->cart->get_cart_contents_count()) == 0) { 
 		wp_enqueue_style ( 'style_functions', '/wp-content/themes/kleo-child/style_functions.css');
-	}
+	}*/
 }
 
 add_action( 'wp_enqueue_scripts', 'streetstyle_script' );

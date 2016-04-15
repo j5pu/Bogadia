@@ -36,7 +36,7 @@ add_action('wp_enqueue_scripts', 'boga_ads_assets');
 function wpse_ad_content($content)
 {
     if (!is_single() || !wp_is_mobile()) return $content;
-    $paragraphAfter = 2; //Enter number of paragraphs to display ad after.
+    $paragraphAfter = 1; //Enter number of paragraphs to display ad after.
     $content = explode("</p>", $content);
     $new_content = '';
     for ($i = 0; $i < count($content); $i++) {

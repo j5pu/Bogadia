@@ -36,46 +36,12 @@ add_action('wp_enqueue_scripts', 'boga_ads_assets');
 function wpse_ad_content($content)
 {
     if (!is_single() || !wp_is_mobile()) return $content;
-    $paragraphAfter = 1; //Enter number of paragraphs to display ad after.
+    $paragraphAfter = 2; //Enter number of paragraphs to display ad after.
     $content = explode("</p>", $content);
     $new_content = '';
     for ($i = 0; $i < count($content); $i++) {
         if ($i == $paragraphAfter) {
-            $new_content.= '<div style="width: 350px; height: 250px; padding: 6px 6px 6px 0; float: left; margin-left: 0; margin-right: 18px;">';
-            $new_content.= '<html>
-  <body>
-    <script>var inDapIF = false;</script>
-    <script type="text/javascript" src="https://www.googletagservices.com/tag/js/gpt.js">
-    </script>
-    <script>
-      window.fbAsyncInit = function() {
-        FB.Event.subscribe(
-          'ad.loaded',
-          function(placementId) {
-            console.log('Audience Network ad loaded');
-          }
-        );
-        FB.Event.subscribe(
-          'ad.error',
-          function(errorCode, errorMessage, placementId) {
-            console.log('Audience Network error (' + errorCode + ') ' + errorMessage);
-            googletag.pubads().definePassback('/61601326/facebook', [350, 250]).display();
-          }
-        );
-        FB.XFBML.parse();
-      };
-      (function(d, s, id) {
-        var js, fjs = d.getElementsByTagName(s)[0];
-        if (d.getElementById(id)) return;
-        js = d.createElement(s); js.id = id;
-        js.src = "//connect.facebook.net/en_US/sdk/xfbml.ad.js#xfbml=1&version=v2.5&appId=948549275229283";
-        fjs.parentNode.insertBefore(js, fjs);
-      }(document, 'script', 'facebook-jssdk'));
-    </script>
-    <div class="fb-ad" data-placementid="948549275229283_975265575890986" data-format="300x250" data-testmode="false"></div>
-  </body>
-</html>';
-            $new_content.= '</div>';
+            $new_content.= '<div class="fb-ad" data-placementid="948549275229283_975265575890986" data-format="300x250" data-testmode="false"></div>';
         }
 
         $new_content.= $content[$i] . "</p>";

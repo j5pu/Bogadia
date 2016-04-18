@@ -37,7 +37,7 @@ body { font-family: 'Open Sans', sans-serif; }
 }
 button#close-buton.close{
     opacity: 1 !important;
-    font-size: 21px;
+    font-size: 30px;
     color: white;
     opacity: 0.8;
 }

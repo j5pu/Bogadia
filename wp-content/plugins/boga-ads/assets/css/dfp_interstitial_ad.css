@@ -65,3 +65,9 @@ button#close-buton.close{
 .old_price{
     color: grey !important;
 }
+#interstitialModal{
+    position: fixed;
+}
+#interstitialModal > div > p {
+    margin: 6px 6px;
+}

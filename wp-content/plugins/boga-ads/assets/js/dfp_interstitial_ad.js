@@ -8,7 +8,7 @@ jQuery(document).ready(function(){
             localStorage.removeItem('bogatitial');
         }
     }else{
-        jQuery('#interstitialModal').modal({show:true, backdrop: 'static'});
+        jQuery('#interstitialModal').delay(200).modal({show:true, backdrop: 'static'});
         localStorage.setItem('bogatitial', 1);
     }
 });

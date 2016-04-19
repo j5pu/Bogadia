@@ -1,6 +1,7 @@
 var width = window.innerWidth || document.documentElement.clientWidth;
 var googletag = googletag || {};
 googletag.cmd = googletag.cmd || [];
+var cookie_val = localStorage.getItem('bogatitial');
 if (width <= 990){
     var inDapIF = false;
     window.fbAsyncInit = function() {
@@ -58,7 +59,7 @@ googletag.cmd.push(function() {
         ls.href="/wp-content/themes/kleo-child/assets/css/cabecera_ad.css";
         document.getElementsByTagName('head')[0].appendChild(ls);
     }*/
-    if (width <= 990){
+    if (width <= 990 && !cookie_val){
         googletag.defineSlot('/61601326/mayor', [300, 600], 'div-gpt-ad-1457972362060-0').addService(googletag.pubads());
     }
     googletag.pubads().enableSingleRequest();

@@ -1,5 +1,4 @@
 jQuery(document).ready(function(){
-    var cookie_val = localStorage.getItem('bogatitial');
     if(cookie_val){
         if(cookie_val < 2){
             cookie_val++;
@@ -8,7 +7,7 @@ jQuery(document).ready(function(){
             localStorage.removeItem('bogatitial');
         }
     }else{
-        jQuery('#interstitialModal').delay(200).modal({show:true, backdrop: 'static'});
+        jQuery('#interstitialModal').delay(2000).modal({show:true, backdrop: 'static'});
         localStorage.setItem('bogatitial', 1);
     }
 });

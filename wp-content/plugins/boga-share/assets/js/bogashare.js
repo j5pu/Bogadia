@@ -42,7 +42,7 @@ function store_share_ajax_call(){
         .done(function( msg ) {
             jQuery("#success").fadeIn('slow');
             jQuery('#bogashare_spinner').fadeOut('slow');
-            jQuery("#compartir_opinion").delay( 2000 ).fadeOut('slow');
+            jQuery("#compartir_opinion").delay( 5000 ).fadeOut('slow');
         });
 }
 function myFacebookLogin() {

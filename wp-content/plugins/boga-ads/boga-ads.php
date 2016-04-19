@@ -46,7 +46,6 @@ function wpse_ad_content($content)
 
         $new_content.= $content[$i] . "</p>";
     }
-
     return $new_content;
 }
 add_filter('the_content', 'wpse_ad_content');

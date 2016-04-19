@@ -20,6 +20,13 @@ function bogashare_assets(){
 add_action('wp_footer', 'show_bogashare_dialog');
 add_action('wp_enqueue_scripts', 'bogashare_assets');
 
+add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+
+    if ( 'bogashare' !== $handle )
+        return $tag;
+
+    return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
+}, 10, 2 );
 
 function bogashare_install() {
     global $wpdb;

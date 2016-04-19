@@ -50,4 +50,19 @@ function wpse_ad_content($content)
 }
 add_filter('the_content', 'wpse_ad_content');
 
+add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+
+    if ( 'boga_dfp_define_slots' !== $handle )
+        return $tag;
+
+    return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
+}, 10, 2 );
+
+add_filter( 'script_loader_tag', function ( $tag, $handle ) {
+
+    if ( 'dfp_interstitial_ad' !== $handle )
+        return $tag;
+
+    return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
+}, 10, 2 );
 ?>

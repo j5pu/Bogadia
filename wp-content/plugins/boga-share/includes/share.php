@@ -9,7 +9,7 @@
 <!--            <p id="bogashare_description"><strong><a target="_blank" href="https://www.bogadia.com/sorteos/gana-kit-productos-crea-m-solo-darnos-opinion/">Más info</a></strong></p>-->
             <form id="compartir_opinion_form">
 <!--                <input id="share_msg" placeholder="¡Me parece increible!" style="margin: 0 auto;margin-bottom: 15px;border: 1px solid lightgray;width: 90%;height: 40px;">
--->                <input id="share_submit" type="submit" value="Compartir en Facebook y participar" onclick=<?php if(!is_user_logged_in()){ ?>"myFacebookLogin()"<?php }else{  ?>"myFacebookShare()"<?php } ?> ></input>
+-->                <input id="share_submit" type="submit" value="Compartir en Facebook y participar" onclick=<?php if(!is_user_logged_in()){ ?>"myFacebookLogin()"<?php }else{  ?>"myFacebookLogin()"<?php } ?> ></input>
             </form>
         </div>
     </div>

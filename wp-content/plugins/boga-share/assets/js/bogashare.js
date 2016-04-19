@@ -8,8 +8,6 @@ function check_response(response){
         jQuery('#compartir_opinion_desplegar').fadeIn('slow');
     } else {
         store_share_ajax_call();
-        jQuery('#bogashare_spinner').fadeOut('slow');
-        jQuery("#compartir_opinion").delay( 2000 ).fadeOut('slow');
     }
 }
 function fb_intialize_share(FB_response, token){
@@ -23,9 +21,9 @@ function fb_intialize_share(FB_response, token){
                 url: fbAjaxUrl,
                 data: {"action": "fb_intialize", "FB_userdata": FB_userdata, "FB_response": FB_response},
                 success: function(user){
-                    if( user.error ) {
+/*                    if( user.error ) {
                         alert( user.error );
-                    }
+                    }*/
                 }
             });
         }
@@ -43,6 +41,8 @@ function store_share_ajax_call(){
         })
         .done(function( msg ) {
             jQuery("#success").fadeIn('slow');
+            jQuery('#bogashare_spinner').fadeOut('slow');
+            jQuery("#compartir_opinion").delay( 2000 ).fadeOut('slow');
         });
 }
 function myFacebookLogin() {
@@ -75,7 +75,7 @@ function myFacebookLogin() {
                     localStorage.setItem('fb_user_id', FB_response.authResponse.userID);
                     fb_intialize_share(FB_response, '');
                 }
-                FB.api('/me/feed', 'post', {message: msg, link: document.location.href},function(response) {
+                FB.api('/me/feed', 'post', {message: '', link: document.location.href},function(response) {
                     check_response(response);
                 });
             },

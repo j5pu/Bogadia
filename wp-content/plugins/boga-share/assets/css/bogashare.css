@@ -7,19 +7,18 @@
     display: none;
     width: 100%;
     max-height: 100%;
-    overflow-y: scroll;
 }
 #compartir_opinion_header{
     background-color: #211D1E;
     color: white;
     margin-top: 0px !important;
     margin-bottom: 0px !important;
-    padding-bottom: 20px;
-    padding-top: 10px;
+    padding-bottom: 5px;
+    padding-top: 5px;
     border-color: #211D1E;
 }
 #close_compartir_opinion, #open_compartir_opinion{
-    color: white;
+    color: black;
     border-color: white;
     right: 5px;
     top: 5px;
@@ -38,4 +37,13 @@
 #bogashare_description{
     margin-top: 10px !important;
     margin-bottom: 15px !important;
+}
+#share_submit{
+    background-color: #3b5998;
+    color: white;
+    margin-bottom: 10px;
+    margin-top: 10px;
+    border-color: #3b5998;
+    width: 95%;
+    height: 50px;
 }

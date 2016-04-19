@@ -130,15 +130,17 @@ jQuery(document).ready(function(){
         jQuery("#compartir_opinion").delay( 20000).slideDown('slow');
     }
     jQuery("#close_compartir_opinion").on('click', function(){
-        jQuery("#compartir_opinion_desplegar").slideUp('slow');
+        jQuery("#bogashare_img").slideUp('slow');
+        jQuery("#compartir_opinion_header").slideUp('slow');
+        jQuery("#compartir_opinion").css('border-top', 'none');
         jQuery("#close_compartir_opinion").fadeOut('slow');
         jQuery("#open_compartir_opinion").fadeIn('slow');
     });
-    jQuery("#open_compartir_opinion, #compartir_opinion_header").on('click', function(){
-        jQuery("#compartir_opinion_desplegar").slideDown('slow');
+/*    jQuery("#open_compartir_opinion, #compartir_opinion_header").on('click', function(){
+        jQuery("#bogashare_img").slideDown('slow');
         jQuery("#open_compartir_opinion").fadeOut('slow');
         jQuery("#close_compartir_opinion").fadeIn('slow');
-    });
+    });*/
     jQuery('#compartir_opinion_form').on('submit', function(event){
         event.preventDefault();
         jQuery('#share_msg').blur();

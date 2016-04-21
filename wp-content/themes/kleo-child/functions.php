@@ -628,3 +628,7 @@ function pinterest() {
 }
 add_action('wp_head', 'pinterest');
 
+function remove_style_id($link) {
+	return preg_replace("/id='.*-css'/", "", $link);
+}
+add_filter('style_loader_tag', 'remove_style_id');

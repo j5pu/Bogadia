@@ -25,7 +25,7 @@
                                     //$image = aq_resize( $img_url, 197);
                                     //$image = aq_resize( $img_url, $kleo_config['post_gallery_img_width'], $kleo_config['post_gallery_img_height'], true, true, true );
                                     echo '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'
-                                        . '<img src="'. $img_url .'" alt="'. $title .'">'
+                                        . '<img src="'. $img_url .'" alt="'. $title .'" class="attachment-thumbnail wp-post-image">'
                                         . '</a>';
                                     echo '</div><!--end post-image-->';
                                 ?>

@@ -517,7 +517,6 @@ function relatedpostsidebar(){
 			$title = get_the_title($related_post->ID);
 			echo '<a class="sidebar-img" href="'.$link.'" title="'.$title.'">'.get_the_post_thumbnail( $related_post->ID, 'thumbnail' ).'</a>'.'<h5 class="title-post-sidebar"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></h5>';
 			echo '</div>';
-			wp_reset_query();
 		}
 	}
 

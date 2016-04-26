@@ -14,7 +14,13 @@ if (is_singular('post')) {
     $related_text = esc_html__("Related Articles", "kleo_framework");
 
     $categories = get_the_category($post->ID);
-
+    $tags = wp_get_post_tags($post->ID);
+    $cat_name = $cats[0]->name;
+    if ($tags && $cat_name != "Streetstyle") {
+        $tag_ids = array();
+        foreach ($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
+        $args['tag__in'] = $tag_ids;
+    }
     if (!empty($categories)) {
         $category_ids = array();
         foreach ($categories as $rcat) {

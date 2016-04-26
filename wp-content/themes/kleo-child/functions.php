@@ -343,7 +343,7 @@ function no_author_base($link, $author_id) {
 add_filter( 'the_content', 'prefix_insert_post_ads' );
 
 function prefix_insert_post_ads( $content ) {
-	global $not_post_in;
+/*	global $not_post_in;
     global $post;
 	$tags = wp_get_post_tags($post->ID);
 	$cats = get_the_category();
@@ -386,6 +386,31 @@ function prefix_insert_post_ads( $content ) {
 		return prefix_insert_after_paragraph( $ad_code, 2, $content );
 	}
 	
+	return $content;*/
+	$likes_posts = boga_get_related_post(3);
+	$c=0;
+	foreach( $likes_posts as $likes_post ) {
+		$c=$c+1;
+		$link = get_permalink($likes_post->ID);
+		$title = get_the_title($likes_post->ID);
+		if ($c==1) {
+			$post_re1 = '<h6 style="float:left;line-height: 17px; margin: 5px 0px;"><a href="'.$link.'"  title="'.$title.'" class="re_post_in_post">'.$title.'</a></h6>';
+		}
+		if ($c==2) {
+			$post_re2 = '<hr style="margin:0px auto; width:100%;clear: left;" /><h6 style="float:left;line-height: 17px; margin: 5px 0px;"><a href="'.$link.'" title="'.$title.'" class="re_post_in_post">'.$title.'</a></h6>';
+		}
+		if ($c==3) {
+			$post_re3 = '<hr style="margin:0px auto; width:100%;clear: left;" /><h6 style="float:left;line-height: 17px; margin: 5px 0px;"><a href="'.$link.'" title="'.$title.'" class="re_post_in_post">'.$title.'</a></h6>';
+		}
+	}
+	$post_re = $post_re1.$post_re2.$post_re3;
+
+	$ad_code = '<div style="max-width: 180px; float: left; margin:0px 20px 20px 0px;"><h5 style="margin:0px auto; font-size: 14px; text-align: center;"><strong>ARTÍCULOS DE INTERÉS</strong></h5><hr style="margin: 0px 0px 5px 0px;" />'.$post_re.'</div>';
+
+	if ( is_single() && ! is_admin() && !is_product() && !in_category('Streetstyle') ) {
+		return prefix_insert_after_paragraph( $ad_code, 2, $content );
+	}
+
 	return $content;
 }
  
@@ -452,7 +477,7 @@ add_shortcode( 'photoBox', 'photographer_box');
 * Shortcode para sacar post relacionados por tags
 */
 function relatedpostsidebar(){
-	global $not_post_in;
+/*	global $not_post_in;
     global $post;
 	$tags = wp_get_post_tags($post->ID);
 	$cats = get_the_category();
@@ -481,7 +506,21 @@ function relatedpostsidebar(){
 				wp_reset_query();
 			}
 		}
+	}*/
+	$related_posts = boga_get_related_post(4);
+	if (!empty( $related_posts )){
+		echo '<h4 class="widget-title">También te gustará</h4>';
+
+		foreach( $related_posts as $related_post ) {
+			echo '<div class="post-sidebar">';
+			$link = get_permalink($related_post->ID);
+			$title = get_the_title($related_post->ID);
+			echo '<a class="sidebar-img" href="'.$link.'" title="'.$title.'">'.get_the_post_thumbnail( $related_post->ID, 'thumbnail' ).'</a>'.'<h5 class="title-post-sidebar"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></h5>';
+			echo '</div>';
+			wp_reset_query();
+		}
 	}
+
 }
 add_shortcode( 'RelatedPostSidebar', 'relatedpostsidebar' );
 
@@ -648,3 +687,42 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 
 	return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
 }, 10, 2 );
+
+function boga_get_related_post($boga_num_post){
+	global $boga_related_post;
+	if (!$boga_related_post) {
+		global $post;
+		/* Query args */
+		$args = array(
+			'post__not_in' => array($post->ID),
+			'showposts' => 16,
+			'order' => 'DESC',
+			'post_type' => 'post',
+			'post_status' => 'publish',
+			'orderby' => 'post_date_gmt',
+		);
+		$categories = get_the_category($post->ID);
+		$tags = wp_get_post_tags($post->ID);
+		$cat_name = $categories[0]->name;
+
+		if (!empty($tags) && $cat_name != "Streetstyle") {
+			$tag_ids = array();
+			foreach ($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
+			$args['tag__in'] = $tag_ids;
+		}
+
+		if (!empty($categories)) {
+			$category_ids = array();
+			foreach ($categories as $rcat) {
+				$category_ids[] = $rcat->term_id;
+			}
+			$args['category__in'] = $category_ids;
+		}
+		$boga_related_post = get_posts($args);
+	}
+	$boga_related_post_to_retrieve = array();
+	for ($i=0; $i < $boga_num_post; $i++){
+		$boga_related_post_to_retrieve[$i] = array_pop($boga_related_post);
+	}
+	return $boga_related_post_to_retrieve;
+}

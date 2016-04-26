@@ -21,7 +21,7 @@
                             <article>
                                 <?php
                                     echo '<div class="post-image">';
-                                    $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );
+                                    $img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
                                     //$image = aq_resize( $img_url, 197);
                                     //$image = aq_resize( $img_url, $kleo_config['post_gallery_img_width'], $kleo_config['post_gallery_img_height'], true, true, true );
                                     echo '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'

@@ -1235,3 +1235,8 @@ body.author div.template-page{
     color: red;
 }
 /*=========================END - Tienda - Woocommerce=========================*/
+@media (max-width:400px) {
+    .boga-related {
+        height: 235px;
+    }
+}

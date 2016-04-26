@@ -2,7 +2,7 @@
     <div class="container">
         <div class="related-wrap">
             <div class="hr-title hr-long"><abbr>ARTÍCULOS RELACIONADOS</abbr></div>
-                <ul style="list-style-type: none;">
+                <ul style="list-style-type: none; padding-left: 0px;">
                     <?php
                     $related_posts = boga_get_related_post(9);
                     foreach( $related_posts as $likes_post ) {
@@ -17,7 +17,7 @@
                         echo '</div>';
                         wp_reset_query();*/
                         ?>
-                        <li id="post-<?php echo $post_id; ?>" <?php post_class(array("post-item col-sm-4")); ?>>
+                        <li id="post-<?php echo $post_id; ?>" <?php post_class(array("post-item col-sm-4 boga-related")); ?>">
                             <article>
                                 <?php
                                     echo '<div class="post-image">';

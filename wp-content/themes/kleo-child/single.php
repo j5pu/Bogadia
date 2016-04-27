@@ -45,8 +45,8 @@ if(get_cfield( 'related_posts') != '' ) {
 		<?php if(function_exists('the_ratings')) { the_ratings(); } ?>
 		<!-- WP-PostRating - Muestra las estrellas para valorar el post END-->
 
-		<?php 
-		get_template_part( 'page-parts/boga_related_post' );
+		<?php
+		$boga_related_post->main_related_post();
 		?>
 
 		<?php

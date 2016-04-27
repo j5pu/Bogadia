@@ -23,6 +23,7 @@ class boga_related_post
             'post_type' => 'post',
             'post_status' => 'publish',
             'orderby' => 'post_date_gmt',
+            'fields' => 'ids'
         );
         $categories = get_the_category($post->ID);
         $tags = wp_get_post_tags($post->ID);
@@ -100,8 +101,8 @@ class boga_related_post
             $post_re3 = '';
             foreach( $likes_posts as $likes_post ) {
                 $c=$c+1;
-                $link = get_permalink($likes_post->ID);
-                $title = self::cut_title(get_the_title($likes_post->ID));
+                $link = get_permalink($likes_post);
+                $title = self::cut_title(get_the_title($likes_post));
                 if ($c==1) {
                     $post_re1 = '<h6 style="float:left;line-height: 17px; margin: 5px 0px;"><a href="'.$link.'"  title="'.$title.'" class="re_post_in_post">'.$title.'</a></h6>';
                 }
@@ -127,10 +128,10 @@ class boga_related_post
         if (!empty( $related_posts )){
             echo '<h4 class="widget-title">También te gustará</h4>';
             foreach( $related_posts as $related_post ) {
-                $link = get_permalink($related_post->ID);
-                $title = get_the_title($related_post->ID);
+                $link = get_permalink($related_post);
+                $title = get_the_title($related_post);
                 echo '<div class="post-sidebar">';
-                echo '<a class="sidebar-img" href="'.$link.'" title="'.$title.'">'.get_the_post_thumbnail( $related_post->ID, 'thumbnail' ).'</a>'.'<h5 class="title-post-sidebar"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></h5>';
+                echo '<a class="sidebar-img" href="'.$link.'" title="'.$title.'">'.get_the_post_thumbnail( $related_post, 'thumbnail' ).'</a>'.'<h5 class="title-post-sidebar"><a href="'.$link.'" title="'.$title.'">'.$title.'</a></h5>';
                 echo '</div>';
             }
         }
@@ -147,7 +148,7 @@ class boga_related_post
             . '<ul style="list-style-type: none; padding-left: 0px;">';
 
         foreach( $related_posts as $likes_post ) {
-            $post_id = $likes_post->ID;
+            $post_id = $likes_post;
             $link = get_permalink($post_id);
             $title = self::cut_title(get_the_title($post_id));
             //$img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));

@@ -2,10 +2,10 @@
 /*
 Plugin Name: WPS Hide Login
 Plugin URI: https://github.com/Tabrisrp/wps-hide-login
-Description: Change your login url and remove access to wp-login.php page | Change votre url de connexion et supprime l'accès à la page wp-login.php (sécurité augmentée)
-Author: WPServeur
+Description: Protect your website by changing the login URL and preventing access to wp-login.php page and wp-admin directory while not logged-in
+Author: Remy Perona for WPServeur
 Author URI: http://profiles.wordpress.org/tabrisrp/
-Version: 1.1.5
+Version: 1.1.6
 Text Domain: wps-hide-login
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -387,16 +387,14 @@ if ( defined( 'ABSPATH' )
 
 			global $pagenow;
 
-			if ( is_admin()
-				&& ! is_user_logged_in()
-				&& ! defined( 'DOING_AJAX' )
-				&& $pagenow !== 'admin-post.php' ) {
-
+			if ( is_admin() && ! is_user_logged_in() && ! defined( 'DOING_AJAX' ) && $pagenow !== 'admin-post.php' ) {
+    			require_once(ABSPATH . 'wp-admin/includes/admin.php');
 				status_header(404);
-                nocache_headers();
-                if ( get_404_template() ) {
-                    locate_template( array( '404.php' ), true, true );
-                }
+
+                $template = get_404_template();
+                if ( $template = apply_filters( 'template_include', $template ) ) {
+                    include( $template );
+	            }
                 exit;
 			}
 

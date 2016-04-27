@@ -318,3 +318,14 @@ function kleo_portfolio_meta($meta_boxes) {
     );
     return $meta_boxes;
 }
+
+add_filter( 'kleo_localize_app', 'kleo_portfolio_localize' );
+
+function kleo_portfolio_localize( $obj_array ) {
+    if ((int)sq_option('portfolio_video_height', 160)) {
+        $obj_array['portfolioVideoHeight'] = (int)sq_option( 'portfolio_video_height', 160 );
+    }
+
+    return $obj_array;
+}
+

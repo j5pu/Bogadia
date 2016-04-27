@@ -2163,6 +2163,12 @@ i.icon {
 	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#007db9e8', endColorstr='#3a2e3a',GradientType=0 ); /* IE6-9 */
 }
 
+/* TEMP until VC fixes it */
+.vc_gitem-col > .wpb_single_image.wpb_animate_when_almost_visible {
+	opacity: 1;
+	filter: alpha(opacity=1);
+}
+
 /* --------------------------------------------------
             14 - MailChimp
 ----------------------------------------------------- */

@@ -205,6 +205,8 @@ class kleoImport {
 			'name' => "Home Shop",
 			'img' => KLEO_LIB_URI . '/importer/img/home-shop.jpg',
 			'page' => 'pages/home-shop',
+			'extra' => 'content/products-dummy',
+			'extra_name' => 'Import Dummy Products',
 			//'widgets' => 'yes',
 			'attach' => 'yes',
 			'revslider' => 'HomeFullwidth',
@@ -215,6 +217,8 @@ class kleoImport {
 			'name' => "Home Stylish Woocommerce",
 			'img' => KLEO_LIB_URI . '/importer/img/home-stylish-woo.jpg',
 			'page' => 'pages/home-stylish-woo',
+			'extra' => 'content/products-dummy',
+			'extra_name' => 'Import Dummy Products',
 			//'widgets' => 'yes',
 			'attach' => 'yes',
 			//'revslider' => 'HomeFullwidth',
@@ -493,6 +497,19 @@ class kleoImport {
 									//file name provided without extension
 									$this->import_revslider( $file_path, $file_name );
 								}
+							}
+
+							//check page
+							if (isset($_POST['import_extra']) && in_array( $current_set, $_POST['import_extra'] ) ) {
+
+								$force_attach = false;
+								//check attachments
+								if (isset($_POST['import_attach']) && in_array( $current_set, $_POST['import_attach'] ) ) {
+									$force_attach = true;
+								}
+
+								$file_path = $demo_sets[$current_set]['extra'] . '.xml.gz';
+								$this->import_content( $file_path, $force_attach );
 							}
 
 						}
@@ -775,6 +792,11 @@ class kleoImport {
 										<br>
 									<?php endif; ?>
 
+									<?php if (isset($v['extra'])) : ?>
+										<label><input type="checkbox" name="import_extra[]" value="<?php echo $k;?>" class="check-page"> <?php echo $v['extra_name']; ?></label>
+										<br>
+									<?php endif; ?>
+
 									<?php if (isset($v['attach'])) : ?>
 										<label><input type="checkbox" name="import_attach[]" checked value="<?php echo $k;?>" class="check-attachment"> Import Images</label>
 										<br>
@@ -860,6 +882,7 @@ class kleoImport {
 								<option value="clients">Clients</option>
 								<option value="portfolio">Portfolio</option>
 								<option value="testimonials">Testimonials</option>
+								<option value="products-dummy">Woocommerce Products</option>
 							</select>
 						</td>
 					</tr>

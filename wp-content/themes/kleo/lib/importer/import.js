@@ -51,13 +51,41 @@
 
         });
 
-		$("input.check-attachment").on("change", function() {
+		/*$("input.check-attachment").on("change", function() {
 			if( $(this).is(":checked")) {
 				$(this).closest('.to-left').find("input.check-page").prop('checked', true);
+			}
+		});*/
+
+		/* Un-check the Attachments checkbox if no page is checked */
+		$("input.check-page").on("change", function() {
+			var inputContainer = $(this).closest('.to-left');
+			if( inputContainer.find("input.check-page:checked").length == 0 ) {
+
+				/* Set initial state before un-checking */
+				if (inputContainer.find("input.check-attachment").prop('checked') == true) {
+					inputContainer.find("input.check-attachment").data('initial-state', 'checked');
+				} else {
+					inputContainer.find("input.check-attachment").data('initial-state', 'unchecked');
+				}
+
+				inputContainer.find("input.check-attachment").prop('disabled', true);
+				inputContainer.find("input.check-attachment").prop('checked', false);
+
 			} else {
-				$(this).closest('.to-left').find("input.check-page").prop('checked', false);
+				inputContainer.find("input.check-attachment").prop('disabled', false);
+
+				if (inputContainer.find("input.check-page:checked").length == 1 && $(this).is(":checked") && inputContainer.find("input.check-attachment").data('initial-state')) {
+					var initialState = inputContainer.find("input.check-attachment").data('initial-state');
+
+					if (initialState == 'checked') {
+						inputContainer.find("input.check-attachment").prop('checked', true);
+					}
+				}
 			}
 		});
+
+
 
 		$(".to-left input[type=checkbox]").on("change", function() {
 			var $isChecked = false;

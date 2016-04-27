@@ -11,10 +11,7 @@
 
 /*-------------------------------------------------------------
  Name:      adrotate_insert_input
-
  Purpose:   Prepare input form on saving new or updated banners
- Receive:   -None-
- Return:	-None-
  Since:		0.1 
 -------------------------------------------------------------*/
 function adrotate_insert_input() {
@@ -197,10 +194,7 @@ function adrotate_insert_input() {
 
 /*-------------------------------------------------------------
  Name:      adrotate_insert_group
-
  Purpose:   Save provided data for groups, update linkmeta where required
- Receive:   -None-
- Return:	-None-
  Since:		0.4
 -------------------------------------------------------------*/
 function adrotate_insert_group() {
@@ -322,10 +316,7 @@ function adrotate_insert_group() {
 
 /*-------------------------------------------------------------
  Name:      adrotate_request_action
-
  Purpose:   Prepare action for banner or group from database
- Receive:   -none-
- Return:    -none-
  Since:		2.2
 -------------------------------------------------------------*/
 function adrotate_request_action() {
@@ -472,27 +463,19 @@ function adrotate_delete($id, $what) {
 			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_groups` WHERE `id` = %d;", $id));
 			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d;", $id));
 		} else if ($what == 'bannergroup') {
-			$linkmeta = $wpdb->get_results($wpdb->prepare("SELECT `ad` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d;", $id));
+			$linkmeta = $wpdb->get_results($wpdb->prepare("SELECT `ad` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d AND `user` = '0' AND `schedule` = '0';", $id));
 			foreach($linkmeta as $meta) {
-				$wpdb->query("DELETE FROM `{$wpdb->prefix}adrotate` WHERE `id` = ".$meta->ad.";");
-				$wpdb->query("DELETE FROM `{$wpdb->prefix}adrotate_stats` WHERE `ad` = ".$meta->ad.";");
-				$wpdb->query("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = ".$meta->ad.";");
+				adrotate_delete($meta->ad, 'banner');
 			}
-			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_groups` WHERE `id` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = %d;", $id));
-			$wpdb->query($wpdb->prepare("DELETE FROM `{$wpdb->prefix}adrotate_stats` WHERE `group` = %d;", $id)); // Perhaps unnessesary
+			unset($linkmeta);
+			adrotate_delete($id, 'group');
 		}
-		// Verify all ads
-		adrotate_prepare_evaluate_ads(false);
 	}
 }
 
 /*-------------------------------------------------------------
  Name:      adrotate_active
-
  Purpose:   Activate or Deactivate a banner
- Receive:   $id, $what
- Return:    -none-
  Since:		0.1
 -------------------------------------------------------------*/
 function adrotate_active($id, $what) {
@@ -505,8 +488,8 @@ function adrotate_active($id, $what) {
 		if ($what == 'activate') {
 			// Determine status of ad 
 			$adstate = adrotate_evaluate_ad($id);
-			if($adstate == 'error' OR $adstate == 'expired') $adtype = 'error';
-				else $adtype = 'active';
+			$adtype = ($adstate == 'error' OR $adstate == 'expired') ? 'error' : 'active';
+
 			$wpdb->update($wpdb->prefix.'adrotate', array('type' => $adtype), array('id' => $id));
 		}
 	}
@@ -514,10 +497,7 @@ function adrotate_active($id, $what) {
 
 /*-------------------------------------------------------------
  Name:      adrotate_reset
-
  Purpose:   Reset statistics for a banner
- Receive:   $id
- Return:    -none-
  Since:		2.2
 -------------------------------------------------------------*/
 function adrotate_reset($id) {
@@ -531,10 +511,7 @@ function adrotate_reset($id) {
 
 /*-------------------------------------------------------------
  Name:      adrotate_renew
-
  Purpose:   Renew the end date of a banner with a new schedule starting where the last ended
- Receive:   $id, $howlong
- Return:    -none-
  Since:		2.2
 -------------------------------------------------------------*/
 function adrotate_renew($id, $howlong = 2592000) {
@@ -555,10 +532,7 @@ function adrotate_renew($id, $howlong = 2592000) {
 
 /*-------------------------------------------------------------
  Name:      adrotate_export
-
  Purpose:   Export selected banners
- Receive:   $id
- Return:    -none-
  Since:		3.8.5
 -------------------------------------------------------------*/
 function adrotate_export($ids, $format) {
@@ -569,10 +543,7 @@ function adrotate_export($ids, $format) {
 
 /*-------------------------------------------------------------
  Name:      adrotate_options_submit
-
  Purpose:   Save options from dashboard
- Receive:   $_POST
- Return:    -none-
  Since:		0.1
 -------------------------------------------------------------*/
 function adrotate_options_submit() {
@@ -611,6 +582,12 @@ function adrotate_options_submit() {
 			update_option('adrotate_crawlers', $new_crawlers);
 
 			$notifications = get_option('adrotate_notifications');
+
+			$notifications['notification_dashboard'] = (isset($_POST['adrotate_notification_dashboard'])) ? 'Y' : 'N';
+
+			// Dashboard Notifications
+			$notifications['notification_dash_expired'] = (isset($_POST['adrotate_notification_dash_expired'])) ? 'Y' : 'N';
+			$notifications['notification_dash_soon'] = (isset($_POST['adrotate_notification_dash_soon'])) ? 'Y' : 'N';
 
 			// Turn options off. Available in AdRotate Pro only
 			$notifications['notification_email'] = 'N';
@@ -691,10 +668,7 @@ function adrotate_options_submit() {
 
 /*-------------------------------------------------------------
  Name:      adrotate_prepare_roles
-
  Purpose:   Prepare user roles for WordPress
- Receive:   $action
- Return:    -None-
  Since:		3.0
 -------------------------------------------------------------*/
 function adrotate_prepare_roles($action) {

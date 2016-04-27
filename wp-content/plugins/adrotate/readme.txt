@@ -3,8 +3,8 @@ Contributors: adegans
 Donate link: http://meandmymac.net/donate/?pk_campaign=adrotatefree-readme
 Tags: ads, banner, commercial, admin, advertise, adrotator, plugin, random, rotator, ad, advertising, advertisement, block, blocks, advertiser, publisher, adsense, geo, geolocation, geotarget, chitika, clickbank, broadstreet, banner manager,advert manager, campaign manager, export, import, telize, maxmind, referrer, email, menu, statistics, stats, report, advert, adverts, popular, best, great, 2014, geoselect, geobytes, schedules, schedule, monetize, header, widget, javascript, jquery, tracking, clicks, impressions, rotate, zone, zones, sidebar, footer, content, posts, pages, 2015
 Requires at least: 3.8
-Tested up to: 4.4.2
-Stable tag: 3.15.2
+Tested up to: 4.5
+Stable tag: 3.15.3
 License: GPLv3
  
 The popular choice for monetizing your website with adverts while keeping things simple. Start making money today!
@@ -91,17 +91,20 @@ You can also post your questions on the [forum](https://ajdg.solutions/forums/?p
 
 Be a Pro and go Pro. With [AdRotate Pro](https://ajdg.solutions/products/adrotate-for-wordpress/?pk_campaign=adrotatefree-readme)!
 
-= 3.15.2 FREE =
-* [change] 'Report' links are now 'Stats' to match AdRotate Pro
-* [change] More consistent use of plugins_url()
-* [change] More consistent use of dirname()
+= 3.15.3 FREE =
+* [fix] Demo adverts schedules created correctly
+* [fix] Widget padding setting using current class
 
-= 3.20.2 PRO =
-* [fix] AdRotate menu missing in Multisite super admin dashboard
-* [fix] No requests made if you run out of lookups for AdRotate Geo
-* [change] More logical stats display in advert and group reports
-* [change] More consistent use of plugins_url()
-* [change] More consistent use of dirname()
+= 3.21 PRO =
+* [new] Automatic trash bin for deleted adverts
+* [new] Expired advert notifications can now be hidden
+* [fix] Live preview switch worked backwards
+* [fix] Demo adverts schedules created correctly
+* [fix] Notice of license activation on some multisite setups
+* [fix] Description label for MaxMind account fields
+* [fix] Serbia and Montenegro are now separated for Geo Targeting
+* [fix] Widget padding setting using current class
+* [fix] Widget padding setting now supports new widgets
 
 All recent changes are available on the [AdRotate website](https://ajdg.solutions/products/adrotate-for-wordpress/development/?pk_campaign=adrotatefree-readme).
 
@@ -109,10 +112,9 @@ NOTE: Unsolicited offers, parnterships, job offers, promotional emails or produc
 
 == Upgrade Notice ==
 
-= 3.15.1 FREE =
-* [change] 'Report' links are now 'Stats' to match AdRotate Pro
-* [change] More consistent use of plugins_url()
-* [change] More consistent use of dirname()
+= 3.15.3 FREE =
+* [fix] Demo adverts schedules created correctly
+* [fix] Widget padding setting using current class
 
 All recent changes are available on the [AdRotate website](https://ajdg.solutions/products/adrotate-for-wordpress/development/?pk_campaign=adrotatefree-readme).
 

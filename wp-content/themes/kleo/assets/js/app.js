@@ -456,7 +456,10 @@ var kleoPage = {
 
 		//activate magnificPopup
         if( $.fn.magnificPopup ) {
-            kleoPage.magnificPopup();
+            kleoPage.magnificPopupModals();
+            if(! kleoFramework.hasOwnProperty('DisableMagnificGallery') || kleoFramework.DisableMagnificGallery === '0') {
+                kleoPage.magnificPopupGallery();
+            }
         }
 
 		//activate html5 video/audio player
@@ -642,14 +645,18 @@ var kleoPage = {
     portfolioVideo: function() {
         var elements  = $(".porto-video .kleo-video-embed");
         elements.height(function () {
+            var elHeight = 160;
+            console.log(kleoFramework.portfolioVideoHeight);
+            if( kleoFramework.hasOwnProperty('portfolioVideoHeight') && kleoFramework.portfolioVideoHeight != 0) {
+                elHeight = kleoFramework.portfolioVideoHeight;
+            }
             var image = $(this).closest(".portfolio-items").find('.portfolio-image img, .kleo-banner-slider img').eq(0);
-            return image.length && image.height() > 50 ? image.height() : "160";
+            return image.length && image.height() > 50 ? image.height() : elHeight;
         });
     },
 	
 	notReadyInit: function() {
 		//Preload logo
-		//$("#logo_img").imgpreload();
         kleoHeader.loadLogoImg();
 
 		$('.responsive-tabs, .nav-pills, .top-menu > ul, #top-social > ul').tabdrop();
@@ -1070,14 +1077,14 @@ var kleoPage = {
 	 },
 
 
-	magnificPopup: function() {
+	magnificPopupModals: function() {
 
         /* Login modal */
 
         /* On specific URL*/
-        if(window.location.hash) {
+        if (window.location.hash) {
             var myHash = window.location.hash.substring(1); //Puts hash in variable, and removes the # character
-            if (myHash == 'show-login' && ! $("body").hasClass('logged-in')) {
+            if (myHash == 'show-login' && !$("body").hasClass('logged-in')) {
                 $.magnificPopup.open({
                     items: {
                         src: '#kleo-login-modal',
@@ -1093,72 +1100,74 @@ var kleoPage = {
 
 
         $('.kleo-show-login, .bp-menu.bp-login-nav a, .must-log-in > a').magnificPopup({
-          items: {
-            src: '#kleo-login-modal',
-            type: 'inline',
-            focus: '#username'
-          },
-          preloader: false,
-          mainClass: 'kleo-mfp-zoom',
+            items: {
+                src: '#kleo-login-modal',
+                type: 'inline',
+                focus: '#username'
+            },
+            preloader: false,
+            mainClass: 'kleo-mfp-zoom',
 
-          // When element is focused, some mobile browsers in some cases zoom in
-          // It looks not nice, so we disable it:
-          callbacks: {
-            beforeOpen: function() {
-              if($(window).width() < 700) {
-                this.st.focus = false;
-              } else {
-                this.st.focus = '#username';
-              }
+            // When element is focused, some mobile browsers in some cases zoom in
+            // It looks not nice, so we disable it:
+            callbacks: {
+                beforeOpen: function () {
+                    if ($(window).width() < 700) {
+                        this.st.focus = false;
+                    } else {
+                        this.st.focus = '#username';
+                    }
+                }
             }
-          }
         });
 
         /* Lost Pass modal */
         $('.kleo-show-lostpass').magnificPopup({
-          items: {
-            src: '#kleo-lostpass-modal',
-            type: 'inline',
-            focus: '#forgot-email'
-          },
-          preloader: false,
-          mainClass: 'kleo-mfp-zoom',
+            items: {
+                src: '#kleo-lostpass-modal',
+                type: 'inline',
+                focus: '#forgot-email'
+            },
+            preloader: false,
+            mainClass: 'kleo-mfp-zoom',
 
-          // When elemened is focused, some mobile browsers in some cases zoom in
-          // It looks not nice, so we disable it:
-          callbacks: {
-            beforeOpen: function() {
-              if($(window).width() < 700) {
-                this.st.focus = false;
-              } else {
-                this.st.focus = '#forgot-email';
-              }
+            // When elemened is focused, some mobile browsers in some cases zoom in
+            // It looks not nice, so we disable it:
+            callbacks: {
+                beforeOpen: function () {
+                    if ($(window).width() < 700) {
+                        this.st.focus = false;
+                    } else {
+                        this.st.focus = '#forgot-email';
+                    }
+                }
             }
-          }
         });
 
         /* Register modal */
         $('.kleo-show-register').magnificPopup({
-          items: {
-            src: '#kleo-register-modal',
-            type: 'inline',
-            focus: '#reg-username'
-          },
-          preloader: false,
-          mainClass: 'kleo-mfp-zoom',
+            items: {
+                src: '#kleo-register-modal',
+                type: 'inline',
+                focus: '#reg-username'
+            },
+            preloader: false,
+            mainClass: 'kleo-mfp-zoom',
 
-          // When elemened is focused, some mobile browsers in some cases zoom in
-          // It looks not nice, so we disable it:
-          callbacks: {
-            beforeOpen: function() {
-              if($(window).width() < 700) {
-                this.st.focus = false;
-              } else {
-                this.st.focus = '#reg-username';
-              }
+            // When elemened is focused, some mobile browsers in some cases zoom in
+            // It looks not nice, so we disable it:
+            callbacks: {
+                beforeOpen: function () {
+                    if ($(window).width() < 700) {
+                        this.st.focus = false;
+                    } else {
+                        this.st.focus = '#reg-username';
+                    }
+                }
             }
-          }
         });
+    },
+    magnificPopupGallery: function() {
 
 		/* Regular popup images */
 		$("a[data-rel^='prettyPhoto'], a[rel^='prettyPhoto'], a[rel^='modalPhoto'], a[data-rel^='modalPhoto'], .article-content a[href$=jpg]:has(img), .article-content a[href$=JPG]:has(img), .article-content a[href$=jpeg]:has(img), .article-content a[href$=JPEG]:has(img), .article-content a[href$=gif]:has(img), .article-content a[href$=GIF]:has(img), .article-content a[href$=bmp]:has(img), .article-content a[href$=BMP]:has(img), .article-content a[href$=png]:has(img), .article-content a[href$=PNG]:has(img)").magnificPopup({
@@ -2041,23 +2050,26 @@ var kleoHeader = {
                 }, 1000);
             }
         });
-
-        $('section')
-            .waypoint(function(direction) {
-                // Highlight element when related content
-                // is 10% percent from the bottom...
-                // remove if below
-                kleoHeader.getRelatedNavigation(this).parents('li').toggleClass('active', direction === 'down');
-            }, {
-                offset: 150 //
-            })
-            .waypoint(function(direction) {
-                // Highlight element when bottom of related content
-                // is 100px from the top - remove if less
-                kleoHeader.getRelatedNavigation(this).parents('li').toggleClass('active', direction === 'up');
-            }, {
-                offset: function() {  return -$(this).height() + 100; }
-            });
+        if ( kleoHeader.getRelatedNavigation(this) ) {
+            $('section')
+                .waypoint(function (direction) {
+                    // Highlight element when related content
+                    // is 10% percent from the bottom...
+                    // remove if below
+                    kleoHeader.getRelatedNavigation(this).parents('li').toggleClass('active', direction === 'down');
+                }, {
+                    offset: 150 //
+                })
+                .waypoint(function (direction) {
+                    // Highlight element when bottom of related content
+                    // is 100px from the top - remove if less
+                    kleoHeader.getRelatedNavigation(this).parents('li').toggleClass('active', direction === 'up');
+                }, {
+                    offset: function () {
+                        return -$(this).height() + 100;
+                    }
+                });
+        }
     },
     /* Get section or article by href */
     getRelatedContent: function(el){
@@ -2065,7 +2077,11 @@ var kleoHeader = {
     },
     /* Get link by section or article id */
     getRelatedNavigation: function(el){
-        return $('.kleo-main-header .nav > li a[href=#'+$(el).attr('id')+']');
+        if ($(el).attr('id')) {
+            return $('.kleo-main-header .nav > li a[href=#' + $(el).attr('id') + ']');
+        } else {
+            return false;
+        }
     },
 
 

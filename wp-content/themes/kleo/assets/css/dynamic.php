@@ -54,16 +54,16 @@ $section['mat-color-bg'] = kleo_calc_similar_color($section['bg'], (kleo_calc_pe
 
 <?php if ( $name == 'main' ) { //only for main-color ?>
 
-        #main {
-        background-color: <?php echo $section['bg']; ?>;
-        }
+#main {
+    background-color: <?php echo $section['bg']; ?>;
+}
 /*** Popover ***/
 .popover-content {
-color: <?php echo $section['text']; ?>;
+    color: <?php echo $section['text']; ?>;
 }
 .popover-title {
-	color: <?php echo $section['high_color']; ?>;
-  background-color: <?php echo $section['high_bg']; ?>;
+    color: <?php echo $section['high_color']; ?>;
+    background-color: <?php echo $section['high_bg']; ?>;
 }
 /*** Tooltip ***/
 .tooltip-inner {

@@ -16,9 +16,9 @@ function kleo_metaboxes( array $meta_boxes ) {
 	// Start with an underscore to hide fields from custom fields list
 	$prefix = '_kleo_';
 	
-	$meta_boxes[] = array(
+	$meta_boxes['general_settings'] = array(
 		'id'         => 'general_settings',
-		'title'      => 'Theme General settings',
+		'title'      => esc_html__('Theme General settings', 'kleo_framework'),
 		'pages'      => array( 'post','page' ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'default',
@@ -31,8 +31,8 @@ function kleo_metaboxes( array $meta_boxes ) {
 				'type' => 'tab'
 			),
 			array(
-				'name' => 'Site Layout',
-				'desc' => 'Override default site layout',
+				'name' => esc_html__('Site Layout', 'kleo_framework' ),
+				'desc' => esc_html__( 'Override default site layout', 'kleo_framework' ),
 				'id'   => $prefix . 'site_style',
 				'type' => 'select',
 				'options' => array(
@@ -43,15 +43,15 @@ function kleo_metaboxes( array $meta_boxes ) {
 				'value' => ''
 			),
 			array(
-				'name' => 'Centered text',
-				'desc' => 'Check to have centered text on this page',
+				'name' => esc_html__('Centered text', 'kleo_framework' ),
+				'desc' => esc_html__( 'Check to have centered text on this page', 'kleo_framework' ),
 				'id'   => $prefix . 'centered_text',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Top bar status',
-				'desc' => 'Enable/disable site top bar',
+				'name' => esc_html__('Top bar status', 'kleo_framework' ),
+				'desc' => esc_html__( 'Enable/disable site top bar' ,'kleo_framework' ),
 				'id'   => $prefix . 'topbar_status',
 				'type' => 'select',
 				'options' => array(
@@ -62,221 +62,221 @@ function kleo_metaboxes( array $meta_boxes ) {
 				'value' => ''
 			),
 			array(
-				'name' => 'Hide Header',
-				'desc' => 'Check to hide whole header area',
+				'name' => esc_html__('Hide Header', 'kleo_framework' ),
+				'desc' => esc_html__( 'Check to hide whole header area', 'kleo_framework' ),
 				'id'   => $prefix . 'hide_header',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Hide Footer',
-				'desc' => 'Check to hide whole footer area',
+				'name' => esc_html__('Hide Footer', 'kleo_framework' ),
+				'desc' => esc_html__( 'Check to hide whole footer area', 'kleo_framework' ),
 				'id'   => $prefix . 'hide_footer',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Hide Socket area',
-				'desc' => 'Check to hide the area after footer that contains copyright info.',
+				'name' => esc_html__('Hide Socket area', 'kleo_framework' ),
+				'desc' => esc_html__( 'Check to hide the area after footer that contains copyright info.', 'kleo_framework' ),
 				'id'   => $prefix . 'hide_socket',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Custom Logo',
-				'desc' => 'Use a custom logo for this page only',
+				'name' => esc_html__('Custom Logo', 'kleo_framework' ),
+				'desc' => esc_html__( 'Use a custom logo for this page only', 'kleo_framework' ),
 				'id'   => $prefix . 'logo',
 				'type' => 'file',
 			),
 			array(
-				'name' => 'Custom Logo Retina',
-				'desc' => 'Use a custom retina logo for this page only',
+				'name' => esc_html__('Custom Logo Retina', 'kleo_framework' ),
+				'desc' => esc_html__( 'Use a custom retina logo for this page only', 'kleo_framework' ),
 				'id'   => $prefix . 'logo_retina',
 				'type' => 'file',
 			),
 			array(
-				'name' => 'Main Menu Full Width',
-				'desc' => 'Check to enable full browser width menu style.',
+				'name' => esc_html__('Main Menu Full Width', 'kleo_framework' ),
+				'desc' => esc_html__( 'Check to enable full browser width menu style.', 'kleo_framework' ),
 				'id'   => $prefix . 'menu_full_width',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Transparent Main menu',
-				'desc' => 'Check to have Main menu background transparent.',
+				'name' => esc_html__('Transparent Main menu', 'kleo_framework' ),
+				'desc' => esc_html__( 'Check to have Main menu background transparent.', 'kleo_framework' ),
 				'id'   => $prefix . 'transparent_menu',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
             array(
-                'name' => 'Transparent Main menu color',
+                'name' => esc_html__( 'Transparent Main menu color', 'kleo_framework' ),
                 'desc' => '',
                 'id'   => $prefix . 'transparent_menu_color',
                 'type' => 'select',
                 'options' => array(
-                    array('value' => 'white', 'name' => 'White'),
-                    array('value' => 'black', 'name' => 'Black')
+                    array('value' => 'white', 'name' => esc_html__( 'White', 'kleo_framework' )),
+                    array('value' => 'black', 'name' => esc_html__( 'Black', 'kleo_framework' ))
                 ),
                 'value' => 'white'
             ),
             array(
-                'name' => 'Social share',
-                'desc' => 'Display social share at bottom of the single page.',
+                'name' => esc_html__('Social share', 'kleo_framework' ),
+                'desc' => esc_html__('Display social share at bottom of the single page.', 'kleo_framework' ),
                 'id'   => $prefix . 'blog_social_share',
                 'type' => 'select',
                 'options' => array(
-                    array('value' => '', 'name' => 'Default'),
-                    array('value' => '1', 'name' => 'Visible'),
-                    array('value' => '0', 'name' => 'Hidden')
+                    array('value' => '', 'name' => esc_html__( 'Default', 'kleo_framework' )),
+                    array('value' => '1', 'name' => esc_html__( 'Visible', 'kleo_framework' )),
+                    array('value' => '0', 'name' => esc_html__( 'Hidden', 'kleo_framework' ))
                 ),
                 'value' => ''
             ),
 				
 				
 			array(
-				'name' => 'Title section',
+				'name' => esc_html__('Title section', 'kleo_framework' ),
 				'desc' => '',
 				'id'   => 'kleoheader',
 				'type' => 'tab'
 			),
             array(
-                'name' => 'Section Layout',
+                'name' => esc_html__('Section Layout', 'kleo_framework' ),
                 'desc' => '',
                 'id'   => $prefix . 'title_layout',
                 'type' => 'select',
                 'options' => array(
-                    array('value' => '', 'name' => 'Default'),
-                    array('value' => 'regular', 'name' => 'Regular'),
-                    array('value' => 'center', 'name' => 'Centered'),
-                    array('value' => 'right_breadcrumb', 'name' => 'Right Breadcrumb')
+                    array('value' => '', 'name' => esc_html__('Default', 'kleo_framework' )),
+                    array('value' => 'regular', 'name' => esc_html__('Regular', 'kleo_framework')),
+                    array('value' => 'center', 'name' => esc_html__('Centered', 'kleo_framework')),
+                    array('value' => 'right_breadcrumb', 'name' => esc_html__('Right Breadcrumb', 'kleo_framework'))
                 ),
                 'value' => ''
             ),
             array(
-                'name' => 'Custom page title',
-                'desc' => 'Set a custom page title here if you need.',
+                'name' => esc_html__('Custom page title', 'kleo_framework' ),
+                'desc' => esc_html__('Set a custom page title here if you need.', 'kleo_framework' ),
                 'id'   => $prefix . 'custom_title',
                 'type' => 'text',
             ),
 			array(
-				'name' => 'Hide the title',
-				'desc' => 'Check to hide the title when displaying the post/page',
+				'name' => esc_html__('Hide the title', 'kleo_framework' ),
+				'desc' => esc_html__('Check to hide the title when displaying the post/page', 'kleo_framework' ),
 				'id'   => $prefix . 'title_checkbox',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Breadcrumb',
+				'name' => esc_html__('Breadcrumb', 'kleo_framework' ),
 				'desc' => '',
 				'id'   => $prefix . 'hide_breadcrumb',
 				'type' => 'select',
 				'options' => array(
-						array('value' => '', 'name' => 'Default'),
-						array('value' => '0', 'name' => 'Visible'),
-						array('value' => '1', 'name' => 'Hidden')
+					array('value' => '', 'name' => esc_html__( 'Default', 'kleo_framework' )),
+					array('value' => '0', 'name' => esc_html__( 'Visible', 'kleo_framework' )),
+					array('value' => '1', 'name' => esc_html__( 'Hidden', 'kleo_framework' ))
 					),
 				'value' => ''
 			),
             array(
-                'name' => 'Hide information',
-                'desc' => 'Check to hide contact info in title section',
+                'name' => esc_html__('Hide information', 'kleo_framework' ),
+                'desc' => esc_html__('Check to hide contact info in title section', 'kleo_framework' ),
                 'id'   => $prefix . 'hide_info',
                 'type' => 'checkbox',
                 'value' => '1'
             ),
             array(
-                'name' => 'Top Padding',
+                'name' => esc_html__('Top Padding', 'kleo_framework' ),
                 'desc' => 'Put a value without px. Example: 20<br>Default value is taken from Theme options - Header - Title/Breadcrumb section',
                 'id'   => $prefix . 'title_top_padding',
                 'type' => 'text',
             ),
             array(
-                'name' => 'Bottom Padding',
+                'name' => esc_html__('Bottom Padding', 'kleo_framework' ),
                 'desc' => 'Put a value without px. Example: 20<br>Default value is taken from Theme options - Header - Title/Breadcrumb section',
                 'id'   => $prefix . 'title_bottom_padding',
                 'type' => 'text',
             ),
             array(
-                'name' => 'Text Color',
-                'desc' => 'Override the default text color as set in Theme options - Styling options - Title',
+                'name' => esc_html__('Text Color', 'kleo_framework' ),
+                'desc' => esc_html__('Override the default text color as set in Theme options - Styling options - Title', 'kleo_framework' ),
                 'id'   => $prefix . 'title_color',
                 'type' => 'colorpicker',
                 'value' => ''
             ),
             array(
-                'name' => 'Background Image',
-                'desc' => 'Choose a background image for the section.',
+                'name' => esc_html__('Background Image', 'kleo_framework' ),
+                'desc' => esc_html__('Choose a background image for the section.', 'kleo_framework' ),
                 'id'   => $prefix . 'title_bg',
                 'type' => 'file',
                 'bg_options' => 'yes'
             ),
             array(
-                'name' => 'Background Color',
-                'desc' => 'If an image is not set the color will be used',
+                'name' => esc_html__('Background Color', 'kleo_framework' ),
+                'desc' => esc_html__('If an image is not set the color will be used', 'kleo_framework' ),
                 'id'   => $prefix . 'title_bg_color',
                 'type' => 'colorpicker',
                 'value' => ''
             ),
 
             array(
-                'name' => 'Media',
+                'name' => esc_html__('Media', 'kleo_framework' ),
                 'desc' => '',
                 'id'   => 'kleomedia',
                 'type' => 'tab'
             ),
             array(
-                'name' => 'Show media on post page',
-                'desc' => 'If you want to show image/gallery/video/audio before the post on single page',
+                'name' => esc_html__('Show media on post page', 'kleo_framework' ),
+                'desc' => esc_html__('If you want to show image/gallery/video/audio before the post on single page', 'kleo_framework' ),
                 'id'   => $prefix . 'post_media_status',
                 'type' => 'select',
                 'options' => array(
-                    array('value' => '', 'name' => 'Default'),
-                    array('value' => '1', 'name' => 'Yes'),
-                    array('value' => '0', 'name' => 'No')
+	                array('value' => '', 'name' => esc_html__( 'Default', 'kleo_framework' )),
+	                array('value' => '1', 'name' => esc_html__( 'Yes', 'kleo_framework' )),
+	                array('value' => '0', 'name' => esc_html__( 'No', 'kleo_framework' ))
                 ),
                 'value' => ''
             ),
             array(
-                'name' => 'Slider',
-                'desc' => 'Used when you select the Gallery format. Upload an image or enter an URL.',
+                'name' => esc_html__('Slider', 'kleo_framework' ),
+                'desc' => esc_html__('Used when you select the Gallery format. Upload an image or enter an URL.', 'kleo_framework' ),
                 'id'   => $prefix . 'slider',
                 'type' => 'file_repeat',
                 'allow' => 'url'
             ),
             array(
-                'name' => 'Video oEmbed URL',
+                'name' => esc_html__('Video oEmbed URL', 'kleo_framework' ),
                 'desc' => 'Used when you select Video format. Enter a Youtube, Vimeo, Soundcloud, etc URL. See supported services at <a target="_blank" href="http://codex.wordpress.org/Embeds">http://codex.wordpress.org/Embeds</a>.',
                 'id'   => $prefix . 'embed',
                 'type' => 'oembed',
             ),
 
             array(
-                'name' => 'Video Self hosted(mp4)',
+                'name' => esc_html__('Video Self hosted(mp4)', 'kleo_framework' ),
                 'desc' => 'Used when you select Video format. Upload your MP4 video file. Setting a self hosted video will ignore Video oEmbed above.',
                 'id'   => $prefix . 'video_mp4',
                 'type' => 'file',
             ),
             array(
-                'name' => 'Video Self hosted(ogv)',
+                'name' => esc_html__('Video Self hosted(ogv)', 'kleo_framework' ),
                 'desc' => 'Used when you select Video format. Upload your OGV video file.',
                 'id'   => $prefix . 'video_ogv',
                 'type' => 'file',
             ),
             array(
-                'name' => 'Video Self hosted(webm)',
+                'name' => esc_html__('Video Self hosted(webm)', 'kleo_framework' ),
                 'desc' => 'Used when you select Video format. Upload your WEBM video file.',
                 'id'   => $prefix . 'video_webm',
                 'type' => 'file',
             ),
             array(
-                'name' => 'Video Self hosted Poster',
+                'name' => esc_html__('Video Self hosted Poster', 'kleo_framework' ),
                 'desc' => 'Used to show before the video loads',
                 'id'   => $prefix . 'video_poster',
                 'type' => 'file',
             ),
 
             array(
-                'name' => 'Audio',
+                'name' => esc_html__('Audio', 'kleo_framework' ),
                 'desc' => 'Used when you select Audio format. Upload your audio file',
                 'id'   => $prefix . 'audio',
                 'type' => 'file',
@@ -294,21 +294,21 @@ function kleo_metaboxes( array $meta_boxes ) {
 		'fields'     => array(
 
 				array(
-				'name' => 'Hide post meta',
+				'name' => esc_html__('Hide post meta', 'kleo_framework' ),
 				'desc' => 'Check to hide the post meta when displaying a post',
 				'id'   => $prefix . 'meta_checkbox',
 				'type' => 'checkbox',
 				'value' => '1'
 			),
 			array(
-				'name' => 'Related posts',
+				'name' => esc_html__('Related posts', 'kleo_framework' ),
 				'desc' => 'Display related posts at bottom of the single post display',
 				'id'   => $prefix . 'related_posts',
 				'type' => 'select',
 				'options' => array(
-						array('value' => '', 'name' => 'Default'),
-						array('value' => '1', 'name' => 'Visible'),
-						array('value' => '0', 'name' => 'Hidden')
+					array('value' => '', 'name' => esc_html__( 'Default', 'kleo_framework' )),
+					array('value' => '1', 'name' => esc_html__( 'Visible', 'kleo_framework' )),
+					array('value' => '0', 'name' => esc_html__( 'Hidden', 'kleo_framework' ))
 					),
 				'value' => ''
 			),
@@ -319,7 +319,7 @@ function kleo_metaboxes( array $meta_boxes ) {
 	
 	$meta_boxes[] = array(
 		'id'         => 'post_layout',
-		'title'      => 'Post Layout',
+		'title'      => esc_html__('Post Layout', 'kleo_framework' ),
 		'pages'      => array( 'post', 'product', 'portfolio' ), // Post type
 		'context'    => 'side',
 		'priority'   => 'default',
@@ -327,18 +327,18 @@ function kleo_metaboxes( array $meta_boxes ) {
 		'fields'     => array(
 			
 			array(
-				'name' => 'Post layout',
+				'name' => esc_html__('Post layout', 'kleo_framework' ),
 				'desc' => '',
 				'id'   => $prefix . 'post_layout',
 				'type' => 'select',
 				'options' => array(
-						array('value' => 'default', 'name' => 'Default'),
-						array('value' => 'right', 'name' => 'Right Sidebar'),
-						array('value' => 'left', 'name' => 'Left sidebar'),
-						array('value' => 'no', 'name' => 'Full width, no sidebar'),
-						array('value' => '3lr', 'name' => '3 columns, Right and Left sidebars'),
-						array('value' => '3ll', 'name' => '3 columns, 2 Left sidebars'),
-						array('value' => '3rr', 'name' => '3 columns, 2 Right sidebars'),
+						array('value' => 'default', 'name' => esc_html__('Default','kleo_framework')),
+						array('value' => 'right', 'name' => esc_html__('Right Sidebar','kleo_framework')),
+						array('value' => 'left', 'name' => esc_html__('Left sidebar','kleo_framework')),
+						array('value' => 'no', 'name' => esc_html__('Full width, no sidebar','kleo_framework')),
+						array('value' => '3lr', 'name' => esc_html__('3 columns, Right and Left sidebars','kleo_framework')),
+						array('value' => '3ll', 'name' => esc_html__('3 columns, 2 Left sidebars','kleo_framework')),
+						array('value' => '3rr', 'name' => esc_html__('3 columns, 2 Right sidebars','kleo_framework')),
 					),
 				'value' => 'right'
 			),
@@ -349,7 +349,7 @@ function kleo_metaboxes( array $meta_boxes ) {
 	
 	$meta_boxes[] = array(
 		'id'         => 'header_content',
-		'title'      => 'Header content(optional)',
+		'title'      => esc_html__('Header content(optional)', 'kleo_framework' ),
 		'pages'      => array( 'post', 'page', 'product' ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'default',
@@ -357,8 +357,8 @@ function kleo_metaboxes( array $meta_boxes ) {
 		'fields'     => array(
 	
 				array(
-				'name' => 'Header content',
-				'desc' => 'This will be displayed right after the menu. Shortcodes are allowed',
+				'name' => esc_html__( 'Header content', 'kleo_framework' ),
+				'desc' => esc_html__( 'This will be displayed right after the menu. Shortcodes are allowed', 'kleo_framework' ),
 				'id'   => $prefix . 'header_content',
 				'type' => 'textarea',
 			),
@@ -368,7 +368,7 @@ function kleo_metaboxes( array $meta_boxes ) {
 	
 	$meta_boxes[] = array(
 		'id'         => 'bottom_content',
-		'title'      => 'Bottom content(optional)',
+		'title'      => esc_html__( 'Bottom content(optional)', 'kleo_framework' ),
 		'pages'      => array( 'post', 'page', 'product' ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'default',
@@ -376,8 +376,8 @@ function kleo_metaboxes( array $meta_boxes ) {
 		'fields'     => array(
 	
 				array(
-				'name' => 'Bottom content',
-				'desc' => 'This will be displayed right after the generated page content ends. Shortcodes are allowed',
+				'name' => esc_html__('Bottom content', 'kleo_framework' ),
+				'desc' => esc_html__('This will be displayed right after the generated page content ends. Shortcodes are allowed', 'kleo_framework' ),
 				'id'   => $prefix . 'bottom_content',
 				'type' => 'textarea',
 			),
@@ -404,14 +404,14 @@ function kleo_metaboxes( array $meta_boxes ) {
         
 	$meta_boxes[] = array(
 		'id'         => 'testimonials_metabox',
-		'title'      => __('Testimonial - Author description', 'kleo_framework'),
+		'title'      => esc_html__('Testimonial - Author description', 'kleo_framework'),
 		'pages'      => array( 'kleo-testimonials' ), // Post type
 		'context'    => 'normal',
 		'priority'   => 'high',
 		'show_names' => false, // Show field names on the left
 		'fields' => array(
 			array(
-				'name' => 'Author description',
+				'name' => esc_html__('Author description', 'kleo_framework' ),
 				'desc' => '',
 				'id'   => $prefix . 'author_description',
 				'type' => 'text',
@@ -429,7 +429,7 @@ function kleo_metaboxes( array $meta_boxes ) {
 
     $meta_boxes[] = array(
         'id'         => 'page_menu',
-        'title'      => 'Main menu options',
+        'title'      => esc_html__('Main menu options', 'kleo_framework' ),
         'pages'      => array( 'page', 'post' ), // Post type
         'context'    => 'side',
         'priority'   => 'default',
@@ -437,7 +437,7 @@ function kleo_metaboxes( array $meta_boxes ) {
         'fields'     => array(
 
             array(
-                'name' => 'Custom menu',
+                'name' => esc_html__('Custom menu', 'kleo_framework' ),
                 'desc' => '',
                 'id'   => $prefix . 'page_menu',
                 'type' => 'select',
@@ -445,14 +445,14 @@ function kleo_metaboxes( array $meta_boxes ) {
                 'value' => 'default'
             ),
             array(
-                'name' => 'Hide Shop',
-                'desc' => 'Check to hide the Shop icon in the main menu',
+                'name' => esc_html__('Hide Shop', 'kleo_framework' ),
+                'desc' => esc_html__( 'Check to hide the Shop icon in the main menu', 'kleo_framework' ),
                 'id'   => $prefix . 'hide_shop_icon',
                 'type' => 'checkbox',
                 'value' => '1'
             ),
             array(
-                'name' => 'Hide Search',
+                'name' => esc_html__('Hide Search', 'kleo_framework' ),
                 'desc' => 'Check to hide the Search icon in the main menu',
                 'id'   => $prefix . 'hide_search_icon',
                 'type' => 'checkbox',

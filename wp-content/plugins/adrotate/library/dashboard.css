@@ -16,9 +16,10 @@
 /* Banner styles */
 .adrotate_banner { margin:12px 0; position:relative; overflow:hidden; }
 .adrotate_banner .text { color:#000; font-size:15px; line-height:26px; margin:18px 18px 14px; float:left; width:auto; max-width:80%; }
-.adrotate_banner .text span { font-size:12px; opacity:0.7; }
+.adrotate_banner .text span { font-size:12px; opacity: 0.7; }
 .adrotate_banner .button { float:left; border:none; font-size:14px; margin:18px 0 18px 16px; padding:12px 0; color:#FFF; text-shadow:none; font-weight:bold; background:#86c351; -moz-border-radius:3px; border-radius:3px; -webkit-border-radius:3px; text-decoration:none; height:50px; text-align:center; text-transform:uppercase; width:147px; box-shadow:none; line-height:26px; }
 .adrotate_banner .button:hover, .adrotate_pro_banner .button:focus { background:#0074A2; color:#FFF; }
+.adrotate_banner .button_large { width:200px; }
 .adrotate_banner .icon { float:right; margin:12px 8px 8px 8px; }
 .adrotate_banner .close_banner { float:right; margin:8px; cursor:pointer; }
 

@@ -194,7 +194,7 @@ add_action( 'vc_after_init', 'kleo_add_vc_column_five_cols_options' );
 function kleo_vc_disable_update() {
     if (function_exists('vc_license') && function_exists('vc_updater') && ! vc_license()->isActivated()) {
 
-        remove_filter( 'upgrader_pre_download', array( vc_updater(), 'preUpgradeFilter' ), 10, 4 );
+        remove_filter( 'upgrader_pre_download', array( vc_updater(), 'preUpgradeFilter' ), 10);
         remove_filter( 'pre_set_site_transient_update_plugins', array(
             vc_updater()->updateManager(),
             'check_update'
@@ -203,3 +203,13 @@ function kleo_vc_disable_update() {
     }
 }
 add_action( 'admin_init', 'kleo_vc_disable_update', 9 );
+
+
+if (! function_exists('kleo_vc_elem_increment')) {
+    function kleo_vc_elem_increment() {
+        static $count = 0;
+        $count ++;
+
+        return $count;
+    }
+}

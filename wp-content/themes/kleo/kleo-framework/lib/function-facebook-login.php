@@ -171,8 +171,8 @@ if ( sq_option( 'facebook_login', 0 ) == 1 ) {
     add_action('kleo_after_body', 'kleo_fb_head');
     add_action('login_head', 'kleo_fb_head');
     add_action('login_head', 'kleo_fb_loginform_script');
-    add_action('wp_footer', 'kleo_fb_footer');
-    add_action('login_footer', 'kleo_fb_footer');
+    add_action('wp_footer', 'kleo_fb_footer', 99);
+    add_action('login_footer', 'kleo_fb_footer', 99);
 }
 
 

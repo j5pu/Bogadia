@@ -1,4 +1,8 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
+
 /**
  * Shortcode attributes
  * @var $atts
@@ -119,7 +123,7 @@ switch ( $source ) {
         $custom_src = $custom_src ? esc_attr( $custom_src ) : $default_src;
 
         $img = array(
-            'thumbnail' => '<img class="vc_single_image-img" ' . $hwstring . ' src="' . $custom_src . '" />'
+            'thumbnail' => '<img class="vc_single_image-img" ' . $hwstring . ' src="' . $custom_src . '" />',
         );
         break;
 
@@ -245,7 +249,7 @@ if ( in_array( $source, array( 'media_library', 'featured_image' ) ) && 'yes' ==
     }
 }
 
-if ( 'yes' == $add_caption && '' !== $caption ) {
+if ( 'yes' === $add_caption && '' !== $caption ) {
     $html .= '<figcaption class="vc_figure-caption">' . esc_html( $caption ) . '</figcaption>';
 }
 

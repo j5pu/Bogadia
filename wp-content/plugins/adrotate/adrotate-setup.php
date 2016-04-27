@@ -288,8 +288,12 @@ function adrotate_check_config() {
 	if(!isset($config['jsfooter']) OR ($config['jsfooter'] != 'Y' AND $config['jsfooter'] != 'N')) $config['jsfooter'] = 'Y';
 	update_option('adrotate_config', $config);
 
-	if(!isset($notifications['notification_push']) OR ($notifications['notification_push'] != 'Y' AND $notifications['notification_push'] != 'N')) $notifications['notification_push'] = 'N';
-	if(!isset($notifications['notification_email']) OR ($notifications['notification_email'] != 'Y' AND $notifications['notification_email'] != 'N')) $notifications['notification_email'] = 'Y';
+	if(!isset($notifications['notification_dash']) OR ($notifications['notification_dash'] != 'Y' AND $notifications['notification_dash'] != 'N')) $notifications['notification_dash'] = 'Y';
+	if(!isset($notifications['notification_email'])) $notifications['notification_email'] = 'N';
+	if(!isset($notifications['notification_push'])) $notifications['notification_push'] = 'N';
+
+	if(!isset($notifications['notification_dash_expired']) OR ($notifications['notification_dash_expired'] != 'Y' AND $notifications['notification_dash_expired'] != 'N')) $notifications['notification_dash_expired'] = 'Y';
+	if(!isset($notifications['notification_dash_soon']) OR ($notifications['notification_dash_soon'] != 'Y' AND $notifications['notification_dash_soon'] != 'N')) $notifications['notification_dash_soon'] = 'Y';
 
 	if(!isset($notifications['notification_push_geo']) OR ($notifications['notification_push_geo'] != 'Y' AND $notifications['notification_push_geo'] != 'N')) $notifications['notification_push_geo'] = 'N';
 	if(!isset($notifications['notification_push_status']) OR ($notifications['notification_push_status'] != 'Y' AND $notifications['notification_push_status'] != 'N')) $notifications['notification_push_status'] = 'N';
@@ -315,11 +319,50 @@ function adrotate_check_config() {
 }
 
 /*-------------------------------------------------------------
- Name:      adrotate_dummy_data
+ Name:      adrotate_check_competition
+ Purpose:   Checks if WP has other advertising plugins installed
+ Since:		3.21
+-------------------------------------------------------------*/
+function adrotate_check_competition() {
+	
+	$compatible_plugins = array(
+		'ad-injection/ad-injection.php', 
+		'adkingpro/adkingpro.php', 
+//		'advanced-advertising-system/advanced_advertising_system.php',
+//		'advert/advert.php',
+//		'advertising-manager/advertising-manager.php',
+		'bannerman/bannerman.php',
+//		'easy-ads-manager/easy-ads-manager.php',
+//		'easy-adsense-injection/easy-adsense-injection.php',
+//		'max-adsense/adsense.php',
+//		'random-banners/random-banners.php',
+		'simple-ads-manager/simple-ads-manager.php',
+		'useful-banner-manager/useful-banner-manager.php',
+		'wp-advertize-it/bootstrap.php',
+		'wp-bannerize/main.php',
+		'wp-ad-manager/ad-minister.php',
+		'wp125/wp125.php',
+	);
 
+	if(!function_exists('get_plugins')) {
+		require_once ABSPATH . 'wp-admin/includes/plugin.php';
+	}
+	$installed_plugins = get_plugins();
+
+	$compatible = array();
+	foreach($installed_plugins as $slug => $plugin) {
+		if(in_array($slug, $compatible_plugins)) {
+			$compatible[$slug] = $plugin['Title'].' v'.$plugin['Version'];
+		}
+	}
+	unset($installed_plugins, $compatible_plugins, $status);
+
+	return $compatible;
+}
+
+/*-------------------------------------------------------------
+ Name:      adrotate_dummy_data
  Purpose:   Install dummy data in empty tables
- Receive:   -none-
- Return:	-none-
  Since:		3.11.3
 -------------------------------------------------------------*/
 function adrotate_dummy_data() {
@@ -337,7 +380,7 @@ function adrotate_dummy_data() {
 		// Demo ad 1
 	    $wpdb->insert("{$wpdb->prefix}adrotate", array('title' => 'Demo ad 468x60', 'bannercode' => '&lt;a href=\&quot;http:\/\/www.adrotateforwordpress.com\&quot;&gt;&lt;img src=\&quot;http://ajdg.solutions/assets/dummy-banners/adrotate-468x60.jpg\&quot; /&gt;&lt;/a&gt;', 'thetime' => $now, 'updated' => $now, 'author' => $current_user->user_login, 'imagetype' => '', 'image' => '', 'tracker' => 'N', 'desktop' => 'Y', 'mobile' => 'Y', 'tablet' => 'Y', 'responsive' => 'N', 'type' => 'active', 'weight' => 6, 'sortorder' => 0, 'budget' => 0, 'crate' => 0, 'irate' => 0, 'cities' => serialize(array()), 'countries' => serialize(array())));
 	    $ad_id = $wpdb->insert_id;
-		$wpdb->insert("{$wpdb->prefix}adrotate_schedule", array('name' => 'Schedule for ad '.$ad_id, 'starttime' => $now, 'stoptime' => $in84days, 'maxclicks' => 0, 'maximpressions' => 0, 'spread' => 'N', 'dayimpressions' => 0));
+		$wpdb->insert("{$wpdb->prefix}adrotate_schedule", array('name' => 'Schedule for ad '.$ad_id, 'starttime' => $now, 'stoptime' => $in84days, 'maxclicks' => 0, 'maximpressions' => 0, 'spread' => 'N', 'dayimpressions' => 0, 'daystarttime' => '0000', 'daystoptime' => '0000', 'day_mon' => 'Y', 'day_tue' => 'Y', 'day_wed' => 'Y', 'day_thu' => 'Y', 'day_fri' => 'Y', 'day_sat' => 'Y', 'day_sun' => 'Y'));
 	    $schedule_id = $wpdb->insert_id;
 		$wpdb->insert("{$wpdb->prefix}adrotate_linkmeta", array('ad' => $ad_id, 'group' => 0, 'user' => 0, 'schedule' => $schedule_id));
 		unset($ad_id, $schedule_id);
@@ -345,7 +388,7 @@ function adrotate_dummy_data() {
 		// Demo ad 2
 	    $wpdb->insert("{$wpdb->prefix}adrotate", array('title' => 'Demo ad 200x200', 'bannercode' => '&lt;a href=\&quot;http:\/\/www.adrotateforwordpress.com\&quot;&gt;&lt;img src=\&quot;http://ajdg.solutions/assets/dummy-banners/adrotate-200x200.jpg\&quot; /&gt;&lt;/a&gt;', 'thetime' => $now, 'updated' => $now, 'author' => $current_user->user_login, 'imagetype' => '', 'image' => '', 'tracker' => 'N', 'desktop' => 'Y', 'mobile' => 'Y', 'tablet' => 'Y', 'responsive' => 'N', 'type' => 'active', 'weight' => 6, 'sortorder' => 0, 'budget' => 0, 'crate' => 0, 'irate' => 0, 'cities' => serialize(array()), 'countries' => serialize(array())));
 	    $ad_id = $wpdb->insert_id;
-		$wpdb->insert("{$wpdb->prefix}adrotate_schedule", array('name' => 'Schedule for ad '.$ad_id, 'starttime' => $now, 'stoptime' => $in84days, 'maxclicks' => 0, 'maximpressions' => 0, 'spread' => 'N', 'dayimpressions' => 0));
+		$wpdb->insert("{$wpdb->prefix}adrotate_schedule", array('name' => 'Schedule for ad '.$ad_id, 'starttime' => $now, 'stoptime' => $in84days, 'maxclicks' => 0, 'maximpressions' => 0, 'spread' => 'N', 'dayimpressions' => 0, 'daystarttime' => '0000', 'daystoptime' => '0000', 'day_mon' => 'Y', 'day_tue' => 'Y', 'day_wed' => 'Y', 'day_thu' => 'Y', 'day_fri' => 'Y', 'day_sat' => 'Y', 'day_sun' => 'Y'));
 	    $schedule_id = $wpdb->insert_id;
 		$wpdb->insert("{$wpdb->prefix}adrotate_linkmeta", array('ad' => $ad_id, 'group' => 0, 'user' => 0, 'schedule' => $schedule_id));
 		unset($ad_id, $schedule_id);
@@ -818,7 +861,7 @@ function adrotate_database_upgrade() {
 	}
 
 	// Database: 	57
-	// AdRotate:	4.0
+	// AdRotate:	3.15
 	if($adrotate_db_version['current'] < 57) {
 		require_once(ABSPATH . 'wp-admin/includes/upgrade.php');
 

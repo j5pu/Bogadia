@@ -1,5 +1,5 @@
 <?php
-define( 'KLEO_THEME_VERSION', '4.0.4' );
+define( 'KLEO_THEME_VERSION', '4.0.6' );
 
 /* Configuration array */
 global $kleo_config;
@@ -91,8 +91,8 @@ $theme_args = array(
         array(
 				'name'			=> 'Visual Composer', // The plugin name
 				'slug'			=> 'js_composer', // The plugin slug (typically the folder name)
-				'version'			=> kleo_get_plugin_version( 'js_composer', '4.11.1', $kleo_rem_plugin_transient ), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-				'source'			=> kleo_get_plugin_src( 'js_composer', '4.11.1' ), // The plugin source
+				'version'			=> kleo_get_plugin_version( 'js_composer', '4.11.2', $kleo_rem_plugin_transient ), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+				'source'			=> kleo_get_plugin_src( 'js_composer', '4.11.2', false ), // The plugin source
 				'required'			=> true, // If false, the plugin is only 'recommended' instead of required
 				'force_activation'		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 				'force_deactivation'	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
@@ -101,9 +101,9 @@ $theme_args = array(
         array(
 				'name'			=> 'Revolution Slider', // The plugin name
 				'slug'			=> 'revslider', // The plugin slug (typically the folder name)
-				'source'			=> 'http://seventhqueen.com/support/files/kleo/plugins/revslider.zip', // The plugin source
 				'required'			=> true, // If false, the plugin is only 'recommended' instead of required
-				'version'			=> kleo_get_plugin_version('revslider', '5.2.3', $kleo_rem_plugin_transient), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+				'version'			=> kleo_get_plugin_version( 'revslider', '5.2.5', $kleo_rem_plugin_transient ), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+				'source'			=> kleo_get_plugin_src( 'revslider', '5.2.5' ), // The plugin source
 				'force_activation'		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 				'force_deactivation'	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 				'external_url'		=> '', // If set, overrides default API URL and points to an external URL
@@ -113,7 +113,7 @@ $theme_args = array(
 				'slug'			=> 'k-elements', // The plugin slug (typically the folder name)
 				'source'			=> get_template_directory() . '/lib/inc/k-elements.zip', // The plugin source
 				'required'			=> true, // If false, the plugin is only 'recommended' instead of required
-				'version'			=> '4.0.4', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+				'version'			=> '4.0.5.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 				'force_activation'		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 				'force_deactivation'	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 				'external_url'		=> '', // If set, overrides default API URL and points to an external URL
@@ -121,14 +121,14 @@ $theme_args = array(
         array(
             'name'			=> 'Go Pricing', // The plugin name
             'slug'			=> 'go_pricing', // The plugin slug (typically the folder name)
-            'source'			=> 'http://seventhqueen.com/support/files/kleo/plugins/go_pricing.zip', // The plugin source
             'required'			=> false, // If false, the plugin is only 'recommended' instead of required
             'version'			=> kleo_get_plugin_version( 'go_pricing', '3.2.1', $kleo_rem_plugin_transient ), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+            'source'			=> kleo_get_plugin_src( 'go_pricing', '3.2.1' ), // The plugin source
             'force_activation'		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
             'force_deactivation'	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
             'external_url'		=> '', // If set, overrides default API URL and points to an external URL
         ),
-        array(
+        /*array(
             'name'                  => 'BuddyPress Cover Photo', // The plugin name
             'slug'                  => 'buddypress-cover-photo', // The plugin slug (typically the folder name)
             'required'              => false, // If false, the plugin is only 'recommended' instead of required
@@ -136,7 +136,7 @@ $theme_args = array(
             'force_activation'      => false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
             'force_deactivation'    => false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
             'external_url'          => '', // If set, overrides default API URL and points to an external URL
-        ),
+        ),*/
 		array(
             'name'                  => 'SideKick - Interactive Tutorials', // The plugin name
             'slug'                  => 'sidekick', // The plugin slug (typically the folder name)
@@ -214,15 +214,16 @@ $kleo_theme = new Kleo($theme_args);
  * Get the source of the plugin depending on the version available
  * @param string $name
  * @param string $version
+ * @param boolean $external_only
  *
  * @return string
  */
-function kleo_get_plugin_src($name, $version) {
+function kleo_get_plugin_src($name, $version, $external_only = true) {
 
 	$online_version = kleo_get_plugin_version( $name, $version );
 
-	if ( version_compare( $online_version, $version, '>' ) ) {
-		$output = 'http://seventhqueen.com/support/files/kleo/plugins/' . $name . '.zip';
+	if ( $external_only === true || version_compare( $online_version, $version, '>' ) ) {
+		$output = 'http://updates.seventhqueen.com/check/kleo/' . $name . '.zip';
 	} else {
 		$output = get_template_directory() . '/lib/inc/' . $name . '.zip';
 	}
@@ -248,7 +249,7 @@ function kleo_get_plugin_version( $name, $version, $reset_transient = false ) {
 	if( get_transient( 'kleo_'. $name ) ) {
 		$final_version = get_transient('kleo_'. $name);
 	} else {
-		$version_get = wp_remote_get( 'http://seventhqueen.com/support/files/kleo/plugins/plugin_version.php?name='. $name );
+		$version_get = wp_remote_get( 'http://updates.seventhqueen.com/check/kleo/plugin_version.php?name='. $name );
 		// Check for error
 		if ( ! is_wp_error( $version_get ) ) {
 			$url_version = wp_remote_retrieve_body( $version_get );
@@ -760,7 +761,7 @@ if(!function_exists('kleo_ajax_search'))
         if( empty( $posts ) && $members['total'] == 0 && $groups['total'] == 0 && ! $forums  ) {
 			$output  = "<div class='kleo_ajax_entry ajax_not_found'>";
 			$output .= "<div class='ajax_search_content'>";
-			$output .= "<i class='icon icon-exclamation-sign'></i> ";
+			$output .= "<i class='icon icon-attention-circled'></i> ";
 			$output .= __("Sorry, we haven't found anything based on your criteria.", 'kleo_framework');
 			$output .= "<br>";
 			$output .= __("Please try searching by different terms.", 'kleo_framework');
@@ -2577,4 +2578,38 @@ function kleo_go_pricing_enable_updates() {
 			'check_update'
 		) );
 	}
+}
+
+
+if ( sq_option( 'mobile_app_capable', 1 ) ) {
+	add_action('wp_head', 'kleo_add_mobile_app_capable_tag');
+}
+function kleo_add_mobile_app_capable_tag() {
+	?>
+	<meta name="mobile-web-app-capable" content="yes">
+	<?php
+}
+
+if ( sq_option( 'apple_mobile_app_capable', 1 ) ) {
+	add_action('wp_head', 'kleo_add_apple_mobile_app_capable_tag');
+}
+function kleo_add_apple_mobile_app_capable_tag() {
+	?>
+	<meta name="apple-mobile-web-app-capable" content="yes">
+	<?php
+}
+
+
+if ( sq_option( 'meta_theme_color', '' ) != '' && sq_option( 'meta_theme_color', '' ) != 'transparent' ) {
+	add_action('wp_head', 'kleo_add_meta_color');
+}
+function kleo_add_meta_color() {
+	?>
+	<!-- Chrome, Firefox OS and Opera -->
+	<meta name="theme-color" content="<?php echo sq_option( 'meta_theme_color', '' ); ?>">
+	<!-- Windows Phone -->
+	<meta name="msapplication-navbutton-color" content="<?php echo sq_option( 'meta_theme_color', '' ); ?>">
+	<!-- Safari -->
+	<meta name="apple-mobile-web-app-status-bar-style" content="<?php echo sq_option( 'meta_theme_color', '' ); ?>">
+	<?php
 }

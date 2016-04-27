@@ -3273,10 +3273,3 @@ msgstr ""
 msgctxt "Recurring payment in cost text generation. E.g. $5 every month for 2 more payments."
 msgid "%s per %s for %d more %s."
 msgstr ""
-
-
-#: lib/theme-functions.php:31
-#, php-format
-#@ kleo_framework
-msgid "Tags: "
-msgstr ""

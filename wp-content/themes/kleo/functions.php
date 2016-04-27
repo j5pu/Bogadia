@@ -1299,7 +1299,8 @@ if (!function_exists('kleo_frontend_files')):
             'logo' => $regular_logo,
             'retinaLogo' => $retina_logo,
             'headerHeight' => $header_height,
-            'loadingmessage' => '<i class="icon icon-spin5 animate-spin"></i> '.__('Sending info, please wait...', 'kleo_framework')
+            'loadingmessage' => '<i class="icon icon-spin5 animate-spin"></i> '.__('Sending info, please wait...', 'kleo_framework'),
+            'DisableMagnificGallery' => sq_option( 'magnific_disable_gallery', '0' )
         );
         $obj_array = apply_filters( 'kleo_localize_app', $obj_array );
 
@@ -1430,19 +1431,19 @@ add_action( 'wp_head', array($kleo_theme, 'render_css'), 15 );
 /***************************************************
 :: Render custom css resulted from theme options
  ***************************************************/
+
+global $kleo_config;
+
+//write the file if isn't there
+if ( ! file_exists ( trailingslashit( $kleo_config['custom_style_path'] ) . 'dynamic.css' ) ) {
+    add_filter( 'kleo_add_dynamic_style', array( $kleo_theme, 'add_font_css' ) );
+    add_action( 'after_setup_theme', 'kleo_generate_dynamic_css', 999 );
+}
+
 if ( ! is_admin() ) {
-    global $kleo_config;
-
     if ( is_writable( trailingslashit( $kleo_config['upload_basedir'] ) ) ) {
-        //write the file if isn't there
-        if ( ! file_exists ( trailingslashit( $kleo_config['custom_style_path'] ) . 'dynamic.css' ) ) {
-            add_filter( 'kleo_add_dynamic_style', array( $kleo_theme, 'add_font_css' ) );
-            add_action( 'after_setup_theme', 'kleo_generate_dynamic_css', 999 );
-        }
-
         add_action( 'wp_enqueue_scripts', 'kleo_load_dynamic_css' );
-    }
-    else {
+    } else {
         add_action( 'wp_head', 'kleo_custom_head_css' );
     }
 }

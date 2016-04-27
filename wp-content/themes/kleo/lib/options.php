@@ -1658,6 +1658,14 @@ $sections[] = array(
             'subtitle' => __('Set your portfolio image size in portfolio list. Defined in pixels. If you are using video items, use a 16:9 size format', 'kleo_framework'),
             'default' => $kleo_config['post_gallery_img_width'] . "x" . $kleo_config['post_gallery_img_height']
         ),
+	    array(
+		    'id' => 'portfolio_video_height',
+		    'type' => 'text',
+		    'title' => __('Portfolio list Video Height', 'kleo_framework'),
+		    'description' => __('Set your portfolio video height default size. It is used when you only have videos in a page. In portfolio lists where you also have images it will have the image height.', 'kleo_framework'),
+		    'subtitle' => __("Expressed in pixels. Example: 160", "kleo_framework"),
+		    'default' => '160'
+	    ),
         array(
             'id' => 'section-title-porto-single',
             'type' => 'section',
@@ -2197,7 +2205,39 @@ if (function_exists('pmpro_url')):
 endif;
 
 
+$sections[] = array(
 
+	'icon' => 'el-icon-iphone-home',
+	'icon_type' => 'iconfont',
+	'icon_class' => 'icon-large',
+	'title' => __('Mobile options', 'kleo_framework'),
+	'customizer' => false,
+	'desc' => esc_html__("Mobile specific customisations", "kleo_framework"),
+	'fields' => array(
+		array(
+			'id' => 'mobile_app_capable',
+			'type' => 'switch',
+			'title' => __('Add mobile app capable meta tag', 'kleo_framework'),
+			'subtitle' => sprintf(__('See more <a target="_blank" href="%s">here</a> ', 'kleo_framework'), 'https://developer.chrome.com/multidevice/android/installtohomescreen'),
+			'default' => '1' // 1 = checked | 0 = unchecked
+		),
+		array(
+			'id' => 'apple_mobile_app_capable',
+			'type' => 'switch',
+			'title' => __('Add Apple mobile app capable meta tag', 'kleo_framework'),
+			'subtitle' => sprintf(__('See more <a target="_blank" href="%s">here</a> ', 'kleo_framework'), 'https://developer.apple.com/library/iad/documentation/AppleApplications/Reference/SafariHTMLRef/Articles/MetaTags.html'),
+			'default' => '0' // 1 = checked | 0 = unchecked
+		),
+		array(
+			'id' => 'meta_theme_color',
+			'type' => 'color',
+			'title' => __('Set mobile browser theme color(only on supported browsers)', 'kleo_framework'),
+			'subtitle' => sprintf(__('See more <a target="_blank" href="%s">here</a> ', 'kleo_framework'), 'https://developers.google.com/web/fundamentals/design-and-ui/browser-customization/theme-color?hl=en'),
+			'description' => __("Allows you to set a browser theme color. To disable it just remove the color code", "kleo_framework"),
+			'default' => '' // 1 = checked | 0 = unchecked
+		),
+	)
+);
 
 $sections[] = array(
 
@@ -2306,6 +2346,14 @@ $sections[] = array(
                 'subtitle' => __('If you enable this, a beautiful snowing effect will cover the whole site', 'kleo_framework'),
                 'default' => '0', // 1 = checked | 0 = unchecked
             ),
+		array(
+			'id' => 'magnific_disable_gallery',
+			'type' => 'switch',
+			'title' => __('Disable Magnific popup for blog gallery', 'kleo_framework'),
+			'subtitle' => __('WARNING: Not recommended. Disable this only if you have other implementation for Image popup.(ON will disable the popup)', 'kleo_framework'),
+			'description' => "<small>Will disable popups for this image tags:<br> a[data-rel^='prettyPhoto'], a[rel^='prettyPhoto'], a[rel^='modalPhoto'], a[data-rel^='modalPhoto'], .article-content a[href$=jpg]:has(img), .article-content a[href$=JPG]:has(img), .article-content a[href$=jpeg]:has(img), .article-content a[href$=JPEG]:has(img), .article-content a[href$=gif]:has(img), .article-content a[href$=GIF]:has(img), .article-content a[href$=bmp]:has(img), .article-content a[href$=BMP]:has(img), .article-content a[href$=png]:has(img), .article-content a[href$=PNG]:has(img)</small>",
+			'default' => '0', // 1 = checked | 0 = unchecked
+		),
         array(
             'id' => 'dev_mode',
             'type' => 'switch',

@@ -26,7 +26,10 @@ $el_class = $this->getExtraClass($el_class);
 
 if ( $images == '' ) $images = '-1,-2,-3';
 
-if ( $onclick == 'custom_link' ) { $custom_links = explode( ',', $custom_links); }
+if ( 'custom_link' === $onclick ) {
+	$custom_links = vc_value_from_safe( $custom_links );
+	$custom_links = explode( ',', $custom_links );
+}
 
 $images = explode( ',', $images);
 $i = -1;

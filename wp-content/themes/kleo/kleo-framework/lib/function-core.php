@@ -467,14 +467,16 @@ function kleo_hex_to_rgb($hex) {
 	$color = array();
 
 	if(strlen($hex) == 3) {
-		$color['r'] = hexdec(substr($hex, 0, 1) . $r);
-		$color['g'] = hexdec(substr($hex, 1, 1) . $g);
-		$color['b'] = hexdec(substr($hex, 2, 1) . $b);
+		$color['r'] = hexdec(substr($hex, 0, 1) . substr($hex, 0, 1));
+		$color['g'] = hexdec(substr($hex, 1, 1) . substr($hex, 0, 1));
+		$color['b'] = hexdec(substr($hex, 2, 1) . substr($hex, 0, 1));
 	}
 	else if(strlen($hex) == 6) {
 		$color['r'] = hexdec(substr($hex, 0, 2));
 		$color['g'] = hexdec(substr($hex, 2, 2));
 		$color['b'] = hexdec(substr($hex, 4, 2));
+	} else {
+		$color = array('r' => '255', 'g' => '255', 'b' => '255');
 	}
 	
 	return $color;

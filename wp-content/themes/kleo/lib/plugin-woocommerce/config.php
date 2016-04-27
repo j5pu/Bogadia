@@ -17,8 +17,11 @@ if (! is_admin()) {
 if ( ! function_exists( 'kleo_load_woocommerce_css' ) ) {
 	function kleo_load_woocommerce_css () {
 		wp_deregister_style('woocommerce-layout');
+		wp_dequeue_style('woocommerce-layout');
 		wp_deregister_style('woocommerce-smallscreen');
+		wp_dequeue_style('woocommerce-smallscreen');
 		wp_deregister_style('woocommerce-general');
+		wp_dequeue_style('woocommerce-general');
 		wp_register_style( 'kleo-woocommerce', get_template_directory_uri() . '/woocommerce/assets/css/woocommerce.css' );
 		wp_enqueue_style( 'kleo-woocommerce' );
 	}

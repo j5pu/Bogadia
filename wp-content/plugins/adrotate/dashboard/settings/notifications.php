@@ -9,12 +9,13 @@
 *  liability that might arise from it's use.
 ------------------------------------------------------------------------------------ */
 ?>
-<h3><?php _e('Notifications - Available in AdRotate Pro', 'adrotate'); ?></h3>
+<h3><?php _e('Notifications', 'adrotate'); ?></h3>
 <span class="description"><?php _e('Set up who gets notifications if ads need your attention.', 'adrotate'); ?></span>
 <table class="form-table">
 	<tr>
-		<th valign="top"><?php _e('Delivery method', 'adrotate'); ?></th>
+		<th valign="top"><?php _e('How to notify', 'adrotate-pro'); ?></th>
 		<td>
+			<input type="checkbox" name="adrotate_notification_dash" <?php if($adrotate_notifications['notification_dash'] == 'Y') { ?>checked="checked" <?php } ?> /> <?php _e('Dashboard banner.', 'adrotate-pro'); ?><br />
 			<input type="checkbox" name="adrotate_notification_email_disabled" disabled /> <?php _e('Email message.', 'adrotate'); ?><br />
 			<input type="checkbox" name="adrotate_notification_push_disabled" disabled /> <?php _e('Push notifications to your smartphone.', 'adrotate'); ?><br />
 			<span class="description"><?php _e('Push notifications are delivered through Pushover, a notification service for Android and iOS', 'adrotate'); ?><br /><?php _e('The Pushover App is a one time purchase for either Android and/or iOS. More information can be found on the pushover website;', 'adrotate'); ?> <a href="http://www.pushover.net" target="_blank">pushover.net</a>.</span>
@@ -23,12 +24,24 @@
 	<tr>
 		<th scope="row" valign="top"><?php _e('Test notification', 'adrotate'); ?></th>
 		<td>
-			<input type="submit" name="adrotate_notification_test_submit_disabled" class="button-secondary" value="Test" disabled /> <?php _e('This sends a test notification. Before you test, save the options first!', 'adrotate'); ?>
+			<input type="submit" name="adrotate_notification_test_submit_disabled" class="button-secondary" value="<?php _e('Test', 'adrotate-pro'); ?>" disabled /> <?php _e('Send a test notification to enabled methods. Before you test, save the options first!', 'adrotate-pro'); ?>
 		</td>
 	</tr>
 </table>
 
-<h3><?php _e('Email Notifications', 'adrotate'); ?></h3>
+<h3><?php _e('Dashboard', 'adrotate-pro'); ?></h3>
+<span class="description"><?php _e('These go in a dashboard banner visible to all users with access to AdRotate on every WordPress dashboard page.', 'adrotate-pro'); ?></span>
+<table class="form-table">
+	<tr>
+		<th valign="top"><?php _e('What', 'adrotate-pro'); ?></th>
+		<td>
+			<input type="checkbox" name="adrotate_notification_dash_expired" <?php if($adrotate_notifications['notification_dash_expired'] == 'Y') { ?>checked="checked" <?php } ?> /> <?php _e('Expired adverts.', 'adrotate-pro'); ?><br />
+			<input type="checkbox" name="adrotate_notification_dash_soon" <?php if($adrotate_notifications['notification_dash_soon'] == 'Y') { ?>checked="checked" <?php } ?> /> <?php _e('Almost expired adverts.', 'adrotate-pro'); ?>
+		</td>
+	</tr>
+</table>
+
+<h3><?php _e('Email', 'adrotate'); ?>  - <?php _e('Available in AdRotate Pro', 'adrotate'); ?></h3>
 <span class="description"><?php _e('Set up who gets notification emails.', 'adrotate'); ?></span>
 <table class="form-table">
 	<tr>
@@ -48,11 +61,11 @@
 	</tr>
 </table>
 
-<h3><?php _e('Push Notifications', 'adrotate'); ?></h3>
+<h3><?php _e('Push', 'adrotate'); ?>  - <?php _e('Available in AdRotate Pro', 'adrotate'); ?></h3>
 <span class="description"><?php _e('Receive information about what is happening with your AdRotate setup on your smartphone via Pushover.', 'adrotate'); ?></span>
 <table class="form-table">
 	<tr>
-		<th valign="top"><?php _e('Publishers', 'adrotate'); ?></th>
+		<th valign="top"><?php _e('What', 'adrotate'); ?></th>
 		<td>
 			<input type="checkbox" name="adrotate_notification_push_geo_disabled" disabled /> <?php _e('When you are running out of Geo Targeting Lookups.', 'adrotate'); ?><br /><br />
 			<input type="checkbox" name="adrotate_notification_push_status_disabled" disabled /> <?php _e('Daily digest of any advert status other than normal.', 'adrotate'); ?><br />

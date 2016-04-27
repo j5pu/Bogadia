@@ -719,6 +719,7 @@ body.activity-permalink #buddypress div.activity-comments div.acomment-content {
 	float: left;
 	display: block;
 	overflow: hidden;
+	max-width: 50px;
 }
 #buddypress div.ac-reply-avatar img {}
 #buddypress div.activity-comments form div.ac-reply-content {

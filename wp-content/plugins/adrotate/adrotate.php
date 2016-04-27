@@ -7,7 +7,7 @@ Author URI: http://ajdg.solutions/?pk_campaign=adrotatefree-pluginpage
 Description: The popular choice for monetizing your website with adverts while keeping things simple. Start making money today!
 Text Domain: adrotate
 Domain Path: /languages/
-Version: 3.15.2
+Version: 3.15.3
 License: GPLv3
 */
 
@@ -22,8 +22,8 @@ License: GPLv3
 ------------------------------------------------------------------------------------ */
 
 /*--- AdRotate values ---------------------------------------*/
-define("ADROTATE_DISPLAY", '3.15.2');
-define("ADROTATE_VERSION", 380);
+define("ADROTATE_DISPLAY", '3.15.3');
+define("ADROTATE_VERSION", 381);
 define("ADROTATE_DB_VERSION", 57);
 /*-----------------------------------------------------------*/
 
@@ -171,7 +171,7 @@ function adrotate_pro() {
  Return:    -none-
 -------------------------------------------------------------*/
 function adrotate_manage() {
-	global $wpdb, $current_user, $userdata, $adrotate_config, $adrotate_debug;
+	global $wpdb, $userdata, $adrotate_config, $adrotate_debug;
 
 	$status = $file = $view = $ad_edit_id = '';
 	if(isset($_GET['status'])) $status = esc_attr($_GET['status']);
@@ -197,105 +197,89 @@ function adrotate_manage() {
 	<div class="wrap">
 		<h1><?php _e('Advert Management', 'adrotate'); ?></h1>
 
-		<?php if($status > 0) adrotate_status($status, array('file' => $file)); ?>
+		<?php
+		if($status > 0) adrotate_status($status, array('file' => $file));
 
-		<?php if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."adrotate';") AND $wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."adrotate_groups';") AND $wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."adrotate_schedule';") AND $wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."adrotate_linkmeta';")) { ?>
+		$allbanners = $wpdb->get_results("SELECT `id`, `title`, `type`, `tracker`, `weight` FROM `{$wpdb->prefix}adrotate` WHERE (`type` != 'empty' OR `type` != 'a_empty' OR `type` != 'queue') ORDER BY `sortorder` ASC, `id` ASC;");
 
-			<?php
-			$allbanners = $wpdb->get_results("SELECT `id`, `title`, `type`, `tracker`, `weight` FROM `".$wpdb->prefix."adrotate` WHERE `type` = 'active' OR `type` = 'error' OR `type` = 'expired' OR `type` = '2days' OR `type` = '7days' OR `type` = 'disabled' ORDER BY `sortorder` ASC, `id` ASC;");
-			$activebanners = $errorbanners = $disabledbanners = false;
-			foreach($allbanners as $singlebanner) {
-				$starttime = $stoptime = 0;
-				$starttime = $wpdb->get_var("SELECT `starttime` FROM `".$wpdb->prefix."adrotate_schedule`, `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = '".$singlebanner->id."' AND `schedule` = `".$wpdb->prefix."adrotate_schedule`.`id` ORDER BY `starttime` ASC LIMIT 1;");
-				$stoptime = $wpdb->get_var("SELECT `stoptime` FROM `".$wpdb->prefix."adrotate_schedule`, `".$wpdb->prefix."adrotate_linkmeta` WHERE `ad` = '".$singlebanner->id."' AND `schedule` = `".$wpdb->prefix."adrotate_schedule`.`id` ORDER BY `stoptime` DESC LIMIT 1;");
-				
-				$type = $singlebanner->type;
-				if($type == 'active' AND $stoptime <= $in7days) $type = '7days';
-				if($type == 'active' AND $stoptime <= $in2days) $type = '2days';
-				if($type == 'active' AND $stoptime <= $now) $type = 'expired'; 
-	
-				if($type == 'active' OR $type == '7days') {
-					$activebanners[$singlebanner->id] = array(
-						'id' => $singlebanner->id,
-						'title' => $singlebanner->title,
-						'type' => $type,
-						'tracker' => $singlebanner->tracker,
-						'weight' => $singlebanner->weight,
-						'firstactive' => $starttime,
-						'lastactive' => $stoptime
-					);
-				}
-				
-				if($type == 'error' OR $type == 'expired' OR $type == '2days') {
-					$errorbanners[$singlebanner->id] = array(
-						'id' => $singlebanner->id,
-						'title' => $singlebanner->title,
-						'type' => $type,
-						'tracker' => $singlebanner->tracker,
-						'weight' => $singlebanner->weight,
-						'firstactive' => $starttime,
-						'lastactive' => $stoptime
-					);
-				}
-				
-				if($type == 'disabled') {
-					$disabledbanners[$singlebanner->id] = array(
-						'id' => $singlebanner->id,
-						'title' => $singlebanner->title,
-						'type' => $type,
-						'tracker' => $singlebanner->tracker,
-						'weight' => $singlebanner->weight,
-						'firstactive' => $starttime,
-						'lastactive' => $stoptime
-					);
-				}
-			}
-			?>
+		$activebanners = $errorbanners = $disabledbanners = false;
+		foreach($allbanners as $singlebanner) {
+			$starttime = $stoptime = 0;
+			$starttime = $wpdb->get_var("SELECT `starttime` FROM `{$wpdb->prefix}adrotate_schedule`, `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = '".$singlebanner->id."' AND `schedule` = `{$wpdb->prefix}adrotate_schedule`.`id` ORDER BY `starttime` ASC LIMIT 1;");
+			$stoptime = $wpdb->get_var("SELECT `stoptime` FROM `{$wpdb->prefix}adrotate_schedule`, `{$wpdb->prefix}adrotate_linkmeta` WHERE `ad` = '".$singlebanner->id."' AND `schedule` = `{$wpdb->prefix}adrotate_schedule`.`id` ORDER BY `stoptime` DESC LIMIT 1;");
 			
-			<div class="tablenav">
-				<div class="alignleft actions">
-					<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-ads&view=manage');?>"><?php _e('Manage', 'adrotate'); ?></a> | 
-					<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-ads&view=addnew');?>"><?php _e('Add New', 'adrotate'); ?></a>
-				</div>
-			</div>
+			$type = $singlebanner->type;
+			if($type == 'active' AND $stoptime <= $in7days) $type = '7days';
+			if($type == 'active' AND $stoptime <= $in2days) $type = '2days';
+			if($type == 'active' AND $stoptime <= $now) $type = 'expired'; 
 
-	    	<?php if ($view == "" OR $view == "manage") { ?>
-	
-				<?php
-				// Show list of errorous ads if any			
-				if ($errorbanners) {
-					include("dashboard/publisher/adverts-error.php");
-				}
+			if($type == 'active' OR $type == '7days') {
+				$activebanners[$singlebanner->id] = array(
+					'id' => $singlebanner->id,
+					'title' => $singlebanner->title,
+					'type' => $type,
+					'tracker' => $singlebanner->tracker,
+					'weight' => $singlebanner->weight,
+					'firstactive' => $starttime,
+					'lastactive' => $stoptime
+				);
+			}
+			
+			if($type == 'error' OR $type == 'expired' OR $type == '2days') {
+				$errorbanners[$singlebanner->id] = array(
+					'id' => $singlebanner->id,
+					'title' => $singlebanner->title,
+					'type' => $type,
+					'tracker' => $singlebanner->tracker,
+					'weight' => $singlebanner->weight,
+					'firstactive' => $starttime,
+					'lastactive' => $stoptime
+				);
+			}
+			
+			if($type == 'disabled') {
+				$disabledbanners[$singlebanner->id] = array(
+					'id' => $singlebanner->id,
+					'title' => $singlebanner->title,
+					'type' => $type,
+					'tracker' => $singlebanner->tracker,
+					'weight' => $singlebanner->weight,
+					'firstactive' => $starttime,
+					'lastactive' => $stoptime
+				);
+			}
+		}
+		?>
 		
-				include("dashboard/publisher/adverts-main.php");
+		<div class="tablenav">
+			<div class="alignleft actions">
+				<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-ads&view=manage');?>"><?php _e('Manage', 'adrotate'); ?></a> | 
+				<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-ads&view=addnew');?>"><?php _e('Add New', 'adrotate'); ?></a>
+			</div>
+		</div>
+
+    	<?php 
+	    if ($view == "" OR $view == "manage") {
+			// Show list of errorous ads if any			
+			if ($errorbanners) {
+				include("dashboard/publisher/adverts-error.php");
+			}
 	
-				// Show disabled ads, if any
-				if ($disabledbanners) {
-					include("dashboard/publisher/adverts-disabled.php");
-				}
-				?>
+			include("dashboard/publisher/adverts-main.php");
 
-			<?php
-		   	} else if($view == "addnew" OR $view == "edit") { 
-		   	?>
+			// Show disabled ads, if any
+			if ($disabledbanners) {
+				include("dashboard/publisher/adverts-disabled.php");
+			}		
+		} else if($view == "addnew" OR $view == "edit") { 
+			include("dashboard/publisher/adverts-edit.php");
+		} else if($view == "report") {
+			include("dashboard/publisher/adverts-report.php");
+		}
+		?>
+	<br class="clear" />
 
-				<?php
-				include("dashboard/publisher/adverts-edit.php");
-				?>
-
-		   	<?php } else if($view == "report") { ?>
-
-				<?php
-				include("dashboard/publisher/adverts-report.php");
-				?>
-
-		   	<?php } ?>
-		<?php } else { ?>
-			<?php echo adrotate_error('db_error'); ?>
-		<?php }	?>
-		<br class="clear" />
-
-		<?php adrotate_credits(); ?>
+	<?php adrotate_credits(); ?>
 
 	</div>
 <?php
@@ -337,39 +321,35 @@ function adrotate_manage_group() {
 
 		<?php if($status > 0) adrotate_status($status); ?>
 
-		<?php if($wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."adrotate_groups';") AND $wpdb->get_var("SHOW TABLES LIKE '".$wpdb->prefix."adrotate_linkmeta';")) { ?>
-			<div class="tablenav">
-				<div class="alignleft actions">
-					<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-groups&view=manage');?>"><?php _e('Manage', 'adrotate'); ?></a> | 
-					<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-groups&view=addnew');?>"><?php _e('Add New', 'adrotate'); ?></a>
-					<?php if($group_edit_id AND $adrotate_config['stats'] == 1) { ?>
-					| <a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-groups&view=report&group='.$group_edit_id);?>"><?php _e('Report', 'adrotate'); ?></a>
-					<?php } ?>
-				</div>
+		<div class="tablenav">
+			<div class="alignleft actions">
+				<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-groups&view=manage');?>"><?php _e('Manage', 'adrotate'); ?></a> | 
+				<a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-groups&view=addnew');?>"><?php _e('Add New', 'adrotate'); ?></a>
+				<?php if($group_edit_id AND $adrotate_config['stats'] == 1) { ?>
+				| <a class="row-title" href="<?php echo admin_url('/admin.php?page=adrotate-groups&view=report&group='.$group_edit_id);?>"><?php _e('Report', 'adrotate'); ?></a>
+				<?php } ?>
 			</div>
+		</div>
 
-	    	<?php if ($view == "" OR $view == "manage") { ?>
+    	<?php if ($view == "" OR $view == "manage") { ?>
 
-				<?php
-				include("dashboard/publisher/groups-main.php");
-				?>
+			<?php
+			include("dashboard/publisher/groups-main.php");
+			?>
 
-		   	<?php } else if($view == "addnew" OR $view == "edit") { ?>
+	   	<?php } else if($view == "addnew" OR $view == "edit") { ?>
 
-				<?php
-				include("dashboard/publisher/groups-edit.php");
-				?>
+			<?php
+			include("dashboard/publisher/groups-edit.php");
+			?>
 
-		   	<?php } else if($view == "report") { ?>
+	   	<?php } else if($view == "report") { ?>
 
-				<?php
-				include("dashboard/publisher/groups-report.php");
-				?>
+			<?php
+			include("dashboard/publisher/groups-report.php");
+			?>
 
-		   	<?php } ?>
-		<?php } else { ?>
-			<?php echo adrotate_error('db_error'); ?>
-		<?php }	?>
+	   	<?php } ?>
 		<br class="clear" />
 
 		<?php adrotate_credits(); ?>
@@ -432,11 +412,11 @@ function adrotate_manage_schedules() {
 			</thead>
 			<tbody>
 		<?php
-		$schedules = $wpdb->get_results("SELECT * FROM `".$wpdb->prefix."adrotate_schedule` WHERE `name` != '' ORDER BY `id` ASC;");
+		$schedules = $wpdb->get_results("SELECT * FROM `{$wpdb->prefix}adrotate_schedule` WHERE `name` != '' ORDER BY `id` ASC;");
 		if($schedules) {
 			$class = '';
 			foreach($schedules as $schedule) {
-				$schedulesmeta = $wpdb->get_results("SELECT `ad` FROM `".$wpdb->prefix."adrotate_linkmeta` WHERE `group` = 0 AND `user` = 0 AND `schedule` = ".$schedule->id.";");
+				$schedulesmeta = $wpdb->get_results("SELECT `ad` FROM `{$wpdb->prefix}adrotate_linkmeta` WHERE `group` = 0 AND `user` = 0 AND `schedule` = ".$schedule->id.";");
 				if($schedule->maxclicks == 0) $schedule->maxclicks = '&infin;';
 				if($schedule->maximpressions == 0) $schedule->maximpressions = '&infin;';
 	
@@ -486,7 +466,7 @@ function adrotate_manage_schedules() {
  Return:    -none-
 -------------------------------------------------------------*/
 function adrotate_manage_media() {
-	global $wpdb, $adrotate_config;
+	global $adrotate_config;
 	?>
 
 	<div class="wrap">
@@ -592,6 +572,7 @@ function adrotate_options() {
 
 				include("dashboard/settings/general.php");						
 			} elseif($active_tab == 'notifications') {
+				$adrotate_notifications	= get_option("adrotate_notifications");
 				include("dashboard/settings/notifications.php");						
 			} elseif($active_tab == 'stats') {
 				include("dashboard/settings/statistics.php");						

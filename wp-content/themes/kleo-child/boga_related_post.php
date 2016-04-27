@@ -157,7 +157,7 @@ class boga_related_post
                 . '<div class="post-image">'
                 . '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'
                 //. '<img src="'. $img_url .'" alt="'. $title .'" class="attachment-thumbnail wp-post-image">'
-                . get_the_post_thumbnail( $post_id, 'thumbnail' )
+                . get_the_post_thumbnail( $post_id, 'medium' )
                 . '</a>'
                 . '</div><!--end post-image-->'
                 . '<div class="entry-content">'

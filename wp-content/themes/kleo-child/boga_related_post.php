@@ -65,6 +65,14 @@ class boga_related_post
         return $posts_to_retrieve;
     }
 
+    function cut_title($title){
+        if ( mb_strlen( $title, 'utf8' ) > 60 ) {
+            $last_space = strrpos( substr( $title, 0, 60 ), ' ' ); // find the last space within 35 characters
+            return substr( $title, 0, $last_space ) . ' ...';
+        }
+        return $title;
+    }
+
     function inside_content_related_post( $content ) {
         function prefix_insert_after_paragraph( $insertion, $paragraph_id, $content ) {
             $closing_p = '</p>';
@@ -87,10 +95,13 @@ class boga_related_post
             self::query_related_post();
             $likes_posts = self::get_related_post(3);
             $c=0;
+            $post_re1 = '';
+            $post_re2 = '';
+            $post_re3 = '';
             foreach( $likes_posts as $likes_post ) {
                 $c=$c+1;
                 $link = get_permalink($likes_post->ID);
-                $title = get_the_title($likes_post->ID);
+                $title = self::cut_title(get_the_title($likes_post->ID));
                 if ($c==1) {
                     $post_re1 = '<h6 style="float:left;line-height: 17px; margin: 5px 0px;"><a href="'.$link.'"  title="'.$title.'" class="re_post_in_post">'.$title.'</a></h6>';
                 }
@@ -138,17 +149,15 @@ class boga_related_post
         foreach( $related_posts as $likes_post ) {
             $post_id = $likes_post->ID;
             $link = get_permalink($post_id);
-            $title = get_the_title($post_id);
-            $img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
-            if ( mb_strlen( $title, 'utf8' ) > 60 ) {
-                $last_space = strrpos( substr( $title, 0, 60 ), ' ' ); // find the last space within 35 characters
-                $title = substr( $title, 0, $last_space ) . ' ...';
-            }
+            $title = self::cut_title(get_the_title($post_id));
+            //$img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
+/*            $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );*/
             echo '<li id="post-'. $post_id .'" class="post-item col-sm-4 boga-related">'
                 . '<article>'
                 . '<div class="post-image">'
                 . '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'
-                . '<img src="'. $img_url .'" alt="'. $title .'" class="attachment-thumbnail wp-post-image">'
+                //. '<img src="'. $img_url .'" alt="'. $title .'" class="attachment-thumbnail wp-post-image">'
+                . get_the_post_thumbnail( $post_id, 'thumbnail' )
                 . '</a>'
                 . '</div><!--end post-image-->'
                 . '<div class="entry-content">'

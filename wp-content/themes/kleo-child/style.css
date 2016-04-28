@@ -17,14 +17,14 @@ License URI: license.txt
 /*Anadida nuestra propia fuente*/
 @font-face {
     font-family: 'bogadia';
-    src: url('fonts/bogadia.ttf') format('truetype');
+    src: url('https://www.bogadia.com/wp-content/themes/kleo-child/fonts/bogadia.ttf') format('truetype');
 
     font-weight: normal;
     font-style: normal;
 }
 @font-face {
     font-family: 'valentina';
-    src: url('fonts/Valentina-Regular.otf');
+    src: url('https://www.bogadia.com/wp-content/themes/kleo-child/fonts/Valentina-Regular.otf');
     font-weight: normal;
     font-style: normal;
 }

@@ -524,12 +524,8 @@ add_filter('style_loader_tag', 'remove_style_id');
 function remove_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
-	if (strpos($src, 'jquery.js') !== false) {
-		$src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js";
-	}
 	if (strpos($src, 'dynamic.css') == false && strpos($src, 'fontello.css') == false) {
 		$src = str_replace("www.bogadia", "bogacdn.appspot", $src);
-
 	}
 	return $src;
 }

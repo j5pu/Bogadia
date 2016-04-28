@@ -524,7 +524,7 @@ add_filter('style_loader_tag', 'remove_style_id');
 function remove_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
-	if (strpos($src, 'dynamic.css') == false && strpos($src, 'fontello.css') == false) {
+	if (strpos($src, 'dynamic.css') == false && strpos($src, 'font') == false) {
 		$src = str_replace("www.bogadia", "bogacdn.appspot", $src);
 	}
 	return $src;

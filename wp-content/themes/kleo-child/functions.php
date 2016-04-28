@@ -524,6 +524,7 @@ add_filter('style_loader_tag', 'remove_style_id');
 function remove_cssjs_ver( $src ) {
 	if( strpos( $src, '?ver=' ) )
 		$src = remove_query_arg( 'ver', $src );
+	$src = str_replace("www.bogadia", "bogacdn.appspot.com", $src);
 	return $src;
 }
 add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );

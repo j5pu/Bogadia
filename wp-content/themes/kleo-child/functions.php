@@ -527,7 +527,10 @@ function remove_cssjs_ver( $src ) {
 	if (strpos($src, 'jquery.js') !== false) {
 		$src = "https://ajax.googleapis.com/ajax/libs/jquery/1.12.2/jquery.min.js";
 	}
-	$src = str_replace("www.bogadia", "bogacdn.appspot", $src);
+	if (strpos($src, 'dynamic.css') == false && strpos($src, 'fontello.css') == false) {
+		$src = str_replace("www.bogadia", "bogacdn.appspot", $src);
+
+	}
 	return $src;
 }
 add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );

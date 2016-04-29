@@ -5361,7 +5361,7 @@ var UniteLayersRev = new function(){
 		
 		objLayer.internal_class = objLayer.internal_class || '';
 		
-		// Enabled Hover ?		
+		// Enabled Hover ?
 		objLayer['hover'] = objLayer['hover'] || false;
 
 		objLayer['alias'] = objLayer['alias'] || u.getSortboxText(objLayer.text).toLowerCase();
@@ -6126,7 +6126,12 @@ var UniteLayersRev = new function(){
 		obj2.order = undefined;
 		obj2.time = undefined;
 		obj2.createdOnInit = false;
-		addLayer(obj2);		
+		
+		//unique_id change as the true in addLayer is not triggering this
+		unique_layer_id++;
+		obj2.unique_id = unique_layer_id;
+		
+		addLayer(obj2, true);
 		initDisallowCaptionsOnClick();
 		var key;
 		jQuery.each(t.getLayers(),function(k,layer) {

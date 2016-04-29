@@ -1,6 +1,6 @@
 /**************************************************************************
  * jquery.themepunch.revolution.js - jQuery Plugin for Revolution Slider
- * @version: 5.2.3 (16.03.2016)
+ * @version: 5.2.5 (13.04.2016)
  * @requires jQuery v1.7 or later (tested on 1.9)
  * @author ThemePunch
 **************************************************************************/
@@ -92,7 +92,7 @@
 				},
 
 				navigation : {
-					keyboardNavigation:"on",	
+					keyboardNavigation:"off",	
 					keyboard_direction:"horizontal",		//	horizontal - left/right arrows,  vertical - top/bottom arrows
 					mouseScrollNavigation:"off",			// on, off, carousel					
 					onHoverStop:"on",						// Stop Banner Timet at Hover on Slide on/off
@@ -219,6 +219,10 @@
 
 				
 				var c = jQuery(this);
+				
+				// Prepare maxHeight
+				options.minHeight = options.minHeight!=undefined ? parseInt(options.minHeight,0) : options.minHeight;
+
 				//REMOVE SLIDES IF SLIDER IS HERO
 				if (options.sliderType=="hero") {
 					c.find('>ul>li').each(function(i) {
@@ -284,7 +288,8 @@
 							opt.thumbs = removeArray(opt.thumbs,sindex);	
 							if (_R.updateNavIndexes) _R.updateNavIndexes(opt); 
 							if (nextslideafter) container.revnext();
-								
+							punchgs.TweenLite.set(opt.li,{minWidth:"99%"});														
+							punchgs.TweenLite.set(opt.li,{minWidth:"100%"});
 						}
 					}
 				}
@@ -812,7 +817,8 @@ jQuery.extend(true, _R, {
 		if (opt.playingvideos != undefined && opt.playingvideos.length>0) { 
 			opt.lastplayedvideos = jQuery.extend(true,[],opt.playingvideos);
 			if (opt.playingvideos)
-				jQuery.each(opt.playingvideos,function(i,_nc) {				
+				jQuery.each(opt.playingvideos,function(i,_nc) {		
+					opt.leaveViewPortBasedStop = true;		
 					if (_R.stopVideo) _R.stopVideo(_nc,opt);
 				});
 		}
@@ -1321,11 +1327,12 @@ var initSlider = function (container,opt) {
 		if (opt.sliderLayout!=="fullscreen" || opt.fullScreenAutoWidth!="on") {			
 			var cp = container.parent(),				
 				mb = cp.css('marginBottom'),
-				mt = cp.css('marginTop');
+				mt = cp.css('marginTop'),
+				cid = container.attr('id')+"_forcefullwidth";
 			mb = mb===undefined ? 0 : mb;
 			mt = mt===undefined ? 0 : mt;
 
-			cp.wrap('<div class="forcefullwidth_wrapper_tp_banner" style="position:relative;width:100%;height:auto;margin-top:'+mt+';margin-bottom:'+mb+'"></div>');
+			cp.wrap('<div class="forcefullwidth_wrapper_tp_banner" id="'+cid+'" style="position:relative;width:100%;height:auto;margin-top:'+mt+';margin-bottom:'+mb+'"></div>');
 			container.closest('.forcefullwidth_wrapper_tp_banner').append('<div class="tp-fullwidth-forcer" style="width:100%;height:'+container.height()+'px"></div>');
 			container.parent().css({marginTop:"0px",marginBottom:"0px"});
 			//container.css({'backgroundColor':container.parent().css('backgroundColor'),'backgroundImage':container.parent().css('backgroundImage')});
@@ -1493,7 +1500,7 @@ var initSlider = function (container,opt) {
 		
 		
 		// PRELOAD STATIC LAYERS			
-		loadImages(container.find('.tp-static-layers'),opt,0);
+		loadImages(container.find('.tp-static-layers'),opt,0,true);
 
 		waitForCurrentImages(container.find('.tp-static-layers'),opt,function() {
 			container.find('.tp-static-layers img').each(function() {								
@@ -1552,7 +1559,7 @@ var initSlider = function (container,opt) {
 		// PREPARE THE SLIDES
 		opt.ul.css({'display':'block'});
 		prepareSlides(container,opt);
-		if (opt.parallax.type!=="off") _R.checkForParallax(container,opt);
+		if (opt.parallax.type!=="off" && _R.checkForParallax) _R.checkForParallax(container,opt);
 
 		
 		// PREPARE SLIDER SIZE			
@@ -1560,8 +1567,8 @@ var initSlider = function (container,opt) {
 		
 
 		// Call the Navigation Builder
-		if (opt.sliderType!=="hero") _R.createNavigation(container,opt);
-		if (_R.resizeThumbsTabs) _R.resizeThumbsTabs(opt);
+		if (opt.sliderType!=="hero" && _R.createNavigation) _R.createNavigation(container,opt);
+		if (_R.resizeThumbsTabs && _R.resizeThumbsTabs) _R.resizeThumbsTabs(opt);
 		contWidthManager(opt);
 		var _v = opt.viewPort;
 		opt.inviewport = false;
@@ -1578,7 +1585,7 @@ var initSlider = function (container,opt) {
 
 		// START THE SLIDER
 		setTimeout(function() {
-			if ( opt.sliderType =="carousel") _R.prepareCarousel(opt);	
+			if ( opt.sliderType =="carousel" && _R.prepareCarousel) _R.prepareCarousel(opt);	
 			
 			if (!_v.enable || (_v.enable && opt.inviewport) || (_v.enable &&  !opt.inviewport && !_v.outof=="wait")) {
 				swapSlide(container,opt);	
@@ -2052,7 +2059,7 @@ var progressImageLoad = function(opt) {
 
 
 // ADD TO QUEUE THE NOT LOADED IMAGES YES
-var addToLoadQueue = function(src,opt,prio,type) {		
+var addToLoadQueue = function(src,opt,prio,type,staticlayer) {		
 	var alreadyexist = false;	
 	if (opt.loadqueue)	
 		jQuery.each(opt.loadqueue, function(index,queue) {			
@@ -2066,13 +2073,14 @@ var addToLoadQueue = function(src,opt,prio,type) {
 			loadobj.type = type || "img";
 			loadobj.prio = prio;
 			loadobj.progress = "prepared";
+			loadobj.static = staticlayer;
 			opt.loadqueue.push(loadobj);		
 	}				
 
 }
 
 // LOAD THE IMAGES OF THE PREDEFINED CONTAINER
-var loadImages = function(container,opt,prio) {	
+var loadImages = function(container,opt,prio,staticlayer) {	
 	
 	container.find('img,.defaultimg, .tp-svg-layer').each(function() {
 		var element = jQuery(this),
@@ -2080,7 +2088,7 @@ var loadImages = function(container,opt,prio) {
 			type = element.data('svg_src') !=undefined ? "svg" : "img";
 		
 		element.data('start-to-load',jQuery.now());
-		addToLoadQueue(src,opt,prio,type);
+		addToLoadQueue(src,opt,prio,type,staticlayer);
 	});
 	progressImageLoad(opt);
 }
@@ -2157,8 +2165,10 @@ var waitForCurrentImages = function(nextli,opt,callback) {
 		if (loadobj && loadobj.progress && loadobj.progress.match(/inprogress|inload|prepared/g)) 
 			if (jQuery.now()-element.data('start-to-load')<5000) 
 					waitforload = true;			
-			else
+			else {
+				loadobj.progress="failed";
 				console.error(src+"  Could not be loaded !");
+			}
 		
 		// WAIT FOR VIDEO API'S					
 		if (opt.youtubeapineeded == true && (!window['YT'] || YT.Player==undefined)) {		
@@ -2193,13 +2203,17 @@ var waitForCurrentImages = function(nextli,opt,callback) {
 		});		
 	}
 	
-
+	jQuery.each(opt.loadqueue,function(i,o) {		
+		if (o.static===true && (o.progress!="loaded" || o.progress==="failed"))
+			waitforload = true;			
+	});
+		
 	if (waitforload) 
 		setTimeout(function() {
 				waitForCurrentImages(nextli,opt,callback) ;
 			},19);
 	else 		
-		callback();
+		setTimeout(callback,19);
 	
 }
 
@@ -2568,7 +2582,7 @@ var letItFree = function(container,opt,nextsh,actsh,nextli,actli,mtl) {
 
 	var lastSlideLoop = actli.data('slide_on_focus_amount'),
 		lastSlideMaxLoop = actli.data('hideafterloop');	
-	if (lastSlideMaxLoop!=0 && lastSlideMaxLoop<=lastSlideLoop) {
+	if (lastSlideMaxLoop!=0 && lastSlideMaxLoop<=lastSlideLoop) {		
 		opt.c.revremoveslide(actli.index());
 	}
 	//if (_R.callStaticDDDParallax) _R.callStaticDDDParallax(container,opt,nextli);		

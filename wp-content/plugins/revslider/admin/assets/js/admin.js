@@ -859,9 +859,10 @@ var UniteAdminRev = new function(){
 		//set html in dialog
 		setYoutubeDialogHtml(data);
 		
-		//set the youtube arguments
+		//set the vimeo arguments
 		var objArguments = jQuery("#input_video_arguments");
-		objArguments.val(objArguments.data("vimeo"));
+		if(objArguments.val() == "")
+			objArguments.val(objArguments.data("vimeo"));
 		
 		//store last video data
 		lastVideoData = data;
@@ -1690,7 +1691,8 @@ var UniteAdminRev = new function(){
 			UniteAdminRev.setAjaxHideButtonID("rs-validation-activate");
 			
 			var data = {
-				code: jQuery('input[name="rs-validation-token"]').val()
+				code: jQuery('input[name="rs-validation-token"]').val()/*,
+				email: jQuery('input[name="rs-validation-email"]').val()*/
 			}
 			
 			UniteAdminRev.ajaxRequest("activate_purchase_code",data);

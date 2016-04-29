@@ -681,7 +681,7 @@ class RevSliderOutput {
 					//---- normal link
 					default:
 					case 'regular':
-						$link = $slide->getParam('link', '');
+						$link = do_shortcode($slide->getParam('link', ''));
 						$linkOpenIn = $slide->getParam('link_open_in', 'same');
 						$htmlTarget = '';
 						if($linkOpenIn == 'new')
@@ -994,21 +994,23 @@ class RevSliderOutput {
 		
 		echo "</ul>\n";
 		
-		
 		if($do_static && !empty($this->static_slide)){
-			$htmlstaticoverflow = '';
-			$staticoverflow = $this->static_slide->getParam('staticoverflow', '');
-			if (!empty($staticoverflow) && $staticoverflow=="hidden")
-				$htmlstaticoverflow = 'overflow:hidden;width:100%;height:100%;top:0px;left:0px;';
+			$layers = $this->static_slide->getLayers();
+			if(!empty($layers)){
+				$htmlstaticoverflow = '';
+				$staticoverflow = $this->static_slide->getParam('staticoverflow', '');
+				if (!empty($staticoverflow) && $staticoverflow=="hidden")
+					$htmlstaticoverflow = 'overflow:hidden;width:100%;height:100%;top:0px;left:0px;';
 
-			
-			//check for static layers
-			echo '<div style="'.$htmlstaticoverflow.'" class="tp-static-layers">'."\n";
-			$this->putCreativeLayer($this->static_slide, true);
-			
-			do_action('revslider_add_static_layer_html', $this->slider);
-			
-			echo '</div>'."\n";
+				
+				//check for static layers
+				echo '<div style="'.$htmlstaticoverflow.'" class="tp-static-layers">'."\n";
+				$this->putCreativeLayer($this->static_slide, true);
+				
+				do_action('revslider_add_static_layer_html', $this->slider);
+				
+				echo '</div>'."\n";
+			}
 		}
 		
 		$this->add_custom_navigation_css($slides);
@@ -1312,8 +1314,6 @@ class RevSliderOutput {
 		
 		$startAnimations = RevSliderOperations::getArrAnimations(false); //only get the standard animations
 		$endAnimations = RevSliderOperations::getArrEndAnimations(false); //only get the standard animations
-		
-		$fullCustomAnims = RevSliderOperations::getFullCustomAnimations();
 		
 		$lazyLoad = $this->slider->getParam('lazy_load_type', false);
 		if($lazyLoad === false){ //do fallback checks to removed lazy_load value since version 5.0 and replaced with an enhanced version
@@ -2385,13 +2385,15 @@ class RevSliderOutput {
 				$tcout .= 'auto:auto;';
 			}
 			
-			$es = RevSliderFunctions::getVal($layer, 'endspeed');
-			$ee = trim(RevSliderFunctions::getVal($layer, 'endeasing'));
-			if(!empty($es)){
-				$tcout .= 's:'.$es.';';
-			}
-			if(!empty($ee) && $ee !== 'nothing'){
-				$tcout .= 'e:'.$ee.';';
+			if($endAnimation == 'auto'){
+				$es = RevSliderFunctions::getVal($layer, 'endspeed');
+				$ee = trim(RevSliderFunctions::getVal($layer, 'endeasing'));
+				if(!empty($es)){
+					$tcout .= 's:'.$es.';';
+				}
+				if(!empty($ee) && $ee !== 'nothing'){
+					$tcout .= 'e:'.$ee.';';
+				}
 			}
 			
 			if($tcout !== ''){
@@ -3165,7 +3167,7 @@ class RevSliderOutput {
 						case 'link':
 							//if post based, replace {{}} with correct info
 							//a_image_link
-							
+							if(isset($a_image_link[$num])) $a_image_link[$num] = do_shortcode($a_image_link[$num]);
 							if(isset($a_link_type[$num]) && $a_link_type[$num] == 'jquery'){
 								/*
 								$setBase = (is_ssl()) ? "https://" : "http://";
@@ -3541,7 +3543,9 @@ class RevSliderOutput {
 			if (!empty($svg_val) && sizeof($svg_val)>0) {				
 				echo '			data-svg_src="'.$svg_val->{'src'}.'"'." \n";
 				echo '			data-svg_idle="sc:'.$svg_val->{'svgstroke-color'}.';sw:'.$svg_val->{'svgstroke-width'}.';sda:'.$svg_val->{'svgstroke-dasharray'}.';sdo:'.$svg_val->{'svgstroke-dashoffset'}.';"'." \n";
-				echo '			data-svg_hover="sc:'.$svg_val->{'svgstroke-hover-color'}.';sw:'.$svg_val->{'svgstroke-hover-width'}.';sda:'.$svg_val->{'svgstroke-hover-dasharray'}.';sdo:'.$svg_val->{'svgstroke-hover-dashoffset'}.';"'." \n";
+				if($is_hover_active){
+					echo '			data-svg_hover="sc:'.$svg_val->{'svgstroke-hover-color'}.';sw:'.$svg_val->{'svgstroke-hover-width'}.';sda:'.$svg_val->{'svgstroke-hover-dasharray'}.';sdo:'.$svg_val->{'svgstroke-hover-dashoffset'}.';"'." \n";
+				}
 			}
 
 			if($basealign !== 'grid'){
@@ -3794,9 +3798,9 @@ class RevSliderOutput {
 					e.fullScreenOffsetContainer= '<?php echo esc_attr($this->slider->getParam("fullscreen_offset_container","")); ?>';
 					e.fullScreenOffset='<?php echo esc_attr($this->slider->getParam("fullscreen_offset_size","")); ?>';
 <?php } ?>
-<?php $minHeight = ($this->slider->getParam('slider_type') !== 'fullscreen') ? $this->slider->getParam('min_height', '0',RevSlider::FORCE_NUMERIC) : $this->slider->getParam('fullscreen_min_height', '0', RevSlider::FORCE_NUMERIC);
+<?php $minHeight = ($this->slider->getParam('slider_type') !== 'fullscreen') ? $this->slider->getParam('min_height', '0') : $this->slider->getParam('fullscreen_min_height', '0');
 					if($minHeight > 0){ ?>
-					e.minHeight = <?php echo $minHeight; ?>;
+					e.minHeight = "<?php echo $minHeight; ?>";
 <?php } ?>
 					if(e.responsiveLevels&&(jQuery.each(e.responsiveLevels,function(e,f){f>i&&(t=r=f,l=e),i>f&&f>r&&(r=f,n=e)}),t>r&&(l=n)),f=e.gridheight[l]||e.gridheight[0]||e.gridheight,s=e.gridwidth[l]||e.gridwidth[0]||e.gridwidth,h=i/s,h=h>1?1:h,f=Math.round(h*f),"fullscreen"==e.sliderLayout){var u=(e.c.width(),jQuery(window).height());if(void 0!=e.fullScreenOffsetContainer){var c=e.fullScreenOffsetContainer.split(",");if (c) jQuery.each(c,function(e,i){u=jQuery(i).length>0?u-jQuery(i).outerHeight(!0):u}),e.fullScreenOffset.split("%").length>1&&void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0?u-=jQuery(window).height()*parseInt(e.fullScreenOffset,0)/100:void 0!=e.fullScreenOffset&&e.fullScreenOffset.length>0&&(u-=parseInt(e.fullScreenOffset,0))}f=u}else void 0!=e.minHeight&&f<e.minHeight&&(f=e.minHeight);e.c.closest(".rev_slider_wrapper").css({height:f})
 					
@@ -4216,9 +4220,9 @@ class RevSliderOutput {
 			}
 			echo '						lazyType:"'. esc_attr($lazyLoad).'",'."\n";
 			
-			$minHeight = ($this->slider->getParam('slider_type') !== 'fullscreen') ? $this->slider->getParam('min_height', '0',RevSlider::FORCE_NUMERIC) : $this->slider->getParam('fullscreen_min_height', '0', RevSlider::FORCE_NUMERIC);
+			$minHeight = ($this->slider->getParam('slider_type') !== 'fullscreen') ? $this->slider->getParam('min_height', '0') : $this->slider->getParam('fullscreen_min_height', '0');
 			if($minHeight > 0){
-				echo '						minHeight:'. $minHeight.','."\n";
+				echo '						minHeight:"'. $minHeight.'",'."\n";
 			}
 			
 			if($use_parallax == 'on'){
@@ -4613,6 +4617,7 @@ class RevSliderOutput {
 			$gfonts = $this->slider->getParam("google_font",array());
 			if(!empty($gfonts) && is_array($gfonts)){
 				foreach($gfonts as $gf){
+					$gf = str_replace(array('"', '+'), array('', ' '), $gf);
 					$htmlBeforeSlider .= RevSliderOperations::getCleanFontImport($gf);
 				}
 			}
@@ -4694,10 +4699,15 @@ class RevSliderOutput {
 			if($this->slider->getParam('enable_thumbnails', 'off') == 'on'){
 				$wrapperHeigh += $this->slider->getParam('thumb_height');
 			}
-
-			$this->sliderHtmlID = 'rev_slider_'.$sliderID.'_'.self::$sliderSerial;
+			
+			$slider_id = $this->slider->getParam('slider_id', '');
+			
+			if(trim($slider_id) !== ''){
+				$this->sliderHtmlID = $slider_id;
+			}else{
+				$this->sliderHtmlID = 'rev_slider_'.$sliderID.'_'.self::$sliderSerial;
+			}
 			$this->sliderHtmlID_wrapper = $this->sliderHtmlID.'_wrapper';
-
 			$containerStyle = "";
 
 			$sliderPosition = $this->slider->getParam("position","center");

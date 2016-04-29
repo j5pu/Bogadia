@@ -65,9 +65,10 @@
 								}
 							
 								//Check for registered slider
-								$rev_addon_code = get_option('revslider-code', '');
 								$rev_addon_validated = get_option('revslider-valid', 'false');
-								if(!empty($rev_addon_code) && $rev_addon_validated){
+								$rev_addon_validated = $rev_addon_validated=='true' ? true : false;
+
+								if($rev_addon_validated){
 							?>
 
 									<div class="rs-addon-not-activated rs-dash-title-button rs-status-orange" <?php echo $rs_addon_not_activated; ?> data-plugin="<?php echo $addon->slug.'/'.$addon->slug.'.php';?>" data-alternative="<i class='icon-no-problem-found'></i>Activate"><i class="icon-update-refresh"></i>Not Active</div>
@@ -75,6 +76,7 @@
 									<div class="rs-addon-not-installed rs-dash-title-button rs-status-red" <?php echo $rs_addon_not_installed; ?> data-alternative="<i class='icon-update-refresh'></i>Install" data-plugin="<?php echo $addon->slug;?>"><i class="icon-not-registered"></i>Not Installed</div>
 							<?php } else { 
 									$rev_addon_version="";
+									$result = deactivate_plugins( $addon->slug.'/'.$addon->slug.'.php' );
 							?>
 									<div class="rs-dash-title-button rs-status-red" style="display:block"><i class="icon-not-registered"></i>Add-on locked</div>
 							<?php }
@@ -122,12 +124,13 @@
 										}
 									?>
 								<?php } else { 
-										if(!empty($rev_addon_code) && $rev_addon_validated){?>
+										if($rev_addon_validated){?>
 										<span data-plugin="<?php echo $addon->slug;?>" class="rs-addon-not-installed rs-dash-button"><?php _e('Install this Add-on', 'revslider'); ?></span>
 								<?php 
 										} else { ?>
 											<a href="<?php echo admin_url( 'admin.php?page=revslider');?>" class="rs-dash-button"><?php _e('Register Slider Revolution', 'revslider'); ?></a>
-									<?php }
+									<?php 
+										}
 									} ?>
 								<?php if(!empty($addon->button) && !empty($rev_addon_code) && $rev_addon_validated && !empty($rev_addon_version) ){ 
 										if($rs_addon_activated=='style="display:block"'){

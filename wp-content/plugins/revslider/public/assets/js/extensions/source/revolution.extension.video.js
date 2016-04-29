@@ -1,6 +1,6 @@
 /********************************************
- * REVOLUTION 5.2.3 EXTENSION - VIDEO FUNCTIONS
- * @version: 1.7 (16.03.2016)
+ * REVOLUTION 5.2.5 EXTENSION - VIDEO FUNCTIONS
+ * @version: 1.8 (05.04.2016)
  * @requires jquery.themepunch.revolution.js
  * @author ThemePunch
 *********************************************/
@@ -55,9 +55,9 @@ jQuery.extend(true,_R, {
 			case "youtube":
 				var player=_nc.data('player');
 			 	try{
-					if (_nc.data('forcerewind')=="on" && !_ISM) {
+					if (_nc.data('forcerewind')=="on") {  //Removed Force Rewind Protection for Handy here !!!
 						var s = getStartSec(_nc.data('videostartat'));
-						s= s==-1 ? 0 : s;		
+						s= s==-1 ? 0 : s;						
 						if (_nc.data('player')!=undefined) {					
 							_nc.data('player').seekTo(s);													
 							_nc.data('player').pauseVideo();
@@ -71,7 +71,7 @@ jQuery.extend(true,_R, {
 			case "vimeo":
 				var f = $f(_nc.find('iframe').attr("id"));	
 			 	try{
-					if (_nc.data('forcerewind')=="on" && !_ISM) 	{						
+					if (_nc.data('forcerewind')=="on") 	{	  //Removed Force Rewind Protection for Handy here !!!					
 						var s = getStartSec(_nc.data('videostartat')),
 							ct = 0;
 						s= s==-1 ? 0 : s;													
@@ -97,6 +97,7 @@ jQuery.extend(true,_R, {
 				
 				if (_nc.data('forcerewind')=="on" && !_nc.hasClass("videoisplaying")) {
 					try{
+						
 						var s = getStartSec(_nc.data('videostartat'));					
 						video.currentTime = s == -1 ? 0 : s;	
 					} catch(e) {}
@@ -194,6 +195,11 @@ jQuery.extend(true,_R, {
 
 	stopVideo : function(_nc,opt) {	
 		
+		if (!opt.leaveViewPortBasedStop) 
+			opt.lastplayedvideos = [];
+
+		opt.leaveViewPortBasedStop = false;
+
 		switch (_nc.data('videotype')) {
 			case "youtube":
 				try{
@@ -1037,13 +1043,15 @@ var htmlvideoevents = function(_nc,opt,startnow) {
 		if (seekBar != undefined)	
 			seekBar.value = value;	
 		
-		if (et!=0 && et!=-1 && (Math.abs(et-cs) <=0.3 && et>cs) && _nc.data('nextslidecalled') != 1) {
+		if (et!=0 && et!=-1 && (Math.abs(et-cs) <=0.3 && et>cs) && _nc.data('nextslidecalled') != 1) {			
 			if (loop) {
 				video.play();
 				var s = getStartSec(_nc.data('videostartat'));
 				if (s!=-1) video.currentTime = s;				
 			} else {
-				if (_nc.data('nextslideatend')==true) {		
+
+				
+				if (_nc.data('nextslideatend')==true) {							
 					_nc.data('nextslideatend-triggered',1);		
 					_nc.data('nextslidecalled',1);						
 					opt.just_called_nextslide_at_htmltimer = true; 
@@ -1147,6 +1155,7 @@ var htmlvideoevents = function(_nc,opt,startnow) {
 
 	// VIDEO EVENT LISTENER FOR "END"
 	
+
 	addEvent(video,"ended",function() {		
 		exitFullscreen();
 		
@@ -1157,7 +1166,7 @@ var htmlvideoevents = function(_nc,opt,startnow) {
 		opt.c.trigger('revolution.slide.onvideostop',getVideoDatas(video,"html5",_nc.data()));
 
 
-		if (_nc.data('nextslideatend')===true) {	
+		if (_nc.data('nextslideatend')===true && video.currentTime>0) {	
 			
 			if (!opt.just_called_nextslide_at_htmltimer==true) {
 				_nc.data('nextslideatend-triggered',1);

@@ -92,7 +92,7 @@ class boga_related_post
             return implode( '', $paragraphs );
         }
 
-        if ( is_single() && ! is_admin() && !is_product() && !in_category('Streetstyle') ) {
+        if ( is_single() && ! is_admin()  && !in_category('Streetstyle') ) {
             self::query_related_post();
             $likes_posts = self::get_related_post(3);
             $c=0;

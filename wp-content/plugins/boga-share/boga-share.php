@@ -6,7 +6,7 @@ Description: Muestra el cajon de compartir a traves de api para el concurso de s
 
 function show_bogashare_dialog() {
     if(is_single() && !is_single(34201)) {
-        include 'includes/share.php';
+        include 'includes/insterstitial.php';
     }
 }
 function bogashare_assets(){
@@ -19,12 +19,15 @@ function bogashare_assets(){
 }
 add_action('wp_footer', 'show_bogashare_dialog');
 add_action('wp_enqueue_scripts', 'bogashare_assets');
-
+function boga_ads_assets(){
+    wp_register_script( 'dfp_interstitial_ad', '/wp-content/plugins/boga-share/assets/js/dfp_interstitial_ad.js', array('jquery'));
+    wp_enqueue_script( 'dfp_interstitial_ad' );
+    wp_register_style( 'dfp_interstitial_ad', '/wp-content/plugins/boga-share/assets/css/dfp_interstitial_ad.css');
+    wp_enqueue_style( 'dfp_interstitial_ad' );
+}
 add_filter( 'script_loader_tag', function ( $tag, $handle ) {
-
     if ( 'bogashare' !== $handle )
         return $tag;
-
     return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
 }, 10, 2 );
 

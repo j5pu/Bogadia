@@ -5,10 +5,7 @@
         <a target="_blank" href="https://www.bogadia.com/sorteos/gana-kit-productos-crea-m-solo-darnos-opinion/"><img id="bogashare_img" class="img-responsive" src="/wp-content/plugins/boga-share/assets/img/concursocream.jpg"></a>
 
 <!--            <p id="bogashare_description"><strong><a target="_blank" href="https://www.bogadia.com/sorteos/gana-kit-productos-crea-m-solo-darnos-opinion/">Más info</a></strong></p>-->
-        <form id="compartir_opinion_form">
-<!--                <input id="share_msg" placeholder="¡Me parece increible!" style="margin: 0 auto;margin-bottom: 15px;border: 1px solid lightgray;width: 90%;height: 40px;">
--->                <input id="share_submit" type="submit" value="Compartir en Facebook y participar" onclick=<?php if(!is_user_logged_in()){ ?>"myFacebookLogin()"<?php }else{  ?>"myFacebookLogin()"<?php } ?> ></input>
-        </form>
+        <button id="share_submit" class="sharecontestbutton" onclick="myFacebookLogin()"><i class="icon-facebook"></i> | Comparte este post para participar</button>
     </div>
     <button id="close_compartir_opinion"><em class="icon-angle-down" style="font-size: 25px;"></em></button>
 <!--    <button id="open_compartir_opinion" style="display: none;"><em class="icon-angle-up" style="font-size: 25px;"></em></button>

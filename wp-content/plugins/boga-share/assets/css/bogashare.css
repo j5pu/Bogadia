@@ -38,12 +38,100 @@
     margin-top: 10px !important;
     margin-bottom: 15px !important;
 }
-#share_submit{
+.share_submit{
     background-color: #3b5998;
     color: white;
     margin-bottom: 10px;
     margin-top: 10px;
     border-color: #3b5998;
-    width: 95%;
-    height: 50px;
+
+    border-radius: 7px;
+}
+.modal-dialog{
+    position: relative !important;
+    left: 0px !important;
+}
+
+#share_submit_post{
+    width: 100%;
+    font-size: 16px;
+    height: 40px;
+}
+
+@media screen and (max-width: 499px) {
+    #flores_img{
+        max-width: 160%;
+        margin-left: -101px;
+    }
+    #share_submit_insterstitial {
+        left: 66px;
+        bottom: 217px;
+        position: relative;
+        width: 240px;
+        height: 30px;
+        font-size: 12px;
+    }
+    #mas_info{
+        left: 157px;
+        bottom: 250px;
+        position: relative;
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 500px) and (max-width: 599px){
+    #flores_img{
+        max-width: 142%;
+        margin-left: -45px;
+    }
+    #share_submit_insterstitial{
+        left: 144px;
+        bottom: 224px;
+        position: relative;
+        width: 230px;
+        height: 30px;
+        font-size: 12px;
+
+    }
+    #mas_info{
+        left: 185px;
+        bottom: 250px;
+        position: relative;
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 600px) and (max-width: 767px){
+    #share_submit_insterstitial{
+        left: 192px;
+        bottom: 224px;
+        position: relative;
+        width: 230px;
+        height: 30px;
+        font-size: 12px;
+
+    }
+    #mas_info{
+        left: 205px;
+        bottom: 250px;
+        position: relative;
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 768px) {
+    #share_submit_insterstitial {
+        left: 24%;
+        bottom: 224px;
+        position: relative;
+        width: 50%;
+        height: 30px;
+        font-size: 12px;
+    }
+    #mas_info{
+        left: 256px;
+        bottom: 250px;
+        position: relative;
+        font-size: 12px;
+    }
+}
+#interstitialModal{
+    position: fixed;
 }

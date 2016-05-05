@@ -39,26 +39,7 @@ if(get_cfield( 'related_posts') != '' ) {
 
     <?php get_template_part( 'content', get_post_format() ); ?>
 
-		<?php get_template_part( 'page-parts/posts-social-share' ); ?>
-
-		<!-- WP-PostRating - Muestra las estrellas para valorar el post -->
-		<?php if(function_exists('the_ratings')) { the_ratings(); } ?>
-		<!-- WP-PostRating - Muestra las estrellas para valorar el post END-->
-
-		<?php
-		$boga_related_post->main_related_post();
-		?>
-
-		<?php
-        if ( sq_option( 'post_navigation', 1 ) == 1 ) :
-            // Previous/next post navigation.
-            kleo_post_nav();
-        endif;
-		?>
-
-    <!-- Begin Comments -->
-    <?php comments_template( '', true ); ?>
-    <!-- End Comments -->
+	<?php $boga_related_post->main_related_post(); ?>
 
 <?php endwhile; ?>
 

@@ -200,8 +200,6 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
             esc_html( get_the_modified_date() )
         );
 
-
-
         if ( is_array( $meta_elements ) && !empty( $meta_elements ) ) {
 
 
@@ -293,15 +291,15 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
         }
 
         $meta_separator = isset( $att['separator'] ) ? $att['separator'] : sq_option( 'blog_meta_sep', ', ') ;
-
+		if (!wp_is_mobile()){
+			array_push($meta_list, '<button id="share_submit_post" class="share_submit" onclick="myFacebookLogin()"><i class="icon-facebook"></i> | Comparte este post para participar</button>');
+		}
         if ( $echo ) {
             echo implode( $meta_separator, $meta_list );
         }
         else {
             return implode( $meta_separator, $meta_list );
         }
-
-
     }
 endif;
 
@@ -536,8 +534,8 @@ function remove_cssjs_ver( $src ) {
 	}
 	return $src;
 }
-add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );
-add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );
+/*add_filter( 'style_loader_src', 'remove_cssjs_ver', 10, 2 );
+add_filter( 'script_loader_src', 'remove_cssjs_ver', 10, 2 );*/
 
 add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 

@@ -106,7 +106,7 @@ jQuery(document).ready(function(){
             localStorage.removeItem('bogatitial');
         }
     }else{
-        jQuery('#interstitialModal').delay(2000).modal({show:true});
+        jQuery('#interstitialModal').modal({show:true});
         localStorage.setItem('bogatitial', 1);
     }
     jQuery('#share_msg').on('change', function(){

@@ -8,11 +8,11 @@
 			<button id="share_submit_insterstitial" class="share_submit" onclick="myFacebookLogin()"><i class="icon-facebook"></i> | Comparte este post para participar</button>
 			<img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none; width: 50px">
 			<div id="success" class="alert alert-success">
-				<strong>¡Genial!</strong> Se ha compartido con tus amigos.
+				<strong>¡Genial!</strong> Ya estás participando en el concurso.
 				<div class="hide-alert"><p><strong>Quitar este aviso</strong></p></div>
 			</div>
 			<div id="danger" class="alert alert-danger">
-				<strong>¡Vaya!</strong> Se ha producido un error. Inténtalo de nuevo o escribe a valle@bogadia.com.
+				<strong>¡Vaya!</strong> Se ha producido un error. Inténtalo de nuevo.
 				<div class="hide-alert"><p><strong>Quitar este aviso</strong></p></div>
 			</div>
 			<a target="_blank" href="https://www.bogadia.com/sorteos/gana-kit-productos-crea-m-solo-darnos-opinion/"><p id="mas_info">Más info</p></a>

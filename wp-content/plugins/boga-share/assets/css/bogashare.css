@@ -169,7 +169,7 @@
 }
 #interstitialModal{
     position: fixed;
-    margin-top: 40px;
+    margin-top: 60px;
 }
 #interstitialModal:focus{
     outline: none;
@@ -182,7 +182,7 @@
 }
 #share_submit_post_mobile{
     width: 95%;
-    font-size: 16px;
+    font-size: 14px;
     height: 40px;
 }
 button#close-buton.close{

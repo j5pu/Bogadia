@@ -169,10 +169,14 @@
 }
 #interstitialModal{
     position: fixed;
+    margin-top: 40px;
+}
+#interstitialModal:focus{
+    outline: none;
 }
 #bogashare_spinner{
-    left: 24%;
-    bottom: 224px;
+    left: 45%;
+    bottom: 212px;
     position: relative;
     width: 50%;
 }

@@ -6,7 +6,7 @@
 		<img id="flores_img" src="/wp-content/plugins/boga-share/assets/img/flores.png">
 		<div>
 			<button id="share_submit_insterstitial" class="share_submit" onclick="myFacebookLogin()"><i class="icon-facebook"></i> | Comparte este post para participar</button>
-			<img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none; width: 80px">
+			<img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none; width: 50px">
 			<div id="success" class="alert alert-success">
 				<strong>¡Genial!</strong> Se ha compartido con tus amigos.
 				<div class="hide-alert"><p><strong>Quitar este aviso</strong></p></div>

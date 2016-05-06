@@ -1,11 +1,12 @@
 var msg = '';
 var user_id = "";
+var cookie_val = localStorage.getItem('bogatitial');
 function check_response(response){
     if (!response || response.error) {
         jQuery("#danger").fadeIn('slow');
-        jQuery('#bogashare_spinner').fadeOut('slow');
+        jQuery('#bogashare_spinner').fadeOut('fast');
         jQuery("#danger").delay( 2000 ).fadeOut('slow');
-        jQuery('#compartir_opinion_desplegar').fadeIn('slow');
+        jQuery('.share_submit, #mas_info').fadeIn('slow');
     } else {
         store_share_ajax_call();
     }
@@ -40,13 +41,16 @@ function store_share_ajax_call(){
             }
         })
         .done(function( msg ) {
-            jQuery("#success").fadeIn('slow');
-            jQuery('#bogashare_spinner').fadeOut('slow');
+            jQuery('#bogashare_spinner').fadeOut('fast');
+            jQuery("#success, #mas_info").fadeIn('slow');
+/*
             jQuery("#compartir_opinion").delay( 5000 ).fadeOut('slow');
+*/
         });
 }
 function myFacebookLogin() {
-    jQuery('#compartir_opinion_desplegar').fadeOut('slow');
+    jQuery('#interstitialModal').delay(2000).modal({show:true});
+    jQuery('.share_submit, #mas_info').fadeOut('fast');
     jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     // fix iOS Chrome
     if (navigator.userAgent.match('CriOS')) {
@@ -94,6 +98,17 @@ function myFacebookShare() {
     });
 }
 jQuery(document).ready(function(){
+    if(false){
+        if(cookie_val < 2){
+            cookie_val++;
+            localStorage.setItem('bogatitial', cookie_val);
+        }else{
+            localStorage.removeItem('bogatitial');
+        }
+    }else{
+        jQuery('#interstitialModal').delay(2000).modal({show:true});
+        localStorage.setItem('bogatitial', 1);
+    }
     jQuery('#share_msg').on('change', function(){
         msg = jQuery('#share_msg').val();
     });

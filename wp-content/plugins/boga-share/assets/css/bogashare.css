@@ -1,10 +1,7 @@
 #compartir_opinion{
     position: fixed;
     bottom: 0;
-    z-index: 9999;
     background-color: #E0E0E0;
-    border-top: 1px solid #211D1E;
-    display: none;
     width: 100%;
     max-height: 100%;
 }
@@ -51,14 +48,32 @@
     position: relative !important;
     left: 0px !important;
 }
-
 #share_submit_post{
     width: 100%;
     font-size: 16px;
     height: 40px;
 }
-
-@media screen and (max-width: 499px) {
+@media screen and (max-width: 399px) {
+    #flores_img{
+        max-width: 160%;
+        margin-left: -86px;
+    }
+    #share_submit_insterstitial {
+        left: 31px;
+        bottom: 189px;
+        position: relative;
+        width: 240px;
+        height: 30px;
+        font-size: 12px;
+    }
+    #mas_info{
+        left: 123px;
+        bottom: 219px;
+        position: relative;
+        font-size: 12px;
+    }
+}
+@media screen and (min-width: 350px) and (max-width: 400px) {
     #flores_img{
         max-width: 160%;
         margin-left: -101px;
@@ -78,6 +93,26 @@
         font-size: 12px;
     }
 }
+@media screen and (min-width: 401px) and (max-width: 499px) {
+    #flores_img{
+        max-width: 160%;
+        margin-left: -108px;
+    }
+    #share_submit_insterstitial {
+        left: 86px;
+        bottom: 232px;
+        position: relative;
+        width: 240px;
+        height: 30px;
+        font-size: 12px;
+    }
+    #mas_info{
+        left: 176px;
+        bottom: 258px;
+        position: relative;
+        font-size: 12px;
+    }
+}
 @media screen and (min-width: 500px) and (max-width: 599px){
     #flores_img{
         max-width: 142%;
@@ -93,8 +128,8 @@
 
     }
     #mas_info{
-        left: 185px;
-        bottom: 250px;
+        left: 228px;
+        bottom: 254px;
         position: relative;
         font-size: 12px;
     }
@@ -110,8 +145,8 @@
 
     }
     #mas_info{
-        left: 205px;
-        bottom: 250px;
+        left: 275px;
+        bottom: 254px;
         position: relative;
         font-size: 12px;
     }
@@ -134,4 +169,21 @@
 }
 #interstitialModal{
     position: fixed;
+}
+#bogashare_spinner{
+    left: 24%;
+    bottom: 224px;
+    position: relative;
+    width: 50%;
+}
+#share_submit_post_mobile{
+    width: 95%;
+    font-size: 16px;
+    height: 40px;
+}
+button#close-buton.close{
+    opacity: 1 !important;
+    font-size: 30px;
+    color: white;
+    opacity: 0.8;
 }

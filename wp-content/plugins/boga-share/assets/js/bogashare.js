@@ -42,7 +42,8 @@ function store_share_ajax_call(){
         })
         .done(function( msg ) {
             jQuery('#bogashare_spinner').fadeOut('fast');
-            jQuery("#success, #mas_info").fadeIn('slow');
+            jQuery('#share_submit_insterstitial').css('visibility', 'hidden');
+            jQuery("#success, #share_submit_insterstitial, #mas_info").fadeIn('slow');
 /*
             jQuery("#compartir_opinion").delay( 5000 ).fadeOut('slow');
 */

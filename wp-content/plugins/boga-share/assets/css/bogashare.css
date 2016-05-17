@@ -41,7 +41,7 @@
     margin-bottom: 10px;
     margin-top: 10px;
     border-color: #3b5998;
-
+    font-family: bogashare;
     border-radius: 7px;
 }
 .modal-dialog{
@@ -190,4 +190,13 @@ button#close-buton.close{
     font-size: 30px;
     color: white;
     opacity: 0.8;
+}
+@font-face {
+    font-family: 'bogashare';
+    src: url('https://www.bogadia.com/wp-content/plugins/boga-share/fonts/CaviarDreams.ttf') format('truetype');
+    font-weight: normal;
+    font-style: normal;
+}
+#mas_info{
+    font-family: bogashare;
 }

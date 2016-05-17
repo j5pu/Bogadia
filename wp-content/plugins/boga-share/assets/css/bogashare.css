@@ -64,7 +64,7 @@
         position: relative;
         width: 240px;
         height: 30px;
-        font-size: 12px;
+        font-size: 11px;
     }
     #mas_info{
         left: 123px;
@@ -84,7 +84,7 @@
         position: relative;
         width: 240px;
         height: 30px;
-        font-size: 12px;
+        font-size: 11px;
     }
     #mas_info{
         left: 157px;
@@ -110,7 +110,7 @@
         left: 176px;
         bottom: 258px;
         position: relative;
-        font-size: 12px;
+        font-size: 11px;
     }
 }
 @media screen and (min-width: 500px) and (max-width: 599px){

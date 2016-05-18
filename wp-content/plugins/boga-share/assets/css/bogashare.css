@@ -175,10 +175,8 @@
     outline: none;
 }
 #bogashare_spinner{
-    left: 45%;
-    bottom: 212px;
-    position: relative;
-    width: 50%;
+    width: 22px;
+    padding-bottom: 3px;
 }
 #share_submit_post_mobile{
     width: 95%;

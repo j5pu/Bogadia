@@ -3,10 +3,7 @@ var user_id = "";
 var cookie_val = localStorage.getItem('bogatitial');
 function check_response(response){
     if (!response || response.error) {
-        jQuery("#danger").fadeIn('slow');
-        jQuery('#bogashare_spinner').fadeOut('fast');
-        jQuery("#danger").delay( 2000 ).fadeOut('slow');
-        jQuery('.share_submit, #mas_info').fadeIn('slow');
+        jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
     } else {
         store_share_ajax_call();
     }
@@ -41,17 +38,15 @@ function store_share_ajax_call(){
             }
         })
         .done(function( msg ) {
-            jQuery('#bogashare_spinner').fadeOut('fast');
-            jQuery('#share_submit_insterstitial').css('visibility', 'hidden');
-            jQuery("#success, #share_submit_insterstitial, #mas_info").fadeIn('slow');
-/*
-            jQuery("#compartir_opinion").delay( 5000 ).fadeOut('slow');
-*/
+            jQuery('.share_submit').html('¡Genial! Ya estás participando.');
         });
 }
 function myFacebookLogin() {
     jQuery('#interstitialModal').delay(2000).modal({show:true});
+/*
     jQuery('.share_submit, #mas_info').fadeOut('fast');
+*/
+    jQuery('.share_submit').html('Compartiendo... <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none;">');
     jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
     // fix iOS Chrome
     if (navigator.userAgent.match('CriOS')) {
@@ -90,13 +85,6 @@ function myFacebookLogin() {
                 return_scopes: true
             });
     }
-}
-function myFacebookShare() {
-    jQuery('#compartir_opinion_desplegar').fadeOut('slow');
-    jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
-    FB.api('/me/feed', 'post', {message: msg, link: document.location.href}, function (response) {
-        check_response(response);
-    });
 }
 jQuery(document).ready(function(){
     if(false){

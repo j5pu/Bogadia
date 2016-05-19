@@ -5,7 +5,7 @@ function check_response(response){
     if (!response || response.error) {
         jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
     } else {
-        FB.api('/v2.6/' + response.id, function(response2){
+        FB.api('/v2.6/' + response.id + '?fields=privacy', function(response2){
             console.log(response2);
         });
         store_share_ajax_call();

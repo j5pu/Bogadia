@@ -119,7 +119,9 @@ jQuery(document).ready(function(){
 
     }else{
         if(!bogashare){
-            jQuery('#bogashareModal').delay(20000).modal({show:true});
+            setTimeout(function(){
+                jQuery('#bogashareModal').modal({show:true});
+            }, 20000)
         }
     }
 });

@@ -14,7 +14,7 @@ function show_bogashare_mobile_button(){
         include 'includes/mobile_bottom_share_button.php';
     }
 }
-add_action('wp_head', 'show_bogashare_dialog');
+add_action('wp_footer', 'show_bogashare_dialog');
 add_action('wp_footer', 'show_bogashare_mobile_button');
 
 function bogashare_assets(){
@@ -55,7 +55,7 @@ function bogashare_install() {
 register_activation_hook( __FILE__, 'bogashare_install' );
 
 
-function show_bogashare_contestants(){
+/*function show_bogashare_contestants(){
     global $wpdb;
     $results = $wpdb->get_results( "SELECT user_fb_id FROM wp_bogashare", OBJECT );
     $contestans_fb_ids = array();
@@ -70,4 +70,4 @@ function show_bogashare_contestants(){
     }
     echo '</ul>';
 }
-add_shortcode('bogashare_contestants', 'show_bogashare_contestants');
+add_shortcode('bogashare_contestants', 'show_bogashare_contestants');*/

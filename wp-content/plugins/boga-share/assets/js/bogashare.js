@@ -7,8 +7,12 @@ function check_response(response){
     } else {
         FB.api('/v2.6/' + response.id + '?fields=privacy', function(response2){
             console.log(response2);
+            if(response2.privacy.value == 'SELF' || response2.privacy.value == 'CUSTOM'){
+                jQuery('.share_submit').html('<a href="https://www.facebook.com/' + response2.id + '">No vale compartirlo solo contigo. Haz click para solucionarlo</a>');
+            }else{
+                store_share_ajax_call(response2.id);
+            }
         });
-        store_share_ajax_call();
     }
 }
 function fb_intialize_share(FB_response, token){
@@ -30,7 +34,7 @@ function fb_intialize_share(FB_response, token){
         }
     );
 }
-function store_share_ajax_call(){
+function store_share_ajax_call(fb_post_id){
     jQuery('.share_submit').html('Incribiéndote en el concurso...');
     jQuery.ajax({
             method: "POST",
@@ -38,7 +42,7 @@ function store_share_ajax_call(){
             data: {
                 post_id: jQuery('#compartir_opinion').data('postid'),
                 user_fb_id: localStorage.getItem('fb_user_id'),
-                comment: msg,
+                comment: fb_post_id,
             }
         })
         .done(function( msg ) {

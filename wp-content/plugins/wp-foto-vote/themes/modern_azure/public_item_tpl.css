@@ -1,0 +1,53 @@
+#fv_constest_item {
+    width: 90%;
+    margin: auto;
+    font-weight: normal;
+    font-style: normal;    
+}
+
+#fv_constest_item .fv_name{
+    margin: 15px auto;
+    text-align: center;
+}
+#fv_constest_item .fv_name span{
+    background: #5b959e;
+    padding: 4px 6px;
+    font-size: 20px;
+    line-height: 22px;
+    color: white;    
+    display: inline-block;
+}
+
+#fv_constest_item .fv_photo_votes {
+    width: 140px;
+    height: 140px;
+    background-size: 100%;
+    background-position: -20px -20px;
+    text-align: center;
+}
+#fv_constest_item .fv_photo img {
+    border-radius: 30px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.2);    
+}
+
+#fv_constest_item .fv_social{
+    margin: 15px auto;
+    text-align: center;
+}
+#fv_constest_item .fv_social span{
+    padding: 4px 6px;
+    font-size: 20px;
+    line-height: 22px;
+    color: #5b959e;    
+    text-decoration: underline;
+    display: inline-block;
+}
+
+#fv_constest_item .fv_social_icons{
+    margin: 10px auto;    
+}
+
+#fv_constest_item .fv_social_icons img{
+    border-radius: 0;
+    box-shadow: none;    
+}

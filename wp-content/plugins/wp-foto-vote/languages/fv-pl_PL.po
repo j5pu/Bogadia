@@ -1,0 +1,2672 @@
+msgid ""
+msgstr ""
+"Project-Id-Version: WP Foto Vote 2.1\n"
+"POT-Creation-Date: 2015-06-28 10:23+0200\n"
+"PO-Revision-Date: 2015-07-23 13:23+0200\n"
+"Last-Translator: Maxim <support@wp-vote.net>\n"
+"Language-Team:  <wp-vote@hotmail.com>\n"
+"Language: pl_PL\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Poedit 1.5.7\n"
+"X-Poedit-KeywordsList: _;_e;__\n"
+"X-Poedit-Basepath: F:\\VertrigoServ\\www\\p\\wp-vote\\wp-content\\plugins"
+"\\wp-foto-vote\\\n"
+"X-Poedit-SearchPathExcluded-0: F:\\VertrigoServ\\www\\p\\wp-vote\\wp-content"
+"\\plugins\\wp-foto-vote\\assets\n"
+"X-Poedit-SearchPath-0: F:\\VertrigoServ\\www\\p\\wp-vote\\wp-content\\plugins"
+"\\wp-foto-vote\\includes\n"
+"X-Poedit-SearchPath-1: F:\\VertrigoServ\\www\\p\\wp-vote\\wp-content\\plugins"
+"\\wp-foto-vote\\admin\n"
+"X-Poedit-SearchPath-2: F:\\VertrigoServ\\www\\p\\wp-vote\\wp-content\\plugins"
+"\\wp-foto-vote\\public\n"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-contest.php:95
+msgid "Contest saved."
+msgstr "Konkurs zapisany"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-form-helper.php:312
+msgid "Select value"
+msgstr "Wybierz wartość"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:60
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:63
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:4
+msgid "Edit contest"
+msgstr "Edycja konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:72
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:24
+msgid "Newest first"
+msgstr "Nowsze najpierw"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:73
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:25
+msgid "Oldest first"
+msgstr "Starsze najpierw"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:74
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:26
+msgid "Popular first"
+msgstr "Popularny pierwszy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:75
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:27
+msgid "Unpopular first"
+msgstr "Niepopularny pierwszy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:76
+msgid "Rand (in about 10 times longer)"
+msgstr "Rand (w około 10 razy dłużej)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:170
+msgid "Page"
+msgstr "Strona"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:170
+msgid "from"
+msgstr "z"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:331
+msgid ""
+"Simple photo contest plugin with ability to user upload photos. Includes "
+"protection from cheating by IP and cookies. User log voting. After the vote "
+"invite to share post about contest in Google+, Twitter, Facebook, OK, "
+"VKontakte."
+msgstr ""
+"Prosty konkurs fotograficzny wtyczki z możliwością wysyłania zdjęć "
+"użytkownika. Zawiera ochronę przed oszukiwaniem przez IP i plików cookie. "
+"Dziennik z logami głosowania. Po głosowaniu pojawia się zaproszenie do "
+"podzielenia się informacją o konkursie na Google+, Twitter, Facebook, OK, "
+"VKontakte."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:349
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:191
+msgid "Published"
+msgstr "Opublikowany"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:349
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:160
+msgid "On moderation"
+msgstr "W moderacji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-functions.php:349
+msgid "On draft"
+msgstr "Szkic"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:11
+msgid "Upload a photo to the contest"
+msgstr "Prześlij zdjęcie na konkurs"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:12
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:22
+msgid "Upload"
+msgstr "Prześlij"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:13
+msgid "You must be logged for upload photo into contest."
+msgstr "Musisz być zalogowany aby dodać zdjęcie do konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:14
+msgid "Leaders vote"
+msgstr "Najlepiej ocenione"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:15
+msgid "Other <br/>photo"
+msgstr "Inne <br/> zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:16
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:18
+msgid "Vote"
+msgstr "Głosowanie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:17
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:116
+msgid "Vote count"
+msgstr "Ilość głosów"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:19
+msgid "Back to contest"
+msgstr "Powrót do konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:21
+msgid "Gallery"
+msgstr "Galeria"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:23
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:27
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:27
+msgid "Sorting:"
+msgstr "Sortowanie:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:28
+msgid "Random"
+msgstr "Losowy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:30
+msgid "days"
+msgstr "dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:31
+msgid "hours"
+msgstr "godzin"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:32
+msgid "minutes"
+msgstr "minut"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:33
+msgid "seconds"
+msgstr "sekund"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:35
+msgid "Share with friends! "
+msgstr "Podziel się z przyjaciółmi! "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:36
+msgid "Voting!"
+msgstr "Głosowanie!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:37
+msgid "Voting in process!"
+msgstr "Głosowanie w trakcie!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:39
+msgid "Success! "
+msgstr "Sukces! "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:40
+msgid "Your vote has been counted! "
+msgstr "Twój głos został zaliczony! "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:41
+msgid "Warning! "
+msgstr "Ostrzeżenie! "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:42
+msgid "The contest has ended."
+msgstr "Konkurs się zakończył."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:43
+msgid "Your have already voted!"
+msgstr "Już oddałeś głos!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:44
+msgid "Since the last vote has not yet been 24 hours!"
+msgstr "Od ostatniego głosowania nie minęło jeszcze 24h!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:45
+msgid "Your are not authorized in site!"
+msgstr "Akcja nieautoryzowana"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:46
+msgid "Register in site and vote"
+msgstr "Zarejestruj "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:47
+msgid "For vote share page in Facebook"
+msgstr "Na stronie akcji głosowania w Facebook"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:48
+msgid "An error has occurred. Please contact the administrator!"
+msgstr "Wystąpił błąd. Proszę skontaktować się z administratorem!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:50
+msgid "Share photo via email"
+msgstr "Podziel się zdjęciem przez e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:51
+msgid "Emails send successful!"
+msgstr "Wysłano email!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:52
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:59
+msgid "Your name"
+msgstr "Twoje imię"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:53
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:60
+msgid "Your email"
+msgstr "Twój email"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:54
+msgid "Enter max 5 emails, one per line"
+msgstr "Podaj e-maile, max 5 każdy w jednej linii"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:55
+msgid "Send"
+msgstr "Wyślij"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:58
+msgid "For vote your are need enter data"
+msgstr "Aby zagłosować, musisz wprowadzić dane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:62
+msgid "For vote your are need authorize with one social network"
+msgstr "Aby oddać głoś musisz się zalogować jednej z sieci społecznościowych"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:64
+msgid "Solve reCAPTCHA please!"
+msgstr "Rozwiąż reCAPTCHA!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:65
+msgid "Seems you do it wrong!"
+msgstr "Wydaje się, że robisz coś nie tak!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:67
+msgid "Invite friends to support your!"
+msgstr "Zaproś znajomych aby Cie wspierali!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:69
+msgid "An error occurred while downloading pictures. "
+msgstr "Wystąpił błąd podczas pobierania zdjęć. "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:70
+msgid ""
+"Your have already downloaded the picture. Maybe she is awaiting moderation "
+"administrator. "
+msgstr "Już pobrałeś zdjęcie. Być może oczekuje on jeszcze w moderacji. "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:71
+msgid "Your photo is bigger than %LIMIT_SIZE% megabytes."
+msgstr "Twoje zdjęcie jest większe niż % LIMIT_SIZE% megabajtów."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:72
+msgid "Entered email is incorrect."
+msgstr "Wpisany e-mail jest nieprawidłowy."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:73
+msgid "Your photo is uploaded and submitted for review to the administrator."
+msgstr ""
+"Twoje zdjęcie zostało przesłane i oczekuje na przegląd u administracji."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:74
+msgid ""
+"Your photo is uploaded and published (because your are administrator, show "
+"after page reload)."
+msgstr ""
+"Twoje zdjęcie zostanie dodane i opublikowane (bo administratora są "
+"wyświetlane po przeładowania strony)."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:76
+msgid "Your photo are uploaded"
+msgstr "Twoje zdjęcia są przesyłane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:77
+#, php-format
+msgid "Your photo uploaded to contest %1$s."
+msgstr "Twoje zdjęcie przesłane do konkursu %1$s ."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:78
+msgid "Your contest photo are approved"
+msgstr "Twoje zdjęcia są zatwierdzone konkurs"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:79
+#, php-format
+msgid "Your photo are approved in contest %1$s."
+msgstr "Twoje zdjęcia są zatwierdzane konkursu %1$s ."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:80
+msgid "Your contest photo are deleted"
+msgstr "Twoje zdjęcia są usuwane konkurs"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:81
+#, php-format
+msgid "Your photo are deleted in contest %1$s."
+msgstr "Twoje zdjęcia zostaną usunięte w konkursowych %1$s ."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:82
+msgid "Help me Win!"
+msgstr "Pomóżcie mi wygrać!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:83
+#, php-format
+msgid ""
+"Hi! There is %1$s (%2$s). \\nI participate in photo contest and need you "
+"help!"
+msgstr ""
+"Cześć! Jest %1$s ( %2$s ). \\ NI udziału w konkursie fotograficznym i trzeba "
+"pomóc!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:85
+msgid "New photo uploaded"
+msgstr "Nowe zdjęcie dodane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:86
+#, php-format
+msgid "New photo uploaded to contest %1$s. Name: %2$s, user email: %3$s"
+msgstr ""
+"Nowe zdjęcie dodane do konkursu %1$s . Imię i nazwisko: %2$s , e-mail "
+"użytkownika: %3$s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:113
+msgid "General"
+msgstr "Ogólny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:114
+msgid "Leaders title"
+msgstr "Liderzy tytuł"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:115
+msgid "Vote text in button"
+msgstr "Głosuj tekst w przycisk"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:117
+msgid "Vote text in image preview"
+msgstr "Tekst Zagłosuj na podglądzie obrazu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:118
+msgid "Other photo title in image preview (in some themes)"
+msgstr "Inny tytuł zdjęcia na podglądzie obrazu (w niektórych tematów)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:119
+msgid "Back to contest(uses in single photo page)"
+msgstr "Powrót do konkursu (używa się w jedną stronę ze zdjęciem)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:122
+msgid "Toolbar"
+msgstr "Toolbar"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:123
+msgid "Gallery tab title"
+msgstr "Galeria Tytuł Zakładka"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:124
+msgid "Upload tab title"
+msgstr "Prześlij Tytuł Zakładka"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:125
+msgid "Sorting title"
+msgstr "Sortowanie tytuł"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:126
+msgid "Sorting > newest"
+msgstr "Sortowanie> Najnowszy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:127
+msgid "Sorting > oldest"
+msgstr "Sortowanie> najstarszych"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:128
+msgid "Sorting > popular"
+msgstr "Sortowanie> popularne"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:129
+msgid "Sorting > unpopular"
+msgstr "Sortowanie> niepopularne"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:130
+msgid "Sorting > random"
+msgstr "Sortowanie> losowo"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:134
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:99
+msgid "Timer"
+msgstr "Regulator czasowy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:135
+msgid "Timer > Days leave"
+msgstr "Zegar> Dni zostawić"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:136
+msgid "Timer > Hours leave"
+msgstr "Zegar> Godziny zostawić"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:137
+msgid "Timer > Minutes leave"
+msgstr "Zegara> Minut zostawić"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:138
+msgid "Timer > Seconds leave"
+msgstr "Sekundy zostawić timera>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:141
+msgid "Dialog messages"
+msgstr "Dialog wiadomości"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:142
+msgid "Title > Go share"
+msgstr "Title> Idź akcji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:143
+msgid "Title > Voting in process"
+msgstr "Title> Głosowanie w procesie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:144
+msgid "Msg with preloader > Voting in process"
+msgstr "Msg z preloader> Głosowanie w procesie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:145
+msgid "Title > vote counted (1-2 words)"
+msgstr "Title> Głosowanie liczone (1-2 słowa)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:146
+msgid "Title > vote not counted (1-2 words)"
+msgstr "Title> głos nie liczy (1-2 słowa)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:147
+msgid "Msg > vote counted"
+msgstr "Msg> Głosowanie liczone"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:148
+msgid "Msg > the contest has ended"
+msgstr "Msg> Konkurs zakończył"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:149
+msgid "Msg > user already voted"
+msgstr "Msg> użytkownik już głosowała"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:150
+msgid ""
+"Msg > 24 hours not passed <small>Use *hours_leave* for show when user can "
+"vote</small>"
+msgstr ""
+"Msg> 24 godzin nie przeszedł <small> Użyj * hours_leave * na pokaz, gdy "
+"użytkownik może głosować </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:151
+msgid "Msg > Your are not authorized"
+msgstr "Msg> Twoje nie są dozwolone"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:152
+msgid "SubTitle > Register in site and vote"
+msgstr "Subtitle> Zarejestruj się w miejscu i głosowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:153
+msgid "Msg > error"
+msgstr "Msg> błąd"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:154
+msgid "Message under title with call to share"
+msgstr "Wiadomość pod tytułem z wezwaniem do akcji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:157
+msgid "Subscription form"
+msgstr "Formularz subskrypcji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:158
+msgid "Msg > your need enter data"
+msgstr "Msg> Twoje potrzeby wprowadzania danych"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:159
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:160
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:167
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:168
+#, php-format
+msgid "Field `%s` caption"
+msgstr "Pole ' %s 'caption"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:159
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:167
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:62
+msgid "name"
+msgstr "Nazwa"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:160
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:168
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:63
+msgid "email"
+msgstr "e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:163
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:152
+msgid "Email share"
+msgstr "Akcje e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:164
+msgid "Title > email share"
+msgstr "Title> akcje e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:165
+msgid "Msg > emails send"
+msgstr "Wysyłanie wiadomości e-mail> wiad"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:169
+msgid "Emails list"
+msgstr "Lista e-maile"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:170
+msgid "Submit text"
+msgstr "Prześlij tekst"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:173
+msgid "Social authorization"
+msgstr "Zezwolenie Społecznego"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:174
+msgid "Soc. authorization title"
+msgstr "Soc. Tytuł zezwolenia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:177
+msgid "Vote with Facebook Share"
+msgstr "Głosuj w Facebook Podziel się"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:178
+msgid "Msg > for vote please share in FB"
+msgstr "Msg> do głosowania prosimy akcji w FB"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:181
+msgid "Vote with reCAPTCHA"
+msgstr "Głosuj z reCAPTCHA"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:182
+msgid "Title > Solve reCAPTCHA please!"
+msgstr "Title> Rozwiąż reCAPTCHA proszę!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:183
+msgid "Msg > Seems you do it wrong!"
+msgstr "Msg> Wydaje robisz to źle!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:186
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:7
+msgid "Upload form"
+msgstr "Prześlij formularz"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:187
+msgid "Upload form title"
+msgstr "Dodaj tytuł formularz"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:188
+msgid "Upload form button text"
+msgstr "Upload forma tekstu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:189
+msgid "User must be logged for upload"
+msgstr "Użytkownik musi być zalogowany do przesłania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:193
+msgid "Upload messages"
+msgstr "Dodaj wiadomości"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:194
+msgid "Photo upload error"
+msgstr "Błąd przesłać zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:195
+msgid "User already downloaded photo"
+msgstr "Użytkownik już pobrać zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:196
+msgid ""
+"User photo is bigger than limit <small>(%LIMIT_SIZE% will be replaced into "
+"`limit value` in megabytes)</small>"
+msgstr ""
+"Zdjęcie użytkownika jest większa niż granica <small> (% LIMIT_SIZE% zostaną "
+"zastąpione w `wartość dopuszczalna w megabajtach) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:197
+msgid "User email is invalid."
+msgstr "E-mail użytkownika jest nieprawidłowa."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:198
+msgid "Photo is uploaded"
+msgstr "Zdjęcie zostanie dodane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:199
+msgid "Photo is uploaded by admin"
+msgstr "Zdjęcie zostanie dodane przez admin"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:202
+msgid "Notify mail messages"
+msgstr "Informuj wiadomości e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:203
+msgid "User email title - photo uploaded"
+msgstr "Tytuł e-mail użytkownika - zdjęcie dodane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:204
+#, php-format
+msgid ""
+"Upload user notify email body <small>(%1$s will be replaced into contest "
+"name, %2$s will be replaced into photo name, %3$s will be replaced into user "
+"email, %4$s will be replaced into photo url for share)</small>"
+msgstr ""
+"Dodaj użytkownika powiadomić organ e-mail <small> ( %1$s zostanie zastąpiony "
+"pod nazwą konkursu, %2$s zostanie zastąpiony pod nazwą zdjęć, %3$s zostanie "
+"zastąpiony na adres e-mail użytkownika, %4$s zostanie zastąpiony w photo url "
+"dla akcji) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:205
+msgid "User email title - photo approved"
+msgstr "Tytuł e-mail użytkownika - zdjęcie zatwierdzone"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:206
+#, php-format
+msgid ""
+"Approved user notify email body <small>(%1$s will be replaced into contest "
+"name, %2$s will be replaced into photo name, %3$s will be replaced into user "
+"email)</small>"
+msgstr ""
+"Zatwierdzony użytkownik zawiadomić organ e-mail <small> ( %1$s zostanie "
+"zastąpiony pod nazwą konkursu, %2$s zostanie zastąpiony do nazwy zdjęć, %3$s "
+"zostanie zastąpiony na adres e-mail użytkownika) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:207
+msgid "User email title - photo deleted"
+msgstr "Tytuł e-mail użytkownika - zdjęcie usunięte"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:208
+#, php-format
+msgid ""
+"Delete user notify email body <small>(%1$s will be replaced into contest "
+"name, %2$s will be replaced into photo name, %3$s will be replaced into user "
+"email)</small>"
+msgstr ""
+"Usuń użytkownika powiadomić organ e-mail <small> ( %1$s zostanie zastąpiony "
+"pod nazwą konkursu, %2$s zostanie zastąpiony do nazwy zdjęć, %3$s zostanie "
+"zastąpiony na adres e-mail użytkownika) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:210
+msgid "User email title - email share"
+msgstr "Nazwa użytkownika e-mail - akcje e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:211
+#, php-format
+msgid ""
+"Email share body <small>(%1$s will be replaced into user name, %2$s will be "
+"replaced into user email, %3$s will be replaced into receiver email, %4$s "
+"will be replaced into photo name, %5$s will be replaced into photo link"
+"[don`t remember set up Page Id in contest settings], %6$s will be replaced "
+"into contest name)</small>"
+msgstr ""
+"Ciało akcji e-mail <small> ( %1$s zostanie zastąpiony do nazwy użytkownika, "
+"%2$s zostanie zastąpiony na adres e-mail użytkownika, %3$s zostanie "
+"zastąpiony na adres e-mail odbiorcy, %4$s zostanie zastąpiony pod nazwą "
+"zdjęć , %5$s zostanie zastąpiony w linku zdjęć [do not pamiętam "
+"skonfigurować w ustawieniach Page Id konkursu], %6$s zostanie zastąpiony w "
+"nazwie konkursu) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:213
+msgid "Admin email title - new photo uploaded"
+msgstr "Admin title e-mail - nowe dodane zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/class-fv-translations.php:214
+#, php-format
+msgid ""
+"Upload admin notify email body <small>(%1$s will be replaced into contest "
+"name, %2$s will be replaced into photo name, %3$s will be replaced into user "
+"email)</small>"
+msgstr ""
+"Administrator powiadamia organ przesłać e-mail <small> ( %1$s zostanie "
+"zastąpiony pod nazwą konkursu, %2$s zostanie zastąpiony pod nazwą zdjęć, "
+"%3$s zostanie zastąpiony na adres e-mail użytkownika) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:186
+msgid "No items found."
+msgstr "Nic nie znaleziono."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:310
+msgid "Bulk Actions"
+msgstr "Działania Masowe"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:320
+msgid "Apply"
+msgstr "Zastosować"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:404
+msgid "All dates"
+msgstr "Wszystkie daty"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:417
+#, php-format
+msgid "%1$s %2$d"
+msgstr "%1$s %2$d"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:433
+msgid "List View"
+msgstr "Widok Listy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:434
+msgid "Excerpt View"
+msgstr "Fragment Zobacz"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:460
+#, php-format
+msgid "%s pending"
+msgstr "%s toku"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/libs/class-wp-list-table.php:715
+msgid "Select All"
+msgstr "Zaznacz Wszystko"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:80
+msgid "Enabled"
+msgstr "Włączone"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:82
+msgid "Disabled"
+msgstr "Wyłączone"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:110
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_tr.php:26
+msgid "Edit"
+msgstr "Edycja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:111
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:224
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:30
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_tr.php:27
+msgid "Delete"
+msgstr "Usunąć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:112
+msgid "Vote log"
+msgstr "Dziennik Zagłosuj"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:158
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:5
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:5
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:14
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:36
+msgid "Name"
+msgstr "Nazwa"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:159
+msgid "Contestants count"
+msgstr "Liczyć zawodnicy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:161
+msgid "Votes count summary"
+msgstr "Zliczania głosów podsumowanie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:162
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:37
+msgid "Date start"
+msgstr "Data rozpoczęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:163
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:46
+msgid "Date finish"
+msgstr "Data zakończenia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_contests_list.php:164
+msgid "Upload photos"
+msgstr "Dodaj zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:46
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:219
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/class-widget.php:190
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/class-widget.php:185
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:10
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:6
+msgid "Contest"
+msgstr "Zawody"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:48
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:12
+msgid "Filter by Contest"
+msgstr "Filtruj według Konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:55
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:19
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:48
+msgid "Photo"
+msgstr "Zdjęcie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:58
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:23
+msgid "Select contest"
+msgstr "Wybierz konkurs"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:60
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:25
+msgid "Filter by photo"
+msgstr "Filtruj zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:220
+msgid "competitor"
+msgstr "konkurent"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:221
+msgid "IP address / Country / Evercookie UID"
+msgstr "Adres IP / Kraj / Evercookie UID"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:222
+msgid "Fraud score"
+msgstr "Wynik oszustwa"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:223
+msgid "Soc. network/ Soc. user id"
+msgstr "Soc. Sieć / Soc. identyfikator użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:224
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:10
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:9
+msgid "User id"
+msgstr "Identyfikator użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:225
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:61
+msgid "changed"
+msgstr "zmieniony"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:226
+msgid "browser"
+msgstr "Przeglądarka"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:227
+msgid "refer"
+msgstr "odnosić się"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:303
+msgid "Vote rows deleted (this did`t affects photo votes count)."
+msgstr "Wiersze to uznali usunięte (dotyczy zdjęć liczyć did`t głosów)."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/list-tables/class_votes_log_list.php:306
+msgid "Row deleted (this did`t affects photo votes count)."
+msgstr "Wiersz usunięte (dotyczy zdjęć tego did`t liczby głosów)."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/class-widget.php:47
+msgid "Photo contest gallery"
+msgstr "Galeria konkurs fotograficzny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/class-widget.php:49
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/class-widget.php:54
+msgid "Shows list photos from selected contest."
+msgstr "Pokazuje zdjęcia z wybranej listy konkursu."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/class-widget.php:114
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/class-widget.php:121
+msgid "Photo contest"
+msgstr "Konkurs fotograficzny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:3
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:3
+msgid "Title:"
+msgstr "Tytuł:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:8
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:8
+msgid "Select contest:"
+msgstr "Wybierz konkurs:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:15
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:15
+msgid "Select contest, from show contestants."
+msgstr "Wybierz konkurs z występów zawodników."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:19
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:19
+msgid "Items count:"
+msgstr "Ilość pozycji:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:37
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:44
+msgid "Thumbnail width:"
+msgstr "Szerokość miniatur:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:48
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:52
+msgid "Link to contest page:"
+msgstr "Link do strony konkursowej:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:50
+msgid "Don`t forgot http://, as example \"http://test.com/contest/\""
+msgstr "Don`t zapomniałem http://, jako przykład http: //test.com/contest/`"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/admin.php:54
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:57
+msgid "Design:"
+msgstr "Budynek:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-gallery/views/widget.php:23
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/widget.php:22
+msgid "View"
+msgstr "Widok"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/class-widget.php:51
+msgid "Photo contest list"
+msgstr "Konkurs fotograficzny lista"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:37
+msgid "Show thumbnails?"
+msgstr "Pokaż miniaturki?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:39
+msgid "If unchecked, it will hide thumbnails."
+msgstr "Jeśli niezaznaczone, ukryć miniaturki."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/admin.php:46
+msgid "more than 25 px."
+msgstr "więcej niż 25 px."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\includes/widget-list/views/widget.php:28
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:44
+msgid "Votes"
+msgstr "Głosy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:72
+msgid "Log cleared."
+msgstr "Zaloguj wyczyszczone."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:80
+msgid "Tables cleared."
+msgstr "Stoły wyczyszczone."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:123
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-contests_page.php:6
+msgid "Photo contests"
+msgstr "Konkursy zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:124
+msgid "Moderation"
+msgstr "Umiar"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:125
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:398
+msgid "Settings"
+msgstr "Ustawienia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:126
+msgid "Form builder"
+msgstr "Formularz budowniczy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:127
+msgid "Translation"
+msgstr "Tłumaczenie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:128
+msgid "Votes log"
+msgstr "Głosy zalogować"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:129
+msgid "Votes analytic"
+msgstr "Głosy analityczna"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:130
+msgid "Subscribers list"
+msgstr "Lista subskrybentów"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:131
+msgid "Debug"
+msgstr "Debug"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:172
+msgid ""
+"You can change, but if the number of votes in the database would be another "
+"<br/> (someone vote in the editing page), <br/> changes will not be saved."
+msgstr ""
+"Możesz zmienić, ale jeśli liczba głosów w bazie danych będzie ktoś inny <br/"
+"> (głosowanie na stronie edycji), <br/> zmiany nie zostaną zapisane."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:173
+msgid ""
+"The site is not displayed when loading user photos, <br/> to specify contact "
+"information and notes to photos.<br/> If specified as `email;text`, user can "
+"take<br/> notification, when photo has been approved."
+msgstr ""
+"Strona nie jest wyświetlany podczas ładowania zdjęcia użytkowników, <br/> "
+"określić informacje kontaktowe i uwagi do zdjęć <br/> Jeśli określona jako "
+"`e-mail;. Text`, użytkownik może podjąć <br/> notyfikacji, jeżeli zdjęcie "
+"zostało zatwierdzone ,"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:174
+msgid ""
+"Image size 150*150 px (if you specify more, with a large number of "
+"contestants <br/> page will be long load). <br /> Tip: The first set "
+"thumbnail - if its size is 150*150 <br/> plugin will automatically insert "
+"the full image in the `image` field"
+msgstr ""
+"Rozmiar obrazu 150 x 150 px (jeśli podasz więcej, z dużą liczbą zawodników "
+"<br/> strona będzie długo obciążenia). <br /> Wskazówka: Pierwszy zestaw "
+"miniaturę - jeśli jego rozmiar jest 150 * 150 <br/> plugin automatycznie "
+"wstawi pełny obraz w polu `image`"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:175
+msgid "Similarly remove all ip addresses, voted in this contest?"
+msgstr "Podobnie usunąć wszystkie adresy IP, głosowała w tym konkursie?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:176
+msgid "Cleared"
+msgstr "Wyczyszczone"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:178
+msgid ""
+"This will reset all pohtos votes to 0 (this will not remove votes from log)!"
+msgstr ""
+"Spowoduje to zresetowanie wszystkich pohtos głosów na 0 (to nie usunie "
+"głosów z dziennika)!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:179
+msgid "Votes reseted!"
+msgstr "Głosy reseted!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:181
+msgid ""
+"Are you sure? This will delete contestant and may photo from hosting (if you "
+"enabled this in settings)!"
+msgstr ""
+"Jesteś pewny? Spowoduje to usunięcie zawodnika i może zdjęcie z gospodarzem "
+"(jeśli włączona to w ustawieniach)!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:182
+msgid "Contestant and photo deleted!"
+msgstr "Uczestnik i zdjęcia usunięte!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:183
+msgid "Contestant approved!"
+msgstr "Uczestnik zatwierdzone!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:184
+msgid "Saved!"
+msgstr "Zapisane!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:185
+msgid "Are you sure to rotate image and thumbnails?"
+msgstr "Czy jesteś pewien, aby obrócić obraz i miniatury?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:186
+msgid "Rotating successful ends!"
+msgstr "Obracanie udanych końcówki!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:187
+msgid "Rotating: some problem!"
+msgstr "Obracanie: jakiś problem!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:188
+msgid "Rotating to *A* degrees start!"
+msgstr "Obracanie się * A * stopni zacząć!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:190
+msgid "Full photo"
+msgstr "Pełna zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:191
+msgid "On modearation"
+msgstr "Na modearation"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/class-fv-admin.php:191
+msgid "Draft"
+msgstr "Projekt"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-contests_page.php:7
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:5
+msgid "Add new"
+msgstr "Dodaj nowe"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-contests_page.php:14
+msgid "Contest deleted."
+msgstr "Konkurs usunięte."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-contests_page.php:31
+msgid "Create contest, copy shortcode and insert it into the page/post text."
+msgstr ""
+"Tworzenie konkurs, skopiuj shortcode i włóż ją do tekstu strony / post."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-contests_page.php:32
+msgid "- for shows contests list"
+msgstr "- Na pokazy listę kwestionuje"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:75
+msgid "Voting log / can be cleared on the page, where you can edit contest"
+msgstr ""
+"Dziennik Głosowanie / można usunąć na stronie, gdzie można edytować konkurs"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:78
+msgid ""
+"There your can see votes log. It can help you to check voting for fraud.\n"
+"            As example if your see a lot similar `browsers` voted for one "
+"person or many empty `refer`.<br/>\n"
+"            Also you can compare `change` field for check voting activity "
+"almost at the same time by one photos."
+msgstr ""
+"Nie twój może zobaczyć głosów zalogować. To może pomóc, aby sprawdzić "
+"głosowanie za oszustwo. \n"
+" Jako przykład jeśli zobaczyć wiele podobny `browsers` głosowali na jedną "
+"osobę lub wielu pustych` refer`. <br/> \n"
+" Ponadto można porównać `pole change` do odprawy głosowanie działalność "
+"niemal w tym samym czasie przez jednego zdjęcia."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:93
+msgid "Export data as csv"
+msgstr "Eksport danych w formacie CSV"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:94
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:35
+msgid "Export to csv"
+msgstr "Eksport do pliku CSV"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:96
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:37
+msgid "last 15 days"
+msgstr "ostatnie 15 dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:97
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:38
+msgid "last 30 days"
+msgstr "ostatnie 30 dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:98
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:39
+msgid "last 60 days"
+msgstr "ostatnich 60 dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:99
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:40
+msgid "last 90 days"
+msgstr "ostatnie 90 dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:100
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:41
+msgid "last 180 days"
+msgstr "Ostatnie 180 dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-log-list.php:101
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:42
+msgid "last 360 days"
+msgstr "Ostatnie 360 ​​dni"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-moderation-list.php:27
+msgid "Moderation users uploaded photos"
+msgstr "Moderacja dodane zdjęcia użytkowników"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:5
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:5
+msgid "Design"
+msgstr "Konstrukcja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:6
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:32
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_voting.php:5
+msgid "Voting"
+msgstr "Głosowanie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:8
+msgid "Upload notify"
+msgstr "Ładuj powiadomić"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:9
+msgid "Additional"
+msgstr "Dodatkowy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:20
+msgid "Data deleted. Reactivate plugin!"
+msgstr "Dane usunięte. Reaktywować wtyczki!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:26
+msgid "Configuration saved."
+msgstr "Konfiguracja zapisana."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:58
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:70
+msgid "Save Changes"
+msgstr "Zapisz Zmiany"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:63
+msgid ""
+"Are you sure to delete all contests & photos & votes data from database?"
+msgstr ""
+"Czy na pewno chcesz usunąć wszystkie konkursy i zdjęcia i głosowanies danych "
+"z bazy danych?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-settings_page.php:63
+msgid "Clear all plugin data from database."
+msgstr "Usunąć wszystkie dane wtyczek z bazy danych."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:32
+msgid ""
+"Log subscribers (15 entries) / can clear on the page, where you can edit a "
+"poll (post)"
+msgstr ""
+"Zaloguj abonentów (15 Wpisy) / można usunąć na stronie, w którym można "
+"edytować ankietę (POST)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:33
+msgid ""
+"If you select voting security - `IP + cookies + evercookie + Subscribe form` "
+"or `IP + cookies + evercookie + Social autorization` or `cookies + "
+"evercookie + Social autorization`, after users voted, there add`s new "
+"records."
+msgstr ""
+"Jeśli wybierzesz głosowania bezpieczeństwa - `IP + ciasteczka + evercookie + "
+"Subskrybuj form` lub` IP + ciasteczka + evercookie + autorization` "
+"Społecznego lub `ciasteczka + evercookie + autorization` Społecznego, po "
+"użytkownicy głosowali, nie add`s nowe rekordy."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-subscribers-list.php:60
+msgid "Post"
+msgstr "Poczta"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:13
+msgid "Translation saved."
+msgstr "Tłumaczenie zapisane."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:20
+msgid "Translating messages"
+msgstr "Tłumaczenia wiadomości"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:23
+msgid "Please don't use double quotes (\") !"
+msgstr "Proszę nie używać cudzysłowów (\")!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:57
+msgid "Did't use html tags."
+msgstr "Did't tagi używać HTML."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:73
+msgid "Are you sure to reset translation?"
+msgstr "Czy na pewno chcesz zresetować tłumaczenia?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-translations.php:73
+msgid "Reset translation."
+msgstr "Zresetować tłumaczenie."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:6
+msgid ""
+"There your can see map with the distribution of votes, and your can filter "
+"data by contest and single photo. <strong>How it can help to your?</strong>"
+msgstr ""
+"Nie twój może zobaczyć mapę z podziałem głosów, a twój może filtrować dane "
+"przez konkursie i pojedyncze zdjęcie. <Strong> Jak może pomóc twój? </ "
+"Strong>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/admin-votes-analytic.php:7
+msgid ""
+"It`s interesting, and if you see a lot of votes from another suspicious "
+"country, it may indicate about fraud."
+msgstr ""
+"It `interesujące, a jeśli zobaczysz wiele głosów z innej podejrzanej kraju, "
+"może to wskazywać na temat nadużyć."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:4
+msgid "New contest"
+msgstr "Nowy konkurs"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:174
+msgid "Save changes"
+msgstr "Zapisz zmiany"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:182
+msgid "Shortcode, to show contest on page/post:"
+msgstr "Shortcode, aby pokazać konkurs na strony / postu:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:185
+msgid "Shortcode, to show only upload form:"
+msgstr "Shortcode, aby pokazać tylko formę przesyłania:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:188
+msgid "Shortcode, to show only countdown:"
+msgstr "Shortcode, aby pokazać tylko odliczanie:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:191
+msgid "Shortcode, to show only leaders block:"
+msgstr "Shortcode, aby pokazać tylko blok liderów:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:197
+msgid "Export all photos to csv"
+msgstr "Wyeksportować wszystkie zdjęcia do pliku CSV"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:199
+msgid "Import CSV to Google Drive"
+msgstr "Importu CSV do Dysku Google"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:211
+msgid "Clear ip list for this contest"
+msgstr "Wyczyść listę ip do tego konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:216
+msgid "Reset all votes in this contest"
+msgstr "Resetowanie wszystkich głosów w konkursie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:222
+msgid "Are you sure"
+msgstr "Jesteś pewny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:230
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:90
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:60
+msgid "Save"
+msgstr "Zapisz"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:232
+msgid "Save contest settings"
+msgstr "Zapisz ustawienia konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:234
+msgid "Tip: this button only saves settings at left."
+msgstr "Wskazówka: przycisk ten zapisuje tylko ustawienia w lewo."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:263
+msgid "Enter contest name"
+msgstr "Wpisz nazwę konkursu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:276
+msgid "Contestants"
+msgstr "Zawodnicy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:284
+msgid "Add one photo"
+msgstr "Dodaj jedno zdjęcie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:287
+msgid "Add many photos (test mode)"
+msgstr "Dodaj wiele zdjęć (tryb testowy)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:289
+msgid "Redraw table"
+msgstr "Przerysować tabelę"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest_single.php:291
+msgid "Save contest for editing contestants!"
+msgstr "Zapisz konkurs na edycję zawodników!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/form-builder.php:2
+msgid "Upload form builder"
+msgstr "Formularz Prześlij budowniczy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/form-builder.php:4
+msgid ""
+"Please be careful with parameter \"Save to photo field\"! <br/>\n"
+"        All fields exept `user_email` appeds data, this means if you select "
+"save 2 fields into `description`,\n"
+"        for first will be writen top field, after into end `description` "
+"will be added next input value.<br/>\n"
+"        But for `email` you will see just last Email input value."
+msgstr ""
+"Proszę być ostrożnym z parametrem `Zapisz w polu Zdjęcie`! <br/> \n"
+" Wszystkie pola Exept `user_email` appeds danych, oznacza to, jeśli "
+"wybierzesz zapisać 2 pola do` description`, \n"
+" na pierwszym będzie napisane górne pole, po w description` zostanie dodany "
+"kolejny wartości wejściowej końca ` . <br/> \n"
+" Ale dla `email` widać tylko ostatnią wartość wejścia E-mail."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:109
+msgid "Debug Log:"
+msgstr "Debug Log:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:116
+msgid "Clear log"
+msgstr "Wyczyść rejestr"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:137
+msgid "WordPress Environment"
+msgstr "WordPress Środowisko"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:142
+msgid "Home URL"
+msgstr "Home URL"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:147
+msgid "Site URL"
+msgstr "Adres strony"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:152
+msgid "FV Version"
+msgstr "Wersja FV"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:157
+msgid "FV Database Version"
+msgstr "FV Database wersja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:162
+msgid "Log File Writable"
+msgstr "Zaloguj plików WRITABLE"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:168
+#, php-format
+msgid "To allow logging, make <code>%s</code> writable."
+msgstr "Aby umożliwić rejestrowanie, aby <code> %s </ code> zapisywalny."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:173
+msgid "WP Version"
+msgstr "Wersja WP"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:178
+msgid "WP Multisite"
+msgstr "WP na wielu serwerach"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:183
+msgid "WP Memory Limit"
+msgstr "WP Limit pamięci"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:190
+msgid "WP Debug Mode"
+msgstr "WP trybie debugowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:195
+msgid "Language"
+msgstr "Język"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:205
+msgid "Server Environment"
+msgstr "Środowisko serwer"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:210
+msgid "Server Info"
+msgstr "Informacje o serwerze"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:215
+msgid "PHP Version"
+msgstr "Wersja PHP"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:223
+#, php-format
+msgid ""
+"%s - We recommend a minimum PHP version of 5.4. See: <a href=\"%s\" target="
+"\"_blank\">How to update your PHP version</a>"
+msgstr ""
+"%s - Polecamy minimalnej wersji PHP 5.4. Zobacz: <a href=\" %s \" target="
+"\"_blank\"> Jak zaktualizować PHP w wersji </a>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:228
+msgid "Couldn't determine PHP version because phpversion() doesn't exist."
+msgstr "Nie można określić wersji PHP, ponieważ phpversion () nie istnieje."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:234
+msgid "PHP Post Max Size"
+msgstr "Napisz Max Rozmiar PHP"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:239
+msgid "PHP Time Limit"
+msgstr "Limit czasu PHP"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:244
+msgid "PHP Max Input Vars"
+msgstr "Wejście Vars PHP Max"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:249
+msgid "SUHOSIN Installed"
+msgstr "SUHOSIN Zainstalowana"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:255
+msgid "MySQL Version"
+msgstr "Wersja MySQL"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:266
+msgid "Max Upload Size"
+msgstr "Max Prześlij Rozmiar"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:271
+msgid "Default Timezone is UTC"
+msgstr "Domyślnie Strefa czasowa jest UTC"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:276
+#, php-format
+msgid "Default timezone is %s - it should be UTC"
+msgstr "Domyślna strefa czasowa jest %s - powinno być UTC"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:293
+msgid ""
+"Your server does not have fsockopen or cURL enabled - PayPal IPN and other "
+"scripts which communicate with other servers will not work. Contact your "
+"hosting provider."
+msgstr ""
+"Serwer nie zostały włączone cURL lub fsockopen - PayPal IPN i inne skrypty, "
+"które komunikują się z innymi serwerami nie będzie działać. Skontaktuj się z "
+"dostawcą usług hostingowych."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:304
+#, php-format
+msgid ""
+"Your server does not support the <a href=\"%s\">gzopen</a> function - this "
+"is required to use the GeoIP database from MaxMind. The API fallback will be "
+"used instead for geolocation."
+msgstr ""
+"Twój serwer nie obsługuje <a href=\" %s \"> gzopen </a> funkcji - jest to "
+"niezbędne do korzystania z bazy danych geoip z MaxMind. API awaryjnej będzie "
+"używany zamiast na geolokalizacji."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:308
+msgid "Remote Post"
+msgstr "Zdalne post"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:323
+msgid ""
+"wp_remote_post() failed. PayPal IPN won't work with your server. Contact "
+"your hosting provider."
+msgstr ""
+"wp_remote_post () nie powiodło się. PayPal IPN nie będzie działać z "
+"serwerem. Skontaktuj się z dostawcą usług hostingowych."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:325
+#, php-format
+msgid "Error: %s"
+msgstr "Błąd: %s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/page-debug.php:327
+#, php-format
+msgid "Status code: %s"
+msgstr "Kod stanu: %s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:10
+msgid "Setup Tutorial"
+msgstr "Tutorial Konfiguracja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:45
+msgid "Addons"
+msgstr "Programy powiązane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:65
+msgid "Updating"
+msgstr "Aktualizacja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:74
+msgid "Status: "
+msgstr "Status: "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:75
+msgid "update active until "
+msgstr "aktywny do czasu aktualizacji "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:75
+msgid "update inactive - "
+msgstr "aktualizować nieaktywna - "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:76
+msgid "<strong>You key</strong>: "
+msgstr "<Strong> key </ strong>: "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:76
+msgid "Key not entered!"
+msgstr "Klucz nie wszedł!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:84
+msgid "Support &amp; Reviews"
+msgstr "Pomoc & amp; Recenzje"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:92
+msgid "Need customization or freelance developer? Write to"
+msgstr "Potrzebujesz dostosowywanie lub niezależny deweloper? Napisz do"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:99
+msgid "Need support? Write to"
+msgstr "Potrzebujesz wsparcia? Napisz do"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_sidebar.php:106
+msgid ""
+"Your feedback and review are both important, <a href=\"http://wp-vote.net/"
+"testimonials/\" target=\"_blank\">write you testimonial</a>!"
+msgstr ""
+"Twoja opinia i ocena są zarówno ważne, <a href=\"http://wp-vote.net/"
+"testimonials/\" target=\"_blank\"> napisać Ci referencje </a>!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:4
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:4
+msgid "Thumb"
+msgstr "Kciuk"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:6
+msgid "Description"
+msgstr "Opis"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:7
+msgid "Votes count"
+msgstr "Liczyć głosów"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:8
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:7
+msgid "Upload info"
+msgstr "Dodaj informacje"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:9
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:8
+msgid "User email"
+msgstr "E-mail użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:11
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:10
+msgid "User ip"
+msgstr "Ip użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:12
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:78
+msgid "Status"
+msgstr "Status"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:13
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:11
+msgid "Added"
+msgstr "Dodano"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units.php:14
+msgid "Actions"
+msgstr "Akcje"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:12
+msgid "Action"
+msgstr "Akcja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_moderation.php:29
+msgid "Approve"
+msgstr "Zatwierdzać"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_tr.php:28
+msgid "rotate right"
+msgstr "Obróć w prawo"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_table_units_tr.php:30
+msgid "rotate left"
+msgstr "Obróć w lewo"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:4
+msgid "Editing contestant:"
+msgstr "Montaż zawodnik:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:4
+msgid "Adding contestant:"
+msgstr "Dodawanie zawodnika:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:5
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:27
+msgid "Please don't use \" (double quotes) in fields"
+msgstr "Proszę nie używać \" (cudzysłowów) w dziedzinach"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:19
+msgid "Number of votes"
+msgstr "Liczba głosów"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:27
+msgid "Short Description"
+msgstr "Krótki Opis"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:27
+msgid "(shows in photos list)"
+msgstr "(pokazy w liście zdjęcia)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:31
+msgid "Full description"
+msgstr "Pełny opis"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:31
+msgid "(shows in single contest photo page)"
+msgstr "(pokazuje w pojedynczym konkursie stronie zdjęcia)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:36
+msgid "Social description"
+msgstr "Opis Społecznego"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:36
+msgid "(uses on sharing image into Social networks)"
+msgstr "(Używa się na dzieleniu obrazu na sieciach socjalnych)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:41
+msgid "Additional filed"
+msgstr "Dodatkowe złożony"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:54
+msgid "Contest image"
+msgstr "Konkurs obrazu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:55
+msgid "(Use full image, thumbnail get`s automatically)"
+msgstr "(Użyj pełny obraz, get`s miniatur automatycznie)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:79
+msgid "Publish"
+msgstr "Publikować"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:80
+msgid "To moderation"
+msgstr "Do moderacji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/_unit.php:81
+msgid "To draft"
+msgstr "Naszkicować"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:4
+msgid "Other settings"
+msgstr "Inne ustawienia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:8
+msgid "Contest list settings"
+msgstr "Konkurs ustawień lista"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:13
+msgid "Page, where contest are placed"
+msgstr "Strona, w której umieszczone są zawody"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:16
+msgid "Select page"
+msgstr "Wybierz stronę"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:35
+msgid "(need, only if you uses contest_list shortcode)"
+msgstr "(Potrzeba, tylko wtedy, gdy korzysta contest_list shortcode)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:38
+msgid "Cover image ID for contest list"
+msgstr "Okładka ID na liście konkursowej"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_other.php:38
+msgid "Did`t shows in photos list, only as cover image."
+msgstr "Did`t pokazuje się lista zdjęć, tylko jako obrazu okładki."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:5
+msgid "Upload settings"
+msgstr "Załaduj ustawienia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:13
+msgid "Upload form theme"
+msgstr "Formularz Prześlij tematu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:27
+msgid "The maximum number of one user upload photos"
+msgstr "Maksymalna liczba zdjęć wysyłania jednego użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:27
+msgid "Maximum number of pictures uploaded by each user in this competition."
+msgstr ""
+"Maksymalna liczba zdjęć przesłanych przez każdego użytkownika w tej "
+"konkurencji."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:33
+msgid "Moderation type"
+msgstr "Typ Moderacja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:33
+msgid "Moderate photos before publishing or after"
+msgstr "Umiarkowane zdjęcia przed lub po publikacji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:36
+msgid "Pre-moderation"
+msgstr "Pre-moderacja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:37
+msgid "After moderation"
+msgstr "Po umiarem"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:39
+msgid ""
+"also you will need setup by what params limit uploads [ip, email, user id] "
+"in Settings, because this will not works"
+msgstr ""
+"również trzeba konfiguracji params przesłane przez co [IP granicznych, e-"
+"mail ID użytkownika] w menu Ustawienia, bo to nie będzie prace"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:44
+msgid "Photo upload enabled"
+msgstr "Przesłać zdjęcie włączony"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:47
+msgid ""
+"(first plugin check this option, after checks upload dates (this option and "
+"upload dates not affects to `Upload shortcode`, it works always)"
+msgstr ""
+"(Pierwszy plugin sprawdzić tę opcję, po kontroli przesłać termin (tę opcję i "
+"przesłać daty nie wpływa na `Udostępnij shortcode`, działa zawsze)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:53
+msgid "Upload date start"
+msgstr "Prześlij Data rozpoczęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:55
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:63
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:40
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:50
+msgid "year-month-day h:m:s"
+msgstr "rok-miesiąc-dzień h: m: s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:60
+msgid "Upload date finish"
+msgstr "Prześlij data zakończenia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_upload.php:61
+msgid "When time end, upload from will be hidden"
+msgstr "Kiedy koniec czasu, przesłać od zostaną ukryte"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:4
+msgid "Vote / design settings"
+msgstr "Projektowanie uznali ustawienia /"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:11
+msgid "Title contest for soc. networks "
+msgstr "Tytuł konkurs na soc. Sieci "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:12
+msgid ""
+"*name* will be replaced by name of the contestant.<br /> Only works for "
+"Vkontakte, Twitter and Pinterest, <br /> others socials take title from "
+"title page. <br /> <br /> If not specified - the name of the contestant taken"
+msgstr ""
+"* Nazwa * zostanie zastąpiony nazwą zawodnika. <br /> Działa tylko dla "
+"Vkontakte, Twitter i Pinterest, <br /> innych socjalne biorą tytuł od strony "
+"tytułowej. <br /> <br /> Jeśli nie podano - nazwisko zawodnika wzięte"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:17
+msgid "Description contest for soc. networks"
+msgstr "Opis konkurs na soc. Sieci"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:18
+msgid ""
+"*name* will be replaced by name of the contestant.<br /> Only works for "
+"Vkontakte and Twitter<br /> take the rest of the description of the "
+"description page. <br /> <br /> If not specified - soc. networks use at its "
+"discretion"
+msgstr ""
+"* Nazwa * zostanie zastąpiony nazwą zawodnika. <br /> Działa tylko dla "
+"Vkontakte i Twitter <br /> wziąć resztę opisu strony opisu. <br /> <br /> "
+"Jeśli nie podano - soc. Sieci korzystać według własnego uznania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:24
+msgid "Picture for social networks"
+msgstr "Obrazek dla sieci społecznościowych"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:25
+msgid ""
+"Only works for Vkontakte and Pinterest.<br /><br /> If not specified - is "
+"taken from field `Image`"
+msgstr ""
+"Działa tylko na Vkontakte i Pinterest <br /> <br /> Jeśli nie podano. - "
+"Pochodzi z pola `Image`"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:47
+msgid ""
+"When time ends, vote buttons will be hidden,<br/> and user can only see "
+"results"
+msgstr ""
+"Gdy czas się kończy, przyciski będą ukryte uznali, <br/> i użytkownik może "
+"zobaczyć tylko wyniki"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:56
+msgid "Frequency of voting"
+msgstr "Częstotliwość głosowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:56
+msgid "Select type of voting - how many user can vote in contest"
+msgstr "Wybierz typ głosowania - ile użytkownik może głosować w konkursie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:59
+msgid "Once for one photo for all time"
+msgstr "Raz na jedno zdjęcie za cały czas"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:60
+msgid "Once for 2 photos for all time"
+msgstr "Raz na 2 zdjęć na zawsze"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:61
+msgid "Once for 3 photos for all time"
+msgstr "Raz na 3 zdjęć na zawsze"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:62
+msgid "Once for 10 photos for all time"
+msgstr "Raz na 10 zdjęcia do wszechczasów"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:63
+msgid "For each photo once"
+msgstr "Dla każdego zdjęcia po"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:64
+msgid "For one photo once for 24 hours"
+msgstr "Na jednym zdjęciu raz na 24 godziny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:65
+msgid "For 2 photos once for 24 hours"
+msgstr "Dla 2 zdjęć raz na 24 godziny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:66
+msgid "For 3 photos once for 24 hours"
+msgstr "Przez 3 zdjęć raz na 24 godziny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:67
+msgid "For all photos once for 24 hours"
+msgstr "Dla wszystkich zdjęć raz na 24 godziny"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:70
+msgid "how ofter user can vote"
+msgstr "w jaki sposób użytkownik może głosować ofter"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:81
+msgid "Contest security type"
+msgstr "Konkurs typ zabezpieczeń"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:82
+msgid "Select - how secure contest voting process?"
+msgstr "Wybierz - Jak bezpieczny proces głosowania konkurs?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:100
+msgid "If you want show countdown timer, check this option"
+msgstr "Jeśli chcesz pokazać, minutnik, zaznaczenie tej opcji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:103
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:134
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:146
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:147
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:148
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:149
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:150
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:151
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:152
+msgid "No show"
+msgstr "Brak pokazu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:110
+msgid "Lightbox theme"
+msgstr "Lightbox tematu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:118
+msgid "Photo sorting"
+msgstr "Zdjęcie sortowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_contest_settings_vote.php:118
+msgid "Output order of pictures on the page"
+msgstr "Kolejność wydruku zdjęć na stronie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:26
+msgid "Adding photos:"
+msgstr "Dodawanie zdjęć:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/contest/_photos_list_form.php:40
+msgid "Short Descr"
+msgstr "Krótki Descr"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:6
+msgid "Photos"
+msgstr "Zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:10
+msgid "On deleting contest photo delete image from hosting?"
+msgstr "Na usunięcie konkursu fotograficznego obrazu z gospodarzem usuwać?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:11
+msgid "If you not need photos after contest, check this."
+msgstr "Jeśli nie potrzebujesz zdjęcia po konkursie, sprawdź to."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:13
+msgid "Enable"
+msgstr "Włączyć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:21
+msgid "Updating key"
+msgstr "Aktualizacja klucza"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:25
+msgid "Key for automatically updating plugin"
+msgstr "Klucz do wtyczki automatycznej aktualizacji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:27
+msgid "Key, taken you at plugin purchase"
+msgstr "Key, podjęte Cię na zakup wtyczek"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:43
+msgid "Key expiration date: "
+msgstr "Key data ważności: "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:43
+msgid "Error: "
+msgstr "Błąd: "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:51
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:55
+msgid "Facebook api key"
+msgstr "Facebook klucz API"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:57
+msgid ""
+"If you want, that Facebook use true image<br/> on share, you need register "
+"as developer."
+msgstr ""
+"Jeśli chcesz, że Facebook używać prawdziwego obrazu <br/> na akcję, musisz "
+"zarejestrować się jako deweloper."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:64
+msgid "How to get FB key - "
+msgstr "Jak zdobyć klucz FB - "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:69
+msgid "Load Facebook assets and init in header or footer?"
+msgstr "Załaduj Init Facebooka aktywów i w nagłówku lub stopce?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:70
+msgid ""
+"Some social applications may break FB sharing,<br/> when loads higher as "
+"this plugin."
+msgstr ""
+"Niektóre aplikacje mogą przełamać społeczne udostępnianie FB, gdy ładunki "
+"<br/> tej wtyczki wyższe."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:76
+msgid ""
+"By default sets in Footer, but if you have problems with FB sharing after "
+"configure FV App Id, change to Head."
+msgstr ""
+"Przez zestawów domyślnych w stopce, ale jeśli masz problemy z dzielenia FB "
+"po configure FV identyfikator aplikacji, zmienia się szefa."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:82
+msgid "ReCaptcha api keys"
+msgstr "Klawisze api Odśwież"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:86
+msgid "ReCaptcha api key"
+msgstr "Odśwież klucz API"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:88
+msgid "If you want use reCAPTCHA."
+msgstr "Jeśli chcesz użyć reCAPTCHA."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:95
+msgid "How to get ReCaptcha key - "
+msgstr "Jak zdobyć przycisk Odśwież - "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:99
+msgid "ReCaptcha secret key"
+msgstr "Odśwież tajny klucz"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:101
+msgid "Needs for verify response."
+msgstr "Potrzebuje do sprawdzenia reakcji."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:108
+msgid "How to get ReCaptcha secret key - "
+msgstr "Jak zdobyć Odśwież tajny klucz - "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:114
+msgid "Export to CSV"
+msgstr "Eksport do pliku CSV"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:118
+msgid "Export delimiter"
+msgstr "Eksport ogranicznik"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:119
+msgid "String delimiter in CSV file"
+msgstr "Separator smyczkowy pliku CSV"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:128
+msgid "How is this - "
+msgstr "Jak to jest - "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:135
+msgid "Capability"
+msgstr "Zdolność"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:139
+msgid "Needed capability to manage contests/contests settings"
+msgstr "Zdolność do zarządzania konieczna / ustawienia konkursy konkursy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:140
+msgid ""
+"Select capability, what user need<br/> to change photos in contest, "
+"translations, settings.<br/> Need if you want grant access to manager or "
+"other user."
+msgstr ""
+"Wybierz możliwości, jakie użytkownik musi <br/> zmienić zdjęcia w konkursie, "
+"tłumaczenia, ustawień. <br/> Potrzebujesz jeśli chcesz udzielić dostępu do "
+"kierownika lub innego użytkownika."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:150
+msgid "More about roles and capabilities - "
+msgstr "Więcej informacji na temat funkcji i możliwości - "
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_additional.php:150
+msgid "Capability vs. Role Table"
+msgstr "Rola zdolności vs. tabeli"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:9
+msgid "Contest block design"
+msgstr "Konkurs projekt bloku"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:11
+msgid "Select how your contest block will looks."
+msgstr "Wybierz w jaki sposób wygląda konkurs blok."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:27
+msgid "Contest block width (min. 180 px.)"
+msgstr "Szerokość bloku Contest (min. 180 px.)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:29
+msgid "Change to fit the width of the voting blocks your site"
+msgstr "Zmiana do szerokości bloków głosu swojej stronie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:39
+msgid "Thumbnail image size (must be less than contest block width)"
+msgstr ""
+"Miniatura rozmiar obrazu (może być mniejsza niż szerokość bloku konkurs)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:41
+msgid "Don`t remember when insert thumb image to contest use new size"
+msgstr ""
+"Don`t pamiętam, kiedy wkładka kciuk zdjęcie do konkursu wykorzystać nowy "
+"rozmiar"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:46
+msgid "select"
+msgstr "wybierać"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:53
+msgid "or set custom <small>(it creates new image size)</small>"
+msgstr "lub ustawić niestandardowy <small> (tworzy nowy rozmiar) </ small>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:56
+msgid "hard crop size?"
+msgstr "Powierzchnia upraw trudne?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:57
+#, php-format
+msgid ""
+"It means thumbnail size will be 100 perncent equal (if checked) <br/>or "
+"proportional on the larger side."
+msgstr ""
+"Oznacza to, że rozmiar miniatur będzie równa (jeśli zaznaczone) <br/> lub "
+"proporcjonalna w większej części."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:63
+msgid "Enable lazy load images?"
+msgstr "Włącz lazy load?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:65
+msgid ""
+"If you enable this, on page load lads just 3 images, <br/>other just user "
+"scroll page"
+msgstr ""
+"Po włączeniu tego, na stronie obciążenia chłopców tylko 3 zdjęcia, <br/> "
+"inne strony przewijania po prostu użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:71
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:99
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:117
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:169
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:203
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:224
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:17
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:30
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:47
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:59
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:71
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:83
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:120
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:12
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:43
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:55
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:99
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_voting.php:17
+msgid "Yes"
+msgstr "Tak"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:77
+msgid "Hide votes count?"
+msgstr "Ukryj głos?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:79
+msgid "If you don`t want show to users votes count, check it"
+msgstr "Jeśli don `t chcesz pokazać użytkownikom głos, sprawdź to"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:85
+msgid "Hide"
+msgstr "Ukryć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:91
+msgid "Enable cache support?"
+msgstr "Włącz obsługę cache?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:93
+msgid ""
+"If you using cache plugins, after refresh page votes will not changes.<br/> "
+"For fix this plugin will AJAX update votes on page after it loaded."
+msgstr ""
+"Jeśli za pomocą wtyczek cache, po głosy odświeżania strony nie będzie "
+"zmiany. <br/> Dla poprawki tej wtyczki będzie aktualizacji AJAX głosów na "
+"stronie po załadowaniu."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:109
+msgid "Show toolbar (under contest)?"
+msgstr "Pokaż pasek narzędzi (w ramach konkursu)?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:111
+msgid ""
+"If want allow user change photos order and it looks good on your design, "
+"then enable it."
+msgstr ""
+"Jeśli chcesz umożliwić użytkownikowi zmianę kolejności zdjęć i wygląda "
+"dobrze na projektowaniu, a następnie włącz go."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:126
+msgid "Show social buttons after voting?"
+msgstr "Pokaż przyciski społecznych po głosowaniu?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:128
+msgid "If you don't want see a social buttons after voting - check it"
+msgstr "Jeśli nie chcesz zobaczyć przyciski społecznych po głosowaniu - zobacz"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:138
+msgid "How social buttons not show?"
+msgstr "Jak społecznej przyciski nie pokazać?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:140
+msgid "Select - how social buttons not show after voting"
+msgstr "Wybierz - jak pokazują społeczne przyciski nie po głosowaniu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:146
+msgid "Vkontake"
+msgstr "Vkontake"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:147
+msgid "Facebook"
+msgstr "Facebook"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:148
+msgid "Twitter"
+msgstr "Świergot"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:149
+msgid "Odnoklasniki"
+msgstr "Odnoklasniki"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:150
+msgid "Google+"
+msgstr "Google+"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:151
+msgid "Pinterest"
+msgstr "Pinterest"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:152
+msgid ""
+"Required <a href=\"#0\" onclick=\"jQuery('a[data-content=\\x22additional"
+"\\x22]').click();\">ReCaptcha Api key</a>"
+msgstr ""
+"Wymagane <a href=\"#0\" onclick=\"jQuery('a[data-content=\\x22additional"
+"\\x22]').click();\"> Odśwież Api key </a>"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:161
+msgid "Open contest image in new page?"
+msgstr "Otwórz obraz w nowym konkursie stronie?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:163
+msgid ""
+"If did't want use lightbox or want add more description<br/> about photo - "
+"use this option."
+msgstr ""
+"Jeśli chcesz użyć schowek did't lub chcesz dodać więcej opis <br/> o zdjęcie "
+"- skorzystać z tej opcji."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:170
+msgid "(Now works only in `new_year`, `flickr` and `default` theme)"
+msgstr "(Teraz działa tylko w `new_year`, a` `flickr` Temat default`)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:179
+msgid "Pagination"
+msgstr "Paginacja"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:181
+msgid "Break photos into pages"
+msgstr "Przerwa zdjęcia na strony"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:189
+msgid "Per page"
+msgstr "Na stronę"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:195
+msgid "Scroll to contest after go to next/prev page?"
+msgstr "Przewiń do konkursu po przejść do następnej strony / prev?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:197
+msgid ""
+"If you enable this, after clicking into page number, <br/>and reload page it "
+"will scrolled to photos"
+msgstr ""
+"Po włączeniu tego, po kliknięciu na numer strony, <br/> i przeładuj stronę "
+"będzie przewijane do zdjęć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:212
+msgid "Voting leaders"
+msgstr "Przywódcy głosowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:216
+msgid "Hide vote leaders block"
+msgstr "Przywódcy Ukryj głosowanie łączne"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:218
+msgid "Check option, if you don`t want to show voting leaders"
+msgstr "Sprawdź opcję, jeśli don `t chcesz pokazać liderom głosowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:229
+msgid "How many leaders show in page?"
+msgstr "Ile przywódcy pokazać na stronie?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:231
+msgid "Select count of voting leaders"
+msgstr "Wybierz liczba liderów głosowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:238
+msgid "Three"
+msgstr "Trzy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:239
+msgid "Two"
+msgstr "Dwa"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:240
+msgid "One"
+msgstr "Jeden"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:241
+msgid "Four"
+msgstr "Cztery"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:247
+msgid "Leaders block type?"
+msgstr "Liderzy blokować typ?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:249
+msgid "Select - how to display contest leaders?"
+msgstr "Wybierz - jak wyświetlić liderów konkursu?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:256
+msgid "Text"
+msgstr "Tekst"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:257
+msgid "Block"
+msgstr "Blok"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:258
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:260
+msgid "Theme styling"
+msgstr "Temat stylizacji"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:260
+msgid "works not in all themes."
+msgstr "Nie działa we wszystkich tematów."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:269
+msgid "Lightbox settings"
+msgstr "Ustawienia Lightbox"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:273
+msgid "Disable plugin lightbox?"
+msgstr "Wyłącz plugin koszyk?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:275
+msgid ""
+"If you have some conflicts with you standard lightbox(image preview plugin), "
+"check it"
+msgstr ""
+"Jeśli masz jakieś konflikty z tobą standardowy ulubionych (podgląd obrazu "
+"plugin), sprawdź to"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:281
+msgid "Disable"
+msgstr "Wyłączyć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:286
+msgid "Lightbox title format?"
+msgstr "Lightbox Format tytuł?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:288
+msgid "You can change text, that show in lightbox"
+msgstr "Możesz zmienić tekst, które pokazują się w ulubionych"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:301
+msgid "Custom CSS"
+msgstr "Niestandardowe CSS"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:305
+msgid "Custom CSS styles"
+msgstr "Własne style CSS"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:307
+msgid "If you want do little customization,<br/> use this textarea."
+msgstr "Jeśli chcesz zrobić trochę personalizacji, <br/> używać tego textarea."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_design.php:314
+msgid "Add some styles. \"Ctrl + Enter\" to show autocomplete."
+msgstr "Dodaj kilka stylów. `Ctrl + Enter`, aby pokazać autouzupełniania."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:5
+msgid "Uploading"
+msgstr "Zamieszczanie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:9
+msgid "Only logged in users can upload photos:"
+msgstr "Tylko zalogowani użytkownicy mogą przesyłać zdjęcia:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:11
+msgid "Allow upload photos only authorized users"
+msgstr "Zezwalaj na przesyłanie zdjęć tylko autoryzowani użytkownicy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:22
+msgid "Show default login form, if user not logged in:"
+msgstr "Pokaż domyślny formularz logowania, jeśli użytkownik nie zalogowany:"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:24
+msgid "You may need add some styles for it looks better"
+msgstr "Być może trzeba dodać kilka style wygląda lepiej"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:39
+msgid "Limit photo upload by email"
+msgstr "Limit przesłać zdjęcie przez e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:41
+msgid ""
+"By one email user can`t upload more<br/> then set in contest options <br/>"
+"(The maximum number of one user upload photos)"
+msgstr ""
+"Przez jednego użytkownika e-mail `t przesłać więcej <br/> następnie ustawić "
+"w opcjach konkursie <br/> (Maksymalna liczba zdjęć wysyłania jeden "
+"użytkownik)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:47
+msgid "(need check \"show in upload form email field\")"
+msgstr "(Trzeba sprawdzić \"show w formularzu wysyłania e-mail polu\")"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:51
+msgid "Limit photo upload by ip"
+msgstr "Limit przesłać zdjęcie przez ip"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:53
+msgid ""
+"By one ip user can`t upload more<br/> then set in contest options <br/>(The "
+"maximum number of one user upload photos)"
+msgstr ""
+"Przez jednego ip użytkownika `t przesłać więcej <br/> następnie ustawić w "
+"opcjach konkursie <br/> (Maksymalna liczba zdjęć wysyłania jeden użytkownik)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:63
+msgid "Limit photo upload by cookie"
+msgstr "Limit przesłać zdjęcie przez ciasteczka"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:65
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:77
+msgid ""
+"In one browser user can`t upload more<br/> then set in contest options <br/>"
+"(The maximum number of one user upload photos)"
+msgstr ""
+"W jednej przeglądarce użytkownika `t przesłać więcej <br/> następnie ustawić "
+"w opcjach konkursie <br/> (Maksymalna liczba zdjęć wysyłania jeden "
+"użytkownik)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:71
+msgid "(Not works in ie)"
+msgstr "(Nie działa w IE)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:75
+msgid "Limit photo upload by user id"
+msgstr "Limit przesłać zdjęcie przez id użytkownika"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:83
+msgid ""
+"(works, if upload enabled only for autorized users AND user are autorized)"
+msgstr ""
+"(Prace, jeśli dostępna tylko dla wysyłania użytkownikom i użytkownik "
+"AUTORYZOWANEGO są AUTORYZOWANEGO)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:89
+msgid "Limit uploaded photo size"
+msgstr "Limit rozmiaru zdjęć przesłanych"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:91
+msgid ""
+"If your did`t have a lot of hosting disc space,<br/> you may limit uploading "
+"photo size.<br/> If image will be bigger,<br/> he receive error message like "
+"`Photo size more than 2 megabytes!`."
+msgstr ""
+"Jeśli did`t mieć dużo miejsca na dysku hosting, <br/> może ograniczyć "
+"przesyłanie rozmiar zdjęcia. <br/> Jeśli obraz będzie większy, <br/> otrzyma "
+"komunikat o błędzie, jak `rozmiar zdjęcia więcej niż 2 MB ! `."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:98
+msgid "Enter a valid max size in kilobytes, 1024 Kb = 1 Mb."
+msgstr "Wpisz poprawną wielkość max w kilobajtach, 1024 Kb = 1 Mb."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:103
+msgid "Resize images"
+msgstr "Zmiana rozmiaru zdjęć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:105
+msgid ""
+"Automatically resize (i.e. scale down) images after uploading. Save disk "
+"space and preserve your layout. Thanks to Daniel Mores (http://mores.cc), A. "
+"Huizinga, Jacob Wyke"
+msgstr ""
+"Automatyczna zmiana rozmiaru (tj skalowanie w dół) obrazów po wysyłania. "
+"Zaoszczędzić miejsce na dysku i zachować układ. Dzięki Daniel Mores (http://"
+"mores.cc), A. Huizinga, Jacob Wyke"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:110
+msgid "Resize images at upload"
+msgstr "Zmiana rozmiaru obrazów na przesyłanie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:112
+msgid ""
+"You can set the max width, and images\n"
+"                        <br/>(JPEG, PNG or GIF) will be resized while they "
+"are uploaded.\n"
+"                        <br/>There will not be a copy or backup with the "
+"original size."
+msgstr ""
+"Można ustawić maksymalną szerokość i zdjęć \n"
+" <br/> (JPEG, PNG lub GIF) zostanie zmieniony, podczas gdy są one dodane. \n"
+" <br/> Nie będzie kopia lub tworzenia kopii zapasowych z oryginalnym "
+"rozmiarze."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:124
+msgid "Max width (about, may vary within this range)"
+msgstr "Maksymalna szerokość (około może zmieniać się w tym zakresie)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:126
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:140
+msgid ""
+"Recommended use only one param - maxwidth or maxheight\n"
+"                        <br/>, then image not be disproportionate"
+msgstr ""
+"Zalecane zastosowanie tylko jeden parametr - maxwidth lub maxheight \n"
+" <br/>, to obraz nie jest nieproporcjonalne"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_form.php:138
+msgid "Max height (about, may vary within this range)"
+msgstr "Maksymalna wysokość (około może zmieniać się w tym zakresie)"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:4
+msgid "Notify me, when new photo uploaded"
+msgstr "Powiadom mnie, gdy nowe zdjęcie dodane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:6
+msgid "Notify to email, when users upload photo"
+msgstr "Informuj e-mail, gdy użytkownicy przesłać zdjęcie"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:17
+msgid "Email to notify me"
+msgstr "Wyślij do mnie powiadomić"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:19
+msgid "Email"
+msgstr "E-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:25
+msgid "If not set, uses email from site options."
+msgstr "Jeśli nie podano, używa e-mail od opcji serwisu."
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:31
+msgid "Users"
+msgstr "Użytkownicy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:35
+msgid "Notify users, when photo approved or deleted"
+msgstr "Powiadomić użytkowników, kiedy zatwierdzono lub usunięte zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:37
+msgid "Send notification to user, when it photo approved or deleted"
+msgstr ""
+"Wyślij powiadomienie do użytkownika, kiedy to zatwierdzono lub usunięte "
+"zdjęcia"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:43
+msgid "on plublishing or deleting photo"
+msgstr "na plublishing lub usuwanie zdjęć"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:47
+msgid "Notify users, when photo uploaded"
+msgstr "Powiadomić użytkowników, gdy zdjęcia dodane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:49
+msgid "Send notification to user, when it photo uploaded"
+msgstr "Wyślij powiadomienie do użytkownika, gdy zdjęcia dodane"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:60
+msgid "Notify users from email"
+msgstr "Informuj użytkowników z poczty e-mail"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:62
+msgid "If not set, wordpress set`s from email<br/> like wordpress@domain.com"
+msgstr ""
+"Jeśli nie podano, WordPress set`s z <br/> e-mail jak wordpress@domain.com"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:73
+msgid "Notify users from name"
+msgstr "Informuj użytkowników z nazwy"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:75
+msgid "If not set using `Wordpress`"
+msgstr "Jeśli nie ustawione za pomocą `Wordpress`"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:87
+msgid "Log emails"
+msgstr "Zaloguj e-maile"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:91
+msgid "Log all emails"
+msgstr "Zaloguj się, wszystkie e-maile"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_upload_notify.php:93
+msgid "Log emails for debug"
+msgstr "Zaloguj e-maile do debugowania"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_voting.php:9
+msgid "Enable anti fraud system?"
+msgstr "Włącz system przeciw nadużyciom?"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\admin/partials/settings/_tab_voting.php:11
+msgid "After enabling this, you can see in Votes Log fraud score"
+msgstr "Po włączeniu tego można zobaczyć w głosów Zaloguj wynik oszustwa"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public-ajax.php:599
+msgid "Upload limit exceeded"
+msgstr "Prześlij przekroczenia limitu"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public-ajax.php:619
+msgid "Enter valid email!"
+msgstr "Wprowadź poprawny adres e-mail!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:430
+msgid "Item not founded"
+msgstr "Przedmiot nie założył"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:435
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:610
+msgid "Check contest id!"
+msgstr "Sprawdź konkurs id!"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:946
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:972
+#, php-format
+msgid "Voting active until %s"
+msgstr "Głosowanie aktywna do momentu %s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:954
+#, php-format
+msgid "Upload active from %s"
+msgstr "Dodaj aktywny od %s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:959
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:976
+#, php-format
+msgid "Upload active until %s"
+msgstr "Dodaj aktywna do momentu %s"
+
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:966
+#: F:\VertrigoServ\www\p\wp-vote\wp-content\plugins\wp-foto-vote\public/class-fv-public.php:980
+#, php-format
+msgid "Contest finished at %s"
+msgstr "Konkurs zakończył się %s"

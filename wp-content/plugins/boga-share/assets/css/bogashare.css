@@ -161,3 +161,10 @@ button#close-buton.close{
 #mas_info{
     font-family: bogashare;
 }
+#mobile_share_button{
+    position: fixed;
+    bottom: 0;
+    background-color: #E0E0E0;
+    width: 100%;
+    max-height: 100%;
+}

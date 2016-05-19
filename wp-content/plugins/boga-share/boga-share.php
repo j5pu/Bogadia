@@ -14,7 +14,7 @@ function show_bogashare_mobile_button(){
         include 'includes/mobile_bottom_share_button.php';
     }
 }
-add_action('wp_footer', 'show_bogashare_dialog');
+add_action('wp_head', 'show_bogashare_dialog');
 add_action('wp_footer', 'show_bogashare_mobile_button');
 
 function bogashare_assets(){

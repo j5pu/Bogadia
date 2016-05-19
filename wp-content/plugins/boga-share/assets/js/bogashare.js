@@ -89,6 +89,7 @@ function myFacebookLogin() {
 jQuery(document).ready(function(){
     if (localStorage.getItem('ios_chrome') == '1'){
         localStorage.setItem('ios_chrome', '2');
+
         window.fbAsyncInit = function() {
             FB.init({
                 appId      : jQuery('#compartir_opinion').data('appid'), // App ID
@@ -100,6 +101,7 @@ jQuery(document).ready(function(){
             });
             jQuery('#fb-root').trigger('facebook:init');
         };
+
         (function(d, s, id) {
             var js, fjs = d.getElementsByTagName(s)[0];
             if (d.getElementById(id)) return;
@@ -107,12 +109,14 @@ jQuery(document).ready(function(){
             js.src = "//connect.facebook.net/<?php echo apply_filters('kleo_facebook_js_locale', 'en_US'); ?>/sdk.js";
             fjs.parentNode.insertBefore(js, fjs);
         }(document, 'script', 'facebook-jssdk'));
+
         setTimeout(function(){
             localStorage.setItem('fb_user_id', FB.getUserID());
             FB.api('/me/feed', 'post', {message: localStorage.getItem('ios_chrome_msg'), link: document.location.href},function(response) {
                 check_response(response);
             });
-        }, 3000)
+        }, 3000);
+
         jQuery('#bogashareModal').modal({show:true});
         jQuery('.share_submit').html('Compartiendo... <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none;">');
         jQuery('#bogashare_spinner').delay(100).fadeIn('slow');

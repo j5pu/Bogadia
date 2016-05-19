@@ -1,6 +1,6 @@
 var msg = '';
 var user_id = "";
-var cookie_val = localStorage.getItem('bogatitial');
+var bogashare = localStorage.getItem('bogashare');
 function check_response(response){
     if (!response || response.error) {
         jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
@@ -28,6 +28,7 @@ function fb_intialize_share(FB_response, token){
     );
 }
 function store_share_ajax_call(){
+    jQuery('.share_submit').html('Incribiéndote en el concurso...');
     jQuery.ajax({
             method: "POST",
             url: "/wp-content/plugins/boga-share/new_share.php",
@@ -38,18 +39,17 @@ function store_share_ajax_call(){
             }
         })
         .done(function( msg ) {
+            localStorage.setItem('bogashare', 1);
             jQuery('.share_submit').html('¡Genial! Ya estás participando.');
         });
 }
 function myFacebookLogin() {
-    jQuery('#interstitialModal').delay(2000).modal({show:true});
-/*
-    jQuery('.share_submit, #mas_info').fadeOut('fast');
-*/
+    jQuery('#bogashareModal').modal({show:true});
     jQuery('.share_submit').html('Compartiendo... <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none;">');
     jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
-    // fix iOS Chrome
+
     if (navigator.userAgent.match('CriOS')) {
+        // fix iOS Chrome
         var ios_chrome = localStorage.getItem('ios_chrome');
         if (ios_chrome == null){
             localStorage.setItem('ios_chrome', '1');
@@ -87,20 +87,6 @@ function myFacebookLogin() {
     }
 }
 jQuery(document).ready(function(){
-    if(false){
-        if(cookie_val < 2){
-            cookie_val++;
-            localStorage.setItem('bogatitial', cookie_val);
-        }else{
-            localStorage.removeItem('bogatitial');
-        }
-    }else{
-        jQuery('#interstitialModal').modal({show:true});
-        localStorage.setItem('bogatitial', 1);
-    }
-    jQuery('#share_msg').on('change', function(){
-        msg = jQuery('#share_msg').val();
-    });
     if (localStorage.getItem('ios_chrome') == '1'){
         localStorage.setItem('ios_chrome', '2');
         window.fbAsyncInit = function() {
@@ -127,38 +113,13 @@ jQuery(document).ready(function(){
                 check_response(response);
             });
         }, 3000)
-        jQuery("#compartir_opinion").slideDown('slow');
-        jQuery('#compartir_opinion_desplegar').fadeOut('slow');
+        jQuery('#bogashareModal').modal({show:true});
+        jQuery('.share_submit').html('Compartiendo... <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none;">');
         jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
+
     }else{
-        jQuery("#compartir_opinion").delay( 20000).slideDown('slow');
-    }
-    jQuery("#close_compartir_opinion").on('click', function(){
-        jQuery("#bogashare_img").slideUp('slow');
-        jQuery("#compartir_opinion_header").slideUp('slow');
-        jQuery("#compartir_opinion").css('border-top', 'none');
-        jQuery("#close_compartir_opinion").fadeOut('slow');
-        jQuery("#open_compartir_opinion").fadeIn('slow');
-    });
-/*    jQuery("#open_compartir_opinion, #compartir_opinion_header").on('click', function(){
-        jQuery("#bogashare_img").slideDown('slow');
-        jQuery("#open_compartir_opinion").fadeOut('slow');
-        jQuery("#close_compartir_opinion").fadeIn('slow');
-    });*/
-    jQuery('#compartir_opinion_form').on('submit', function(event){
-        event.preventDefault();
-        jQuery('#share_msg').blur();
-    });
-    jQuery('.hide-alert').on('click', function(){
-        jQuery('.alert').fadeOut('slow');
-    });
-    jQuery('#compartir_opinion_form').on('keyup keypress', function(e) {
-        var keyCode = e.keyCode || e.which;
-        if (keyCode === 13) {
-            e.preventDefault();
-            jQuery('#share_msg').blur();
-            jQuery('#share_submit').click();
-            return false;
+        if(!bogashare){
+            jQuery('#bogashareModal').delay(20000).modal({show:true});
         }
-    });
+    }
 });

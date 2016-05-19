@@ -5,20 +5,22 @@ Description: Muestra el cajon de compartir a traves de api para el concurso de s
 */
 
 function show_bogashare_dialog() {
-    if(is_single() && !is_single(34201)) {
+    if(is_single() && !is_single(35229)) {
         include 'includes/insterstitial.php';
     }
 }
 function show_bogashare_mobile_button(){
     if(wp_is_mobile()){
-        include 'includes/mobile_bottom_share_button.php';
+        if(is_single() && !is_single(35229)) {
+            include 'includes/mobile_bottom_share_button.php';
+        }
     }
 }
 add_action('wp_head', 'show_bogashare_dialog');
 add_action('wp_footer', 'show_bogashare_mobile_button');
 
 function bogashare_assets(){
-    if(is_single() && !is_single(34201)) {
+    if(is_single() && !is_single(35229)) {
         wp_register_script('bogashare', '/wp-content/plugins/boga-share/assets/js/bogashare.js', array('jquery'));
         wp_enqueue_script('bogashare');
         wp_register_style('bogashare_style', '/wp-content/plugins/boga-share/assets/css/bogashare.css');

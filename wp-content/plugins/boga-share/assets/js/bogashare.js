@@ -9,7 +9,7 @@ function check_response(response){
             console.log(response2);
             if(response2.privacy.value == 'SELF' || response2.privacy.value == 'CUSTOM'){
                 jQuery('.share_submit').html('No vale compartirlo solo contigo');
-                jQuery('#mas_info').attr('href', 'https://www.facebook.com/profile.php?id=' + localStorage.getItem('fb_user_id') + '&sk=allactivity&privacy_source=activity_log&log_filter=app_' + jQuery('#compartir_opinion').data('appid'));
+                jQuery('#mas_info_link').attr('href', 'https://www.facebook.com/profile.php?id=' + localStorage.getItem('fb_user_id') + '&sk=allactivity&privacy_source=activity_log&log_filter=app_' + jQuery('#compartir_opinion').data('appid'));
                 jQuery('#mas_info').html('Click aquí para cambiar la privacidad a público o amigos y vuelve a compartir.');
             }else{
                 store_share_ajax_call(response2.id);

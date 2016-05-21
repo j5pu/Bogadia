@@ -51,7 +51,7 @@ function store_share_ajax_call(fb_post_id){
         });
 }
 function myFacebookLogin() {
-    jQuery('#bogashareModal').modal({show:true}
+    jQuery('#bogashareModal').modal({show:true};
     jQuery('.share_submit').html('Compartiendo... <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none;">');
     jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
 

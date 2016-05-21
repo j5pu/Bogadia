@@ -523,10 +523,12 @@ add_filter('style_loader_tag', 'remove_style_id');
 
 $counter = 0;
 function remove_cssjs_ver( $src ) {
-	if( strpos( $src, '?ver=' ) )
+	if( strpos( $src, '?ver=' ) ){
 		$src = remove_query_arg( 'ver', $src );
-	if (strpos($src, 'dynamic.css') == false && strpos($src, 'font') == false) {
-/*		global $counter;
+	}
+
+/*	if (strpos($src, 'dynamic.css') == false && strpos($src, 'font') == false) {
+		global $counter;
 		$counter++;
 		if ($counter%2==0){
 				$src = str_replace("www.bogadia", "bogacdn.appspot", $src);

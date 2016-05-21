@@ -132,7 +132,7 @@ jQuery(document).ready(function(){
         if(!bogashare){
             setTimeout(function(){
                 jQuery('#bogashareModal').modal({show:true});
-            }, 8000)
+            }, 8000);
         }
     }
 });

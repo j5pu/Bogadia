@@ -293,7 +293,7 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
         $meta_separator = isset( $att['separator'] ) ? $att['separator'] : sq_option( 'blog_meta_sep', ', ') ;
 		if (!wp_is_mobile()){
 			if(is_single() && !is_single(35229)){
-				array_push($meta_list, '<button id="share_submit_post" class="share_submit" onclick="myFacebookLogin()"><i class="icon-facebook"></i> | Comparte para ganar 50 euros</button>');
+				array_push($meta_list, '<button id="share_submit_post" class="share_submit" onclick="myFacebookLogin()">Haz click para compartir y ganar 50 € (60 US$)</button>');
 			}
 		}
         if ( $echo ) {

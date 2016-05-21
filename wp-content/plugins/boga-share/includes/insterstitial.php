@@ -5,7 +5,7 @@
 		</button>
 		<img id="flores_img" src="/wp-content/plugins/boga-share/assets/img/flores.png">
 		<div id="compartir_opinion" data-postid="<?php echo get_the_ID(); ?>" data-appid="<?php echo sq_option('fb_app_id') ?>">
-			<button id="share_submit_insterstitial" class="share_submit" onclick="myFacebookLogin()"><i class="icon-facebook"></i> | Comparte este post para participar</button>
+			<button id="share_submit_insterstitial" class="share_submit" onclick="myFacebookLogin()">Haz click para compartir y ganar 50 € (60 US$)</button>
 			<a id="mas_info_link" target="_blank" href="https://www.bogadia.com/sorteos/ganar-50-euros-compartiendo-post-facebook"><p id="mas_info">Más info</p></a>
 		</div>
 	</div>

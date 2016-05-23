@@ -128,15 +128,7 @@ $primary_menu = wp_nav_menu( array(
 							?>
 							
 						</div>
-								<?php if ( is_page( 1190 ) ) { ?>
-								
-                                                                <h1 class="logo"><a href="<?php echo home_url();?>" title="Bogadia - Mucho más que moda">Bogadia</a></h1>
-									
-								<?php } else { ?>
-									
-									<h2 class="logo"><a href="<?php echo home_url();?>" title="Bogadia - Mucho más que moda">Bogadia</a></h2>
-									
-								<?php } ?>
+                        <div class="new_logo"><a href="<?php echo home_url();?>" title="Bogadia - Mucho más que moda"><img id="nuevo_logo" src="https://www.bogadia.com/wp-content/uploads/2016/05/logo_final_negro-2.png" alt="Bogadia"></a></div>
 					</div>
 
                     <?php if ($header_style == 'left_logo') : ?>

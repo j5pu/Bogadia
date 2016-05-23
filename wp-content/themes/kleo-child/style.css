@@ -1240,3 +1240,8 @@ body.author div.template-page{
         height: 235px;
     }
 }
+#nuevo_logo{
+    width: 121px;
+    padding-top: 2px;
+    padding-left: 5px;
+}

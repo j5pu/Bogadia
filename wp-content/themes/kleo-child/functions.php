@@ -549,21 +549,27 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 	return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
 }, 10, 2 );
 
-include('boga_related_post.php');
-$boga_related_post = new boga_related_post();
+/*include('boga_related_post.php');
+$boga_related_post = new boga_related_post();*/
 
 function show_bogashare_contestants(){
 	global $wpdb;
-	$results = $wpdb->get_results( "SELECT user_fb_id FROM wp_bogashare", OBJECT );
+	$results = $wpdb->get_results( "SELECT user_fb_id FROM wp_bogashare ORDER BY date ASC", OBJECT );
 	$contestans_fb_ids = array();
 	foreach($results as $result){
 		array_push($contestans_fb_ids, $result->user_fb_id);
 	}
 	$contestans_fb_ids = array_unique($contestans_fb_ids);
-	$results = $wpdb->get_results( "SELECT user_id,meta_value,display_name FROM wp_usermeta INNER JOIN wp_users ON wp_usermeta.user_id = wp_users.ID WHERE meta_key = '_fbid' AND meta_value IN (" . implode(',', array_map('intval', $contestans_fb_ids)) . ")", OBJECT );
+/*	$results = $wpdb->get_results( "SELECT user_id,user_fb_id,display_name, post_title FROM wp_usermeta INNER JOIN wp_users ON wp_usermeta.user_id = wp_users.ID INNER JOIN wp_bogashare ON wp_bogashare.user_fb_id = wp_usermeta.meta_value INNER JOIN wp_posts ON wp_bogashare.post_id = wp_posts.ID WHERE wp_usermeta.meta_key = '_fbid' AND wp_usermeta.meta_value IN (" . implode(',', array_map('intval', $contestans_fb_ids)) . ") ORDER BY wp_bogashare.date DESC", OBJECT );*/
+	$results = $wpdb->get_results( "SELECT user_fb_id,display_name, post_title FROM wp_usermeta INNER JOIN wp_users ON wp_usermeta.user_id = wp_users.ID INNER JOIN wp_bogashare ON wp_bogashare.user_fb_id = wp_usermeta.meta_value INNER JOIN wp_posts ON wp_bogashare.post_id = wp_posts.ID WHERE wp_usermeta.meta_key = '_fbid' AND wp_usermeta.meta_value = wp_bogashare.user_fb_id ORDER BY wp_bogashare.date DESC", OBJECT );
+	$results = array_map("unserialize", array_unique(array_map("serialize", (array)$results)));
+
+	echo '<p>'. count($contestans_fb_ids, 0) .' concursantes totales.</p>';
+	echo '<p>'. count($results, 0) .' concursantes registrados.</p>';
+	echo '<p>'. (count($contestans_fb_ids, 0) - count($results, 0)) .' concursantes NO registrados.</p>';
 	echo '<ul class="media-list">';
 	foreach($results as $contestant){
-		echo '<li class="media col-xs-6 col-sm-4 portada_posts"><div class="media"><a href="https://www.facebook.com/'. $contestant->meta_value . '"><img class="media-object img-responsive" src="https://graph.facebook.com/'. $contestant->meta_value . '/picture?type=large"></a></div><div class="media-body"><h4 class="media-heading">'. $contestant->display_name . '</h4></div></li>';
+		echo '<li class="media portada_posts"><a href="https://www.facebook.com/'. $contestant->user_fb_id . '"><img style="float: left;" class="media-object" src="https://graph.facebook.com/'. $contestant->user_fb_id . '/picture?type=large"></a><div class="media-body"><h4 class="media-heading">'. $contestant->display_name . '</h4><p> Compartió <strong>'. $contestant->post_title .'</strong></p></div></li>';
 	}
 	echo '</ul>';
 }

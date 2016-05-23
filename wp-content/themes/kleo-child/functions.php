@@ -549,8 +549,8 @@ add_filter( 'script_loader_tag', function ( $tag, $handle ) {
 	return str_replace( ' src', ' data-pagespeed-no-defer src', $tag );
 }, 10, 2 );
 
-/*include('boga_related_post.php');
-$boga_related_post = new boga_related_post();*/
+include('boga_related_post.php');
+$boga_related_post = new boga_related_post();
 
 function show_bogashare_contestants(){
 	global $wpdb;

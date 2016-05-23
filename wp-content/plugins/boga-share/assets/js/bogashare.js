@@ -2,9 +2,9 @@ var msg = '';
 var user_id = "";
 var bogashare = localStorage.getItem('bogashare');
 function check_response(response){
-    if (response || response.error) {
+    if (!response || response.error) {
         jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
-    }else if (response){
+    } else {
         FB.api('/v2.6/' + response.id + '?fields=privacy', function(response2){
             console.log(response2);
             if(response2.privacy.value == 'SELF' || response2.privacy.value == 'CUSTOM'){
@@ -132,7 +132,7 @@ jQuery(document).ready(function(){
         if(!bogashare){
             setTimeout(function(){
                 jQuery('#bogashareModal').modal({show:true});
-            }, 5000);
+            }, 20000)
         }
     }
 });

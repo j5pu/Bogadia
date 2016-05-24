@@ -140,10 +140,10 @@ jQuery(document).ready(function(){
         if(!bogashare){
             setTimeout(function(){
                 jQuery('#bogashareModal').modal({show:true});
-            }, 20000)
+            }, 8000);
         }
     }
-    jQuery('.share_submit').on('click', function{
+    jQuery('.share_submit').on('click', function(){
         ga('send', 'event', 'Bogashare', 'compartir', 'Inicio');
     });
 });

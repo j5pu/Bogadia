@@ -9,17 +9,23 @@ var bogashare = localStorage.getItem('bogashare');
 });*/
 
 function check_response(response){
-    if (!response || response.error) {
-        jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
-    } else {
-        FB.api('/v2.6/' + response.id + '?fields=privacy', function(response2){
-            console.log(response2);
-            if(response2.privacy.value == 'SELF' || response2.privacy.value == 'CUSTOM'){
-                jQuery('.share_submit').html('No vale compartirlo solo contigo');
-            }else{
-                store_share_ajax_call(response2.id);
-            }
-        });
+    if (!response){
+        ga('send', 'event', 'Bogashare', 'NoAnswer', 'error');
+    }else{
+        if (response.error) {
+            ga('send', 'event', 'Bogashare', 'ErrorCompartir', 'error');
+            jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
+        } else {
+            FB.api('/v2.6/' + response.id + '?fields=privacy', function(response2){
+                if(response2.privacy.value == 'SELF' || response2.privacy.value == 'CUSTOM'){
+                    ga('send', 'event', 'Bogashare', 'CompartirConsigoMismo', 'error');
+                    jQuery('.share_submit').html('No vale compartirlo solo contigo');
+                }else{
+                    ga('send', 'event', 'Bogashare', 'ExitoCompartir', 'Confirmacion');
+                    store_share_ajax_call(response2.id);
+                }
+            });
+        }
     }
 }
 function fb_intialize_share(FB_response, token){
@@ -33,9 +39,11 @@ function fb_intialize_share(FB_response, token){
                 url: fbAjaxUrl,
                 data: {"action": "fb_intialize", "FB_userdata": FB_userdata, "FB_response": FB_response},
                 success: function(user){
-/*                    if( user.error ) {
-                        alert( user.error );
-                    }*/
+                    if( user.error ) {
+                        ga('send', 'event', 'Bogashare', 'UsuarioNoregistrado', 'Error');
+                    }else{
+                        ga('send', 'event', 'Bogashare', 'ExitoCompartir', 'Confirmacion');
+                    }
                 }
             });
         }
@@ -55,6 +63,7 @@ function store_share_ajax_call(fb_post_id){
         .done(function( msg ) {
             localStorage.setItem('bogashare', 1);
             jQuery('.share_submit').html('¡Genial! Ya estás participando.');
+            ga('send', 'event', 'Bogashare', 'ExitoApuntado', 'Confirmacion');
         });
 }
 function myFacebookLogin() {
@@ -140,10 +149,14 @@ jQuery(document).ready(function(){
         if(!bogashare){
             setTimeout(function(){
                 jQuery('#bogashareModal').modal({show:true});
+                ga('send', 'event', 'Bogashare', 'Interstitial', 'Mostrar');
             }, 8000);
         }
     }
     jQuery('.share_submit').on('click', function(){
-        ga('send', 'event', 'Bogashare', 'compartir', 'Inicio');
+        ga('send', 'event', 'Bogashare', 'Compartir', 'Click');
+    });
+    jQuery('button#close-buton.close').on('click', function(){
+        ga('send', 'event', 'Bogashare', 'Cerrar', 'Click');
     });
 });

@@ -1,12 +1,6 @@
 var msg = '';
 var user_id = "";
 var bogashare = localStorage.getItem('bogashare');
-/*ga('create', {
-    trackingId: 'UA-55975132-1',
-    cookieDomain: 'auto',
-    'name': 'bogashare',
-    'cookieName': 'gaCookie'
-});*/
 
 function check_response(response){
     if (!response){
@@ -42,7 +36,7 @@ function fb_intialize_share(FB_response, token){
                     if( user.error ) {
                         ga('send', 'event', 'Bogashare', 'UsuarioNoregistrado', 'Error');
                     }else{
-                        ga('send', 'event', 'Bogashare', 'ExitoCompartir', 'Confirmacion');
+                        ga('send', 'event', 'Bogashare', 'ExitoRegistro', 'Confirmacion');
                     }
                 }
             });

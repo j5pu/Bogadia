@@ -5,10 +5,27 @@ class contest
     public $slug;
     public $contestants = array();
 
-    function __construct($contest_id)
+    function __construct()
     {
-        $this->id = $contest_id;
-        self::get_contestants('RAND()');
+        add_shortcode( 'bogacontest', array($this, 'print_contest_data') );
+    }
+
+    function print_contest_data(){
+        global $wp_query;
+        global $wpdb;
+        $this->slug = urldecode($wp_query->query_vars['contest']);
+        $results = $wpdb->get_results( "SELECT wp_bogacontest_contestant.ID, wp_users.display_name, wp_users.user_nicename FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE wp_bogacontest.slug='". $this->slug ."';", OBJECT );
+        if (empty($results)) {
+            return 'Concurso no encontrado';
+        }
+        echo '<hr>';
+        echo 'Así van las votaciones: '. count($results) .' participantes. <hr>';
+        foreach($results as $contestant){
+            echo '<div class="col-md-3">';
+            echo '<h1><a href="/concursante/'. $this->slug .'/'. $contestant->user_nicename .'">'. $contestant->display_name .'</a></h1>';
+            echo '</div>';
+        }
+        return '';
     }
 
     function get_contestants($by)
@@ -57,10 +74,10 @@ class contestant
 
     function __construct()
     {
-        add_shortcode( 'bogacontestant', array($this, 'print_data') );
+        add_shortcode( 'bogacontestant', array($this, 'print_contestant_data') );
     }
 
-    function print_data(){
+    function print_contestant_data(){
         global $wp_query;
         global $wpdb;
         $contestant_name = urldecode($wp_query->query_vars['contestant']);
@@ -213,5 +230,3 @@ class contestant
 
 
 }
-/*require_once('../../../../wp-load.php');
-$bogacontest = new contest(1);*/

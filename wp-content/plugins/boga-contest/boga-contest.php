@@ -27,8 +27,6 @@ Description: Concurso de modelos
 function bogacontest_install() {
     global $wpdb;
 
-    $table_name = $wpdb->prefix . 'bogacontest_';
-
     $charset_collate = $wpdb->get_charset_collate();
 
     $sql = "CREATE TABLE wp_bogacontest_contestant (
@@ -85,7 +83,8 @@ function flushRules(){
 function wp_insertMyRewriteRules($rules)
 {
     $newrules = array();
-    $newrules['concursos/(.+)/(.+)'] = 'index.php?pagename=concursante&contest=$matches[1]&contestant=$matches[2]';
+    $newrules['concurso/([^/]+)'] = 'index.php?pagename=bogacontest&contest=$matches[1]';
+    $newrules['concursante/([^/]+)/(.+)'] = 'index.php?pagename=bogacontestant&contest=$matches[1]&contestant=$matches[2]';
     $finalrules = $newrules + $rules;
     return $finalrules;
 }
@@ -103,3 +102,5 @@ remove_filter('template_redirect', 'redirect_canonical');
 
 include 'class/contestant.php';
 $bogacontestant = new contestant();
+$bogacontest = new contest();
+

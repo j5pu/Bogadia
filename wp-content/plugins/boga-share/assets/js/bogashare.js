@@ -4,15 +4,15 @@ var bogashare = localStorage.getItem('bogashare');
 
 function check_response(response){
     if (!response){
-        ga('send', 'event', 'Bogashare', 'NoAnswer', 'error');
+        ga('send', 'event', 'Bogashare', 'NoAnswer', 'Error');
     }else{
         if (response.error) {
-            ga('send', 'event', 'Bogashare', 'ErrorCompartir', 'error');
+            ga('send', 'event', 'Bogashare', 'ErrorCompartir', 'Error');
             jQuery('.share_submit').html('¡Vaya! Se ha producido un error');
         } else {
             FB.api('/v2.6/' + response.id + '?fields=privacy', function(response2){
                 if(response2.privacy.value == 'SELF' || response2.privacy.value == 'CUSTOM'){
-                    ga('send', 'event', 'Bogashare', 'CompartirConsigoMismo', 'error');
+                    ga('send', 'event', 'Bogashare', 'CompartirConsigoMismo', 'Error');
                     jQuery('.share_submit').html('No vale compartirlo solo contigo');
                 }else{
                     ga('send', 'event', 'Bogashare', 'ExitoCompartir', 'Confirmacion');

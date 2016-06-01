@@ -10,7 +10,7 @@ function bogacontest_install() {
 
     $sql = "CREATE TABLE wp_bogacontest_contestant (
         id int UNSIGNED NOT NULL AUTO_INCREMENT,
-        user_id varchar(45) NULL,
+        user_id bigint(45) NULL,
         contest_id varchar(45) NULL,
         date datetime NULL,
         PRIMARY KEY  (id),
@@ -20,7 +20,8 @@ function bogacontest_install() {
 	CREATE TABLE wp_bogacontest_img (
         id int UNSIGNED NOT NULL AUTO_INCREMENT,
         contestant_id int UNSIGNED NULL,
-        contest_id varchar(45) NULL,
+        main int NULL,
+        path varchar(800) NULL,
         date datetime NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY id (id ASC)
@@ -29,7 +30,7 @@ function bogacontest_install() {
 	CREATE TABLE wp_bogacontest_votes(
         id int UNSIGNED NOT NULL AUTO_INCREMENT,
         contestant_id bigint(20) UNSIGNED NULL,
-        votes_id bigint(20) NULL,
+        voter_id bigint(20) NULL,
         date datetime NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY id (id ASC)

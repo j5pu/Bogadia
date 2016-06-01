@@ -62,7 +62,13 @@ function new_contestant(){
             .done(function( msg ) {
                 alert('exito ' + msg);
                 if(msg != '0'){
-                    window.location = window.location.href + msg;
+                    var href = window.location.href;
+                    var last_char = href.slice(-1);
+                    if (!(last_char == '/')){
+                        window.location = window.location.href + '/' + msg;
+                    }else{
+                        window.location = window.location.href + msg;
+                    }
                 }
             })
             .fail(function( msg ) {

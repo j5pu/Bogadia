@@ -113,8 +113,7 @@ class contest
 
         self::print_participate_button();
 
-        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'">';
-        echo '<a id="login_show" class="kleo-show-login" href="#" style="visibility: hidden; none">Show Login popup</a>';
+        echo '<div class="row">';
         echo '<div class="col-md-12">';
         echo '<small>Así van las votaciones: '. $this->total_contestants .' participantes.</small><hr>';
         self::print_toolbar();
@@ -139,16 +138,16 @@ class contest
     }
 
     function print_participate_button(){
-        echo '<div class="row">';
+        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'">';
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div class="col-md-6 ">';
         echo '<button id="participate" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->id .'">PARTICIPAR</button>';
+        echo '<a id="login_show" class="kleo-show-login" href="#" style="visibility: hidden; none">Show Login popup</a>';
         echo '</div>';
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '</div>';
-
     }
 
     function print_contestants(){

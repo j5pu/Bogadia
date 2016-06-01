@@ -2,28 +2,7 @@
 /*
 Plugin Name: Bogacontest
 Description: Concurso de modelos
-
-/*CREATE TABLE `bogadia`.`wp_bogacontest_contestant` (
-`ID` INT NOT NULL AUTO_INCREMENT,
-  `user_id` VARCHAR(45) NULL,
-  `Date` DATETIME NULL,
-  PRIMARY KEY (`ID`),
-  UNIQUE INDEX `user_id_UNIQUE` (`user_id` ASC));*/
-/*CREATE TABLE `bogadia`.`wp_bogacontest_img` (
-`ID` INT NOT NULL AUTO_INCREMENT,
-  `contestant_id` INT UNSIGNED NULL,
-  `main` INT NULL DEFAULT 0,
-  PRIMARY KEY (`ID`));*/
-/*CREATE TABLE `bogadia`.`new_table` (
-`ID` INT NOT NULL AUTO_INCREMENT,
-  `contestant_id` BIGINT(20) NULL,
-  `voter_id` BIGINT(20) NULL,
-  `date` DATETIME NULL,
-  PRIMARY KEY (`ID`));*/
-/*CREATE TABLE `bogadia`.`wp_bogacontest` (
-`ID` INT NOT NULL AUTO_INCREMENT,
-  `slug` VARCHAR(100) NULL,
-  PRIMARY KEY (`ID`));*/
+*/
 function bogacontest_install() {
     global $wpdb;
 
@@ -61,46 +40,54 @@ function bogacontest_install() {
         slug varchar(100) NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY id (id ASC)
-	) $charset_collate;
-	";
+	) $charset_collate;";
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
 }
-register_activation_hook( __FILE__, 'bogashare_install' );
 
-add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
-add_filter('query_vars','wp_insertMyRewriteQueryVars');
-add_filter('init','flushRules');
-
-// Remember to flush_rules() when adding rules
 function flushRules(){
+    // Remember to flush_rules() when adding rules
     global $wp_rewrite;
     $wp_rewrite->flush_rules();
 }
 
-// Adding a new rule
 function wp_insertMyRewriteRules($rules)
 {
+    // Adding a new rule
     $newrules = array();
-    $newrules['concurso/([^/]+)'] = 'index.php?pagename=bogacontest&contest=$matches[1]';
-    $newrules['concursante/([^/]+)/(.+)'] = 'index.php?pagename=bogacontestant&contest=$matches[1]&contestant=$matches[2]';
+    $newrules['concursos/([^/]+)/(.+)'] = 'index.php?pagename=bogacontestant&contest=$matches[1]&contestant=$matches[2]';
+    $newrules['concursos/([^/]+)'] = 'index.php?pagename=bogacontest&contest=$matches[1]';
     $finalrules = $newrules + $rules;
     return $finalrules;
 }
 
-// Adding the var so that WP recognizes it
 function wp_insertMyRewriteQueryVars($vars)
 {
+    // Adding the var so that WP recognizes it
     array_push($vars, 'contest');
     array_push($vars, 'contestant');
     return $vars;
 }
 
-//Stop wordpress from redirecting
-remove_filter('template_redirect', 'redirect_canonical');
+function bogacontest_assets(){
+    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery'));
+    wp_enqueue_script('bogacontest');
+    wp_register_style('bogacontest', '/wp-content/plugins/boga-contest/assets/css/bogacontest.css');
+    wp_enqueue_style('bogacontest');
+    wp_enqueue_media();
+}
 
 include 'class/contestant.php';
 $bogacontestant = new contestant();
 $bogacontest = new contest();
+
+register_activation_hook( __FILE__, 'bogashare_install' );
+add_action('wp_enqueue_scripts', 'bogacontest_assets');
+add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
+add_filter('query_vars','wp_insertMyRewriteQueryVars');
+add_filter('init','flushRules');
+remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
+add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data') );
+add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );
 

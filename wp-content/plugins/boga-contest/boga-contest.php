@@ -82,7 +82,7 @@ include 'class/contestant.php';
 $bogacontestant = new contestant();
 $bogacontest = new contest();
 
-register_activation_hook( __FILE__, 'bogashare_install' );
+register_activation_hook( __FILE__, 'bogacontest_install' );
 add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
 add_filter('query_vars','wp_insertMyRewriteQueryVars');

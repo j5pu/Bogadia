@@ -41,6 +41,25 @@ class contest
     {
     }
 
+    function create()
+    {
+        global $wpdb;
+        $results = $wpdb->insert(
+            'wp_bogacontest',
+            array(
+                'slug' => $this->slug,
+            ),
+            array(
+                '%s',
+            )
+        );
+        if($results){
+            $results = $wpdb->insert_id;
+        }
+        return $results;
+    }
+
+
     function get_contest_slug_from_url(){
         global $wp_query;
         $this->slug = urldecode($wp_query->query_vars['contest']);
@@ -66,14 +85,31 @@ class contest
         return $wpdb->get_results( "SELECT wp_bogacontest_contestant.user_id FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_users.ID=wp_bogacontest_contestant.user_id WHERE wp_users.display_name LIKE '%". $query ."%' ;", OBJECT );
     }
 
-    function print_contest_data(){
+    function print_contest_data()
+    {
         self::get_contest_slug_from_url();
         self::get_contestants('RAND()', '');
+
         if (empty($this->contestants)) {
-            return 'Concurso no encontrado';
+            global $wpdb;
+            $this->id = $wpdb->get_var("SELECT ID FROM wp_bogacontest WHERE slug='". $this->slug ."';");
+
+            if (empty($this->id)) {
+                $this->id = self::create();
+                self::get_contestants('RAND()', '');
+
+                if (empty($this->contestants)) {
+                    echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
+                    self::print_participate_button();
+                    return '';
+                }
+            }
+        }else{
+            self::count_contestans();
+            $this->id = $this->contestants[0]->contest_id;
+
         }
-        self::count_contestans();
-        $this->id = $this->contestants[0]->contest_id;
+
 
         self::print_participate_button();
 
@@ -526,7 +562,7 @@ class contestant
         echo '</div>';
         echo '</div>';
 
-        echo '<div class="row">';
+/*        echo '<div class="row">';
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div class="col-md-6 ">';
@@ -535,7 +571,7 @@ class contestant
         echo '</div>';
         echo '<div class="col-md-3 ">';
         echo '</div>';
-        echo '</div>';
+        echo '</div>';*/
         return '';
     }
 

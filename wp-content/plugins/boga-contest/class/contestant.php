@@ -487,7 +487,9 @@ class contestant
         echo '<a id="login_show" class="kleo-show-login" href="#" style="display: none">Show Login popup</a>';
         echo '<div class="col-sm-6 col-md-6">';
         if (!empty($this->main_photo)){
+            echo '<a id="main_photo_holder" href="'. $this->main_photo .'">';
             echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive">';
+            echo '</a>';
         }else{
             echo '<img id="no_main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
         }
@@ -536,7 +538,9 @@ class contestant
                         echo '<div class="row gallery-row" style="">';
                     }
                     echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                    echo '<a id="main_photo_holder" href="'. $photo->path .'">';
                     echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
+                    echo '</a>';
                     echo '</div>';
                     $contador++;
                 }

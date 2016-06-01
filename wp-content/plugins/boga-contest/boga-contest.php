@@ -21,7 +21,7 @@ function bogacontest_install() {
         id int UNSIGNED NOT NULL AUTO_INCREMENT,
         contestant_id int UNSIGNED NULL,
         main int NULL,
-        path varchar(800) NULL,
+        path varchar(500) NULL,
         date datetime NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY id (id ASC)

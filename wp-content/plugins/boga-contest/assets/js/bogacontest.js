@@ -118,9 +118,6 @@ function new_photo(){
                     beforeSend: function(){
                         console.log('preparando foto');
                         progress_bar.move('60%');
-                        setTimeout(function(){
-                            progress_bar.move('70%');
-                        }, 1000);
                     },
                     method: "POST",
                     url: "/wp-content/plugins/boga-contest/new_photo.php",
@@ -221,8 +218,14 @@ jQuery(document).ready(function()
     jQuery('.contestant-photo').each(function(){
         galeria.push({scr: jQuery(this).attr('src')});
     });
-    jQuery('.contestant-photo').magnificPopup({
+/*    jQuery('.contestant-photo').magnificPopup({
         items: galeria,
+        gallery: {
+            enabled: true
+        },
+        type: 'image' // this is default type
+    });*/
+    jQuery('#main_photo_holder').magnificPopup({
         gallery: {
             enabled: true
         },

@@ -6,10 +6,10 @@ var progress_bar = {
         jQuery("#upload_progress_bar_text").html(value);
     },
     show: function (){
-        jQuery("#progress_bar_container").show('fast');
+        jQuery("#progress_bar_container").slideDown('fast');
     },
     hide: function (){
-        jQuery("#progress_bar_container").hide('slow');
+        jQuery("#progress_bar_container").slideUp('slow');
     }
 };
 
@@ -20,18 +20,20 @@ function new_vote(contestant_id){
     }else{
         jQuery.ajax({
             beforeSend: function(){
-                console.log('preparando voto');
+                jQuery('.vote').html('<img src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 4%">');
             },
             method: "POST",
             url: "/wp-content/plugins/boga-contest/new_vote.php",
             data: {
                 voter_id: voter_id,
-                contestant_id: contestant_id
-            }
+                contestant_id: contestant_id,
+                user_id: jQuery('#current-user-data-holder').data('contestantuserid')
+
+    }
             })
             .done(function( msg ) {
-                alert('exito' + msg);
-                if(msg != '0'){
+                jQuery('.vote').html(msg);
+                if(msg == '¡Genial! Tu voto ha sido contabilizado'){
                     var vote_div = jQuery('#votes-' + contestant_id);
                     var votes = parseInt(vote_div.data('votes'));
                     vote_div.html((votes + 1) + ' votos');
@@ -127,7 +129,7 @@ function new_photo(){
                         contestant_id: jQuery('#upload').data("contestantid")
                     }
                 })
-                .done(function( msg ) {
+                .done(function(  ) {
                     progress_bar.move('90%');
 
                     // Colocamos la nueva imagen
@@ -142,7 +144,9 @@ function new_photo(){
                         }
 
                         str = str + '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                        str = str + '<a id="main_photo_holder" href="' + image_url + '">';
                         str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
+                        str = str + '</a>';
                         str = str + '</div>';
 
                         if (num_photos_last_row == 4) {
@@ -152,15 +156,13 @@ function new_photo(){
                             gallery.find('div:last-child').append(str);
                         }
                     }else{
-                        jQuery("#no_main_photo").attr('src', image_url);
-                        jQuery("#no_main_photo").attr('id', 'main_photo');
+                        var main_photo = jQuery("#no_main_photo");
+                        main_photo.attr('src', image_url);
+                        main_photo.attr('id', 'main_photo');
                     }
 
                     progress_bar.move('100%');
-                    // get instance (after popup was opened)
-                    /*                    jQuery.magnificPopup.instance.items.push({
-                     src: image_url
-                     });*/
+
                     setTimeout(function(){
                         progress_bar.hide();
                     }, 1000);
@@ -226,6 +228,7 @@ jQuery(document).ready(function()
         type: 'image' // this is default type
     });*/
     jQuery('#main_photo_holder').magnificPopup({
+        delegate: 'a',
         gallery: {
             enabled: true
         },

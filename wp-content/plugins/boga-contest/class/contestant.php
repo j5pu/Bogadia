@@ -1,7 +1,6 @@
 <?php
 class contest
 {
-
     public function getId()
     {
         return $this->id;
@@ -76,7 +75,7 @@ class contest
 
     function count_contestans(){
         global $wpdb;
-        $this->total_contestants = $wpdb->get_var( "SELECT COUNT(*) FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ;", OBJECT );
+        $this->total_contestants = $wpdb->get_var( "SELECT COUNT(*) FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ;");
     }
 
     function search_contestant($query)
@@ -112,10 +111,10 @@ class contest
 
 
         self::print_participate_button();
-
+        echo '<hr>';
         echo '<div class="row">';
         echo '<div class="col-md-12">';
-        echo '<small>Así van las votaciones: '. $this->total_contestants .' participantes.</small><hr>';
+        echo '<small>Así van las votaciones: '. $this->total_contestants .' participantes.</small>';
         self::print_toolbar();
         self::print_contestants();
         echo '</div>';
@@ -406,7 +405,23 @@ class contestant
     }
 
     function anotate_vote($voter_id){
+        if ($this->user_id == $voter_id){
+            return '¡Ehh tramposo! No vale votarte a ti mismo';
+        }
         global $wpdb;
+        $last_user_vote = $wpdb->get_var("SELECT date FROM wp_bogacontest_votes WHERE contestant_id=". $this->ID ." AND voter_id=". $voter_id ." ORDER BY date DESC;");
+        if ($last_user_vote){
+            $last_user_vote = new DateTime("$last_user_vote");
+            $date_to_vote_again = date_add($last_user_vote, date_interval_create_from_date_string('1 days'));
+            $now = new DateTime("now");
+            $time_to_vote_again = date_diff($now, $date_to_vote_again);
+
+            if (! ($time_to_vote_again->invert == 1)){
+                return 'Podrás volver a votarle en '. $time_to_vote_again->format('%h horas y %i minutos') .'.';
+            }
+
+        }
+
         $success = $wpdb->insert(
             'wp_bogacontest_votes',
             array(
@@ -422,8 +437,10 @@ class contestant
         );
         if($success){
             $success = $wpdb->insert_id;
+            return '¡Genial! Tu voto ha sido contabilizado';
         }
-        return $success;
+        return '¡Upps! Tu voto no se ha contado';
+
     }
 
     function print_social_data(){
@@ -444,7 +461,9 @@ class contestant
     }
 
     function print_vote_button(){
-        echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-primary btn-block vote" data-id="'. $this->ID .'">VOTAR</button>';
+        if(!($this->user_id == get_current_user_id())){
+            echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-primary btn-block vote" data-id="'. $this->ID .'">VOTAR</button>';
+        }
     }
 
     function print_mini_card($contest_slug){
@@ -457,10 +476,6 @@ class contestant
         self::print_social_data();
         self::print_vote_button();
         echo '</div>';
-    }
-
-    function get_id_or_nicename_from_url(){
-
     }
 
     function print_contestant_data(){
@@ -483,7 +498,7 @@ class contestant
         self::get_imgs();
         self::get_votes();
 
-        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'">';
+        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
         echo '<a id="login_show" class="kleo-show-login" href="#" style="display: none">Show Login popup</a>';
         echo '<div class="col-sm-6 col-md-6">';
         if (!empty($this->main_photo)){
@@ -565,17 +580,6 @@ class contestant
         echo '</div>';
         echo '</div>';
 
-/*        echo '<div class="row">';
-        echo '<div class="col-md-3 ">';
-        echo '</div>';
-        echo '<div class="col-md-6 ">';
-        self::print_social_data();
-        self::print_vote_button();
-        echo '</div>';
-        echo '<div class="col-md-3 ">';
-        echo '</div>';
-        echo '</div>';*/
         return '';
     }
-
 }

@@ -58,7 +58,6 @@ class contest
         return $results;
     }
 
-
     function get_contest_slug_from_url(){
         global $wp_query;
         $this->slug = urldecode($wp_query->query_vars['contest']);
@@ -109,7 +108,7 @@ class contest
 
         }
 
-
+        self::print_form();
         self::print_participate_button();
         echo '<hr>';
         echo '<div class="row">';
@@ -167,6 +166,53 @@ class contest
         }
     }
 
+    function print_form(){
+        echo '<div class="modal fade" id="bogacontest_login_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
+
+        echo '<div  class="modal-dialog">';
+        echo '<div id="bogacontest_login_modal_dialog" class="modal-content text-right">';
+
+        echo '<div id="bogacontest_login_header" class="modal-header">';
+        echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        echo '<h4 id="bogacontest_login_title" class="modal-title text-center">Acceso</h4>';
+        echo '</div>';
+
+
+        echo '<div class="modal-body">';
+        echo '<div class="row">';
+
+        echo '<div class="col-xs-5 col-sm-6 col-md-6">';
+        echo '</div>';
+
+        echo '<div id="bogacontest_login_body" class="col-xs-7 col-sm-6 col-md-6">';
+        echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
+        echo '<hr>';
+        echo '<input id="username" class="form-control" type="text" name="username" placeholder="Nombre de usuario">';
+        echo '<input id="password" class="form-control" type="password" name="password" placeholder="Contraseña">';
+        echo '<input id="action_after_login" class="form-control" type="hidden" name="action_after_login" value="0">';
+        echo wp_nonce_field( 'ajax-login-nonce', 'security' );
+        echo '<button id="bogacontest_up_login" type="button" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Entrar</button>';
+        echo '</div>';
+
+
+        echo '</div>';
+        echo '</div>';
+
+
+        echo '<div id="bogacontest_login_footer" class="modal-footer">';
+        echo '<a class="lost" href="'. wp_lostpassword_url() .'">¿Has perdido tu contraseña?</a>';
+        echo '</div>';
+
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+
+        if (is_user_logged_in()) {
+            echo '<a class="login_button" href="'. wp_logout_url() .'">Salir</a>';
+        } else {
+            echo '<button class="login_button" id="show_login" href="" >Entrar</button>';
+        }
+    }
 }
 class contestant
 {
@@ -269,6 +315,7 @@ class contestant
     public $main_photo;
     public $photos = array();
     public $nice_name;
+    public $position;
 
     function __construct()
     {
@@ -401,7 +448,7 @@ class contestant
     function get_votes()
     {
         global $wpdb;
-        $this->votes = $wpdb->get_var("SELECT COUNT(*) FROM wp_bogacontest_votes WHERE contestant_id=". $this->ID .";");
+        $this->position = $wpdb->get_var("SELECT COUNT(*) FROM wp_bogacontest_votes WHERE contestant_id=". $this->ID .";");
     }
 
     function anotate_vote($voter_id){
@@ -443,38 +490,48 @@ class contestant
 
     }
 
+    function get_position(){
+        global $wpdb;
+        $this->position = $wpdb->get_var("SELECT COUNT((SELECT COUNT(*) as count FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY count DESC)) FROM wp_bogacontest_votes WHERE contestant_id=". $this->ID .";");
+/*        $this->position = $wpdb->get_var("SELECT contestant_id, COUNT(*) as count FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY count DESC;");*/
+    }
+
     function print_social_data(){
         echo '<div class="row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-facebook" style="font-size: 22px;"></em>';
+        echo '<em class="icon-facebook"></em>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-twitter" style="font-size: 22px;"></em>';
+        echo '<em class="icon-twitter"></em>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-instagram" style="font-size: 22px;"></em>';
+        echo '<i class="icon-instagramm"></i>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-pinterest" style="font-size: 22px;"></em>';
+        echo '<i class="icon-pinterest-circled"></i>';
         echo '</div>';
         echo '</div>';
     }
 
     function print_vote_button(){
         if(!($this->user_id == get_current_user_id())){
-            echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-primary btn-block vote" data-id="'. $this->ID .'">VOTAR</button>';
+            echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-primary btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
         }
     }
 
     function print_mini_card($contest_slug){
-        echo '<div class="col-md-3 portada_post">';
+        echo '<div class="col-md-3 ">';
         echo '<div style="height: 120px; overflow-y: hidden;">';
         echo '<img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" >';
         echo '</div>';
+        echo '<div id="data_border" class="mini_contestant_data">';
         echo '<h3><a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
-        echo $this->votes .' votos';
+        echo '<h6>Posición '. $this->votes .'<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
+        echo '<div>';
         self::print_social_data();
         self::print_vote_button();
+        echo '</div>';
+        echo '</div>';
         echo '</div>';
     }
 
@@ -494,9 +551,11 @@ class contestant
         if (empty($results)) {
             return 'Concursante no encontrado';
         }
+
         self::set_contestant($results);
         self::get_imgs();
         self::get_votes();
+        self::get_position();
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
         echo '<a id="login_show" class="kleo-show-login" href="#" style="display: none">Show Login popup</a>';

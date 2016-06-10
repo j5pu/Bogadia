@@ -79,16 +79,35 @@ function bogacontest_assets(){
     wp_enqueue_media();
 }
 
+function bogacontest_ajax_login(){
+    // First check the nonce, if it fails the function will break
+    check_ajax_referer( 'ajax-login-nonce', 'security' );
+
+    // Nonce is checked, get the POST data and sign user on
+    $info = array();
+    $info['user_login'] = $_POST['username'];
+    $info['user_password'] = $_POST['password'];
+    $info['remember'] = true;
+    $user_signon = wp_signon($info, is_ssl() ? true : false);
+    if ( is_wp_error($user_signon) ){
+        echo json_encode(array('loggedin'=>false, 'message'=>__('Wrong username or password.')));
+    } else {
+        echo json_encode(array('loggedin'=>true, 'message'=>__('Login successful, redirecting...'), 'user_id'=>$user_signon->ID));
+    }
+    die();
+}
+
+
 include 'class/contestant.php';
 $bogacontestant = new contestant();
 $bogacontest = new contest();
 
 register_activation_hook( __FILE__, 'bogacontest_install' );
-add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
 add_filter('query_vars','wp_insertMyRewriteQueryVars');
 add_filter('init','flushRules');
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
 add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data') );
 add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );
-
+add_action('wp_enqueue_scripts', 'bogacontest_assets');
+add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );

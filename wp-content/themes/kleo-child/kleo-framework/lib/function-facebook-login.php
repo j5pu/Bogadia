@@ -336,7 +336,6 @@ function kleo_fb_intialize() {
 
     die( json_encode( array(
         'loggedin' => true,
-        'user_id' => $user->data->ID,
         'type' => $logintype,
         'url' => $redirect,
         'redirectType' => $redirect_type,

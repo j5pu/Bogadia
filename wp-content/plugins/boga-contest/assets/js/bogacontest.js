@@ -1,4 +1,18 @@
-var galeria = [];
+var gallery = {
+    photos: [],
+    init: function(){
+        jQuery('.contestant-photo').each(function(){
+            gallery.photos.push({scr: jQuery(this).attr('src')});
+        });
+        jQuery('#main_photo_holder').magnificPopup({
+            delegate: 'a',
+            gallery: {
+                enabled: true
+            },
+            type: 'image' // this is default type
+        });
+    },
+};
 
 var progress_bar = {
     move: function (value){
@@ -13,28 +27,123 @@ var progress_bar = {
     }
 };
 
-function new_vote(contestant_id){
-    var voter_id = jQuery('#current-user-data-holder').data('currentuserid');
-    if(voter_id == '0') {
-        jQuery('#login_show').click();
-    }else{
+var login = {
+    bind_events: function(){
+        jQuery('#show_login').on('click', function(){
+            jQuery('#bogacontest_login_modal').modal({show:true});
+        });
+        jQuery('#bogacontest_fb_login').on('click', function(){
+            login.with_facebook();
+        });
+        jQuery('#bogacontest_up_login').on('click', function(){
+            login.with_user_password();
+        });
+    },
+    with_user_password: function (){
         jQuery.ajax({
-            beforeSend: function(){
-                jQuery('.vote').html('<img src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 4%">');
-            },
-            method: "POST",
-            url: "/wp-content/plugins/boga-contest/new_vote.php",
+            type: 'POST',
+            dataType: 'html',
+            url: jQuery('#login_button').data('ajaxurl'),
             data: {
-                voter_id: voter_id,
-                contestant_id: contestant_id,
-                user_id: jQuery('#current-user-data-holder').data('contestantuserid')
+                'action': 'bogacontest_ajax_login', //calls wp_ajax_nopriv_ajaxlogin
+                'username': jQuery('form#login #username').val(),
+                'password': jQuery('form#login #password').val(),
+                'security': jQuery('form#login #security').val(),
+                'bogacontest_action': jQuery('form#login #security').val()
+            }
+        }).done(function(data){
+            data = JSON.parse(data);
+            if (data.loggedin == true){
+                jQuery('#current-user-data-holder').data('currentuserid', data.user_id);
+                login.action_after_login();
+            }
+        });
+    },
+    with_facebook: function(){
+        function fb_intialize_share(FB_response, token){
+            FB.api( '/me', 'GET', {
+                    fields : 'id,email,verified,name',
+                    access_token : token
+                },
+                function(FB_userdata){
+                    jQuery.ajax({
+                        type: 'POST',
+                        dataType: 'html',
+                        url: fbAjaxUrl,
+                        data: {"action": "fb_intialize", "FB_userdata": FB_userdata, "FB_response": FB_response},
+                        success: function(user){
+                            user = JSON.parse(user);
+                            if( user.error ) {
+                            }else{
+                                jQuery('#current-user-data-holder').data('currentuserid', user.user_id);
+                                login.action_after_login();
+                            }
+                        }
+                    });
+                }
+            );
+        }
 
+        if (navigator.userAgent.match('CriOS')) {
+            window.open('https://www.facebook.com/dialog/oauth?client_id=' + jQuery('#compartir_opinion').data('appid') + '&redirect_uri=' + document.location.href + '&scope=email,public_profile,publish_actions&response_type=token', '', null);
+            jQuery("#fb-root").bind("facebook:init", function () {
+                var accToken = jQuery.getUrlVar('#access_token');
+                if (accToken) {
+                    var fbArr = {scopes: "email,public_profile,publish_actions"};
+                    return fb_intialize_share(fbArr, accToken);
+                }
+            });
+        } else {
+            FB.login(function (FB_response) {
+                    if (FB_response.authResponse) {
+                        return fb_intialize_share(FB_response, '');
+                    }
+                },
+                {
+                    scope: 'email,public_profile',
+                    auth_type: 'rerequest',
+                    return_scopes: true
+                });
+        }
+    },
+    action_after_login: function(){
+        var action = jQuery('#action_after_login').val();
+        if (action == 'vote'){
+            vote.new_vote();
+        }
+        if (action == 'participate'){
+            new_contestant();
+        }
     }
+};
+
+var vote = {
+    voter_id: '',
+    contestant_id: '',
+    user_id: '',
+    button: '',
+    new_vote: function(){
+        vote.voter_id = jQuery('#current-user-data-holder').data('currentuserid');
+        if(vote.voter_id == '0') {
+            jQuery('#bogacontest_login_modal').modal({show:true});
+            jQuery('#action_after_login').val('vote');
+        }else{
+            jQuery.ajax({
+                beforeSend: function(){
+                    vote.button.html('<img src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 4%">');
+                },
+                method: "POST",
+                url: "/wp-content/plugins/boga-contest/new_vote.php",
+                data: {
+                    voter_id: vote.voter_id,
+                    contestant_id: vote.contestant_id,
+                    user_id: vote.user_id
+                }
             })
             .done(function( msg ) {
-                jQuery('.vote').html(msg);
+                vote.button.html(msg);
                 if(msg == '¡Genial! Tu voto ha sido contabilizado'){
-                    var vote_div = jQuery('#votes-' + contestant_id);
+                    var vote_div = jQuery('#votes-' + vote.contestant_id);
                     var votes = parseInt(vote_div.data('votes'));
                     vote_div.html((votes + 1) + ' votos');
                 }
@@ -42,13 +151,15 @@ function new_vote(contestant_id){
             .fail(function( msg ) {
                 alert('fallo' + msg);
             });
+        }
     }
-}
+};
 
 function new_contestant(){
     var user_id = jQuery('#current-user-data-holder').data('currentuserid');
     if(user_id == '0') {
-        jQuery('#login_show').click();
+        jQuery('#bogacontest_login_modal').modal({show:true});
+        jQuery('#action_after_login').val('participate');
     }else{
         jQuery.ajax({
                 beforeSend: function(){
@@ -206,10 +317,14 @@ function change_main_photo() {
 jQuery(document).ready(function()
 {
     jQuery('.vote').on('click', function(){
-        new_vote(jQuery(this).data("id"));
+        vote.contestant_id = jQuery(this).data('contestantuserid');
+        vote.user_id = jQuery(this).data("id");
+        vote.voter_id = jQuery('#current-user-data-holder').data('currentuserid');
+        vote.button = jQuery(this);
+        vote.new_vote();
     });
     jQuery('#participate').on('click', function(){
-        new_contestant();
+        new_contestant(jQuery(this));
     });
     jQuery('#upload_alias').on('click', function(){
         jQuery('#upload').click();
@@ -217,21 +332,6 @@ jQuery(document).ready(function()
     jQuery('#upload').on('change', function(){
         new_photo();
     });
-    jQuery('.contestant-photo').each(function(){
-        galeria.push({scr: jQuery(this).attr('src')});
-    });
-/*    jQuery('.contestant-photo').magnificPopup({
-        items: galeria,
-        gallery: {
-            enabled: true
-        },
-        type: 'image' // this is default type
-    });*/
-    jQuery('#main_photo_holder').magnificPopup({
-        delegate: 'a',
-        gallery: {
-            enabled: true
-        },
-        type: 'image' // this is default type
-    });
+    login.bind_events();
+    gallery.init();
 });

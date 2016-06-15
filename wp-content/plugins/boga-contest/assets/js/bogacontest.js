@@ -153,6 +153,7 @@ var progress_bar = {
 var login = {
     bind_events: function(){
         jQuery('#login_button').on('click', function(){
+            jQuery('#bogacontest_up_login_action_after_login').val('log');
             jQuery('#bogacontest_login_modal').modal({show:true});
         });
         jQuery('#bogacontest_fb_login').on('click', function(){

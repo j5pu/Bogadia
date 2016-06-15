@@ -70,3 +70,17 @@
 #logout_button, #login_button{
     margin-left: 0px;
 }
+#contestants_forest_header{
+    width:100%;
+    text-align:left;
+    border-bottom: 3px solid #000;
+    line-height:0.1em;
+    margin:10px 0 20px;
+}
+#contestants_forest_header_span{
+    background:#fff;
+    padding:0 10px;
+}
+#current-user-data-holder{
+    margin-bottom: 50px;
+}

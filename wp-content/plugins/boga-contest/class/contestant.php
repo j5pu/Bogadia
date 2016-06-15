@@ -143,8 +143,12 @@ class contest
         }
 
         self::print_form();
-        self::print_participate_button();
+        echo '<img class="aligncenter img-responsive" src="http://alo.co/sites/default/files/imagecache/Main_Galeria_Vertical_720_438/_can8835.jpg">';
+        echo '<h1>BogaContest</h1>';
         echo '<hr>';
+        echo '<p>¿Tienes carisma? ¿Te consideras una persona con chispa? Es tu momento. En Bogadia queremos romper los estereotipos de los concursos de modelos y apostar por una <strong>belleza real</strong>, lejos de los cánones impuestos. Entra de lleno en el mundo de la moda participando en BogaContest, el primer <strong>concurso de modelos</strong> para <strong>gente como tú</strong>. Podrás convertirte en la <strong>imagen de Bogadia</strong>, ganar un <strong>book de fotos profesional</strong> valorado en 300€ y promoción en todas nuestras <strong>redes sociales</strong>. ¿A qué esperas? ¡Haz click en participar para <strong>crear tu cuenta</strong>!</p>';
+        self::print_participate_button();
+        echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones</span></h2>';
         self::print_toolbar();
         echo '<div class="row">';
         echo '<div id="contestants_container" class="col-md-12">';
@@ -164,7 +168,7 @@ class contest
         echo '</div>';
         echo '<div id="toolbar_filter" class="col-md-4">';
         echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="votes">Ranking</label></div>';
-        echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="RAND()">Aleatorio</label></div>';
+        echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="RAND()" checked="checked">Aleatorio</label></div>';
         echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="wp_bogacontest_contestant.date">Recientes</label></div>';
         echo '</div>';
         echo '</div>';

@@ -164,6 +164,9 @@ var login = {
     },
     with_user_password: function (){
         jQuery.ajax({
+            beforeSend: function(){
+                jQuery('#bogacontest_up_login').html('<img class="image-responsive" style="margin: 0 auto;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 5%">');
+            },
             type: 'POST',
             dataType: 'html',
             url: jQuery('#bogacontest_up_login').data('ajaxurl'),
@@ -189,19 +192,25 @@ var login = {
                 },
                 function(FB_userdata){
                     jQuery.ajax({
+                        beforeSend: function(){
+                            jQuery('#bogacontest_fb_login').html('<img class="image-responsive" style="margin: 0 auto;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 5%">');
+                        },
                         type: 'POST',
                         dataType: 'html',
                         url: fbAjaxUrl,
                         data: {"action": "fb_intialize", "FB_userdata": FB_userdata, "FB_response": FB_response},
-                        success: function(user){
-                            user = JSON.parse(user);
-                            if( user.error ) {
-                            }else{
-                                jQuery('#current-user-data-holder').data('currentuserid', user.user_id);
-                                login.action_after_login();
-                            }
+                    }).done(function(user){
+                        user = JSON.parse(user);
+                        if( user.error ) {
+                        }else{
+                            jQuery('#current-user-data-holder').data('currentuserid', user.user_id);
+                            login.action_after_login();
                         }
-                    });
+                    }).fail(function(user){
+
+                    })
+
+                    ;
                 }
             );
         }
@@ -289,9 +298,9 @@ var toolbar = {
         toolbar.search = jQuery("#search_query_input").val();
         toolbar.new_query();
     },
-    wait: 1500,
+    wait: 1000,
     highlight: true,
-    captureLength: 0
+    captureLengƒth: 0
     },
     new_query: function(){
         jQuery.ajax({

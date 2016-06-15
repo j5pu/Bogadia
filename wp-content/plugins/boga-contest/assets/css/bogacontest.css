@@ -67,3 +67,6 @@
 #bogacontest_login_title{
     color: white !important;
 }
+#logout_button, #login_button{
+    margin-left: 0px;
+}

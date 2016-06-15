@@ -82,12 +82,18 @@ class contest
         }
         $results = $wpdb->get_results( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id LEFT JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $query_search ." ". $group_by ." ORDER BY ". $by ." ". $direction .";", OBJECT );
         $this->contestants = $results;
-        return $results;
+        if ($by == 'votes') {
+            $this->positions;
+        }
+            return $results;
     }
 
-    function get_positions(){
-        global $wpdb;
-        $this->positions = $wpdb->get_results("SELECT contestant_id, COUNT(*) as votes FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY votes DESC;", OBJECT);
+    function get_positions()
+    {
+        if (empty($this->positions)){
+            global $wpdb;
+            $this->positions = $wpdb->get_results("SELECT contestant_id, COUNT(*) as votes FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY votes DESC;", OBJECT);
+        }
     }
 
     function count_contestans(){
@@ -139,7 +145,6 @@ class contest
         self::print_form();
         self::print_participate_button();
         echo '<hr>';
-        echo '<small>Así van las votaciones: '. $this->total_contestants .' participantes.</small>';
         self::print_toolbar();
         echo '<div class="row">';
         echo '<div id="contestants_container" class="col-md-12">';
@@ -150,17 +155,19 @@ class contest
     }
 
     function print_toolbar(){
-        echo '<div id="toolbar" class="row form-group" data-slug="'. $this->slug .'">';
-        echo '<div id="toolbar_search" class="col-md-6">';
+        echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->slug .'">';
+        echo '<div id="toolbar_counter" class="col-md-4">';
+        echo '<small>'. $this->total_contestants .' participantes</small>';
+        echo '</div>';
+        echo '<div id="toolbar_search" class="col-md-4">';
         echo '<input id="search_query_input" type="text" class="form-control" placeholder="buscar por nombre">';
         echo '</div>';
-        echo '<div id="toolbar_filter" class="col-md-6">';
+        echo '<div id="toolbar_filter" class="col-md-4">';
         echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="votes">Ranking</label></div>';
         echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="RAND()">Aleatorio</label></div>';
         echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="wp_bogacontest_contestant.date">Recientes</label></div>';
         echo '</div>';
         echo '</div>';
-
     }
 
     function print_participate_button(){
@@ -169,7 +176,15 @@ class contest
         echo '</div>';
         echo '<div class="col-md-6 ">';
         echo '<button id="participate" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->id .'">PARTICIPAR</button>';
-        echo '<a id="login_show" class="kleo-show-login" href="#" style="visibility: hidden; none">Show Login popup</a>';
+/*        echo '<div id="bogacontest_log_in_out_button">';*/
+        if (is_user_logged_in()) {
+            echo '<a id="logout_button" class=" btn btn-default btn-block" href="'. wp_logout_url(home_url()) .'">Salir</a>';
+            echo '<button class="login_button btn btn-default btn-block" id="login_button" style="display: none;">Entrar</button>';
+        } else {
+            echo '<a id="logout_button" class="logout_button btn btn-default btn-block" href="'. wp_logout_url(home_url()) .'" style="display: none;">Salir</a>';
+            echo '<button class="btn btn-default btn-block" id="login_button">Entrar</button>';
+        }
+/*        echo '</div>';*/
         echo '</div>';
         echo '<div class="col-md-3 ">';
         echo '</div>';
@@ -235,15 +250,6 @@ class contest
 
         echo '</div>';
         echo '</div>';
-        echo '</div>';
-        echo '<div id="bogacontest_log_in_out_button">';
-        if (is_user_logged_in()) {
-            echo '<a id="logout_button" class=" btn btn-default" href="'. wp_logout_url(home_url()) .'">Salir</a>';
-            echo '<button class="login_button btn btn-default" id="login_button" style="display: none;">Entrar</button>';
-        } else {
-            echo '<a id="logout_button" class="logout_button btn btn-default" href="'. wp_logout_url(home_url()) .'" style="display: none;">Salir</a>';
-            echo '<button class="btn btn-default" id="login_button">Entrar</button>';
-        }
         echo '</div>';
     }
 }

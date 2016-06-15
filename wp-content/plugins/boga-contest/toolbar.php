@@ -1,10 +1,7 @@
 <?php
 require_once('../../../wp-load.php');
 $filter = $_POST['filter'];
-$query = $_POST['query'];
+$search = $_POST['search'];
 $bogacontest->setSlug($_POST['slug']);
-if ($filter){
-    $bogacontest->setSlug($_POST['slug']);
-
-}
-$bogacontest->setSlug($_POST['slug']);
+$bogacontest->get_contestants($filter, 'DESC', $search);
+$bogacontest->print_contestants();

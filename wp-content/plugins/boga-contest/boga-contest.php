@@ -72,7 +72,9 @@ function wp_insertMyRewriteQueryVars($vars)
 }
 
 function bogacontest_assets(){
-    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery'));
+    wp_register_script('typewatch', '/wp-content/plugins/boga-contest/assets/js/typewatch.js', array('jquery'));
+    wp_enqueue_script('bogacontest');
+    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery', 'typewatch'));
     wp_enqueue_script('bogacontest');
     wp_register_style('bogacontest', '/wp-content/plugins/boga-contest/assets/css/bogacontest.css');
     wp_enqueue_style('bogacontest');
@@ -97,6 +99,34 @@ function bogacontest_ajax_login(){
     die();
 }
 
+function bogacontest_ajax_register(){
+
+    // First check the nonce, if it fails the function will break
+    check_ajax_referer( 'ajax-register-nonce', 'security' );
+
+    // Nonce is checked, get the POST data and sign user on
+    $info = array();
+    $info['user_nicename'] = $info['nickname'] = $info['display_name'] = $info['first_name'] = $info['user_login'] = sanitize_user($_POST['username']) ;
+    $info['user_pass'] = sanitize_text_field($_POST['password']);
+    $info['user_email'] = sanitize_email( $_POST['email']);
+
+    // Register the user
+    $user_register = wp_insert_user( $info );
+    if ( is_wp_error($user_register) ){
+        $error  = $user_register->get_error_codes()	;
+
+        if(in_array('empty_user_login', $error))
+            echo json_encode(array('loggedin'=>false, 'message'=>__($user_register->get_error_message('empty_user_login'))));
+        elseif(in_array('existing_user_login',$error))
+            echo json_encode(array('loggedin'=>false, 'message'=>__('This username is already registered.')));
+        elseif(in_array('existing_user_email',$error))
+            echo json_encode(array('loggedin'=>false, 'message'=>__('This email address is already registered.')));
+    } else {
+        auth_user_login($info['nickname'], $info['user_pass'], 'Registration');
+    }
+
+    die();
+}
 
 include 'class/contestant.php';
 $bogacontestant = new contestant();
@@ -111,3 +141,4 @@ add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data')
 add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );
 add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );
+add_action( 'wp_ajax_nopriv_bogacontest_ajax_register', 'bogacontest_ajax_register' );

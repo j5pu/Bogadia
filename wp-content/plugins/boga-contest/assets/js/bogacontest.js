@@ -247,6 +247,7 @@ var login = {
         }
         jQuery('#login_button').hide('slow');
         jQuery('#logout_button').show('slow');
+        jQuery('#bogacontest_login_modal').modal('toggle');
     }
 };
 
@@ -263,7 +264,6 @@ var vote = {
         }else{
             jQuery.ajax({
                 beforeSend: function(){
-                    jQuery('#bogacontest_login_modal').modal('toggle');
                     vote.button.html('<img src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 4%">');
                 },
                 method: "POST",
@@ -335,7 +335,7 @@ function new_contestant(){
     var user_id = jQuery('#current-user-data-holder').data('currentuserid');
     if(user_id == '0') {
         jQuery('#bogacontest_login_modal').modal({show:true});
-        jQuery('#action_after_login').val('participate');
+        jQuery('#bogacontest_up_login_action_after_login').val('participate');
     }else{
         jQuery.ajax({
                 beforeSend: function(){

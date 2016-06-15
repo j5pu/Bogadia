@@ -128,6 +128,10 @@ function bogacontest_ajax_register(){
     die();
 }
 
+function allow_origin() {
+    header("Access-Control-Allow-Origin: *");
+}
+
 include 'class/contestant.php';
 $bogacontestant = new contestant();
 $bogacontest = new contest();
@@ -136,6 +140,7 @@ register_activation_hook( __FILE__, 'bogacontest_install' );
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
 add_filter('query_vars','wp_insertMyRewriteQueryVars');
 add_filter('init','flushRules');
+add_action( 'init', 'allow_origin' );
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
 add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data') );
 add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );

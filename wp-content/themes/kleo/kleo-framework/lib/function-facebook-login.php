@@ -264,7 +264,7 @@ function kleo_fb_intialize() {
             }
 
             //send email with password
-            wp_new_user_notification( $user_ID, wp_unslash( $user_pass ) );
+/*            wp_new_user_notification( $user_ID, wp_unslash( $user_pass ) );*/
 
             //add Facebook image
             update_user_meta($user_ID, 'kleo_fb_picture', 'https://graph.facebook.com/' . $id . '/picture');
@@ -336,11 +336,11 @@ function kleo_fb_intialize() {
 
     die( json_encode( array(
         'loggedin' => true,
-        'user_id' => $user->data->ID,
+        'user_id' => $user_ID,
         'type' => $logintype,
         'url' => $redirect,
         'redirectType' => $redirect_type,
-        'message' => __( 'Login successful, redirecting...','kleo_framework' )
+        'message' => __( 'Genial! ','kleo_framework' )
     )));
 }
 if ( ! is_admin() ) {

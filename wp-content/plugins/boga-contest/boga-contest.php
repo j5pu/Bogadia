@@ -3,6 +3,11 @@
 Plugin Name: Bogacontest
 Description: Concurso de modelos
 */
+
+include 'class/contestant.php';
+$bogacontestant = new contestant();
+$bogacontest = new contest();
+
 function bogacontest_install() {
     global $wpdb;
 
@@ -87,26 +92,51 @@ function bogacontest_ajax_login(){
 
     // Nonce is checked, get the POST data and sign user on
     $info = array();
-    $info['user_login'] = $_POST['username'];
-    $info['user_password'] = $_POST['password'];
-    $info['remember'] = true;
-    $user_signon = wp_signon($info, is_ssl() ? true : false);
-    if ( is_wp_error($user_signon) ){
-        echo json_encode(array('loggedin'=>false, 'message'=>__('Wrong username or password.')));
-    } else {
-        echo json_encode(array('loggedin'=>true, 'message'=>__('Login successful, redirecting...'), 'user_id'=>$user_signon->ID));
+
+    $user = get_user_by('email', $_POST['email']);
+    if (!empty($user)) {
+        if (wp_check_password( $_POST['password'], $user->data->user_pass, $user->ID)){
+            $info['user_login'] = $user->data->user_login;
+            $info['user_password'] = $_POST['password'];
+            $info['remember'] = true;
+            $user_signon = wp_signon($info, is_ssl() ? true : false);
+            if ( is_wp_error($user_signon) ){
+                echo json_encode(array('loggedin'=>false, 'message'=>__('¡Upps! Ha ocurrido un error')));
+            } else {
+                $bogacontestant = new contestant();
+                $bogacontestant->setUserId($user_signon->ID);
+                $bogacontestant->setContestId($_POST['contest_id']);
+                $bogacontestant->get();
+                if (!empty($bogacontestant->ID)){
+                    echo json_encode(array('loggedin'=>true, 'message'=>__('Hola de nuevo '. $bogacontestant->name .'. Te estamos redirigiendo a tu cuenta'), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
+                }else{
+                    echo json_encode(array('loggedin'=>true, 'message'=>__('Hola de nuevo '. $user->data->display_name ), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
+                }
+            }
+            die();
+        }else{
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Contraseña incorrecta. <a class="lost" href="'. wp_lostpassword_url() .'">¿Has olvidado tu contraseña?</a>')));
+            die();
+        }
+    }else{
+        echo json_encode(array('loggedin'=>false, 'message'=>__('¡Guay! Solo falta tu nombre completo')));
+        die();
     }
-    die();
 }
 
 function bogacontest_ajax_register(){
-
-    // First check the nonce, if it fails the function will break
+    global $wpdb;
     check_ajax_referer( 'ajax-register-nonce', 'security' );
 
-    // Nonce is checked, get the POST data and sign user on
     $info = array();
-    $info['user_nicename'] = $info['nickname'] = $info['display_name'] = $info['first_name'] = $info['user_login'] = sanitize_user($_POST['username']) ;
+    $info['display_name'] = cut_title($_POST['username'], 250);
+    $info['user_nicename'] = sanitize_title(cut_title($_POST['username'], 50));
+    $info['user_login'] = cut_by($info['user_nicename'], '-') . '-' . cut_email(sanitize_email($_POST['email'])) . '-' . time();
+    if($wpdb->get_row("SELECT user_nicename FROM wp_users WHERE user_nicename = '" . $info['user_nicename'] . "'", 'ARRAY_A')) {
+        $info['user_nicename'] = $info['user_login'];
+    }
+
+    $info['nickname'] = $info['first_name'] = cut_by($info['display_name'], ' ');
     $info['user_pass'] = sanitize_text_field($_POST['password']);
     $info['user_email'] = sanitize_email( $_POST['email']);
 
@@ -118,23 +148,47 @@ function bogacontest_ajax_register(){
         if(in_array('empty_user_login', $error))
             echo json_encode(array('loggedin'=>false, 'message'=>__($user_register->get_error_message('empty_user_login'))));
         elseif(in_array('existing_user_login',$error))
-            echo json_encode(array('loggedin'=>false, 'message'=>__('This username is already registered.')));
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Cambia tu nombre por un mote, o modifícalo un poco por favor.')));
         elseif(in_array('existing_user_email',$error))
-            echo json_encode(array('loggedin'=>false, 'message'=>__('This email address is already registered.')));
-    } else {
-        auth_user_login($info['nickname'], $info['user_pass'], 'Registration');
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Este e-mail ya ha sido usado')));
+    } else
+    {
+        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );
+/*        auth_user_login($info['nickname'], $info['user_pass'], 'Registration');*/
+/*        echo json_encode(array('loggedin'=>true, 'message'=>__('Te has registrado correctamente.'), 'user_id'=>$user_register));*/
+        $login_data['user_login'] = $info['user_login'];
+        $login_data['user_password'] = $info['user_pass'];
+        $login_data['remember'] = true;
+        $user_signon = wp_signon($login_data, is_ssl() ? true : false);
+        if ( is_wp_error($user_signon) ){
+            echo json_encode(array('loggedin'=>false, 'message'=>__('Upps! Te has registrado correctamente pero no hemos podido auntenticarte')));
+        } else {
+            echo json_encode(array('loggedin'=>true, 'message'=>__('Perfecto '. $info['nickname']  . '. Ya estás registrado.'), 'user_id'=>$user_signon->ID, 'contestant_id'=>''));
+        }
     }
-
     die();
+}
+
+function cut_title($title, $limit){
+    if ( mb_strlen( $title, 'utf8' ) > $limit ) {
+        $last_space = strrpos( substr( $title, 0, $limit ), ' ' );
+        return substr( $title, 0, $last_space );
+    }
+    return $title;
+}
+function cut_email($email){
+    $arroba_position = strrpos( $email, '@' );
+    return substr( $email, 0, $arroba_position );
+}
+function cut_by($string ,$letter){
+    $position = strrpos( $email, $letter );
+    return substr( $string, 0, $position );
 }
 
 function allow_origin() {
     header("Access-Control-Allow-Origin: *");
 }
 
-include 'class/contestant.php';
-$bogacontestant = new contestant();
-$bogacontest = new contest();
 
 register_activation_hook( __FILE__, 'bogacontest_install' );
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');

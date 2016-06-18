@@ -80,7 +80,11 @@ class contest
             $group_by = 'GROUP BY wp_bogacontest_votes.contestant_id';
             $left_join = 'LEFT JOIN wp_bogacontest_votes ON wp_bogacontest_contestant.ID=wp_bogacontest_votes.contestant_id';
         }
-        $results = $wpdb->get_results( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $query_search ." ". $group_by ." ORDER BY ". $by ." ". $direction .";", OBJECT );
+        if (!empty($by)){
+            $by = 'ORDER BY ' . $by ;
+            $direction = 'DESC';
+        }
+        $results = $wpdb->get_results( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $query_search ." ". $group_by . " " . $by ." ". $direction .";", OBJECT );
         $this->contestants = $results;
         if ($by == 'votes') {
             $this->positions;
@@ -235,21 +239,28 @@ class contest
         echo '<div id="bogacontest_login_body" class="col-xs-7 col-sm-6 col-md-6">';
         echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
         echo '<hr>';
-        echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre de usuario">';
+        echo '<div id="first_form">';
         echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
         echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
-        echo '<input id="bogacontest_up_login_action_after_login" class="form-control" type="hidden" name="action_after_login" value="0">';
-        echo wp_nonce_field( 'ajax-login-nonce', 'bogacontest_up_login_security' );
         echo '<button id="bogacontest_up_login" type="button" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Entrar</button>';
         echo '</div>';
-
+        echo '<div id="second_form" style="display: none;">';
+        echo '<h3 id="register_help_text" style="color: white;">¡Guay! Solo falta tu nombre completo</h3>';
+        echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
+        echo '<button id="bogacontest_up_register" type="button" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Registrarme</button>';
+        echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
+        echo '</div>';
+        echo wp_nonce_field( 'ajax-login-nonce', 'bogacontest_up_login_security' );
+        echo wp_nonce_field( 'ajax-register-nonce', 'bogacontest_up_register_security' );
+        echo '</div>';
+        echo '<input id="bogacontest_up_login_action_after_login" class=  "form-control" type="hidden" name="action_after_login" value="0">';
 
         echo '</div>';
         echo '</div>';
 
 
         echo '<div id="bogacontest_login_footer" class="modal-footer">';
-        echo '<a class="lost" href="'. wp_lostpassword_url() .'">¿Has perdido tu contraseña?</a>';
+        echo '<a class="lost" href="'. wp_lostpassword_url() .'">¿Has olvidado tu contraseña?</a>';
         echo '</div>';
 
         echo '</div>';
@@ -403,9 +414,7 @@ class contestant
     {
     }
 
-    function get_all_data($user_id, $contest_id){
-        $this->user_id = $user_id;
-        $this->contest_id = $contest_id;
+    function get_or_create(){
         $results = self::get();
         if (empty($results)){
             self::create();
@@ -607,7 +616,7 @@ class contestant
 
     function print_vote_button(){
         if(!($this->user_id == get_current_user_id())){
-            echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-primary btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
+            echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-default btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
         }
     }
 

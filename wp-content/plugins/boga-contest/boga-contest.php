@@ -50,6 +50,7 @@ function bogacontest_install() {
 
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
+    add_role( 'BogaContestant', 'Boga Contestant', array( 'upload_files' => true ) );
 }
 
 function flushRules(){
@@ -139,6 +140,7 @@ function bogacontest_ajax_register(){
     $info['nickname'] = $info['first_name'] = cut_by($info['display_name'], ' ');
     $info['user_pass'] = sanitize_text_field($_POST['password']);
     $info['user_email'] = sanitize_email( $_POST['email']);
+    $info['role'] = 'BogaContestant';
 
     // Register the user
     $user_register = wp_insert_user( $info );
@@ -153,9 +155,7 @@ function bogacontest_ajax_register(){
             echo json_encode(array('loggedin'=>false, 'message'=>__('Este e-mail ya ha sido usado')));
     } else
     {
-        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );
-/*        auth_user_login($info['nickname'], $info['user_pass'], 'Registration');*/
-/*        echo json_encode(array('loggedin'=>true, 'message'=>__('Te has registrado correctamente.'), 'user_id'=>$user_register));*/
+/*        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );*/
         $login_data['user_login'] = $info['user_login'];
         $login_data['user_password'] = $info['user_pass'];
         $login_data['remember'] = true;
@@ -181,7 +181,7 @@ function cut_email($email){
     return substr( $email, 0, $arroba_position );
 }
 function cut_by($string ,$letter){
-    $position = strrpos( $email, $letter );
+    $position = strrpos( $string, $letter );
     return substr( $string, 0, $position );
 }
 
@@ -201,3 +201,4 @@ add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );
 add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_register', 'bogacontest_ajax_register' );
+add_action( 'wp_ajax_nopriv_wp_ajax_upload_attachment', 'wp_ajax_upload_attachment' );

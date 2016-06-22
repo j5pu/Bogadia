@@ -140,7 +140,6 @@ function bogacontest_ajax_register(){
     $info['nickname'] = $info['first_name'] = cut_by($info['display_name'], ' ');
     $info['user_pass'] = sanitize_text_field($_POST['password']);
     $info['user_email'] = sanitize_email( $_POST['email']);
-    $info['role'] = 'BogaContestant';
 
     // Register the user
     $user_register = wp_insert_user( $info );

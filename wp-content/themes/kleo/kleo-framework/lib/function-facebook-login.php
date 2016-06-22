@@ -257,7 +257,6 @@ function kleo_fb_intialize() {
             $user_pass = wp_generate_password( 12, false );
             $userdata = compact( 'user_login', 'user_email', 'user_pass', 'display_name', 'first_name', 'last_name' );
             $userdata = apply_filters( 'kleo_fb_register_data', $userdata );
-            $userdata['role'] = 'BogaContestant';
 
             $user_ID = wp_insert_user( $userdata );
             if ( is_wp_error( $user_ID )) {

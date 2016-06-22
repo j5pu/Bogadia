@@ -443,6 +443,9 @@ class contestant
         );
         if($results){
             $results = $wpdb->insert_id;
+            $u = new WP_User( $this->user_id );
+            $u->remove_role( 'subscriber' );
+            $u->add_role( 'BogaContestant' );
         }
         return $results;
     }

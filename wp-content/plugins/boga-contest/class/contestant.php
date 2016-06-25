@@ -240,6 +240,7 @@ class contest
         echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
         echo '<hr>';
         echo '<div id="first_form">';
+        echo '<small id="email_validate_text" style="display: none; color: chartreuse;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
         echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
         echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
         echo '<button id="bogacontest_up_login" type="button" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Entrar</button>';
@@ -483,7 +484,7 @@ class contestant
         $wpdb->delete( 'wp_bogacontest_contestant', array( 'ID' => $this->ID ) );
     }
 
-    function create_img($main, $path)
+    function create_img($main, $path, $post_id)
     {
         global $wpdb;
         $wpdb->insert(
@@ -493,12 +494,14 @@ class contestant
                 'main' => $main,
                 'path' => $path,
                 'date' => date("Y-m-d H:i:s"),
+                'post_id' => $post_id,
             ),
             array(
                 '%s',
                 '%s',
                 '%s',
                 '%s',
+                '%d',
             )
         );
         return $wpdb->insert_id;
@@ -512,6 +515,7 @@ class contestant
         foreach($this->photos as $photo){
             if ($photo->main){
                 $this->main_photo = $photo->path;
+                $this->main_photo_id = $photo->post_id;
             }
         }
         return $results;
@@ -536,7 +540,13 @@ class contestant
     function delete_img($img_id)
     {
         global $wpdb;
-        return $wpdb->delete( 'wp_bogacontest_img', array( 'ID' => $img_id ) );
+        $first = $wpdb->delete( 'wp_bogacontest_img', array( 'post_id' => $img_id, 'contestant_id' => $this->ID) );
+        $second = wp_delete_attachment( $img_id );
+        if ($first == 'false'){
+            return 'No se ha podido borrar la foto';
+        }else{
+            return 'Foto borrada con éxito';
+        }
     }
 
     function get_votes()
@@ -664,10 +674,11 @@ class contestant
         self::get_imgs();
         self::get_votes();
         self::get_position();
+        self::print_photos_manager();
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
         echo '<a id="login_show" class="kleo-show-login" href="#" style="display: none">Show Login popup</a>';
-        echo '<div class="col-sm-6 col-md-6">';
+        echo '<div id="gallery_image_container_'. $this->main_photo_id .'" class="col-sm-6 col-md-6" data-main="1">';
         if (!empty($this->main_photo)){
             echo '<a id="main_photo_holder" href="'. $this->main_photo .'">';
             echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive">';
@@ -686,7 +697,7 @@ class contestant
             echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
             echo '</div>';
             echo '<div class="col-sm-4 col-md-4">';
-            echo '<button type="button" class="btn btn-primary btn-block">Editar mi perfil</button>';
+            echo '<button id="delete" type="button" class="btn btn-primary btn-block">Borrar foto</button>';
             echo '</div>';
             echo '<div class="col-sm-4 col-md-4">';
             echo '<button type="button" class="btn btn-primary btn-block">Cambiar foto principal</button>';
@@ -719,7 +730,7 @@ class contestant
                         }
                         echo '<div class="row gallery-row" style="">';
                     }
-                    echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                    echo '<div id="gallery_image_container_'. $photo->post_id .'" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
                     echo '<a id="main_photo_holder" href="'. $photo->path .'">';
                     echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
                     echo '</a>';
@@ -748,5 +759,55 @@ class contestant
         echo '</div>';
 
         return '';
+    }
+
+    function print_photos_manager(){
+        $contador = 0;
+
+        echo '<div class="modal fade" id="bogacontest_manager_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
+
+        echo '<div  class="modal-dialog">';
+        echo '<div id="bogacontest_manager_modal_dialog" class="modal-content text-right">';
+
+        echo '<div id="bogacontest_manager_header" class="modal-header">';
+        echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
+        echo '<h4 id="bogacontest_manager_title" class="modal-title text-center">Selecciona una foto</h4>';
+        echo '</div>';
+
+
+        echo '<div class="modal-body">';
+        echo '<div class="row">';
+
+        echo '<div id="photo_manager_select" class="col-xs-12 col-sm-12 col-md-12" style="height: 250px; overflow-y: scroll;">';
+        if (!empty($this->photos)){
+            foreach($this->photos as $photo){
+                if ($contador % 3 == 0){
+                    if($contador != 0){
+                        echo '</div>';
+                    }
+                    echo '<div class="row gallery-row">';
+                }
+                echo '<div id="manager_image_container_'. $photo->post_id .'" class="col-xs-4 col-sm-4 col-md-4" style="height: 100px; overflow: hidden;margin-bottom: 15px;">';
+                echo '<label class="manager_photo" >';
+                echo '<input type="radio" name="photo_to_edit" value="'. $photo->post_id .'" />';
+                echo '<img id="manager-contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
+                echo '</label>';
+                echo '</div>';
+                $contador++;
+            }
+        }
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+
+
+        echo '<div id="bogacontest_manager_footer" class="modal-footer">';
+        echo '<button id="delete_selected_photo" class="btn btn-primary">Borrar foto</button>';
+        echo '</div>';
+
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
+        echo '</div>';
     }
 }

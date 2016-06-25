@@ -42,7 +42,8 @@
     width: 100%;
     font-size: 14px;
 }
-#bogacontest_login_modal:focus{
+
+#bogacontest_login_modal:focus, #bogacontest_manager_modal:focus{
     outline: none;
 }
 
@@ -52,9 +53,11 @@
     background-repeat: no-repeat;
     background-color: #181820;
 }
+
 #bogacontest_login_header{
     border-bottom: none;
 }
+
 #bogacontest_login_footer{
     border-top: none;
 }
@@ -67,9 +70,11 @@
 #bogacontest_login_title{
     color: white !important;
 }
+
 #logout_button, #login_button{
     margin-left: 0px;
 }
+
 #contestants_forest_header{
     width:100%;
     text-align:left;
@@ -77,10 +82,51 @@
     line-height:0.1em;
     margin:10px 0 20px;
 }
+
 #contestants_forest_header_span{
     background:#fff;
     padding:0 10px;
 }
+
 #current-user-data-holder{
     margin-bottom: 50px;
+}
+
+textarea:focus,
+input[type="text"]:focus,
+input[type="password"]:focus,
+input[type="datetime"]:focus,
+input[type="datetime-local"]:focus,
+input[type="date"]:focus,
+input[type="month"]:focus,
+input[type="time"]:focus,
+input[type="week"]:focus,
+input[type="number"]:focus,
+input[type="email"]:focus,
+input[type="url"]:focus,
+input[type="search"]:focus,
+input[type="tel"]:focus,
+input[type="color"]:focus,
+.btn:focus,
+.uneditable-input:focus {
+    border-color: rgba(209,123,131, 0.7) !important;
+    box-shadow: 0 1px 1px rgba(0, 0, 0, 0.075) inset, 0 0 8px rgba(209,123,131, 0.6) !important;
+    outline: 0 none !important;
+}
+
+.manager_photo > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}
+.manager_photo > input + img{ /* IMAGE STYLES */
+    cursor:pointer;
+    /*
+    border:2px solid transparent;
+    */
+}
+.manager_photo > input:checked + img{ /* (RADIO CHECKED) IMAGE STYLES */
+    border:;
+    -webkit-box-shadow: -1px -7px 56px -20px rgba(0,0,0,0.71);
+    -moz-box-shadow: -1px -7px 56px -20px rgba(0,0,0,0.71);
+    box-shadow: -1px -7px 56px -20px rgba(0,0,0,0.71);
 }

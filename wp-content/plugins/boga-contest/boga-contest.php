@@ -28,6 +28,7 @@ function bogacontest_install() {
         main int NULL,
         path varchar(500) NULL,
         date datetime NULL,
+        post_id bigint(20) NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY id (id ASC)
 	) $charset_collate;

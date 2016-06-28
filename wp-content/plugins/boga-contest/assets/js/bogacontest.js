@@ -76,7 +76,7 @@ var vote = {
             })
             .done(function( msg ) {
                 vote.button.html(msg);
-                if(msg == '¡Genial! Tu voto ha sido contabilizado'){
+                if(msg == '¡Genial! Voto contado'){
                     var vote_div = jQuery('#votes-' + vote.contestant_id);
                     var votes = parseInt(vote_div.data('votes'));
                     vote_div.html((votes + 1) + ' votos');
@@ -311,11 +311,8 @@ var photo_manager = {
                     }else{
                         jQuery('#gallery_image_container_' + photo_manager.selected_photo).hide('slow');
                     }
-
                     jQuery('#manager_image_container_' + photo_manager.selected_photo).fadeOut('slow');
                     jQuery('#manager_image_container_' + photo_manager.selected_photo).remove();
-
-
                 }
             })
             .fail(function( msg ) {

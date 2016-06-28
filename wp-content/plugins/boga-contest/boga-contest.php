@@ -176,10 +176,12 @@ function cut_title($title, $limit){
     }
     return $title;
 }
+
 function cut_email($email){
     $arroba_position = strrpos( $email, '@' );
     return substr( $email, 0, $arroba_position );
 }
+
 function cut_by($string ,$letter){
     $position = strrpos( $string, $letter );
     return substr( $string, 0, $position );
@@ -189,6 +191,26 @@ function allow_origin() {
     header("Access-Control-Allow-Origin: *");
 }
 
+function bogacontest_meta(){
+    global $wpdb;
+    global $wp_query;
+    $contest = new contest();
+    $contest->get_contest_slug_from_url();
+
+    $contestant_name_or_id = urldecode($wp_query->query_vars['contestant']);
+    if (!empty($contestant_name_or_id)) {
+        if (is_numeric($contestant_name_or_id)) {
+            $query_lookup_field = 'wp_bogacontest_contestant.ID=' . $contestant_name_or_id;
+        } else {
+            $query_lookup_field = 'wp_users.user_nicename="' . $contestant_name_or_id . '"';
+        }
+        $results = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path as main_photo FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.slug='" . $contest->slug . "' AND wp_bogacontest_img.main='1';", OBJECT);
+        echo '<meta property="og:title" content="'. $results->display_name .' - Concursante de Bogadia" />';
+        echo '<meta property="og:image" content="'. $results->main_photo .'" />';
+        echo '<meta property="og:description" content="¡Necesito tu voto para ganar! Ayúdame a cumplir mi sueño." />';
+        echo '<meta property="og:url" content="https://www.bogadia.com/concursos/'. $contest->slug .'/'. $contestant_name_or_id .'/">';
+    }
+}
 
 register_activation_hook( __FILE__, 'bogacontest_install' );
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');

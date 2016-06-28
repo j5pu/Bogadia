@@ -669,13 +669,12 @@ class contestant
         if (empty($results)) {
             return 'Concursante no encontrado';
         }
-
         self::set_contestant($results, $this->contest);
         self::get_imgs();
         self::get_votes();
         self::get_position();
         self::print_photos_manager();
-
+        echo '<p><a href="/concursos/'. $this->contest->slug .'">Boga Contest</a> / '. $this->name .'</p>';
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
         echo '<a id="login_show" class="kleo-show-login" href="#" style="display: none">Show Login popup</a>';
         echo '<div id="gallery_image_container_'. $this->main_photo_id .'" class="col-sm-6 col-md-6" data-main="1">';
@@ -690,18 +689,18 @@ class contestant
         echo '<div class="col-sm-6 col-md-6">';
         if($current_user_id == $this->user_id){
             echo '<div class="row">';
-            echo '<div class="col-sm-4 col-md-4">';
+            echo '<div class="col-sm-6 col-md-6">';
             echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block">Subir foto</button>';
             echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
 /*            echo '<div class="progress"><div id="upload_progress_bar" class="bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>';*/
             echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
             echo '</div>';
-            echo '<div class="col-sm-4 col-md-4">';
+            echo '<div class="col-sm-6 col-md-6">';
             echo '<button id="delete" type="button" class="btn btn-primary btn-block">Borrar foto</button>';
             echo '</div>';
-            echo '<div class="col-sm-4 col-md-4">';
+/*            echo '<div class="col-sm-4 col-md-4">';
             echo '<button type="button" class="btn btn-primary btn-block">Cambiar foto principal</button>';
-            echo '</div>';
+            echo '</div>';*/
             echo '</div>';
         }
         echo '</div>';

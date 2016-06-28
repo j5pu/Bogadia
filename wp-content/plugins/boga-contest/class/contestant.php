@@ -155,7 +155,7 @@ class contest
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones</span></h2>';
         self::print_toolbar();
         echo '<div class="row">';
-        echo '<div id="contestants_container" class="col-md-12">';
+        echo '<div id="contestants_container" class="col-md-12 text-center">';
         self::print_contestants();
         echo '</div>';
         echo '</div>';

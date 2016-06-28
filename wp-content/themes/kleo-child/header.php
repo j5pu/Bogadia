@@ -31,7 +31,7 @@ if ( defined('WP_INSTALLING') && WP_INSTALLING == true && ! function_exists('kle
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
 
 	// check for plugin using plugin name
-	if ( is_plugin_active( '../../plugins/boga-contest/boga-contest.php' ) ) {
+	if ( is_plugin_active( 'boga-contest/boga-contest.php' ) ) {
 		bogacontest_meta();
 	}?>
 	<!-- Fav and touch icons -->

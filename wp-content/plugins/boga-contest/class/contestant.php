@@ -152,7 +152,7 @@ class contest
         echo '<hr>';
         echo '<p>¿Tienes carisma? ¿Te consideras una persona con chispa? Es tu momento. En Bogadia queremos romper los estereotipos de los concursos de modelos y apostar por una <strong>belleza real</strong>, lejos de los cánones impuestos. Entra de lleno en el mundo de la moda participando en BogaContest, el primer <strong>concurso de modelos</strong> para <strong>gente como tú</strong>. Podrás convertirte en la <strong>imagen de Bogadia</strong>, ganar un <strong>book de fotos profesional</strong> valorado en 300€ y promoción en todas nuestras <strong>redes sociales</strong>. ¿A qué esperas? ¡Haz click en participar para <strong>crear tu cuenta</strong>!</p>';
         self::print_participate_button();
-        echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones</span></h2>';
+        echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
         self::print_toolbar();
         echo '<div class="row">';
         echo '<div id="contestants_container" class="col-md-12 text-center">';
@@ -611,25 +611,32 @@ class contestant
     }
 
     function print_social_data(){
-        echo '<div class="row">';
+        echo '<div class="row bogacontest_social_row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-facebook"></em>';
+        echo '<em class="icon-facebook bogacontest_social"></em>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-twitter"></em>';
+        echo '<em class="icon-twitter bogacontest_social"></em>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<i class="icon-instagramm"></i>';
+        echo '<i class="icon-instagramm bogacontest_social"></i>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<i class="icon-pinterest-circled"></i>';
+        echo '<i class="icon-pinterest-circled bogacontest_social"></i>';
         echo '</div>';
         echo '</div>';
     }
 
-    function print_vote_button(){
+    function print_vote_button($primary){
         if(!($this->user_id == get_current_user_id())){
-            echo '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn btn-default btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
+            $button = '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn ';
+            if($primary == True){
+                $button .= ' btn-primary ';
+            }else{
+                $button .= ' btn-default ';
+            }
+            $button .= 'btn-block" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
+            echo $button;
         }
     }
 
@@ -642,8 +649,8 @@ class contestant
         echo '<h3><a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
         echo '<h6>Posición '. $this->position .'<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
         echo '<div>';
+        self::print_vote_button(False);
         self::print_social_data();
-        self::print_vote_button();
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -674,9 +681,8 @@ class contestant
         self::get_votes();
         self::get_position();
         self::print_photos_manager();
-        echo '<p><a href="/concursos/'. $this->contest->slug .'">Boga Contest</a> / '. $this->name .'</p>';
+        echo '<p id="bogacontest_breadcrumb"><a href="/concursos/'. $this->contest->slug .'">Boga Contest</a> / '. $this->name .'</p>';
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
-        echo '<a id="login_show" class="kleo-show-login" href="#" style="display: none">Show Login popup</a>';
         echo '<div id="gallery_image_container_'. $this->main_photo_id .'" class="col-sm-6 col-md-6" data-main="1">';
         if (!empty($this->main_photo)){
             echo '<a id="main_photo_holder" href="'. $this->main_photo .'">';
@@ -687,6 +693,9 @@ class contestant
         }
         echo '</div>';
         echo '<div class="col-sm-6 col-md-6">';
+        echo '<h2 id="contestants_forest_header" style="font-size: 250%;"><span id="contestants_forest_header_span">'. $this->name .'</span></h2>';
+        echo '<h3 style="margin-top: 40px;"><a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:left;">'. $this->votes .' votos</a> <a style="float:right;">Posición actual: '. $this->position .'</a></h3>';
+
         if($current_user_id == $this->user_id){
             echo '<div class="row">';
             echo '<div class="col-sm-6 col-md-6">';
@@ -703,16 +712,18 @@ class contestant
             echo '</div>';*/
             echo '</div>';
         }
-        echo '</div>';
-        echo '</div>';
 
+        echo '</div>';
+        echo '</div>';
 
         echo '<div class="row">';
-        echo '<div class="col-sm-6 col-md-6">';
-        echo '<h1>'. $this->name .'</h1>';
-        echo '<h3>Posición actual: '. $this->position .'<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos.</a></h3>';
+        echo '<div class="col-md-3 ">';
+        echo '</div>';
+        echo '<div class="col-md-6">';
         self::print_social_data();
-        self::print_vote_button();
+        self::print_vote_button(True);
+        echo '</div>';
+        echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '</div>';
 

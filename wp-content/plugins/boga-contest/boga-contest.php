@@ -191,32 +191,139 @@ function allow_origin() {
     header("Access-Control-Allow-Origin: *");
 }
 
-function bogacontest_meta(){
-    global $wpdb;
-    global $wp_query;
-    $contest = new contest();
-    $contest->get_contest_slug_from_url();
+function bogacontest_meta_canonical($string){
+    global $contest;
+    if (!empty($contest->slug))
+    {
+        global $contestant_name_or_id;
 
-    $contestant_name_or_id = urldecode($wp_query->query_vars['contestant']);
-    if (!empty($contestant_name_or_id)) {
-        if (is_numeric($contestant_name_or_id)) {
-            $query_lookup_field = 'wp_bogacontest_contestant.ID=' . $contestant_name_or_id;
-        } else {
-            $query_lookup_field = 'wp_users.user_nicename="' . $contestant_name_or_id . '"';
+        if (!empty($contestant_name_or_id))
+        {
+            global $meta_data_container;
+            return 'https://www.bogadia.com/concursos/' . $contest->slug . '/' . $meta_data_container->user_nicename . '/';
+        }else{
+            return 'https://www.bogadia.com/concursos/' . $contest->slug . '/';
         }
-        $results = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path as main_photo FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.slug='" . $contest->slug . "' AND wp_bogacontest_img.main='1';", OBJECT);
-        echo '<meta property="og:title" content="'. $results->display_name .' - Concursante de Bogadia" />';
-        echo '<meta property="og:image" content="'. $results->main_photo .'" />';
-        echo '<meta property="og:description" content="¡Necesito tu voto para ganar! Ayúdame a cumplir mi sueño." />';
-        echo '<meta property="og:url" content="https://www.bogadia.com/concursos/'. $contest->slug .'/'. $contestant_name_or_id .'/">';
+    }else{
+        return $string;
     }
 }
 
+function bogacontest_meta_title($string){
+    global $contest;
+    $contest = new contest();
+    $contest->get_contest_slug_from_url();
+
+    if (!empty($contest->slug))
+    {
+        global $wpdb;
+        global $wp_query;
+        global $meta_data_container;
+        global $contestant_name_or_id;
+        $contestant_name_or_id = urldecode($wp_query->query_vars['contestant']);
+
+        if (!empty($contestant_name_or_id))
+        {
+            if (is_numeric($contestant_name_or_id))
+            {
+                $query_lookup_field = 'wp_bogacontest_contestant.ID=' . $contestant_name_or_id;
+            } else
+            {
+                $query_lookup_field = 'wp_users.user_nicename="' . $contestant_name_or_id . '"';
+            }
+            $meta_data_container = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path AS main_photo FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.slug='" . $contest->slug . "' AND wp_bogacontest_img.main='1';", OBJECT);
+            return $meta_data_container->display_name .' - Aspirante a portada de Bogadia';
+        }else{
+            return 'Concurso de modelos - Portada de Bogadia';
+        }
+    } else {
+        return $string;
+    }
+}
+
+function bogacontest_meta_img($string){
+    global $contest;
+    if (!empty($contest->slug))
+    {
+        global $contestant_name_or_id;
+
+        if (!empty($contestant_name_or_id))
+        {
+            global $meta_data_container;
+            return $meta_data_container->main_photo ;
+        }else{
+            return 'https://www.bogadia.com/wp-content/uploads/2016/05/logo_final_negro-2.png';
+        }
+    }else{
+        return $string;
+    }
+}
+
+function bogacontest_meta_description($string){
+    global $contest;
+    if (!empty($contest->slug))
+    {
+        global $contestant_name_or_id;
+
+        if (!empty($contestant_name_or_id))
+        {
+            global $meta_data_container;
+            return '¡Necesito tu voto para ganar! Ayúdame a ser portada de Bogadia' ;
+        }else{
+            return 'Entra de lleno en el mundo de la moda participando en BogaContest, el primer concurso de modelos para gente como tú.';
+        }
+    }else{
+        return $string;
+    }
+}
+
+/*function add_urls_to_bogacontest_sitemap(){
+    $sitemap_custom_items = '<sitemap>
+		<loc>http://localhost/custom-page-1/</loc>
+		<lastmod>2016-5-18T23:12:27+00:00</lastmod>
+	</sitemap>';
+
+    return $sitemap_custom_items;
+}*/
+/*add_action('init', 'enable_custom_sitemap');
+function enable_custom_sitemap(){
+    global $wpseo_sitemaps;
+    $wpseo_sitemaps->register_sitemap('bogacontestant', 'add_urls_to_bogacontest_sitemap');
+}*/
+
+// Yoast SEO, add own sub-sitemap
+// works only after SEO -> XML Sitemaps -> Post Types (change something and back, some cache?)
+
+function bogacontest_sitemap_index() {
+    $xml = "";
+
+    $url = get_bloginfo( 'url' ) . '/wp-content/plugins/boga-contest/bogacontest_sitemap.php';
+
+    // http://wordpress.stackexchange.com/a/188461
+    require_once( ABSPATH . 'wp-admin/includes/file.php' );
+    $path = get_home_path() . '/wp-content/plugins/boga-contest/bogacontest_sitemap.php';
+
+    // http://wordpress.stackexchange.com/a/8404
+    date_default_timezone_set( get_option('timezone_string') );
+    $lastmod = date( 'c', filemtime( $path ) );
+
+    $xml .= '<sitemap>' . "\n";
+    $xml .= '<loc>' . $url . '</loc>' . "\n";
+    $xml .= '<lastmod>' .  $lastmod . '</lastmod>' . "\n";
+    $xml .= '</sitemap>' . "\n";
+
+    return $xml;
+}
+
+add_filter( 'wpseo_sitemap_index', 'bogacontest_sitemap_index' );
 register_activation_hook( __FILE__, 'bogacontest_install' );
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
 add_filter('query_vars','wp_insertMyRewriteQueryVars');
 add_filter('init','flushRules');
-add_action( 'init', 'allow_origin' );
+add_filter( 'wpseo_canonical', 'bogacontest_meta_canonical' );
+add_filter( 'wpseo_title', 'bogacontest_meta_title' );
+add_filter( 'wpseo_opengraph_image', 'bogacontest_meta_img' );
+add_filter( 'wpseo_metadesc', 'bogacontest_meta_description' );
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
 add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data') );
 add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );
@@ -224,3 +331,4 @@ add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_register', 'bogacontest_ajax_register' );
 add_action( 'wp_ajax_nopriv_wp_ajax_upload_attachment', 'wp_ajax_upload_attachment' );
+add_action( 'init', 'allow_origin' );

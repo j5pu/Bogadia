@@ -27,13 +27,6 @@ if ( defined('WP_INSTALLING') && WP_INSTALLING == true && ! function_exists('kle
 	<meta name="mobile-web-app-capable" content="yes">
 	<link rel="profile" href="http://gmpg.org/xfn/11">
 	<link rel="pingback" href="<?php bloginfo( 'pingback_url' ); ?>">
-	<?php
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
-
-	// check for plugin using plugin name
-	if ( is_plugin_active( 'boga-contest/boga-contest.php' ) ) {
-		bogacontest_meta();
-	}?>
 	<!-- Fav and touch icons -->
 	<?php if (sq_option_url('favicon')) { ?>
 	<link rel="shortcut icon" href="<?php echo sq_option_url('favicon'); ?>">

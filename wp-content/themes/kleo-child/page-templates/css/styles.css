@@ -532,6 +532,9 @@ img::-moz-selection {
         padding-top: 78.97%;
         height: 0;
     }
+    #eventbrite_bogawow{
+        height: 500px !important;
+    }
 }
 @media all and (min-width: 600px) {
     #test5 {
@@ -541,6 +544,9 @@ img::-moz-selection {
         background-size: 100%;
         padding-top: 56.25%;
         height: 0;
+    }
+    #eventbrite_bogawow{
+        height: 350px !important;
     }
 }
 
@@ -560,3 +566,4 @@ img::-moz-selection {
 #three{
     background-color: #333;
 }
+

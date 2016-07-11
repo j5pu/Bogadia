@@ -146,6 +146,9 @@ function is_mobile() {
                     <a class="page-scroll" href="#four" style="background-color: darkred;">Consigue tu entrada</a>
                 </li>
                 <li>
+                    <a class="page-scroll" href="#five">Donde</a>
+                </li>
+                <li>
                     <a class="page-scroll" href="#footer">Contacto</a>
                 </li>
             </ul>
@@ -215,8 +218,8 @@ function is_mobile() {
                 <div class="feature">
                     <i class="icon-lg ion-ios-location wow fadeIn" data-wow-delay=".3s"></i>
                     <h3>Dónde y cuándo</h3>
-                    <p class="text-muted">Lolita Disco & Lounge Madrid</p>
                     <p class="text-muted">Viernes 15 de julio de 2016 a partir de las 22 horas</p>
+                    <a href="#Donde"></a><p class="text-muted">Lolita Disco & Lounge Madrid</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 text-center">
@@ -347,7 +350,53 @@ function is_mobile() {
     </div>
     <div class="row">
         <div class="col-md-12">
-            <div class="text-center" style="width:100%; text-align:left; background-color: white; border-radius: 5px;" ><iframe  src="//eventbrite.com/tickets-external?eid=19636162290&ref=etckt" frameborder="0" height="600" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe><div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" ><a class="powered-by-eb" style="color: #dddddd; text-decoration: none;" target="_blank" href="http://www.eventbrite.com/r/etckt">Con tecnología de Eventbrite</a></div></div>
+            <div class="text-center" style="width:100%; text-align:left; background-color: white; border-radius: 5px;" ><iframe id="eventbrite_bogawow"  src="//eventbrite.com/tickets-external?eid=19636162290&ref=etckt" frameborder="0" height="450px" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe><div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" ><a class="powered-by-eb" style="color: #dddddd; text-decoration: none;" target="_blank" href="http://www.eventbrite.com/r/etckt">Con tecnología de Eventbrite</a></div></div>
+        </div>
+    </div>
+</section>
+<section class="bg-primary" id="five">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="margin-top-0 text-primary">Mapa</h2>
+                <hr class="primary">
+            </div>
+        </div>
+    </div>
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4 col-md-4 text-center">
+                <div class="feature">
+                    <i class="icon-lg ion-android-locate wow fadeIn" data-wow-delay=".3s"></i>
+                    <h3></h3>
+                    <p class="text-muted">Calle de Manuel de Falla 3</p>
+                    <a href="#Donde"></a><p class="text-muted">Madrid</p>
+                </div>
+            </div>
+            <div class="col-lg-8 col-md-8">
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3035.88500199819!2d-3.691068949144129!3d40.45568216109225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42291da4702475%3A0xf3d0ea1eb3b96546!2sLolita+Lounge+%26+Bar!5e0!3m2!1ses!2ses!4v1468263429329" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+            </div>
+            <!--            <div class="col-lg-4 col-md-4 text-center">
+                            <div class="feature">
+                                <i class="icon-lg ion-android-bar wow fadeInUp" data-wow-delay=".2s"></i>
+                                <h3>Que incluye la entrada</h3>
+                                <p class="text-muted">Una copa gratis (nacional)</p>
+                                <p class="text-muted">Participar en un desfile</p>
+                                <p class="text-muted">Protagonizar un videobook</p>
+                                <p class="text-muted">Una sesión de fotos</p>
+                                <p class="text-muted">¡Premios y más!</p>
+                            </div>
+                        </div>
+                        <div class="col-lg-4 col-md-4 text-center">
+                            <div class="feature">
+                                <i class="icon-lg ion-android-contacts wow fadeIn" data-wow-delay=".3s"></i>
+                                <h3>Actividades</h3>
+                                <p class="text-muted">Grabación en directo de una fashion film</p>
+                                <p class="text-muted">Sesión de fotos en nuestro Photocall</p>
+                                <p class="text-muted">Concurso de talentos sobre la pasarela</p>
+                                <p class="text-muted">Sorteos</p>
+                            </div>
+                        </div>-->
         </div>
     </div>
 </section>
@@ -516,7 +565,6 @@ function is_mobile() {
             </div>
         </div>
         <br/>
-        <span class="pull-right text-muted small"><a href="http://www.bootstrapzero.com">Landing Zero by BootstrapZero</a> ©2015 Company</span>
     </div>
 </footer>
 <div id="galleryModal" class="modal fade" tabindex="-1" role="dialog" aria-hidden="true">

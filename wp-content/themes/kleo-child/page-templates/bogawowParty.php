@@ -143,10 +143,10 @@ function is_mobile() {
                     <a class="page-scroll" href="#three">Más info</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#four" style="background-color: darkred;">Consigue tu entrada</a>
+                    <a class="page-scroll" href="#four" style="background-color: gold;">Consigue tu entrada</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#five">Donde</a>
+                    <a class="page-scroll" href="#five">Dónde</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#footer">Contacto</a>
@@ -358,22 +358,14 @@ function is_mobile() {
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
-                <h2 class="margin-top-0 text-primary">Mapa</h2>
+                <h2 class="margin-top-0 text-primary">Dónde</h2>
                 <hr class="primary">
             </div>
         </div>
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-4 col-md-4 text-center">
-                <div class="feature">
-                    <i class="icon-lg ion-android-locate wow fadeIn" data-wow-delay=".3s"></i>
-                    <h3></h3>
-                    <p class="text-muted">Calle de Manuel de Falla 3</p>
-                    <a href="#Donde"></a><p class="text-muted">Madrid</p>
-                </div>
-            </div>
-            <div class="col-lg-8 col-md-8">
+            <div class="col-lg-12 col-md-12">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3035.88500199819!2d-3.691068949144129!3d40.45568216109225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42291da4702475%3A0xf3d0ea1eb3b96546!2sLolita+Lounge+%26+Bar!5e0!3m2!1ses!2ses!4v1468263429329" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
             <!--            <div class="col-lg-4 col-md-4 text-center">
@@ -531,7 +523,6 @@ function is_mobile() {
                     <li><a href="https://www.bogadia.com">Magazine</a></li>
                     <li><a href="https://www.bogadia.com/equipo">Equipo</a></li>
                     <li><a href="https://www.bogadia.com/contacto">Contacto</a></li>
-                    <li><a href="">Developers</a></li>
                 </ul>
             </div>
 <!--            <div class="col-xs-6 col-sm-3 column">

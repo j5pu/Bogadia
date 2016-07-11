@@ -143,7 +143,7 @@ function is_mobile() {
                     <a class="page-scroll" href="#three">Más info</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#four" style="background-color: gold;">Consigue tu entrada</a>
+                    <a class="page-scroll" href="#four" style="background-color: gold; color: #222 !important; border-radius: 60px;">Consigue tu entrada</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#five">Dónde</a>
@@ -365,7 +365,7 @@ function is_mobile() {
     </div>
     <div class="container">
         <div class="row">
-            <div class="col-lg-12 col-md-12">
+            <div id="maps" class="col-lg-12 col-md-12">
                 <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3035.88500199819!2d-3.691068949144129!3d40.45568216109225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42291da4702475%3A0xf3d0ea1eb3b96546!2sLolita+Lounge+%26+Bar!5e0!3m2!1ses!2ses!4v1468263429329" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
             <!--            <div class="col-lg-4 col-md-4 text-center">

@@ -567,3 +567,6 @@ img::-moz-selection {
     background-color: #333;
 }
 
+#maps{
+    padding: 50px;
+}

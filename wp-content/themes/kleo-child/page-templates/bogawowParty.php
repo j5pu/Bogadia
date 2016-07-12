@@ -116,7 +116,7 @@ function is_mobile() {
                     <a class="page-scroll" href="#three">Más info</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#four" style="background-color: gold; color: #222 !important; border-radius: 60px;">Consigue tu entrada</a>
+                    <a class="page-scroll" href="#four" style="background-color: #D4AF37; color: #222 !important; border-radius: 60px;">Consigue tu entrada</a>
                 </li>
                 <li>
                     <a class="page-scroll" href="#five">Dónde</a>

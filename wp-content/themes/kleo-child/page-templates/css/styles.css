@@ -34,7 +34,7 @@ hr.light {
 }
 
 a {
-    color: gold;
+    color: #D4AF37;
     -webkit-transition: all .35s;
     -moz-transition: all .35s;
     transition: all .35s;
@@ -88,7 +88,7 @@ p {
 }
 
 .text-primary {
-    color: gold;
+    color: #D4AF37;
 }
 
 .modal-content {

@@ -11,7 +11,7 @@ function is_mobile() {
 <html>
 <head>
     <meta charset="utf-8">
-    <title>BogaWOW Party</title>
+    <title>Boga WOW Party</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="generator" content="Codeply">
     <link rel="stylesheet" href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css" />
@@ -25,11 +25,8 @@ function is_mobile() {
     <!-- Fav and touch icons -->
     <link rel="shortcut icon" href="data:image/webp;base64,UklGRiQBAABXRUJQVlA4IBgBAACQBwCdASogACAAPm0wlUckIqIhKAqogA2JaQATgCsATJX+Gc+Y/xXl6+U/OZ/JLhQFua9uAtofdf0ehF55G1eImhM4fUAA/v+S44ilJnI+jld+t2fsg3gZoU3/9E8AYyOSP872vr9jerQmikxckPTiq8+M00gEsoj9oEPQi0wk8kDwACWAyT4TboTz+990f6z5N5PL3WiPnGiY451b8Jf4F9cgnS8Rf2xp6GlZGc+iCzPfYM166uuK8FxKMre8v/2avS3/aZa//qu3mSR/wheLMtaq4MRfWzJfWvx5mVMARSgvHrCdw3QVNGAaONfvARZZbxsTtA6jvsXV4bdEJC5IEMwWHJMjdbj8tarenZKz6DKs0fEMAAAA">
     <link rel="apple-touch-icon-precomposed" href="data:image/webp;base64,UklGRrYBAABXRUJQVlA4IKoBAACwCgCdASo5ADkAPm0uk0akIqGhLhJLiIANiWkAE9N/YOefRbWAoE8zPyAfRnotf7s7tBvabVoxeoawH76nLpOJ8TJnZ58bCPzTz3SZWeP9X4v3HOtPqXeoyA7thOsAAP7/KmsgCwGoY9L9FIYvboxHfClP7Q/8pQ/Epcx7v13fu1dYE/w17OYq1ztqMW7xQlLzQNn/Ne9LmYLZ6hPY3Jo5qea949PYVyUd1QJhU850Yzu4q8T+uDwUos6cJH7857k9YNZ8M0QvocozSvAnA+ndN++4ZmQTHfOSdtWOmu4axYD87Dg24JczPzdsYs1ZoeUjncXZ2Qa5jteQFQxpSBNvsJpi9/wzs9TRj/Qq2H/jgvynGFzG1Hw/VD9PLjCJK/yujE4ylfbkwLWXUowxWdIAZn5Xsl8yvdAubriWTU1QNEOR/JRMh+xnrH57p+DxDuH/gnrYiDujoml8tIIlJuBQ8ky2ZPVxBPV3iBQKx5omTlKgvuY9+cuuo5Do8h28faiBh3awcIEu5Ud931EEf1awAtanMc6FrJomDrTrYsDbIhr5huqPDpXgQAA=">
-
     <link rel="apple-touch-icon-precomposed" sizes="72x72" href="data:image/webp;base64,UklGRvwBAABXRUJQVlA4IPABAAAQCwCdASpIAEgAPm0ylkakIyUhK5OaAKANiWkAE5sbsVcPvGrwe0CPRhcdUUrr5+bg2skzSfL5lLcsK+oH3qpvEp5LodxTdmWWs6tbh469Mj8E7TLpvN5LqQMD40sqp67gAP78l4+1w0TjLkB//s6OkVlAvGZjs0Cqe7sukb1u79TeQde+e7WDJEWY/6z643ptN7r1A+e9kY6hA+HUwez9aJCq3sNIASxwStn0Ll8jALDjCDaWuxCJ3OtZ6falekbo+l8AgOBu5uwAXEN0+G+6re/KgP7VCUc9PRSf9YOA5bewV+gGlezqq8OZNqoqzDF4T0BP97VvWFAMAKTXLwCddlvxKLuA4oaJP1TL8jQjYYZvLov7XEf0afK/QD/2jJIyvb8zJt1Bbwdd88wJvZmbOD6qEN2UDI5GXNDkeH82a9JVOKS+K5KIfSuXD0008fFgq0Q3feRzB8z7Y+X7am0sGxPpz4ay94E2nOK60ROqZh5QA9VOXaLr/pqNsLVDt4NWNJ0k2+MsQzXFmd6P1zfmNwGUjsuwSEK58Ehubf7uVe0FkDkkYHe3/A2vhGzQZi3YS48a9yR4rDSYEHSkJsojPjUPvdtkUP9HemMlsjYAw09UgBpsAjfPisTmSZmxOYKTTO2ppjGL7pgDV4eIAAAA">
-
     <link rel="apple-touch-icon-precomposed" sizes="114x114" href="data:image/webp;base64,UklGRuwCAABXRUJQVlA4IOACAAAQEwCdASpyAHIAPm00lkikIqIhIZVa4IANiWkAE92fgOV2PvPwfsq/M+8HX33u65L18Znar5Gh6Hmfp6W9g39Xd9VIMwES6h9Cy5qQuC2tXGFntWD7M8UwnWcJ2VWncEkBDBcCnPqDPZ+9cCW1nqqexbx5hO6zK9CAFME32GXHZV0nMC8hF9zGLbz6X+ls9JRMh9fQfJCwuz7RtO5hT6dcAAD+/JdgkgS1+unv6PNzJBaP/bKqkFDhLi/tYWXXwQvefBI/iqi+ay//Br/I6qp3+H7/SjhX95s3BNFv0Mie+INcLBP+Rk/9M74whm+TU8EUpRV+Oj6xG4OYkfXtys+17xbtxYhKGBXo5xPUEAYPGT4Am/PNC3Wvc1PsVVQmqAf1KqXCkiJjbSgxqfDddLFzmQdp3f4iTgAxZLdV2UDh6o8fKdNd5mh/qIQLteFeV/7dFgCAL9Rpqxgr+Oj3uKVOBIqPwdGkWNQ5rGY5QHrjU2fWFm2/1fph/uW1/3Zar3npC/femX1BcqWz2frrK3MZ/lapJ6Jjxgzs4/ttz4Fr/v13BiE8wiPTemoLEM2v/K4lJ0lpME3mODSvvKt1JdsC7cIwDAJaj3MAJM8aLzAI1cdXoBvB+MEb3Exot/r6Mt4K+v5rBT4m0gVYrHQJYAFCZgqOoWHlOMiow5VgMPtcGDj+kfIrSLEEF65Tm5pTxRHbKWhJkdrgBywBzjVbMkYC3Ag6guuJ/F3H0GVSTgdyH8Ytu5I3Di1YbMn0Cu0k76akcS0FXint6dz+ZurHHTiwwxr/BJCx4cAxrpkr6S0XSTA2gCH7wgGu+nOm7LPNg/PXZyLeKxN7biDS/f/beIKb2q7FUoT0NpUPcHWOMzR8lzNBw+p4n9dKsyFznXYr37F6EwmmgsVx/wRnOw/AjcSgGhRokeI0pk+s6AATt0Ga49COTNjQzdsuX8DHHqJSc4fgfuRpPTQBI/+ccYAAAAAA">
-
     <link rel="apple-touch-icon-precomposed" sizes="144x144" href="data:image/webp;base64,UklGRngDAABXRUJQVlA4IGwDAAAwFQCdASqQAJAAPm0yl0ikIqKhIzIKuIANiWlu3Qjxn71yy5+1ivZGrUX+K3na6r1eZrir4Zd5JPqP0ZOtURMqfAtShgKE3j9Ila7KLtL4t3jvK6nMbH6w2ln/fupcpUqlThW+fAiOvbmdcGddpxt50MZGve0dsnBbApFnSFQ3j8Lh5TdlWWt4t6vYNoI5mCjyO3XSa+pV3GGhsIqbfSRM9h6YEgMXdqns8lrM98rUorTgAP78l2CUj6Mzwff/qEVzy/UPEEX07d4O7dNmVoryMMx5v/ubTUBp1dIaE89HV7MP8GA3gGNzN6rHa3+oYmb59/YdqoIFb117xnBvTsPwoziOF1eX9WUl6cdj4NEVe69YIQ8HOUn5OKFhtcHyNMmLCqRaMrvsnIcVX4NB558kMIEnRnPmlC0rqgRqfFhMxjMf5n7XpW8JuPkGhvTd/p89cdXDjFqObVnwtTaNRV1P4ayXa2PSZb8Non5rzwintKrIgzpvEtGanutI7qe9Un10IIADb5ioFPvurADxquziPTD/iKuzwvm4rUH2nDbZEgWR2+h2U3r30+uY7D3Bq2MshFrb+lTVcvyL/0Qph/8tGSVCy19J3LZxVJUXKDV8vJaRNiYZ3ROt51uNy5A6g2OTc3S/BMCoGLNkdHc5ftznHUcNiKFi08sleKd9Gm62bBNxPIFynnySb3WeQfM+JnHPCl9wnyr1/MGVUHGb/e3j7a21WPEUeA2X6LRbM8jzSIHNrYIA13UYJwEjCQBDJrSF9T5LsouoDSQKjtBgIdftK2eFi5QZGmYvusUsJKaYKMl0F0KVMugnIbPOb7UfThBXTLwK2CTjKBFL8csv8XOjfR4aAGxnwP/TdW3E7PCWBUWFhuy8i2QvePCJXa2yxUiQGggunkBnyJmG4ALpd5/Km83gTHk9dulC8WviwZtMagpUoUCASeSTA0meH9Udu9ZoeiHM+iHgd2v6eP8hA/AdmjO8hCiP3FND24nG7E1DuGZWWHJuOHoXRLBs/FQpCVqm0mncO68xTLee3RSBlJbWE0RYHXkA7Hq7x/6wj1R74Om8Ffi6qBRQy5hdpB0bvmwlOjENchGGCF1cwu5gCeIk8xc1X77FDcCY1xvrBhWX/R5JlaaU8kNij4TspkObYJ1tnPEAMhJA6KAAAAA=">
 
     <!-- HTML5 shim, for IE6-8 support of HTML5 elements -->
@@ -42,9 +39,6 @@ function is_mobile() {
     <![endif]-->
 
 
-
-    <title>BogaWOW Party - Bogadia</title>
-
     <!-- This site is optimized with the Yoast SEO plugin v3.2.3 - https://yoast.com/wordpress/plugins/seo/ -->
     <meta name="description" content="Bienvenido a la fiesta de la moda. 15 de Julio de 2016 en Lolita Lounge, Madrid">
     <meta name="robots" content="noodp">
@@ -52,7 +46,7 @@ function is_mobile() {
     <link rel="publisher" href="http://google.com/+Bogadiamag">
     <meta property="og:locale" content="es_ES">
     <meta property="og:type" content="article">
-    <meta property="og:title" content="BogaWOW Party - Bogadia">
+    <meta property="og:title" content="Boga WOW Party - Bogadia">
     <meta property="og:description" content="Bienvenido a la fiesta de la moda. 15 de Julio de 2016 en Lolita Lounge, Madrid">
     <meta property="og:url" content="https://www.bogadia.com/bogawow-party/">
     <meta property="og:site_name" content="Bogadia">
@@ -61,7 +55,7 @@ function is_mobile() {
     <meta property="og:image" content="https://www.bogadia.com/wp-content/uploads/2016/07/bogaccartelJulio-1-recortado.jpg">
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:description" content="La fiesta de la moda. 15 de Julio de 2016 en Lolita Lounge, Madrid">
-    <meta name="twitter:title" content="Bogawow - Party - Bogadia">
+    <meta name="twitter:title" content="Boga wow - Party - Bogadia">
     <meta name="twitter:site" content="@Bogadia">
     <meta name="twitter:image" content="https://www.bogadia.com/wp-content/uploads/2016/07/bogaccartelJulio-1-recortado.jpg">
     <meta name="twitter:creator" content="@Bogadia">
@@ -69,34 +63,14 @@ function is_mobile() {
 
     <link rel="alternate" type="application/rss+xml" title="Bogadia » Feed" href="https://www.bogadia.com/feed/">
     <link rel="alternate" type="application/rss+xml" title="Bogadia » RSS de los comentarios" href="https://www.bogadia.com/comments/feed/">
-    <div class="fit-vids-style" id="fit-vids-style" style="display: none;">­<style>.fluid-width-video-wrapper{width:100%;position:relative;padding:0;}.fluid-width-video-wrapper iframe,.fluid-width-video-wrapper object,.fluid-width-video-wrapper embed {position:absolute;top:0;left:0;width:100%;height:100%;}</style></div><script async="" src="//www.google-analytics.com/analytics.js"></script><script type="text/javascript">window._wpemojiSettings={"baseUrl":"https:\/\/s.w.org\/images\/core\/emoji\/72x72\/","ext":".png","source":{"concatemoji":"https:\/\/www.bogadia.com\/wp-includes\/js\/wp-emoji-release.min.js"}};!function(a,b,c){function d(a){var c,d,e,f=b.createElement("canvas"),g=f.getContext&&f.getContext("2d"),h=String.fromCharCode;if(!g||!g.fillText)return!1;switch(g.textBaseline="top",g.font="600 32px Arial",a){case"flag":return g.fillText(h(55356,56806,55356,56826),0,0),f.toDataURL().length>3e3;case"diversity":return g.fillText(h(55356,57221),0,0),c=g.getImageData(16,16,1,1).data,d=c[0]+","+c[1]+","+c[2]+","+c[3],g.fillText(h(55356,57221,55356,57343),0,0),c=g.getImageData(16,16,1,1).data,e=c[0]+","+c[1]+","+c[2]+","+c[3],d!==e;case"simple":return g.fillText(h(55357,56835),0,0),0!==g.getImageData(16,16,1,1).data[0];case"unicode8":return g.fillText(h(55356,57135),0,0),0!==g.getImageData(16,16,1,1).data[0]}return!1}function e(a){var c=b.createElement("script");c.src=a,c.type="text/javascript",b.getElementsByTagName("head")[0].appendChild(c)}var f,g,h,i;for(i=Array("simple","flag","unicode8","diversity"),c.supports={everything:!0,everythingExceptFlag:!0},h=0;h<i.length;h++)c.supports[i[h]]=d(i[h]),c.supports.everything=c.supports.everything&&c.supports[i[h]],"flag"!==i[h]&&(c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&c.supports[i[h]]);c.supports.everythingExceptFlag=c.supports.everythingExceptFlag&&!c.supports.flag,c.DOMReady=!1,c.readyCallback=function(){c.DOMReady=!0},c.supports.everything||(g=function(){c.readyCallback()},b.addEventListener?(b.addEventListener("DOMContentLoaded",g,!1),a.addEventListener("load",g,!1)):(a.attachEvent("onload",g),b.attachEvent("onreadystatechange",function(){"complete"===b.readyState&&c.readyCallback()})),f=c.source||{},f.concatemoji?e(f.concatemoji):f.wpemoji&&f.twemoji&&(e(f.twemoji),e(f.wpemoji)))}(window,document,window._wpemojiSettings);</script>
 
-
-
-
-    <script type="text/javascript" src="https://www.bogadia.com/wp-includes/js/jquery/jquery.js"></script>
-    <script type="text/javascript" src="https://www.bogadia.com/wp-includes/js/jquery/jquery-migrate.min.js"></script>
     <script type="text/javascript">var cdp_cookies_info={"url_plugin":"https:\/\/www.bogadia.com\/wp-content\/plugins\/asesor-cookies-para-la-ley-en-espana\/plugin.php","url_admin_ajax":"https:\/\/www.bogadia.com\/wp-admin\/admin-ajax.php","comportamiento":"cerrar","posicion":"inferior","layout":"ventana"};</script>
-    <script src="https://www.bogadia.com/wp-content/plugins/asesor-cookies-para-la-ley-en-espana,_html,_front,_principal.js+boga-contest,_assets,_js,_typewatch.js+boga-contest,_assets,_js,_bogacontest.js.pagespeed.jc.5VQ8avJamP.js"></script><script>eval(mod_pagespeed_SnENEtpHvp);</script>
-    <script>eval(mod_pagespeed_v1hIV4CnX8);</script>
-    <script>eval(mod_pagespeed_3kfb9use9S);</script>
-    <script type="text/javascript">var userSettings={"url":"\/","uid":"56","time":"1468262175","secure":"1"};</script>
-    <script type="text/javascript" src="https://www.bogadia.com/wp-includes/js/utils.min.js"></script>
-    <script type="text/javascript" src="https://www.bogadia.com/wp-includes/js/plupload/plupload.full.min.js"></script>
-    <!--[if lt IE 8]>
-    <script type='text/javascript' src='https://www.bogadia.com/wp-includes/js/json2.min.js'></script>
-    <![endif]-->
-    <script type="text/javascript" src="https://www.bogadia.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.tools.min.js.pagespeed.jm.B--1ysp0UN.js"></script>
-    <script type="text/javascript" src="https://www.bogadia.com/wp-content/plugins/revslider/public/assets/js/jquery.themepunch.revolution.min.js.pagespeed.jm.iFHPSk2Qcj.js"></script>
-    <script type="text/javascript">var wc_add_to_cart_params={"ajax_url":"\/wp-admin\/admin-ajax.php","wc_ajax_url":"\/27897-2\/?wc-ajax=%%endpoint%%","i18n_view_cart":"Ver carrito","cart_url":"https:\/\/www.bogadia.com\/cart\/","is_cart":"","cart_redirect_after_add":"no"};</script>
-    <script src="//www.bogadia.com/wp-content/plugins/woocommerce,_assets,_js,_frontend,_add-to-cart.min.js+js_composer,_assets,_js,_vendors,_woocommerce-add-to-cart.js.pagespeed.jc.hire9ZNdvr.js"></script><script>eval(mod_pagespeed_3r4tLAj47S);</script>
-    <script>eval(mod_pagespeed_3_4AUN6Qwp);</script>
 
     <link rel="https://api.w.org/" href="https://www.bogadia.com/wp-json/">
     <link rel="EditURI" type="application/rsd+xml" title="RSD" href="https://www.bogadia.com/xmlrpc.php?rsd">
     <link rel="wlwmanifest" type="application/wlwmanifest+xml" href="https://www.bogadia.com/wp-includes/wlwmanifest.xml">
 
-    <link rel="shortlink" href="https://www.bogadia.com/?p=27897">
+    <link rel="shortlink" href="https://www.bogadia.com/?p=37690">
     <link rel="alternate" type="application/json+oembed" href="https://www.bogadia.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bogadia.com%2F27897-2%2F">
     <link rel="alternate" type="text/xml+oembed" href="https://www.bogadia.com/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fwww.bogadia.com%2F27897-2%2F&amp;format=xml">
 
@@ -104,20 +78,19 @@ function is_mobile() {
     <link rel="dns-prefetch" href="//i1.wp.com">
     <link rel="dns-prefetch" href="//i2.wp.com">
     <meta name="verification" content="6c2c0d0251a189774a6fe4252ce561a5"><meta name="p:domain_verify" content="fd4dd19485ea9f51eccc6866100da866">	<meta name="mobile-web-app-capable" content="yes">
-    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.bogadia.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><!--[if IE  8]><link rel="stylesheet" type="text/css" href="https://www.bogadia.com/wp-content/plugins/js_composer/assets/css/vc-ie8.min.css" media="screen"><![endif]--><meta name="generator" content="Powered by Slider Revolution 5.2.5 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+    <!--[if lte IE 9]><link rel="stylesheet" type="text/css" href="https://www.bogadia.com/wp-content/plugins/js_composer/assets/css/vc_lte_ie9.min.css" media="screen"><![endif]--><!--[if IE  8]>
+    <link rel="stylesheet" type="text/css" href="https://www.bogadia.com/wp-content/plugins/js_composer/assets/css/vc-ie8.min.css" media="screen"><![endif]-->
+    <meta name="generator" content="Powered by Slider Revolution 5.2.5 - responsive, Mobile-Friendly Slider Plugin for WordPress with comfortable drag and drop interface.">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+        ga('create', 'UA-55975132-1', 'auto');
+        ga('send', 'pageview');
 
-
-
-
-
-
-
-
-
-
-
-
+    </script>
 </head>
 <body>
 <nav id="topNav" class="navbar navbar-default navbar-fixed-top">
@@ -349,7 +322,7 @@ function is_mobile() {
         </div>
     </div>
     <div class="row">
-        <div class="col-md-12">
+        <div id="eventbrite_bogawow_div" class="col-md-12">
             <div class="text-center" style="width:100%; text-align:left; background-color: white; border-radius: 5px;" ><iframe id="eventbrite_bogawow"  src="//eventbrite.com/tickets-external?eid=19636162290&ref=etckt" frameborder="0" height="450px" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe><div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" ><a class="powered-by-eb" style="color: #dddddd; text-decoration: none;" target="_blank" href="http://www.eventbrite.com/r/etckt">Con tecnología de Eventbrite</a></div></div>
         </div>
     </div>

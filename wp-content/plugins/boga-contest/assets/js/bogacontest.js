@@ -531,8 +531,6 @@ jQuery(document).ready(function()
         new_contestant();
     });
 
-
-
     login.bind_events();
     toolbar.bind_events();
     photo_manager.bind_events();

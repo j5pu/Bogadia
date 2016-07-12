@@ -185,13 +185,7 @@ class contest
         echo '<div class="col-md-6 ">';
         echo '<button id="participate" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->id .'">PARTICIPAR</button>';
 /*        echo '<div id="bogacontest_log_in_out_button">';*/
-        if (is_user_logged_in()) {
-            echo '<a id="logout_button" class=" btn btn-default btn-block" href="'. wp_logout_url(home_url()) .'">Salir</a>';
-            echo '<button class="login_button btn btn-default btn-block" id="login_button" style="display: none;">Entrar</button>';
-        } else {
-            echo '<a id="logout_button" class="logout_button btn btn-default btn-block" href="'. wp_logout_url(home_url()) .'" style="display: none;">Salir</a>';
-            echo '<button class="btn btn-default btn-block" id="login_button">Entrar</button>';
-        }
+
 /*        echo '</div>';*/
         echo '</div>';
         echo '<div class="col-md-3 ">';
@@ -635,7 +629,7 @@ class contestant
             }else{
                 $button .= ' btn-default ';
             }
-            $button .= 'btn-block" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
+            $button .= 'btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
             echo $button;
         }
     }
@@ -643,11 +637,11 @@ class contestant
     function print_mini_card($contest_slug){
         echo '<div class="col-md-3 ">';
         echo '<div style="height: 120px; overflow-y: hidden;">';
-        echo '<img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" >';
+        echo '<a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';
         echo '</div>';
         echo '<div id="data_border" class="mini_contestant_data">';
         echo '<h3><a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
-        echo '<h6>Posición '. $this->position .'<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
+        echo '<h6 class="text-left">Posición '. $this->position .'<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
         echo '<div>';
         self::print_vote_button(False);
         self::print_social_data();
@@ -681,7 +675,10 @@ class contestant
         self::get_votes();
         self::get_position();
         self::print_photos_manager();
+        echo '<div>';
         echo '<p id="bogacontest_breadcrumb"><a href="/concursos/'. $this->contest->slug .'">Boga Contest</a> / '. $this->name .'</p>';
+        $this->contest->print_participate_button();
+        echo '</div>';
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
         echo '<div id="gallery_image_container_'. $this->main_photo_id .'" class="col-sm-6 col-md-6" data-main="1">';
         if (!empty($this->main_photo)){

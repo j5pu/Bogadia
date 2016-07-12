@@ -551,7 +551,7 @@ img::-moz-selection {
 }
 
 #test5{
-    margin-top: 50px;
+    margin-top: 63px;
     padding-bottom: 0 !important;
 }
 
@@ -569,4 +569,5 @@ img::-moz-selection {
 
 #maps{
     padding: 50px;
+    border-radius: 15px !important;
 }

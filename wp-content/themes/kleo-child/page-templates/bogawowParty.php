@@ -122,6 +122,9 @@ function is_mobile() {
                     <a class="page-scroll" href="#five">Dónde</a>
                 </li>
                 <li>
+                    <a class="page-scroll" href="#six">Patrocinadores</a>
+                </li>
+                <li>
                     <a class="page-scroll" href="#footer">Contacto</a>
                 </li>
             </ul>
@@ -366,64 +369,38 @@ function is_mobile() {
         </div>
     </div>
 </section>
-<!--<section class="container-fluid" id="four">
+<section class="container-fluid" id="six">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
-            <h2 class="text-center text-primary">Features</h2>
+            <h2 class="text-center text-primary">Patrocinadores</h2>
             <hr>
             <div class="media wow fadeInRight">
-                <h3>Simple</h3>
-                <div class="media-body media-middle">
-                    <p>What could be easier? Get started fast with this landing page starter theme.</p>
-                </div>
-                <div class="media-right">
-                    <i class="icon-lg ion-ios-bolt-outline"></i>
-                </div>
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/lolita-white.png">
             </div>
             <hr>
             <div class="media wow fadeIn">
-                <h3>Free</h3>
-                <div class="media-left">
-                    <a href="#alertModal" data-toggle="modal" data-target="#alertModal"><i class="icon-lg ion-ios-cloud-download-outline"></i></a>
-                </div>
-                <div class="media-body media-middle">
-                    <p>Yes, please. Grab it for yourself, and make something awesome with this.</p>
-                </div>
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/CARLOS-CORDOBA-VECTOR-1.png">
             </div>
             <hr>
             <div class="media wow fadeInRight">
-                <h3>Unique</h3>
-                <div class="media-body media-middle">
-                    <p>Because you don't want your Bootstrap site, to look like a Bootstrap site.</p>
-                </div>
-                <div class="media-right">
-                    <i class="icon-lg ion-ios-snowy"></i>
-                </div>
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/cms.png">
             </div>
             <hr>
             <div class="media wow fadeIn">
-                <h3>Popular</h3>
-                <div class="media-left">
-                    <i class="icon-lg ion-ios-heart-outline"></i>
-                </div>
-                <div class="media-body media-middle">
-                    <p>There's good reason why Bootstrap is the most used frontend framework in the world.</p>
-                </div>
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/lindenmann.png">
             </div>
             <hr>
             <div class="media wow fadeInRight">
-                <h3>Tested</h3>
-                <div class="media-body media-middle">
-                    <p>Bootstrap is matured and well-tested. It's a stable codebase that provides consistency.</p>
-                </div>
-                <div class="media-right">
-                    <i class="icon-lg ion-ios-flask-outline"></i>
-                </div>
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/ysabel-mora.png">
+            </div>
+            <hr>
+            <div class="media wow fadeIn">
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/lemien-white.png">
             </div>
         </div>
     </div>
 </section>
-<aside class="bg-dark">
+<!--<aside class="bg-dark">
     <div class="container text-center">
         <div class="call-to-action">
             <h2 class="text-primary">Get Started</h2>
@@ -452,8 +429,8 @@ function is_mobile() {
             </div>
         </div>
     </div>
-</aside>
-<section id="last">
+</aside>-->
+<!--<section id="last">
     <div class="container">
         <div class="row">
             <div class="col-lg-8 col-lg-offset-2 text-center">

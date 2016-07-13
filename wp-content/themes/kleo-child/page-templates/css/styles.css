@@ -525,11 +525,11 @@ img::-moz-selection {
 
 @media all and (max-width: 601px) {
     #test5 {
-        background-image:url('https://www.bogadia.com/wp-content/uploads/2016/07/bogaccartelJulio-1-recortado-2.jpg');
+        background-image:url('https://www.bogadia.com/wp-content/uploads/2016/07/bogawow_recortada.jpg');
         width:100%;
         background-repeat: no-repeat;
-        background-size: contain;
-        padding-top: 78.97%;
+        background-size: 100%;
+        padding-top: 100%;
         height: 0;
     }
     #eventbrite_bogawow{
@@ -571,4 +571,8 @@ img::-moz-selection {
     padding-left: 50px;
     padding-right: 50px;
     border-radius: 15px !important;
+}
+
+.partner_logo{
+    padding: 20px;
 }

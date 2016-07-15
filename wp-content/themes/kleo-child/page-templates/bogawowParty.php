@@ -116,9 +116,6 @@ function is_mobile() {
                     <a class="page-scroll" href="#three">Más info</a>
                 </li>
                 <li>
-                    <a class="page-scroll" href="#four" style="background-color: #D4AF37; color: #222 !important; border-radius: 60px;">Consigue tu entrada</a>
-                </li>
-                <li>
                     <a class="page-scroll" href="#five">Dónde</a>
                 </li>
                 <li>
@@ -315,23 +312,7 @@ function is_mobile() {
         </div>
     </div>
 </section>
-<section class="container-fluid" id="four">
-    <div class="container">
-        <div class="row">
-            <div class="col-lg-12 text-center">
-                <h2 class="margin-top-0 text-primary">Consigue tu entrada</h2>
-                <hr class="primary">
-            </div>
-        </div>
-    </div>
-    <div class="row">
-        <div id="eventbrite_bogawow_div" class="col-md-12">
-<!--            <div class="text-center" style="width:100%; text-align:left; background-color: white; border-radius: 5px;" ><iframe id="eventbrite_bogawow"  src="//eventbrite.com/tickets-external?eid=19636162290&ref=etckt" frameborder="0" height="450px" width="100%" vspace="0" hspace="0" marginheight="5" marginwidth="5" scrolling="auto" allowtransparency="true"></iframe><div style="font-family:Helvetica, Arial; font-size:10px; padding:5px 0 5px; margin:2px; width:100%; text-align:left;" ><a class="powered-by-eb" style="color: #dddddd; text-decoration: none;" target="_blank" href="http://www.eventbrite.com/r/etckt">Con tecnología de Eventbrite</a></div></div>
--->                 <div id="tkt-content">Compra aquí tus entradas</div><script language="javascript" type="text/javascript" src="//www.ticketea.com/entradas-festival-bogawowparty-15jul/buy?width=600px&height=600px"></script><a href="//www.ticketea.com/entradas-festival-bogawowparty-15jul/" alt="#BOGAWOWPARTY FASHION - ¡Mucho más que una fiesta!" title="ticketea"><img src="//www.ticketea.com/images/powered_by.png" alt="ticketea" /></a>
-        </div>
-    </div>
-</section>
-<section class="bg-primary" id="five">
+<section id="five">
     <div class="container">
         <div class="row">
             <div class="col-lg-12 text-center">
@@ -369,7 +350,7 @@ function is_mobile() {
         </div>
     </div>
 </section>
-<section class="container-fluid" id="six">
+<section class="container-fluid bg-primary" id="six">
     <div class="row">
         <div class="col-xs-10 col-xs-offset-1 col-sm-6 col-sm-offset-3 col-md-4 col-md-offset-4">
             <h2 class="text-center text-primary">Patrocinadores</h2>

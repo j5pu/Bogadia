@@ -195,7 +195,7 @@ function is_mobile() {
                     <i class="icon-lg ion-ios-location wow fadeIn" data-wow-delay=".3s"></i>
                     <h3>Dónde y cuándo</h3>
                     <p class="text-muted">Viernes 15 de julio de 2016 a partir de las 22 horas</p>
-                    <a href="#Donde"></a><p class="text-muted">Lolita Disco & Lounge Madrid</p>
+                    <a href="#Donde"></a><p class="text-muted">Bucca Madrid</p>
                 </div>
             </div>
             <div class="col-lg-4 col-md-4 text-center">
@@ -235,8 +235,8 @@ function is_mobile() {
         <div class="row">
 
             <div class="col-lg-6 col-sm-6">
-                <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="https://www.bogadia.com/wp-content/uploads/2015/11/Lolita.jpg">
-                    <img src="https://www.bogadia.com/wp-content/uploads/2015/11/Lolita.jpg" class="img-responsive" alt="Image 1">
+                <a href="#galleryModal" class="gallery-box" data-toggle="modal" data-src="https://www.bogadia.com/wp-content/uploads/2016/07/discotecca-bucca-madrid2.jpg">
+                    <img src="https://www.bogadia.com/wp-content/uploads/2016/07/discotecca-bucca-madrid2.jpg" class="img-responsive" alt="Image 1">
                     <div class="gallery-box-caption">
                         <div class="gallery-box-content">
                             <div>
@@ -270,7 +270,7 @@ function is_mobile() {
                     </div>
                 </a>-->
                 <p>¿Quieres pasar una noche inolvidable entre flashes, música, moda y buen ambiente? ¿Te gustaría ser el protagonista de una fashion film, ganar un sesión de fotos valorado en 200€ o un videobook profesional y conocer a gente del mundo de la moda? ¡Esta es la fiesta que esperabas!</p>
-                <p>La revista BOGADIA presenta la primera fiesta exclusiva para amantes de la moda que quieran divertirse con sus amigos a la vez que disfrutan de su gran pasión. Te abrimos las puertas de Lolita Disco&Lounge para que vivas una noche inolvidable con nosotros rodeado de gente con mucho estilo, buena música y distintas zonas de participación donde dar rienda suelta a tu lado más fashion.</p>
+                <p>La revista BOGADIA presenta la primera fiesta exclusiva para amantes de la moda que quieran divertirse con sus amigos a la vez que disfrutan de su gran pasión. Te abrimos las puertas de BUCCA Madrid para que vivas una noche inolvidable con nosotros rodeado de gente con mucho estilo, buena música y distintas zonas de participación donde dar rienda suelta a tu lado más fashion.</p>
                 <p>Esto no es una simple fiesta donde conocer gente guapa, tomarte una copa y disfrutar de la noche, aquí además sentirás la moda desde dentro. Podrás posar en nuestro photocall con las mejores marcas de ropa, aparecerás en nuestro espectacular fashion film, podrás ganar un videobook y tendrás la posibilidad de tener un post exclusivo en nuestra revista entre otras múltiples actividades y concursos.</p>
                 <p>En #BOGAWOWPARTY tú eres nuestro protagonista ¿Te animas?</p>
             </div>
@@ -343,7 +343,7 @@ function is_mobile() {
     <div class="container">
         <div class="row">
             <div id="maps" class="col-lg-12 col-md-12">
-                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3035.88500199819!2d-3.691068949144129!3d40.45568216109225!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd42291da4702475%3A0xf3d0ea1eb3b96546!2sLolita+Lounge+%26+Bar!5e0!3m2!1ses!2ses!4v1468263429329" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3035.581007262282!2d-3.6890485847029706!3d40.46240967935975!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0xd4229199044a18f%3A0x2605d9c124cd7729!2sBucca+Madrid!5e0!3m2!1ses!2ses!4v1468573814112" width="100%" height="450" frameborder="0" style="border:0" allowfullscreen></iframe>
             </div>
             <!--            <div class="col-lg-4 col-md-4 text-center">
                             <div class="feature">
@@ -375,7 +375,7 @@ function is_mobile() {
             <h2 class="text-center text-primary">Patrocinadores</h2>
             <hr>
             <div class="media wow fadeInRight">
-                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/lolita-white.png">
+                <img class="img-responsive partner_logo" src="https://www.bogadia.com/wp-content/uploads/2016/07/bucca-invertido.png">
             </div>
             <hr>
             <div class="media wow fadeIn">

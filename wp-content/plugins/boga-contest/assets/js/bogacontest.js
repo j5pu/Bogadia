@@ -521,8 +521,8 @@ var login = {
 jQuery(document).ready(function()
 {
     jQuery('.vote').on('click', function(){
-        vote.contestant_id = jQuery(this).data('contestantuserid');
-        vote.user_id = jQuery(this).data("id");
+        vote.contestant_id = jQuery(this).data('id');
+        vote.user_id = jQuery(this).data("contestantuserid");
         vote.voter_id = jQuery('#current-user-data-holder').data('currentuserid');
         vote.button = jQuery(this);
         vote.new_vote();

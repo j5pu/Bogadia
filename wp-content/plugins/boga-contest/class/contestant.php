@@ -548,6 +548,10 @@ class contestant
         if (empty($this->votes)){
             global $wpdb;
             $this->votes = $wpdb->get_var("SELECT COUNT(*) FROM wp_bogacontest_votes WHERE contestant_id=". $this->ID .";");
+            if (is_null($this->votes)){
+                $this->votes = 0;
+            }
+
         }
     }
 
@@ -584,7 +588,7 @@ class contestant
         );
         if($success){
             $success = $wpdb->insert_id;
-            return '¡Genial! Tu voto ha sido contabilizado';
+            return '¡Genial! Voto contado';
         }
         return '¡Upps! Tu voto no se ha contado';
 
@@ -592,14 +596,21 @@ class contestant
 
     function get_position(){
         if(empty($this->position)){
-            $counter = 1;
-            foreach($this->contest->positions as $contestant_position){
-                if ($contestant_position->contestant_id == $this->ID){
-                    $this->position = $counter;
-                    $this->votes = $contestant_position->votes;
-                    break;
+            if (!empty($this->contest->positions)){
+                $counter = 1;
+                foreach($this->contest->positions as $contestant_position){
+                    if ($contestant_position->contestant_id == $this->ID){
+                        $this->position = $counter;
+                        $this->votes = $contestant_position->votes;
+                        if (is_null($this->votes)){
+                            $this->votes = 0;
+                        }
+                        break;
+                    }
+                    $counter++;
                 }
-                $counter++;
+            } else {
+                $this->votes = 0;
             }
         }
     }
@@ -641,7 +652,9 @@ class contestant
         echo '</div>';
         echo '<div id="data_border" class="mini_contestant_data">';
         echo '<h3><a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
-        echo '<h6 class="text-left">Posición '. $this->position .'<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
+        echo '<h6 class="text-left">';
+        if(!empty($this->position)){ echo 'Posición '. $this->position ;}
+        echo '<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
         echo '<div>';
         self::print_vote_button(False);
         self::print_social_data();
@@ -688,27 +701,28 @@ class contestant
         }else{
             echo '<img id="no_main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
         }
+        if($current_user_id == $this->user_id){
+/*            echo '<div class="row">';
+            echo '<div class="col-sm-6 col-md-6">';*/
+            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block">Subir foto</button>';
+            echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
+            /*            echo '<div class="progress"><div id="upload_progress_bar" class="bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>';*/
+            echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
+/*            echo '</div>';
+            echo '<div class="col-sm-6 col-md-6">';*/
+            echo '<button id="delete" type="button" class="btn btn-default btn-block">Borrar foto</button>';
+/*            echo '</div>';*/
+            /*            echo '<div class="col-sm-4 col-md-4">';
+                        echo '<button type="button" class="btn btn-primary btn-block">Cambiar foto principal</button>';
+                        echo '</div>';*/
+/*            echo '</div>';*/
+        }
         echo '</div>';
         echo '<div class="col-sm-6 col-md-6">';
         echo '<h2 id="contestants_forest_header" style="font-size: 250%;"><span id="contestants_forest_header_span">'. $this->name .'</span></h2>';
         echo '<h3 style="margin-top: 40px;"><a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:left;">'. $this->votes .' votos</a> <a style="float:right;">Posición actual: '. $this->position .'</a></h3>';
 
-        if($current_user_id == $this->user_id){
-            echo '<div class="row">';
-            echo '<div class="col-sm-6 col-md-6">';
-            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block">Subir foto</button>';
-            echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
-/*            echo '<div class="progress"><div id="upload_progress_bar" class="bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>';*/
-            echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
-            echo '</div>';
-            echo '<div class="col-sm-6 col-md-6">';
-            echo '<button id="delete" type="button" class="btn btn-primary btn-block">Borrar foto</button>';
-            echo '</div>';
-/*            echo '<div class="col-sm-4 col-md-4">';
-            echo '<button type="button" class="btn btn-primary btn-block">Cambiar foto principal</button>';
-            echo '</div>';*/
-            echo '</div>';
-        }
+
 
         echo '</div>';
         echo '</div>';

@@ -1,6 +1,15 @@
 <?php
 class contest
 {
+    // Atributos
+    public $id;
+    public $slug;
+    public $contestants = array();
+    public $total_contestants;
+    public $ranking;
+
+
+    // Getters y Setters
     public function getId()
     {
         return $this->id;
@@ -31,18 +40,11 @@ class contest
         $this->total_contestants = $total_contestants;
     }
 
-    public $id;
-    public $slug;
-    public $contestants = array();
-    public $total_contestants;
-    public $positions;
-
-    function __construct()
-    {
-    }
-
+    // Métodos Gestión
     function create()
     {
+        /* Crea un nuevo concurso. Devuelve el id del concurso creado, 0 en caso de error */
+
         global $wpdb;
         $results = $wpdb->insert(
             'wp_bogacontest',
@@ -54,115 +56,135 @@ class contest
             )
         );
         if($results){
-            $results = $wpdb->insert_id;
-        }
-        return $results;
+            return $wpdb->insert_id;
+        }else
+            return 0;
     }
 
     function get_contest_slug_from_url(){
+        /* Extrae el slug del concurso de la url */
+
         global $wp_query;
         $this->slug = urldecode($wp_query->query_vars['contest']);
     }
 
+    // Métodos
     function get_contestants($by, $direction, $search)
     {
+        /* Rescata de base de datos Concursantes. Acepta buscar por nombre, ordenar por algún atributo y/o de menor a mayor y viceversa */
+
         global $wpdb;
         $query_search = "";
         $query_filter_var = "";
         $group_by = "";
         $left_join = "";
 
-        if (!empty($search)){
+        // Composición de la query
+        if (!empty($search))
+        {
+            // Busqueda por nombre
             $query_search = "AND wp_users.display_name LIKE '%". $search ."%'";
         }
-        if ($by == 'votes'){
-            $query_filter_var = ', COUNT(wp_bogacontest_votes.contestant_id) as votes ';
-            $group_by = 'GROUP BY wp_bogacontest_votes.contestant_id';
-            $left_join = 'LEFT JOIN wp_bogacontest_votes ON wp_bogacontest_contestant.ID=wp_bogacontest_votes.contestant_id';
-        }
-        if (!empty($by)){
+
+        if (!empty($by))
+        {
+            // Ordenacion
+            if ($by == 'votes')
+            {
+                // Query especial para ordenacion por votos (Ranking)
+                $query_filter_var = ', COUNT(wp_bogacontest_votes.contestant_id) as votes ';
+                $group_by = 'GROUP BY wp_bogacontest_votes.contestant_id';
+                $left_join = 'LEFT JOIN wp_bogacontest_votes ON wp_bogacontest_contestant.ID=wp_bogacontest_votes.contestant_id';
+            }
+
             $by = 'ORDER BY ' . $by ;
             $direction = 'DESC';
         }
-        $results = $wpdb->get_results( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $query_search ." ". $group_by . " " . $by ." ". $direction .";", OBJECT );
-        $this->contestants = $results;
-        if ($by == 'votes') {
-            $this->positions;
-        }
+
+        $variables = "wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." ";
+        $tables = "wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." ";
+        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $query_search ." ". $group_by . " " . $by ." ". $direction ;
+        $query = "SELECT ". $variables . " FROM ". $tables ." WHERE ". $conditions .";";
+
+        // Ejecución
+        $results = $wpdb->get_results( $query, OBJECT );
+
+        // Evaluacion
+        if (!empty($results))
+        {
+            $this->contestants = $results;
+            $this->id = $this->contestants[0]->contest_id;
+            if ($by == 'votes') {
+                $this->ranking;
+            }
             return $results;
-    }
-
-    function get_positions()
-    {
-        if (empty($this->positions)){
-            global $wpdb;
-            $this->positions = $wpdb->get_results("SELECT contestant_id, COUNT(*) as votes FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY votes DESC;", OBJECT);
+        } else
+        {
+            return 0;
         }
     }
 
-    function count_contestans(){
+    function get_ranking()
+    {
+        /* Calcula el ranking de los concursantes del concurso*/
+
+        if (empty($this->ranking))
+        {
+            global $wpdb;
+            $this->ranking = $wpdb->get_results("SELECT contestant_id, COUNT(*) as votes FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY votes DESC;", OBJECT);
+        }
+    }
+
+    function count_contestans()
+    {
+        /* Calcula el numero total de concursantes inscritos en el concurso */
+
         global $wpdb;
         $this->total_contestants = $wpdb->get_var( "SELECT COUNT(*) FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID WHERE wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ;");
     }
-/*
-    function search_contestant($query)
-    {
-        global $wpdb;
-        return $wpdb->get_results( "SELECT wp_bogacontest_contestant.user_id FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_users.ID=wp_bogacontest_contestant.user_id WHERE wp_users.display_name LIKE '%". $query ."%' ;", OBJECT );
-    }
-    */
-/*    function toolbar_query($filter, $search)
-    {
 
-        if ($search){
-
-        }
-        self::get_contestants('RAND()', '');
-    }*/
-
-    function print_contest_data()
+    // Imprimir
+    function print_contest_page()
     {
+        /* Imprime la pagina individual de un concurso */
+
         self::get_contest_slug_from_url();
         self::get_contestants('RAND()', '', '');
-        self::get_positions();
+        self::get_ranking();
+        self::print_login_register_form();
 
-        if (empty($this->contestants)) {
-            global $wpdb;
-            $this->id = $wpdb->get_var("SELECT ID FROM wp_bogacontest WHERE slug='". $this->slug ."';");
-
-            if (empty($this->id)) {
-                $this->id = self::create();
-                self::get_contestants('RAND()', '', '');
-
-                if (empty($this->contestants)) {
-                    echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
-                    self::print_participate_button();
-                    return '';
-                }
-            }
-        }else{
-            self::count_contestans();
-            $this->id = $this->contestants[0]->contest_id;
-
-        }
-
-        self::print_form();
+        // PRESENTACION CONCURSO:
         echo '<img class="aligncenter img-responsive" src="http://alo.co/sites/default/files/imagecache/Main_Galeria_Vertical_720_438/_can8835.jpg">';
         echo '<h1>BogaContest</h1>';
         echo '<hr>';
         echo '<p>¿Tienes carisma? ¿Te consideras una persona con chispa? Es tu momento. En Bogadia queremos romper los estereotipos de los concursos de modelos y apostar por una <strong>belleza real</strong>, lejos de los cánones impuestos. Entra de lleno en el mundo de la moda participando en BogaContest, el primer <strong>concurso de modelos</strong> para <strong>gente como tú</strong>. Podrás convertirte en la <strong>imagen de Bogadia</strong>, ganar un <strong>book de fotos profesional</strong> valorado en 300€ y promoción en todas nuestras <strong>redes sociales</strong>. ¿A qué esperas? ¡Haz click en participar para <strong>crear tu cuenta</strong>!</p>';
         self::print_participate_button();
+
+        // CONCURSANTES
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
+        self::count_contestans();
         self::print_toolbar();
         echo '<div class="row">';
         echo '<div id="contestants_container" class="col-md-12 text-center">';
-        self::print_contestants();
+
+        if (empty($this->contestants))
+        {
+            echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
+            return '';
+        }else
+        {
+            self::print_contestants();
+        }
+
         echo '</div>';
         echo '</div>';
         return '';
     }
 
-    function print_toolbar(){
+    function print_toolbar()
+    {
+        /* Imprime la barra de filtrado y busqueda de concursantes */
+
         echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->slug .'">';
         echo '<div id="toolbar_counter" class="col-md-4">';
         echo '<small>'. $this->total_contestants .' participantes</small>';
@@ -179,14 +201,13 @@ class contest
     }
 
     function print_participate_button(){
+        /* Imprime el boton de participar */
+
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'">';
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div class="col-md-6 ">';
         echo '<button id="participate" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->id .'">PARTICIPAR</button>';
-/*        echo '<div id="bogacontest_log_in_out_button">';*/
-
-/*        echo '</div>';*/
         echo '</div>';
         echo '<div class="col-md-3 ">';
         echo '</div>';
@@ -194,8 +215,10 @@ class contest
     }
 
     function print_contestants(){
+        /* Imprime los concursantes inscritos en el concurso*/
+
         $counter = 0;
-        self::get_positions();
+        self::get_ranking();
         foreach($this->contestants as $contestant_data){
             $contestant = new contestant();
             $contestant->set_contestant($contestant_data, $this);
@@ -212,35 +235,42 @@ class contest
         }
     }
 
-    function print_form(){
+    function print_login_register_form(){
+        /* Imprime el formulario modal de login y registro */
+
         echo '<div class="modal fade" id="bogacontest_login_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
+
 
         echo '<div  class="modal-dialog">';
         echo '<div id="bogacontest_login_modal_dialog" class="modal-content text-right">';
 
+        // Encabezado del modal (ahora mismo vacio)
         echo '<div id="bogacontest_login_header" class="modal-header">';
         echo '<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>';
-        echo '<h4 id="bogacontest_login_title" class="modal-title text-center">Acceso</h4>';
+        echo '<h4 id="bogacontest_login_title" class="modal-title text-center"></h4>';
         echo '</div>';
 
-
+        // Cuerpo del modal
         echo '<div class="modal-body">';
         echo '<div class="row">';
-
+        //// Parte de la foto de la modelo
         echo '<div class="col-xs-5 col-sm-6 col-md-6">';
         echo '</div>';
 
+        //// Parte del formulario
         echo '<div id="bogacontest_login_body" class="col-xs-7 col-sm-6 col-md-6">';
+        ////// Boton facebook
         echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
         echo '<hr>';
-        echo '<div id="first_form">';
+        ////// Formulario registro
+        echo '<h4 id="register_help_text" style="color: white;"></h4>';
         echo '<small id="email_validate_text" style="display: none; color: chartreuse;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
+        echo '<div id="first_form">';
         echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
         echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
         echo '<button id="bogacontest_up_login" type="button" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Entrar</button>';
         echo '</div>';
         echo '<div id="second_form" style="display: none;">';
-        echo '<h3 id="register_help_text" style="color: white;">¡Guay! Solo falta tu nombre completo</h3>';
         echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
         echo '<button id="bogacontest_up_register" type="button" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Registrarme</button>';
         echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
@@ -249,14 +279,13 @@ class contest
         echo wp_nonce_field( 'ajax-register-nonce', 'bogacontest_up_register_security' );
         echo '</div>';
         echo '<input id="bogacontest_up_login_action_after_login" class=  "form-control" type="hidden" name="action_after_login" value="0">';
-
         echo '</div>';
         echo '</div>';
 
-
-        echo '<div id="bogacontest_login_footer" class="modal-footer">';
+        // Footer del modal
+/*        echo '<div id="bogacontest_login_footer" class="modal-footer">';
         echo '<a class="lost" href="'. wp_lostpassword_url() .'">¿Has olvidado tu contraseña?</a>';
-        echo '</div>';
+        echo '</div>';*/
 
         echo '</div>';
         echo '</div>';
@@ -365,6 +394,7 @@ class contestant
     {
         $this->contest = $position;
     }
+
     public function getVotes()
     {
         return $this->votes;
@@ -676,7 +706,7 @@ class contestant
         }
         $this->contest = new contest();
         $this->contest->get_contest_slug_from_url();
-        $this->contest->get_positions();
+        $this->contest->get_ranking();
 
         $current_user_id = get_current_user_id();
         $results = $wpdb->get_row( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id  FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE ". $query_lookup_field ." AND wp_bogacontest.slug='". $this->contest->slug ."';", OBJECT );

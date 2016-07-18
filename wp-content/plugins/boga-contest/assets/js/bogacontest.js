@@ -341,7 +341,7 @@ function new_contestant(){
             })
             .done(function( msg ) {
                 msg = JSON.parse(msg);
-                change_text_animate('#bogacontest_login_body', '<div class="text-center"><h3>' + msg.message + '</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
+                change_text_animate('#bogacontest_login_body', '<div class="text-center" style="color: white;"><h3>' + msg.message + '</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
                 jQuery('#bogacontest_up_login_action_after_login').val('redirect');
                 login.action_after_login(msg);
 
@@ -405,12 +405,20 @@ var login = {
         }).done(function(data){
             data = JSON.parse(data);
             jQuery('#bogacontest_up_login').html('Entrar');
-            if (data.loggedin == true){
-                jQuery('#current-user-data-holder').data('currentuserid', data.user_id);
-                login.action_after_login(data);
-            }else{
+            jQuery('#email_validate_text').html(data.message);
+            jQuery('#register_help_text').html(data.message);
+
+            if (data.case == 0)
+            {
+                // Continuar con registro
                 jQuery('#first_form').hide('slow');
                 jQuery('#second_form').delay(500).show('slow');
+            }
+
+            if (data.loggedin == true)
+            {
+                jQuery('#current-user-data-holder').data('currentuserid', data.user_id);
+                login.action_after_login(data);
             }
         });
     },

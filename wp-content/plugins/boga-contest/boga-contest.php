@@ -103,25 +103,25 @@ function bogacontest_ajax_login(){
             $info['remember'] = true;
             $user_signon = wp_signon($info, is_ssl() ? true : false);
             if ( is_wp_error($user_signon) ){
-                echo json_encode(array('loggedin'=>false, 'message'=>__('¡Upps! Ha ocurrido un error')));
+                echo json_encode(array('loggedin'=>false, 'case'=>1, 'message'=>__('¡Upps! Ha ocurrido un error')));
             } else {
                 $bogacontestant = new contestant();
                 $bogacontestant->setUserId($user_signon->ID);
                 $bogacontestant->setContestId($_POST['contest_id']);
                 $bogacontestant->get();
                 if (!empty($bogacontestant->ID)){
-                    echo json_encode(array('loggedin'=>true, 'message'=>__('Hola de nuevo '. $bogacontestant->name .'. Te estamos redirigiendo a tu cuenta'), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
+                    echo json_encode(array('loggedin'=>true, 'case'=>8, 'message'=>__('Hola de nuevo '. $bogacontestant->name .'. Te estamos redirigiendo a tu cuenta'), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
                 }else{
-                    echo json_encode(array('loggedin'=>true, 'message'=>__('Hola de nuevo '. $user->data->display_name ), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
+                    echo json_encode(array('loggedin'=>true, 'case'=>9, 'message'=>__('Hola de nuevo '. $user->data->display_name ), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
                 }
             }
             die();
         }else{
-            echo json_encode(array('loggedin'=>false, 'message'=>__('Contraseña incorrecta. <a class="lost" href="'. wp_lostpassword_url() .'">¿Has olvidado tu contraseña?</a>')));
+            echo json_encode(array('loggedin'=>false, 'case'=>2, 'message'=>__('Contraseña incorrecta. <a class="lost" style="color: white;" href="'. wp_lostpassword_url() .'">¿Has olvidado tu contraseña?</a>')));
             die();
         }
     }else{
-        echo json_encode(array('loggedin'=>false, 'message'=>__('¡Guay! Solo falta tu nombre completo')));
+        echo json_encode(array('loggedin'=>false, 'case'=>0, 'message'=>__('¡Guay! Solo falta tu nombre completo')));
         die();
     }
 }
@@ -148,11 +148,11 @@ function bogacontest_ajax_register(){
         $error  = $user_register->get_error_codes()	;
 
         if(in_array('empty_user_login', $error))
-            echo json_encode(array('loggedin'=>false, 'message'=>__($user_register->get_error_message('empty_user_login'))));
+            echo json_encode(array('loggedin'=>false, 'case'=>3, 'message'=>__($user_register->get_error_message('empty_user_login'))));
         elseif(in_array('existing_user_login',$error))
-            echo json_encode(array('loggedin'=>false, 'message'=>__('Cambia tu nombre por un mote, o modifícalo un poco por favor.')));
+            echo json_encode(array('loggedin'=>false, 'case'=>4, 'message'=>__('Cambia tu nombre por un mote, o modifícalo un poco por favor.')));
         elseif(in_array('existing_user_email',$error))
-            echo json_encode(array('loggedin'=>false, 'message'=>__('Este e-mail ya ha sido usado')));
+            echo json_encode(array('loggedin'=>false, 'case'=>5, 'message'=>__('Este e-mail ya ha sido usado')));
     } else
     {
 /*        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );*/
@@ -161,9 +161,9 @@ function bogacontest_ajax_register(){
         $login_data['remember'] = true;
         $user_signon = wp_signon($login_data, is_ssl() ? true : false);
         if ( is_wp_error($user_signon) ){
-            echo json_encode(array('loggedin'=>false, 'message'=>__('Upps! Te has registrado correctamente pero no hemos podido auntenticarte')));
+            echo json_encode(array('loggedin'=>false, 'case'=>6, 'message'=>__('Upps! Te has registrado correctamente pero no hemos podido auntenticarte')));
         } else {
-            echo json_encode(array('loggedin'=>true, 'message'=>__('Perfecto '. $info['nickname']  . '. Ya estás registrado.'), 'user_id'=>$user_signon->ID, 'contestant_id'=>''));
+            echo json_encode(array('loggedin'=>true, 'case'=>7, 'message'=>__('Perfecto '. $info['nickname']  . '. Ya estás registrado.'), 'user_id'=>$user_signon->ID, 'contestant_id'=>''));
         }
     }
     die();
@@ -277,20 +277,6 @@ function bogacontest_meta_description($string){
     }
 }
 
-/*function add_urls_to_bogacontest_sitemap(){
-    $sitemap_custom_items = '<sitemap>
-		<loc>http://localhost/custom-page-1/</loc>
-		<lastmod>2016-5-18T23:12:27+00:00</lastmod>
-	</sitemap>';
-
-    return $sitemap_custom_items;
-}*/
-/*add_action('init', 'enable_custom_sitemap');
-function enable_custom_sitemap(){
-    global $wpseo_sitemaps;
-    $wpseo_sitemaps->register_sitemap('bogacontestant', 'add_urls_to_bogacontest_sitemap');
-}*/
-
 // Yoast SEO, add own sub-sitemap
 // works only after SEO -> XML Sitemaps -> Post Types (change something and back, some cache?)
 
@@ -326,7 +312,7 @@ add_filter( 'wpseo_opengraph_image', 'bogacontest_meta_img' );
 add_filter( 'wpseo_metadesc', 'bogacontest_meta_description' );
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
 add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data') );
-add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_data') );
+add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_page') );
 add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_register', 'bogacontest_ajax_register' );

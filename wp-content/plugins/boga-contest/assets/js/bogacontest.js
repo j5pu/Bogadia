@@ -50,6 +50,18 @@ var progress_bar = {
         jQuery("#progress_bar_container").slideUp('slow');
     }
 };
+var progress_gallery_bar = {
+    move: function (value){
+        jQuery("#upload_progress_gallery_bar").css('width', value);
+        jQuery("#upload_progress_gallery_bar_text").html(value);
+    },
+    show: function (){
+        jQuery("#progress_gallery_bar_container").slideDown('fast');
+    },
+    hide: function (){
+        jQuery("#progress_gallery_bar_container").slideUp('slow');
+    }
+};
 
 var vote = {
     voter_id: '',
@@ -137,6 +149,7 @@ var toolbar = {
 var photo_manager = {
     selected_photo: '',
     main: 0,
+    upload_to_main: 0,
     check_main: function(){
         if ( jQuery("#no_main_photo").length > 0){
             photo_manager.main = 1;
@@ -144,7 +157,8 @@ var photo_manager = {
             photo_manager.main = 0;
         }
     },
-    bind_events: function(){
+    bind_events: function()
+    {
         jQuery('#delete').on('click', function(){
             jQuery('#bogacontest_manager_modal').modal('toggle');
         });
@@ -152,35 +166,46 @@ var photo_manager = {
             photo_manager.selected_photo = jQuery("input[type=radio][name=photo_to_edit]:checked").val();
             photo_manager.delete();
         });
-/*        jQuery("input[type=radio][name=photo_to_edit]").on('click', function(){
-            jQuery(this).parent().parent().css('border', '2px solid black');
-            jQuery(this).parent().parent().css('-webkit-box-shadow', '0px 4px 18px -5px rgba(0,0,0,0.75)');
-            jQuery(this).parent().parent().css('--moz-box-shadow', '0px 4px 18px -5px rgba(0,0,0,0.75)');
-            jQuery(this).parent().parent().css('box-shadow', '0px 4px 18px -5px rgba(0,0,0,0.75)');
-        });*/
+
         jQuery('#upload_alias').on('click', function(){
+            photo_manager.upload_to_main = 0;
+            jQuery('#upload').click();
+        });
+        jQuery('#upload_main_alias').on('click', function(){
+            photo_manager.upload_to_main = 1;
             jQuery('#upload').click();
         });
         jQuery('#upload').on('change', function(){
-            photo_manager.upload();
+            photo_manager.upload(photo_manager.upload_to_main);
         });
     },
+    upload: function(upload_to_main)
+    {
+        var selected_progress_bar = "";
 
-    upload: function(){
+        if (upload_to_main == 1)
+        {
+            selected_progress_bar = progress_bar;
+        }else
+        {
+            selected_progress_bar = progress_gallery_bar;
+        }
+
         var nonce = jQuery('#upload').data('nonce');
         var formData = new FormData();
         var fileInputElement = document.getElementById("upload");
         var xhr = new XMLHttpRequest();
 
-        progress_bar.show();
-        progress_bar.move('10%');
+        selected_progress_bar.show();
+        selected_progress_bar.move('10%');
 
         formData.append("action", "upload-attachment");
         formData.append("async-upload", fileInputElement.files[0]);
         formData.append("name", fileInputElement.files[0].name);
         formData.append("_wpnonce", nonce);
 
-        xhr.onreadystatechange=function(){
+        xhr.onreadystatechange=function()
+        {
             if (xhr.readyState==1){
                 progress_bar.move('30%');
             }
@@ -190,7 +215,8 @@ var photo_manager = {
             if (xhr.readyState==3){
                 progress_bar.move('50%');
             }
-            if (xhr.readyState==4 && xhr.status==200){
+            if (xhr.readyState==4 && xhr.status==200)
+            {
                 var response = jQuery.parseJSON(xhr.responseText);
                 var image_url = response.data.url;
                 var post_id = response.data.id;
@@ -198,62 +224,86 @@ var photo_manager = {
                 photo_manager.check_main();
                 var there_is_main = photo_manager.main;
 
-                progress_bar.move('60%');
+                selected_progress_bar.move('60%');
 
-                jQuery.ajax({
+                jQuery.ajax(
+                    {
                         beforeSend: function(){
                             console.log('preparando foto');
-                            progress_bar.move('60%');
+                            selected_progress_bar.move('60%');
                         },
                         method: "POST",
                         url: "/wp-content/plugins/boga-contest/new_photo.php",
                         data: {
                             path: image_url,
-                            main: there_is_main,
+                            main: upload_to_main,
                             contestant_id: jQuery('#upload').data("contestantid"),
                             post_id: post_id
                         }
                     })
-                    .done(function(  ) {
-                        progress_bar.move('90%');
+
+                    .done(function(  )
+                    {
+                        selected_progress_bar.move('90%');
+
                         // Colocamos la nueva imagen en la galeria
-                        if (there_is_main == 0){
-                            var gallery = jQuery('#gallery');
-                            var num_photos_last_row = gallery.find('div:last-child').find('div').length;
-                            var num_photos = jQuery('.contestant-photo').length;
-                            var str = '';
-
-                            if (num_photos_last_row == 4) {
-                                str = '<div class="row gallery-row" style="">';
-                            }
-
-                            str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-                            str = str + '<a id="main_photo_holder" href="' + image_url + '">';
-                            str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
-                            str = str + '</a>';
-                            str = str + '</div>';
-
-                            if (num_photos_last_row == 4) {
-                                str = str + '</div>';
-                                gallery.append(str);
-                            }else{
-                                gallery.find('div:last-child').append(str);
-                            }
-                        }else{
-                            var main_photo = jQuery("#no_main_photo");
+                        if (upload_to_main == 1)
+                        {
+                            // si la foto se sube como principal
+                            var main_photo = jQuery("#main_photo");
+                            var old_photo = main_photo.attr('src');
                             main_photo.attr('src', image_url);
                             main_photo.attr('id', 'main_photo');
                             main_photo.parent().attr('id', 'gallery_image_container_' + post_id);
                             main_photo.parent().css('visibility', 'visible');
+                            main_upload_button = jQuery('#upload_main_alias');
+
+                            if (main_upload_button.hasClass('btn-primary'))
+                            {
+                                main_upload_button.html('Cambia tu foto principal');
+                                main_upload_button.removeClass('btn-primary');
+                                main_upload_button.addClass('btn-default');
+                            }
+                            jQuery('meta[property="og:image"]').attr(image_url);
+                            jQuery('meta[property="twitter:image"]').attr(image_url);
+                            image_url = old_photo;
                         }
 
-                        // Colocamos la foto subida en el photo manager
+                        // Colocamos la nueva foto o la antigua foto principal en la galeria
+                        var gallery = jQuery('#gallery');
+                        var first_row = gallery.find('.gallery-row:first-child')[0];
+                        var num_photos_first_row = first_row.childNodes.length;
+                        var num_photos = jQuery('.contestant-photo').length;
+                        var str = '';
+
+                        if (num_photos_first_row == 4)
+                        {
+                            str = '<div class="row gallery-row" style="">';
+                        }
+
+                        str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                        str = str + '<a id="main_photo_holder" href="' + image_url + '">';
+                        str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
+                        str = str + '</a>';
+                        str = str + '</div>';
+
+                        if (num_photos_first_row == 4)
+                        {
+                            str = str + '</div>';
+                            gallery.prepend(str);
+                        }else
+                        {
+                            jQuery(first_row).prepend(str);
+                        }
+
+                        // Colocamos la nueva foto o la antigua foto principal en el photo manager
                         var photo_manager = jQuery('#photo_manager_select');
-                        var num_photos_last_row = photo_manager.find('div:last-child').find('div').length;
+                        var num_photos_last_row = photo_manager.find('div:first-child').find('div').length;
                         var num_photos = jQuery('.manager_photo').length;
                         var str = '';
 
-                        if (num_photos_last_row == 3) {
+                        if (num_photos_last_row == 3)
+                        {
                             str = '<div class="row gallery-row" style="">';
                         }
 
@@ -264,21 +314,25 @@ var photo_manager = {
                         str = str + '</label>';
                         str = str + '</div>';
 
-                        if (num_photos_last_row == 3) {
+                        if (num_photos_last_row == 3)
+                        {
                             str = str + '</div>';
                             photo_manager.append(str);
-                        }else{
+                        }else
+                        {
                             photo_manager.append(str);
                         }
 
-                        progress_bar.move('100%');
+                        selected_progress_bar.move('100%');
 
-                        setTimeout(function(){
-                            progress_bar.hide();
+                        setTimeout(function()
+                        {
+                            selected_progress_bar.hide();
                         }, 1000);
 
                     })
-                    .fail(function( msg ) {
+                    .fail(function( msg )
+                    {
                         alert('fallo' + msg);
                     })
                 ;
@@ -286,7 +340,7 @@ var photo_manager = {
         };
         xhr.open("POST","/wp-admin/async-upload.php",true);
         xhr.send(formData);
-        progress_bar.move('20%');
+        selected_progress_bar.move('20%');
     },
     delete: function (){
         jQuery.ajax({
@@ -330,7 +384,7 @@ function new_contestant(){
     }else{
         jQuery.ajax({
                 beforeSend: function(){
-                    change_text_animate('#bogacontest_login_body', '<div class="text-center"><h3>Te estamos inscribiendo en el concurso</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
+                    change_text_animate('#bogacontest_login_body', '<div class="text-center"><h3 style="color: white;">Te estamos inscribiendo en el concurso</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/new_contestant.php",
@@ -341,7 +395,7 @@ function new_contestant(){
             })
             .done(function( msg ) {
                 msg = JSON.parse(msg);
-                change_text_animate('#bogacontest_login_body', '<div class="text-center" style="color: white;"><h3>' + msg.message + '</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
+                change_text_animate('#bogacontest_login_body', '<div class="text-center" style="color: white;"><h3 style="color: white;">' + msg.message + '</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
                 jQuery('#bogacontest_up_login_action_after_login').val('redirect');
                 login.action_after_login(msg);
 

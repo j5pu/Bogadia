@@ -88,7 +88,8 @@ function bogacontest_assets(){
     wp_enqueue_media();
 }
 
-function bogacontest_ajax_login(){
+function bogacontest_ajax_login()
+{
     // First check the nonce, if it fails the function will break
     check_ajax_referer( 'ajax-login-nonce', 'security' );
 
@@ -96,37 +97,49 @@ function bogacontest_ajax_login(){
     $info = array();
 
     $user = get_user_by('email', $_POST['email']);
-    if (!empty($user)) {
-        if (wp_check_password( $_POST['password'], $user->data->user_pass, $user->ID)){
+
+    if (!empty($user))
+    {
+        if (wp_check_password( $_POST['password'], $user->data->user_pass, $user->ID))
+        {
             $info['user_login'] = $user->data->user_login;
             $info['user_password'] = $_POST['password'];
             $info['remember'] = true;
             $user_signon = wp_signon($info, is_ssl() ? true : false);
-            if ( is_wp_error($user_signon) ){
+
+            if ( is_wp_error($user_signon) )
+            {
                 echo json_encode(array('loggedin'=>false, 'case'=>1, 'message'=>__('¡Upps! Ha ocurrido un error')));
-            } else {
+            } else
+            {
                 $bogacontestant = new contestant();
                 $bogacontestant->setUserId($user_signon->ID);
                 $bogacontestant->setContestId($_POST['contest_id']);
                 $bogacontestant->get();
-                if (!empty($bogacontestant->ID)){
+
+                if (!empty($bogacontestant->ID))
+                {
                     echo json_encode(array('loggedin'=>true, 'case'=>8, 'message'=>__('Hola de nuevo '. $bogacontestant->name .'. Te estamos redirigiendo a tu cuenta'), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
-                }else{
+                }else
+                {
                     echo json_encode(array('loggedin'=>true, 'case'=>9, 'message'=>__('Hola de nuevo '. $user->data->display_name ), 'user_id'=>$user_signon->ID, 'contestant_id'=>$bogacontestant->ID));
                 }
             }
             die();
-        }else{
+        }else
+        {
             echo json_encode(array('loggedin'=>false, 'case'=>2, 'message'=>__('Contraseña incorrecta. <a class="lost" style="color: white;" href="'. wp_lostpassword_url() .'">¿Has olvidado tu contraseña?</a>')));
             die();
         }
-    }else{
+    }else
+    {
         echo json_encode(array('loggedin'=>false, 'case'=>0, 'message'=>__('¡Guay! Solo falta tu nombre completo')));
         die();
     }
 }
 
-function bogacontest_ajax_register(){
+function bogacontest_ajax_register()
+{
     global $wpdb;
     check_ajax_referer( 'ajax-register-nonce', 'security' );
 
@@ -134,7 +147,9 @@ function bogacontest_ajax_register(){
     $info['display_name'] = cut_title($_POST['username'], 250);
     $info['user_nicename'] = sanitize_title(cut_title($_POST['username'], 50));
     $info['user_login'] = cut_by($info['user_nicename'], '-') . '-' . cut_email(sanitize_email($_POST['email'])) . '-' . time();
-    if($wpdb->get_row("SELECT user_nicename FROM wp_users WHERE user_nicename = '" . $info['user_nicename'] . "'", 'ARRAY_A')) {
+
+    if($wpdb->get_row("SELECT user_nicename FROM wp_users WHERE user_nicename = '" . $info['user_nicename'] . "'", 'ARRAY_A'))
+    {
         $info['user_nicename'] = $info['user_login'];
     }
 
@@ -144,7 +159,9 @@ function bogacontest_ajax_register(){
 
     // Register the user
     $user_register = wp_insert_user( $info );
-    if ( is_wp_error($user_register) ){
+
+    if ( is_wp_error($user_register) )
+    {
         $error  = $user_register->get_error_codes()	;
 
         if(in_array('empty_user_login', $error))
@@ -160,9 +177,12 @@ function bogacontest_ajax_register(){
         $login_data['user_password'] = $info['user_pass'];
         $login_data['remember'] = true;
         $user_signon = wp_signon($login_data, is_ssl() ? true : false);
-        if ( is_wp_error($user_signon) ){
+
+        if ( is_wp_error($user_signon) )
+        {
             echo json_encode(array('loggedin'=>false, 'case'=>6, 'message'=>__('Upps! Te has registrado correctamente pero no hemos podido auntenticarte')));
-        } else {
+        } else
+        {
             echo json_encode(array('loggedin'=>true, 'case'=>7, 'message'=>__('Perfecto '. $info['nickname']  . '. Ya estás registrado.'), 'user_id'=>$user_signon->ID, 'contestant_id'=>''));
         }
     }
@@ -209,7 +229,8 @@ function bogacontest_meta_canonical($string){
     }
 }
 
-function bogacontest_meta_title($string){
+function bogacontest_meta_title($string)
+{
     global $contest;
     $contest = new contest();
     $contest->get_contest_slug_from_url();
@@ -231,12 +252,15 @@ function bogacontest_meta_title($string){
             {
                 $query_lookup_field = 'wp_users.user_nicename="' . $contestant_name_or_id . '"';
             }
-            $meta_data_container = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path AS main_photo FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.slug='" . $contest->slug . "' AND wp_bogacontest_img.main='1';", OBJECT);
+
+            $meta_data_container = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path AS main_photo FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID LEFT JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID LEFT JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.ID='" . $contest->id . "' AND wp_bogacontest_img.main='1';", OBJECT);
             return $meta_data_container->display_name .' - Aspirante a portada de Bogadia';
-        }else{
+        }else
+        {
             return 'Concurso de modelos - Portada de Bogadia';
         }
-    } else {
+    } else
+    {
         return $string;
     }
 }
@@ -311,7 +335,7 @@ add_filter( 'wpseo_title', 'bogacontest_meta_title' );
 add_filter( 'wpseo_opengraph_image', 'bogacontest_meta_img' );
 add_filter( 'wpseo_metadesc', 'bogacontest_meta_description' );
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
-add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_data') );
+add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_page') );
 add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_page') );
 add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );

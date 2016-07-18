@@ -1,7 +1,6 @@
 <?php
 class contest
 {
-    // Atributos
     public $id;
     public $slug;
     public $contestants = array();
@@ -63,9 +62,10 @@ class contest
 
     function get_contest_slug_from_url(){
         /* Extrae el slug del concurso de la url */
-
+        global $wpdb;
         global $wp_query;
         $this->slug = urldecode($wp_query->query_vars['contest']);
+        $this->id = $wpdb->get_var('SELECT ID FROM wp_bogacontest WHERE slug="'. $this->slug .'" ;');
     }
 
     // Métodos
@@ -113,7 +113,6 @@ class contest
         if (!empty($results))
         {
             $this->contestants = $results;
-            $this->id = $this->contestants[0]->contest_id;
             if ($by == 'votes') {
                 $this->ranking;
             }
@@ -171,7 +170,8 @@ class contest
         {
             echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
             return '';
-        }else
+        }
+        else
         {
             self::print_contestants();
         }
@@ -187,7 +187,7 @@ class contest
 
         echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->slug .'">';
         echo '<div id="toolbar_counter" class="col-md-4">';
-        echo '<small>'. $this->total_contestants .' participantes</small>';
+        echo '<small>'. $this->total_contestants .' concursantes</small>';
         echo '</div>';
         echo '<div id="toolbar_search" class="col-md-4">';
         echo '<input id="search_query_input" type="text" class="form-control" placeholder="buscar por nombre">';
@@ -295,6 +295,18 @@ class contest
 
 class contestant
 {
+    public $ID;
+    public $user_id;
+    public $name;
+    public $description;
+    public $votes;
+    public $main_photo;
+    public $photos = array();
+    public $nice_name;
+    public $position;
+    public $contest;
+
+    // Getters y Setters
     public function getContestId()
     {
         return $this->contest_id;
@@ -423,22 +435,7 @@ class contestant
         }
     }
 
-    public $ID;
-    public $user_id;
-    public $contest_id;
-    public $name;
-    public $description;
-    public $votes;
-    public $main_photo;
-    public $photos = array();
-    public $nice_name;
-    public $position;
-    public $contest;
-
-    function __construct()
-    {
-    }
-
+    // Metodos de gestion
     function get_or_create(){
         $results = self::get();
         if (empty($results)){
@@ -534,7 +531,7 @@ class contestant
     function get_imgs()
     {
         global $wpdb;
-        $results = $wpdb->get_results( "SELECT * FROM wp_bogacontest_img WHERE contestant_id=". $this->ID ." ORDER BY wp_bogacontest_img.date;", OBJECT );
+        $results = $wpdb->get_results( "SELECT * FROM wp_bogacontest_img WHERE contestant_id=". $this->ID ." ORDER BY wp_bogacontest_img.date DESC;", OBJECT );
         $this->photos = $results;
         foreach($this->photos as $photo){
             if ($photo->main){
@@ -558,6 +555,24 @@ class contestant
                 '%s'
             ),
             array( '%d' )
+        );
+    }
+
+    function quit_main_photo()
+    {
+        /* Desselecciona una foto como principal ya que se va a subir una foto principal nueva */
+        global $wpdb;
+        return $wpdb->update(
+            'wp_bogacontest_img',
+            array(
+                'main' => 0
+            ),
+            array( 'main' => 1, 'contestant_id' => $this->ID),
+            array(
+                '%d',
+                '%d',
+            ),
+            array( '%d', '%d' )
         );
     }
 
@@ -645,7 +660,35 @@ class contestant
         }
     }
 
-    function print_social_data(){
+    function get_contestant_from_slug(){
+        global $wp_query;
+        global $wpdb;
+        $contestant_name_or_id = urldecode($wp_query->query_vars['contestant']);
+
+        if (is_numeric($contestant_name_or_id))
+        {
+            $query_lookup_field = 'wp_bogacontest_contestant.ID='. $contestant_name_or_id;
+        }else
+        {
+            $query_lookup_field = 'wp_users.user_nicename="'. $contestant_name_or_id.'"';
+        }
+
+        $this->contest = new contest();
+        $this->contest->get_contest_slug_from_url();
+        $this->contest->get_ranking();
+
+        $results = $wpdb->get_row( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id  FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE ". $query_lookup_field ." AND wp_bogacontest.slug='". $this->contest->slug ."';", OBJECT );
+
+        if (empty($results))
+        {
+            return 'Concursante no encontrado';
+        }
+        return $results;
+    }
+
+    // Imprimir
+    function print_share_buttons()
+    {
         echo '<div class="row bogacontest_social_row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
         echo '<em class="icon-facebook bogacontest_social"></em>';
@@ -662,106 +705,93 @@ class contestant
         echo '</div>';
     }
 
-    function print_vote_button($primary){
-        if(!($this->user_id == get_current_user_id())){
+    function print_vote_button($primary)
+    {
+        if(!($this->user_id == get_current_user_id()))
+        {
             $button = '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn ';
-            if($primary == True){
+
+            if($primary == True)
+            {
                 $button .= ' btn-primary ';
             }else{
                 $button .= ' btn-default ';
             }
+
             $button .= 'btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
             echo $button;
         }
     }
 
-    function print_mini_card($contest_slug){
+    function print_mini_card($contest_slug)
+    {
         echo '<div class="col-md-3 ">';
         echo '<div style="height: 120px; overflow-y: hidden;">';
-        echo '<a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';
+        echo '<a target="_blank"
+         href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';
         echo '</div>';
         echo '<div id="data_border" class="mini_contestant_data">';
-        echo '<h3><a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
+        echo '<h3><a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
         echo '<h6 class="text-left">';
-        if(!empty($this->position)){ echo 'Posición '. $this->position ;}
+
+        if(!empty($this->position))
+        {
+            echo 'Posición '. $this->position ;
+        }
+
         echo '<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
         echo '<div>';
         self::print_vote_button(False);
-        self::print_social_data();
+        self::print_share_buttons();
         echo '</div>';
         echo '</div>';
         echo '</div>';
     }
 
-    function print_contestant_data(){
-        global $wp_query;
-        global $wpdb;
-        $contador = 0;
-        $contestant_name_or_id = urldecode($wp_query->query_vars['contestant']);
-
-        if (is_numeric($contestant_name_or_id)){
-            $query_lookup_field = 'wp_bogacontest_contestant.ID='. $contestant_name_or_id;
-        }else{
-            $query_lookup_field = 'wp_users.user_nicename="'. $contestant_name_or_id.'"';
-        }
-        $this->contest = new contest();
-        $this->contest->get_contest_slug_from_url();
-        $this->contest->get_ranking();
-
+    function print_contestant_page()
+    {
+        global $current_user_id;
         $current_user_id = get_current_user_id();
-        $results = $wpdb->get_row( "SELECT wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id  FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE ". $query_lookup_field ." AND wp_bogacontest.slug='". $this->contest->slug ."';", OBJECT );
-        if (empty($results)) {
-            return 'Concursante no encontrado';
-        }
+        $results = self::get_contestant_from_slug();
         self::set_contestant($results, $this->contest);
         self::get_imgs();
         self::get_votes();
         self::get_position();
+
+        $this->contest->print_login_register_form();
         self::print_photos_manager();
-        echo '<div>';
-        echo '<p id="bogacontest_breadcrumb"><a href="/concursos/'. $this->contest->slug .'">Boga Contest</a> / '. $this->name .'</p>';
-        $this->contest->print_participate_button();
+
+        // Navegación
+        echo '<div class="row">';
+        echo '<div class="col-md-12">';
+        echo '<p id="bogacontest_breadcrumb"><a style="color: #444444 !important;" href="/concursos/'. $this->contest->slug .'">Bogacontest</a> / '. $this->name ;
+        echo '<a id="participate" data-contestid="'. $this->contest->id .'" style="float: right; cursor: pointer; color: #444444 !important;" >Participa</a>';
+        echo '</p>';
         echo '</div>';
+        echo '</div>';
+
+        // Foto principal y nombre
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
-        echo '<div id="gallery_image_container_'. $this->main_photo_id .'" class="col-sm-6 col-md-6" data-main="1">';
-        if (!empty($this->main_photo)){
-            echo '<a id="main_photo_holder" href="'. $this->main_photo .'">';
-            echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive">';
-            echo '</a>';
-        }else{
-            echo '<img id="no_main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
-        }
-        if($current_user_id == $this->user_id){
-/*            echo '<div class="row">';
-            echo '<div class="col-sm-6 col-md-6">';*/
-            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block">Subir foto</button>';
-            echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
-            /*            echo '<div class="progress"><div id="upload_progress_bar" class="bar progress-bar-striped active" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width:0%"></div></div>';*/
-            echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
-/*            echo '</div>';
-            echo '<div class="col-sm-6 col-md-6">';*/
-            echo '<button id="delete" type="button" class="btn btn-default btn-block">Borrar foto</button>';
-/*            echo '</div>';*/
-            /*            echo '<div class="col-sm-4 col-md-4">';
-                        echo '<button type="button" class="btn btn-primary btn-block">Cambiar foto principal</button>';
-                        echo '</div>';*/
-/*            echo '</div>';*/
-        }
-        echo '</div>';
+        self::print_main_photo();
         echo '<div class="col-sm-6 col-md-6">';
-        echo '<h2 id="contestants_forest_header" style="font-size: 250%;"><span id="contestants_forest_header_span">'. $this->name .'</span></h2>';
-        echo '<h3 style="margin-top: 40px;"><a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:left;">'. $this->votes .' votos</a> <a style="float:right;">Posición actual: '. $this->position .'</a></h3>';
+        echo '<h2 id="" style="font-size: 250%;"><span id="">'. $this->name .'</span></h2>';
+        echo '<h3 style="margin-top: 40px;"><a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:left;">'. $this->votes .' votos</a> <a style="float:right;">';
 
+        if(!empty($this->position))
+        {
+            echo 'Posición '. $this->position ;
+        }
 
-
+        echo '</a></h3>';
         echo '</div>';
         echo '</div>';
 
+        // Botones
         echo '<div class="row">';
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div class="col-md-6">';
-        self::print_social_data();
+        self::print_share_buttons();
         self::print_vote_button(True);
         echo '</div>';
         echo '<div class="col-md-3 ">';
@@ -770,49 +800,16 @@ class contestant
 
         echo '<hr>';
 
-        echo '<div class="row">';
-        echo '<div id="gallery" class="col-md-12" style="margin: 10px 15px 10px 15px;">';
-        if (!empty($this->photos)){
-            foreach($this->photos as $photo){
-                if($photo->main == 0){
-                    if ($contador % 4 == 0){
-                        if($contador != 0){
-                            echo '</div>';
-                        }
-                        echo '<div class="row gallery-row" style="">';
-                    }
-                    echo '<div id="gallery_image_container_'. $photo->post_id .'" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-                    echo '<a id="main_photo_holder" href="'. $photo->path .'">';
-                    echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
-                    echo '</a>';
-                    echo '</div>';
-                    $contador++;
-                }
-            }
-        }else{
-            echo '<div class="row" style="">';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-            echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
-            echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-            echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/pro_justice___facebook_no_profile_by_officialprojustice-d6zqggi.jpg" >';
-            echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-            echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/sexy_facebook_avatar_by_tesne-d3feuml.jpg" >';
-            echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-            echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
-            echo '</div>';
-            echo '</div>';
-        }
-        echo '</div>';
-        echo '</div>';
+        // Galeria
+        self::print_contestant_gallery();
+
         echo '</div>';
 
         return '';
     }
 
-    function print_photos_manager(){
+    function print_photos_manager()
+    {
         $contador = 0;
 
         echo '<div class="modal fade" id="bogacontest_manager_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
@@ -830,23 +827,32 @@ class contestant
         echo '<div class="row">';
 
         echo '<div id="photo_manager_select" class="col-xs-12 col-sm-12 col-md-12" style="height: 250px; overflow-y: scroll;">';
-        if (!empty($this->photos)){
-            foreach($this->photos as $photo){
-                if ($contador % 3 == 0){
-                    if($contador != 0){
-                        echo '</div>';
+
+        if (!empty($this->photos))
+        {
+            foreach($this->photos as $photo)
+            {
+                if (!$photo->main)
+                {
+                    if ($contador % 3 == 0)
+                    {
+                        if($contador != 0)
+                        {
+                            echo '</div>';
+                        }
+                        echo '<div class="row gallery-row">';
                     }
-                    echo '<div class="row gallery-row">';
+                    echo '<div id="manager_image_container_'. $photo->post_id .'" class="col-xs-4 col-sm-4 col-md-4" style="height: 100px; overflow: hidden;margin-bottom: 15px;">';
+                    echo '<label class="manager_photo" >';
+                    echo '<input type="radio" name="photo_to_edit" value="'. $photo->post_id .'" />';
+                    echo '<img id="manager-contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
+                    echo '</label>';
+                    echo '</div>';
+                    $contador++;
                 }
-                echo '<div id="manager_image_container_'. $photo->post_id .'" class="col-xs-4 col-sm-4 col-md-4" style="height: 100px; overflow: hidden;margin-bottom: 15px;">';
-                echo '<label class="manager_photo" >';
-                echo '<input type="radio" name="photo_to_edit" value="'. $photo->post_id .'" />';
-                echo '<img id="manager-contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
-                echo '</label>';
-                echo '</div>';
-                $contador++;
             }
         }
+
         echo '</div>';
         echo '</div>';
         echo '</div>';
@@ -859,6 +865,105 @@ class contestant
         echo '</div>';
         echo '</div>';
         echo '</div>';
+        echo '</div>';
+    }
+
+    function print_contestant_gallery()
+    {
+        global $current_user_id;
+        echo '<div class="row">';
+        if($current_user_id == $this->user_id)
+        {
+            echo '<div class="col-md-12">';
+            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block">Subir foto a tu galería</button>';
+            echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
+            echo '<div id="progress_gallery_bar_container" class="progress" style="display: none;"><div id="upload_progress_gallery_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_gallery_bar_text" class="sr-only"></span></div></div>';
+            echo '<button id="delete" type="button" class="btn btn-default btn-block">Borrar foto</button>';
+            echo '</div>';
+        }
+        echo '<div id="gallery" class="col-md-12" style="margin: 10px 15px 10px 15px;">';
+
+
+        if (!empty($this->photos))
+        {
+            $contador = 0;
+            $row_counter = 1;
+
+            foreach($this->photos as $photo)
+            {
+                if($photo->main == 0)
+                {
+                    if ($contador % 4 == 0)
+                    {
+                        if($contador != 0)
+                        {
+                            echo '</div>';
+                        }
+                        echo '<div id="contestant_gallery_row-'. $row_counter .'" class="row gallery-row" style="">';
+                        $row_counter++;
+                    }
+
+                    echo '<div id="gallery_image_container_'. $photo->post_id .'" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                    echo '<a id="main_photo_holder" href="'. $photo->path .'">';
+                    echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
+                    echo '</a>';
+                    echo '</div>';
+
+                    $contador++;
+                }
+            }
+        }else
+        {
+            echo '<div class="row" style="">';
+            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<img id="contestant-0" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
+            echo '</div>';
+            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<img id="contestant-1" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/pro_justice___facebook_no_profile_by_officialprojustice-d6zqggi.jpg" >';
+            echo '</div>';
+            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<img id="contestant-2" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/sexy_facebook_avatar_by_tesne-d3feuml.jpg" >';
+            echo '</div>';
+            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<img id="contestant-3" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
+            echo '</div>';
+            echo '</div>';
+        }
+
+        echo '</div>';
+        echo '</div>';
+    }
+
+    function print_main_photo()
+    {
+        global $current_user_id;
+        $button_text = '';
+        $button_class = '';
+
+        echo '<div id="gallery_image_container_'. $this->main_photo_id .'" class="col-sm-6 col-md-6" data-main="1">';
+
+        // Foto principal
+        if (!empty($this->main_photo))
+        {
+            echo '<a id="main_photo_holder" href="'. $this->main_photo .'">';
+            echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive">';
+            echo '</a>';
+            $button_text = 'Cambia tu foto principal';
+            $button_class = 'btn-default';
+        }else
+        {
+            echo '<img id="main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
+            $button_text = '¡Sube tu foto principal!';
+            $button_class = 'btn-primary';
+        }
+
+        if($current_user_id == $this->user_id)
+        {
+            echo '<button id="upload_main_alias" type="button" class="btn '. $button_class .' btn-block">'. $button_text .'</button>';
+            echo '<input id="upload_main" accept="image/*" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
+            echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
+        }
+
         echo '</div>';
     }
 }

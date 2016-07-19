@@ -80,8 +80,10 @@ function wp_insertMyRewriteQueryVars($vars)
 
 function bogacontest_assets(){
     wp_register_script('typewatch', '/wp-content/plugins/boga-contest/assets/js/typewatch.js', array('jquery'));
-    wp_enqueue_script('bogacontest');
-    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery', 'typewatch'));
+    wp_enqueue_script('typewatch');
+    wp_register_script('load_img', '/wp-content/plugins/boga-contest/assets/js/load-image.all.min.js');
+    wp_enqueue_script('load_img');
+    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery', 'typewatch', 'load_img'));
     wp_enqueue_script('bogacontest');
     wp_register_style('bogacontest', '/wp-content/plugins/boga-contest/assets/css/bogacontest.css');
     wp_enqueue_style('bogacontest');

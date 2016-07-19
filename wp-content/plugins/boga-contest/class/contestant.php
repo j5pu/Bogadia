@@ -914,7 +914,7 @@ class contestant
             }
         }else
         {
-            echo '<div class="row" style="">';
+            echo '<div class="row gallery-row" style="">';
             echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-0" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
             echo '</div>';
@@ -957,13 +957,13 @@ class contestant
             $button_class = 'btn-primary';
         }
 
+        // Boton de subida
         if($current_user_id == $this->user_id)
         {
             echo '<button id="upload_main_alias" type="button" class="btn '. $button_class .' btn-block">'. $button_text .'</button>';
             echo '<input id="upload_main" accept="image/*" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
             echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
         }
-
         echo '</div>';
     }
 }

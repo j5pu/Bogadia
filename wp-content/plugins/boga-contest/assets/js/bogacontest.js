@@ -294,15 +294,9 @@ var photo_manager = {
                                 jQuery('#fake_photo_1, #fake_photo_2, #fake_photo_3, #fake_photo_4').hide('slow');
                                 // Colocamos la nueva foto o la antigua foto principal en la galeria
                                 var gallery = jQuery('#gallery');
-                                var first_row = gallery.find('.gallery-row:first-child')[0];
-                                var num_photos_first_row = first_row.childNodes.length;
+
                                 var num_photos = jQuery('.contestant-photo').length;
                                 var str = '';
-
-                                if (num_photos_first_row == 4)
-                                {
-                                    str = '<div class="row gallery-row" style="">';
-                                }
 
                                 str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
                                 str = str + '<a id="main_photo_holder" href="' + image_url + '">';
@@ -310,42 +304,26 @@ var photo_manager = {
                                 str = str + '</a>';
                                 str = str + '</div>';
 
-                                if (num_photos_first_row == 4)
-                                {
-                                    str = str + '</div>';
-                                    gallery.prepend(str);
-                                }else
-                                {
-                                    jQuery(first_row).prepend(str);
-                                }
+                                gallery.prepend(str);
+
                                 progress_bar.move('90%');
 
                                 // Colocamos la nueva foto o la antigua foto principal en el photo manager
                                 var photo_manager = jQuery('#photo_manager_select');
-                                var num_photos_last_row = photo_manager.find('div:first-child').find('div').length;
+
                                 var num_photos = jQuery('.manager_photo').length;
                                 var str = '';
 
-                                if (num_photos_last_row == 3)
-                                {
-                                    str = '<div class="row gallery-row" style="">';
-                                }
 
-                                str = str + '<div id="manager_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4" style="height: 100px; overflow: hidden;margin-bottom: 15px;">';
+                                str = str + '<div id="manager_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4" style="margin-bottom: 15px;">';
                                 str = str + '<label class="manager_photo" >';
                                 str = str + '<input type="radio" name="photo_to_edit" value="' + post_id + '" />';
                                 str = str + '<img id="manager-contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
                                 str = str + '</label>';
                                 str = str + '</div>';
 
-                                if (num_photos_last_row == 3)
-                                {
-                                    str = str + '</div>';
-                                    photo_manager.append(str);
-                                }else
-                                {
-                                    photo_manager.append(str);
-                                }
+                                photo_manager.prepend(str);
+
                             }
 
                             selected_progress_bar.move('100%');
@@ -391,15 +369,12 @@ var photo_manager = {
             .done(function( response ) {
                 jQuery('#delete_selected_photo').html(response);
                 if (response == 'Foto borrada con éxito'){
-                    if (jQuery('#gallery_image_container_' + photo_manager.selected_photo).data('main') == '1'){
-                        jQuery('#gallery_image_container_' + photo_manager.selected_photo).css('visibility', 'hidden');
-                        var main_photo = jQuery("#main_photo");
-                        main_photo.attr('id', 'no_main_photo');
-                    }else{
-                        jQuery('#gallery_image_container_' + photo_manager.selected_photo).hide('slow');
-                    }
+                    jQuery('#gallery_image_container_' + photo_manager.selected_photo).hide('slow');
                     jQuery('#manager_image_container_' + photo_manager.selected_photo).fadeOut('slow');
                     jQuery('#manager_image_container_' + photo_manager.selected_photo).remove();
+                    jQuery('#bogacontest_manager_modal').on('hidden.bs.modal', function () {
+                        jQuery('#delete_selected_photo').html('Borrar foto');
+                    });
                 }
             })
             .fail(function( msg ) {

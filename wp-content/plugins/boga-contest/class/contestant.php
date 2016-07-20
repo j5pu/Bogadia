@@ -837,17 +837,9 @@ class contestant
             {
                 if (!$photo->main)
                 {
-                    if ($contador % 3 == 0)
-                    {
-                        if($contador != 0)
-                        {
-                            echo '</div>';
-                        }
-                        echo '<div class="row gallery-row">';
-                    }
-                    echo '<div id="manager_image_container_'. $photo->post_id .'" class="col-xs-4 col-sm-4 col-md-4" style="height: 100px; overflow: hidden;margin-bottom: 15px;">';
+                    echo '<div id="manager_image_container_'. $photo->id .'" class="col-xs-4 col-sm-4 col-md-4" style="margin-bottom: 15px;">';
                     echo '<label class="manager_photo" >';
-                    echo '<input type="radio" name="photo_to_edit" value="'. $photo->post_id .'" />';
+                    echo '<input type="radio" name="photo_to_edit" value="'. $photo->id .'" />';
                     echo '<img id="manager-contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
                     echo '</label>';
                     echo '</div>';
@@ -896,22 +888,11 @@ class contestant
             {
                 if($photo->main == 0)
                 {
-                    if ($contador % 4 == 0)
-                    {
-                        if($contador != 0)
-                        {
-                            echo '</div>';
-                        }
-                        echo '<div id="contestant_gallery_row-'. $row_counter .'" class="row gallery-row" style="">';
-                        $row_counter++;
-                    }
-
-                    echo '<div id="gallery_image_container_'. $photo->post_id .'" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                    echo '<div id="gallery_image_container_'. $photo->id .'" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
                     echo '<a id="main_photo_holder" href="'. $photo->path .'">';
                     echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
                     echo '</a>';
                     echo '</div>';
-
                     $contador++;
                 }
             }

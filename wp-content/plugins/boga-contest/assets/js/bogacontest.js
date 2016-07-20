@@ -109,6 +109,7 @@ var toolbar = {
     {
         toolbar.search = jQuery("#search_query_input").val();
         toolbar.new_query();
+        document.activeElement.blur();
     },
     wait: 1000,
     highlight: true,

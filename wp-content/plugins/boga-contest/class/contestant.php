@@ -203,7 +203,7 @@ class contest
     function print_participate_button(){
         /* Imprime el boton de participar */
 
-        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'">';
+        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div class="col-md-6 ">';

@@ -178,7 +178,7 @@ function bogacontest_ajax_register()
             echo json_encode(array('loggedin'=>false, 'case'=>5, 'message'=>__('Este e-mail ya ha sido usado')));
     } else
     {
-/*        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );*/
+        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );
         $login_data['user_login'] = $info['user_login'];
         $login_data['user_password'] = $info['user_pass'];
         $login_data['remember'] = true;
@@ -259,7 +259,7 @@ function bogacontest_meta_title($string)
                 $query_lookup_field = 'wp_users.user_nicename="' . $contestant_name_or_id . '"';
             }
 
-            $meta_data_container = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path AS main_photo FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID LEFT JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID LEFT JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.ID='" . $contest->id . "' AND wp_bogacontest_img.main='1';", OBJECT);
+            $meta_data_container = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path AS main_photo FROM wp_bogacontest_contestant LEFT JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID LEFT JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID LEFT JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.ID='" . $contest->id . "' AND wp_bogacontest_img.main='1';", OBJECT);
             return $meta_data_container->display_name .' - Aspirante a portada de Bogadia';
         }else
         {
@@ -306,9 +306,6 @@ function bogacontest_meta_description($string){
         return $string;
     }
 }
-
-// Yoast SEO, add own sub-sitemap
-// works only after SEO -> XML Sitemaps -> Post Types (change something and back, some cache?)
 
 function bogacontest_sitemap_index() {
     $xml = "";

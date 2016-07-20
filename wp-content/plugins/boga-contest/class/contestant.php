@@ -881,8 +881,8 @@ class contestant
             {
                 if($photo->main == 0)
                 {
-                    echo '<div id="gallery_image_container_'. $photo->id .'" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-                    echo '<a id="main_photo_holder" href="'. $photo->path .'">';
+                    echo '<div id="gallery_image_container_'. $photo->id .'" class="col-xs-6 col-sm-6 col-md-3 gallery_container" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                    echo '<a class="main_photo_holder_link" href="'. $photo->path .'">';
                     echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
                     echo '</a>';
                     echo '</div>';
@@ -922,7 +922,7 @@ class contestant
         // Foto principal
         if (!empty($this->main_photo))
         {
-            echo '<a id="main_photo_holder" href="'. $this->main_photo .'">';
+            echo '<a id="main_photo_link" class="main_photo_holder_link" href="'. $this->main_photo .'">';
             echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive">';
             echo '</a>';
             $button_text = 'Cambia tu foto principal';

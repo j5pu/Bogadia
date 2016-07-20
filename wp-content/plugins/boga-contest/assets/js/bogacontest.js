@@ -4,8 +4,8 @@ var gallery = {
         jQuery('.contestant-photo').each(function(){
             gallery.photos.push({scr: jQuery(this).attr('src')});
         });
-        jQuery('#main_photo_holder').magnificPopup({
-            delegate: 'a',
+        jQuery('#main').magnificPopup({
+            delegate: '.main_photo_holder_link',
             gallery: {
                 enabled: true
             },
@@ -269,6 +269,7 @@ var photo_manager = {
                                 var main_photo = jQuery("#main_photo");
                                 var old_photo = main_photo.attr('src');
                                 main_photo.attr('src', image_url);
+                                jQuery('#main_photo_link').attr('href', image_url);
                                 main_photo.attr('id', 'main_photo');
                                 main_photo.parent().attr('id', 'gallery_image_container_' + post_id);
                                 main_photo.parent().css('visibility', 'visible');
@@ -299,7 +300,7 @@ var photo_manager = {
                                 var str = '';
 
                                 str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-                                str = str + '<a id="main_photo_holder" href="' + image_url + '">';
+                                str = str + '<a class="main_photo_holder_link"  href="' + image_url + '">';
                                 str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
                                 str = str + '</a>';
                                 str = str + '</div>';

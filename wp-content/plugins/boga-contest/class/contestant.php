@@ -581,8 +581,7 @@ class contestant
     function delete_img($img_id)
     {
         global $wpdb;
-        $first = $wpdb->delete( 'wp_bogacontest_img', array( 'post_id' => $img_id, 'contestant_id' => $this->ID) );
-        $second = wp_delete_attachment( $img_id );
+        $first = $wpdb->delete( 'wp_bogacontest_img', array( 'id' => $img_id, 'contestant_id' => $this->ID) );
         if ($first == 'false'){
             return 'No se ha podido borrar la foto';
         }else{
@@ -806,6 +805,8 @@ class contestant
         self::print_contestant_gallery();
 
         echo '</div>';
+        echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->contest->slug .'"></div>';
+
 
         return '';
     }
@@ -917,16 +918,16 @@ class contestant
         }else
         {
             echo '<div class="row gallery-row" style="">';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_1" class="col-xs-6 col-sm-6 col-md-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-0" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
             echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_2" class="col-xs-6 col-sm-6 col-md-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-1" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/pro_justice___facebook_no_profile_by_officialprojustice-d6zqggi.jpg" >';
             echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_3" class="col-xs-6 col-sm-6 col-md-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-2" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/sexy_facebook_avatar_by_tesne-d3feuml.jpg" >';
             echo '</div>';
-            echo '<div class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_4" class="col-xs-6 col-sm-6 col-md-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-3" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
             echo '</div>';
             echo '</div>';
@@ -954,7 +955,7 @@ class contestant
             $button_class = 'btn-default';
         }else
         {
-            echo '<img id="main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
+            echo '<img id="main_photo" class="fake_main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
             $button_text = '¡Sube tu foto principal!';
             $button_class = 'btn-primary';
         }

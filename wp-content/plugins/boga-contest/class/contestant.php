@@ -719,14 +719,14 @@ class contestant
 
     function print_mini_card($contest_slug)
     {
+        echo '<a  target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
         echo '<div class="col-md-3 col-sm-4 col-xs-6 mini_image">';
-/*        <a  target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">*/
 /*        echo '<div class="">';*/
 /*        echo '<a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';*/
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
         echo '<h5 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h5>';
         echo '</div>';
-/*        </a>*/
+        echo '</a>';
 /*        echo '<div id="data_border" class="mini_contestant_data">';
         echo '<h6 class="text-left">';
 

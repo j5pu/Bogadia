@@ -505,7 +505,7 @@ class contestant
         $wpdb->delete( 'wp_bogacontest_contestant', array( 'ID' => $this->ID ) );
     }
 
-    function create_img($main, $path, $post_id)
+    function create_img($main, $path)
     {
         global $wpdb;
         $wpdb->insert(
@@ -515,14 +515,12 @@ class contestant
                 'main' => $main,
                 'path' => $path,
                 'date' => date("Y-m-d H:i:s"),
-                'post_id' => $post_id,
             ),
             array(
                 '%s',
                 '%s',
                 '%s',
                 '%s',
-                '%d',
             )
         );
         return $wpdb->insert_id;

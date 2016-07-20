@@ -181,6 +181,26 @@ var photo_manager = {
     },
     upload: function(upload_to_main)
     {
+        function dataURItoBlob(dataURI) {
+            // convert base64/URLEncoded data component to raw binary data held in a string
+            var byteString;
+            if (dataURI.split(',')[0].indexOf('base64') >= 0)
+                byteString = atob(dataURI.split(',')[1]);
+            else
+                byteString = unescape(dataURI.split(',')[1]);
+
+            // separate out the mime component
+            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
+
+            // write the bytes of the string to a typed array
+            var ia = new Uint8Array(byteString.length);
+            for (var i = 0; i < byteString.length; i++) {
+                ia[i] = byteString.charCodeAt(i);
+            }
+
+            return new Blob([ia], {type:mimeString});
+        }
+
         var selected_progress_bar = "";
 
         if (upload_to_main == 1)
@@ -199,52 +219,37 @@ var photo_manager = {
         selected_progress_bar.show();
         selected_progress_bar.move('10%');
 
-        formData.append("action", "upload-attachment");
-        formData.append("async-upload", fileInputElement.files[0]);
-        formData.append("name", fileInputElement.files[0].name);
-        formData.append("_wpnonce", nonce);
+        var loaded_info = loadImage(
+            fileInputElement.files[0],
+            function (img) {
+                selected_progress_bar.move('20%');
+                var image_resize = img.toDataURL('image/jpeg', 0.7);
 
-        xhr.onreadystatechange=function()
-        {
-            if (xhr.readyState==1){
+                formData.append("action", "upload-attachment");
+                formData.append("async-upload", image_resize);
+                formData.append("name", fileInputElement.files[0].name);
+                formData.append("_wpnonce", nonce);
+                formData.append("main", upload_to_main);
+                formData.append("contestant_id", jQuery('#upload').data("contestantid"));
                 progress_bar.move('30%');
-            }
-            if (xhr.readyState==2){
-                progress_bar.move('40%');
-            }
-            if (xhr.readyState==3){
-                progress_bar.move('50%');
-            }
-            if (xhr.readyState==4 && xhr.status==200)
-            {
-                var response = jQuery.parseJSON(xhr.responseText);
-                var image_url = response.data.url;
-                var post_id = response.data.id;
-
-                photo_manager.check_main();
-                var there_is_main = photo_manager.main;
-
-                selected_progress_bar.move('60%');
-
-                jQuery.ajax(
+                xhr.onreadystatechange=function()
+                {
+                    if (xhr.readyState==1){
+                        progress_bar.move('40%');
+                    }
+                    if (xhr.readyState==2){
+                        progress_bar.move('50%');
+                    }
+                    if (xhr.readyState==3){
+                        progress_bar.move('60%');
+                    }
+                    if (xhr.readyState==4 && xhr.status==200)
                     {
-                        beforeSend: function(){
-                            console.log('preparando foto');
-                            selected_progress_bar.move('60%');
-                        },
-                        method: "POST",
-                        url: "/wp-content/plugins/boga-contest/new_photo.php",
-                        data: {
-                            path: image_url,
-                            main: upload_to_main,
-                            contestant_id: jQuery('#upload').data("contestantid"),
-                            post_id: post_id
-                        }
-                    })
+                        var response = jQuery.parseJSON(xhr.responseText);
+                        var image_url = response.url;
+                        var post_id = response.id;
 
-                    .done(function(  )
-                    {
-                        selected_progress_bar.move('90%');
+                        selected_progress_bar.move('70%');
 
                         // Colocamos la nueva imagen en la galeria
                         if (upload_to_main == 1)
@@ -256,7 +261,7 @@ var photo_manager = {
                             main_photo.attr('id', 'main_photo');
                             main_photo.parent().attr('id', 'gallery_image_container_' + post_id);
                             main_photo.parent().css('visibility', 'visible');
-                            main_upload_button = jQuery('#upload_main_alias');
+                            var main_upload_button = jQuery('#upload_main_alias');
 
                             if (main_upload_button.hasClass('btn-primary'))
                             {
@@ -295,6 +300,7 @@ var photo_manager = {
                         {
                             jQuery(first_row).prepend(str);
                         }
+                        progress_bar.move('90%');
 
                         // Colocamos la nueva foto o la antigua foto principal en el photo manager
                         var photo_manager = jQuery('#photo_manager_select');
@@ -330,17 +336,23 @@ var photo_manager = {
                             selected_progress_bar.hide();
                         }, 1000);
 
-                    })
-                    .fail(function( msg )
-                    {
-                        alert('fallo' + msg);
-                    })
-                ;
+
+                    }
+                };
+                xhr.open("POST","/wp-content/plugins/boga-contest/new_photo.php",true);
+                xhr.send(formData);
+                selected_progress_bar.move('20%');
+
+
+            },
+            {
+                maxWidth: 600,
+                maxHeight: 300,
+                minWidth: 100,
+                minHeight: 50,
+                orientation: true
             }
-        };
-        xhr.open("POST","/wp-admin/async-upload.php",true);
-        xhr.send(formData);
-        selected_progress_bar.move('20%');
+        );
     },
     delete: function (){
         jQuery.ajax({

@@ -163,7 +163,7 @@ class contest
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
         self::count_contestans();
         self::print_toolbar();
-        echo '<div id="contestants_container" class="row text-center">';
+        echo '<div id="contestants_container" class="row text-center ">';
 /*        echo '<div id="contestants_container" class="col-md-12 text-center">';*/
 
         if (empty($this->contestants))
@@ -724,7 +724,7 @@ class contestant
 /*        echo '<div class="">';*/
 /*        echo '<a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';*/
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
-        echo '<h5 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h5>';
+        echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h6>';
         echo '</div>';
         echo '</a>';
 /*        echo '<div id="data_border" class="mini_contestant_data">';

@@ -360,7 +360,7 @@ var photo_manager = {
                     minWidth: 100,
                     minHeight: 50,
                     canvas: true,
-                    orientation: ori
+                    orientation: ori,
                 }
             );
         });
@@ -449,21 +449,23 @@ var login = {
         jQuery('#bogacontest_fb_login').on('click', function(){
             login.with_facebook();
         });
-        jQuery('#bogacontest_up_login').on('click', function(){
+        jQuery('#bogacontest_login_body').on('submit', '#register_form_form', function(e){
+
+            login.register_with_user_password();
+            e.preventDefault();
+        });
+        jQuery('#go_back').on('click', function(){
+            jQuery('#second_form').hide('slow');
+            jQuery('#first_form').delay(500).show('slow');
+        });
+        jQuery('#login_form_form').on('submit', function(e){
             if( !login.validate_email( jQuery('#bogacontest_up_login_email').val()) ) {
                 jQuery('#email_validate_text').show('slow');
             }else{
                 jQuery('#email_validate_text').hide('slow');
                 login.login_with_user_password();
             }
-        });
-        jQuery('#bogacontest_login_body').on('click', '#bogacontest_up_register', function(){
-
-            login.register_with_user_password();
-        });
-        jQuery('#go_back').on('click', function(){
-            jQuery('#second_form').hide('slow');
-            jQuery('#first_form').delay(500).show('slow');
+            e.preventDefault();
         });
     },
     login_with_user_password: function (){

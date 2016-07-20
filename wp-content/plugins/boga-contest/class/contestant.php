@@ -614,7 +614,7 @@ class contestant
             $time_to_vote_again = date_diff($now, $date_to_vote_again);
 
             if (! ($time_to_vote_again->invert == 1)){
-                return 'Podrás volver a votarle en '. $time_to_vote_again->format('%h horas y %i minutos') .'.';
+                return 'Podrás votarle en '. $time_to_vote_again->format('%h horas y %i minutos') .'.';
             }
 
         }

@@ -169,10 +169,12 @@ var photo_manager = {
 
         jQuery('#upload_alias').on('click', function(){
             photo_manager.upload_to_main = 0;
+            jQuery('#upload').val(null);
             jQuery('#upload').click();
         });
         jQuery('#upload_main_alias').on('click', function(){
             photo_manager.upload_to_main = 1;
+            jQuery('#upload').val(null);
             jQuery('#upload').click();
         });
         jQuery('#upload').on('change', function(){
@@ -455,9 +457,11 @@ var login = {
         jQuery('#bogacontest_fb_login').on('click', function(){
             login.with_facebook();
         });
-        jQuery('#bogacontest_login_body').on('submit', '#register_form_form', function(e){
-
-            login.register_with_user_password();
+        jQuery('#bogacontest_login_body').on('submit', '#register_form_form', function(e)
+        {
+            if( jQuery('#bogacontest_up_login_username').val().length > 0 ) {
+                login.register_with_user_password();
+            }
             e.preventDefault();
         });
         jQuery('#go_back').on('click', function(){
@@ -500,7 +504,9 @@ var login = {
                 // Continuar con registro
                 jQuery('#first_form').hide('slow');
                 jQuery('#second_form').delay(500).show('slow');
-                jQuery('#bogacontest_up_login_username').focus();
+/*
+                jQuery('#bogacontest_up_login_username').delay(500).focus();
+*/
             }
 
             if (data.loggedin == true)

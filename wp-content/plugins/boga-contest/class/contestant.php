@@ -164,7 +164,7 @@ class contest
         self::count_contestans();
         self::print_toolbar();
         echo '<div class="row">';
-        echo '<div id="contestants_container" class="col-md-12 text-center">';
+/*        echo '<div id="contestants_container" class="col-md-12 text-center">';*/
 
         if (empty($this->contestants))
         {
@@ -176,7 +176,7 @@ class contest
             self::print_contestants();
         }
 
-        echo '</div>';
+/*        echo '</div>';*/
         echo '</div>';
         return '';
     }
@@ -223,13 +223,6 @@ class contest
             $contestant = new contestant();
             $contestant->set_contestant($contestant_data, $this);
             $contestant->get_position();
-
-            if ($counter % 4 == 0){
-                if($counter != 0){
-                    echo '</div>';
-                }
-                echo '<div class="row">';
-            }
             $contestant->print_mini_card($this->slug);
             $counter++;
         }
@@ -726,13 +719,15 @@ class contestant
 
     function print_mini_card($contest_slug)
     {
-        echo '<div class="col-md-3 ">';
-        echo '<div style="height: 120px; overflow-y: hidden;">';
-        echo '<a target="_blank"
-         href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';
+        echo '<div class="col-md-3 col-sm-4 col-xs-6 mini_image">';
+/*        <a  target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">*/
+/*        echo '<div class="">';*/
+/*        echo '<a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';*/
+        echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
+        echo '<h5 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h5>';
         echo '</div>';
-        echo '<div id="data_border" class="mini_contestant_data">';
-        echo '<h3><a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">'. $this->name .'</a></h3>';
+/*        </a>*/
+/*        echo '<div id="data_border" class="mini_contestant_data">';
         echo '<h6 class="text-left">';
 
         if(!empty($this->position))
@@ -740,13 +735,11 @@ class contestant
             echo 'Posición '. $this->position ;
         }
 
-        echo '<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="float:right;">'. $this->votes .' votos</a></h6>';
+        echo '<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="right:0;">'. $this->votes .' votos</a></h6>';
         echo '<div>';
-        self::print_vote_button(False);
-        self::print_share_buttons();
         echo '</div>';
         echo '</div>';
-        echo '</div>';
+        echo '</div>';*/
     }
 
     function print_contestant_page()

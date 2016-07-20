@@ -158,3 +158,24 @@ input[type="color"]:focus,
     margin: 0 0 10px !important;
     font-size: 70%;
 }
+
+.mini-name{
+    color: white !important;
+    text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    position: absolute;
+    bottom: 0;
+    right: 10%;
+}
+.mini_image{
+    position: relative !important;
+    margin-bottom: 15px;
+    margin-top: 15px;
+}
+.mini_span {
+    color: lightgrey;
+    padding: 2px 5px 2px 5px;
+    background: rgb(0, 0, 0);
+    background: rgba(0, 0, 0, 1.1);
+    letter-spacing: 0.2px;
+    border-radius: 13px;
+}

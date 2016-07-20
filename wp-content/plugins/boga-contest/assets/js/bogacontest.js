@@ -265,7 +265,7 @@ var photo_manager = {
                             {
                                 // si la foto se sube como principal
                                 var main_photo = jQuery("#main_photo");
-                                var old_photo = main_photo;
+                                var old_photo = main_photo.attr('src');
                                 main_photo.attr('src', image_url);
                                 main_photo.attr('id', 'main_photo');
                                 main_photo.parent().attr('id', 'gallery_image_container_' + post_id);
@@ -281,15 +281,15 @@ var photo_manager = {
                                 jQuery('meta[property="og:image"]').attr(image_url);
                                 jQuery('meta[property="twitter:image"]').attr(image_url);
 
-                                if(!old_photo.hasClass('fake_main_photo')){
-                                    image_url = old_photo.attr('src');
+                                if(!main_photo.hasClass('fake_main_photo')){
+                                    image_url = old_photo;
                                 }else{
                                     image_url = 0;
+                                    main_photo.removeClass('fake_main_photo');
                                 }
-                            }else{
-                                jQuery('#fake_photo_1, #fake_photo_2, #fake_photo_3, #fake_photo_4').hide('slow');
                             }
                             if (image_url != 0){
+                                jQuery('#fake_photo_1, #fake_photo_2, #fake_photo_3, #fake_photo_4').hide('slow');
                                 // Colocamos la nueva foto o la antigua foto principal en la galeria
                                 var gallery = jQuery('#gallery');
                                 var first_row = gallery.find('.gallery-row:first-child')[0];

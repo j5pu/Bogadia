@@ -28,7 +28,6 @@ function bogacontest_install() {
         main int NULL,
         path varchar(500) NULL,
         date datetime NULL,
-        post_id bigint(20) NULL,
         PRIMARY KEY  (id),
         UNIQUE KEY id (id ASC)
 	) $charset_collate;
@@ -52,6 +51,9 @@ function bogacontest_install() {
     require_once( ABSPATH . 'wp-admin/includes/upgrade.php' );
     dbDelta( $sql );
     add_role( 'BogaContestant', 'Boga Contestant', array( 'upload_files' => true ) );
+    if (!file_exists(WP_CONTENT_DIR .'/uploads/bogacontest')) {
+        mkdir(WP_CONTENT_DIR .'/uploads/bogacontest', 0777, true);
+    }
 }
 
 function flushRules(){

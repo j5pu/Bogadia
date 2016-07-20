@@ -230,7 +230,7 @@ var photo_manager = {
                 fileInputElement.files[0],
                 function (img) {
                     selected_progress_bar.move('20%');
-                    var image_resize = img.toDataURL('image/jpeg', 0.7);
+                    var image_resize = img.toDataURL('image/jpeg', 0.9);
 
                     formData.append("action", "upload-attachment");
                     formData.append("async-upload", image_resize);
@@ -238,6 +238,7 @@ var photo_manager = {
                     formData.append("_wpnonce", nonce);
                     formData.append("main", upload_to_main);
                     formData.append("contestant_id", jQuery('#upload').data("contestantid"));
+                    formData.append("contest_slug", jQuery('#toolbar').data('slug'));
                     progress_bar.move('30%');
                     setTimeout(function()
                     {

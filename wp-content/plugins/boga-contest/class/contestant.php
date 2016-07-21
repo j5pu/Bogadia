@@ -635,9 +635,9 @@ class contestant
 
     function get_position(){
         if(empty($this->position)){
-            if (!empty($this->contest->positions)){
+            if (!empty($this->contest->ranking)){
                 $counter = 1;
-                foreach($this->contest->positions as $contestant_position){
+                foreach($this->contest->ranking as $contestant_position){
                     if ($contestant_position->contestant_id == $this->ID){
                         $this->position = $counter;
                         $this->votes = $contestant_position->votes;
@@ -648,8 +648,6 @@ class contestant
                     }
                     $counter++;
                 }
-            } else {
-                $this->votes = 0;
             }
         }
     }
@@ -701,20 +699,17 @@ class contestant
 
     function print_vote_button($primary)
     {
-        if(!($this->user_id == get_current_user_id()))
+        $button = '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn ';
+
+        if($primary == True)
         {
-            $button = '<button id="vote-contestant-'. $this->ID .'" type="button" class="btn ';
-
-            if($primary == True)
-            {
-                $button .= ' btn-primary ';
-            }else{
-                $button .= ' btn-default ';
-            }
-
-            $button .= 'btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
-            echo $button;
+            $button .= ' btn-primary ';
+        }else{
+            $button .= ' btn-default ';
         }
+
+        $button .= 'btn-block vote" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">VOTAR</button>';
+        echo $button;
     }
 
     function print_mini_card($contest_slug)

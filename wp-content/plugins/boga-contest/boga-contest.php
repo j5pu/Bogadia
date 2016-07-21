@@ -178,7 +178,7 @@ function bogacontest_ajax_register()
             echo json_encode(array('loggedin'=>false, 'case'=>5, 'message'=>__('Este e-mail ya ha sido usado')));
     } else
     {
-        wp_new_user_notification( $user_register, wp_unslash( $info['user_pass'] ) );
+/*        wp_new_usewp_new_user_notificationr_notification( $user_register, wp_unslash( $info['user_pass'] ) );*/
         $login_data['user_login'] = $info['user_login'];
         $login_data['user_password'] = $info['user_pass'];
         $login_data['remember'] = true;

@@ -118,7 +118,7 @@ var toolbar = {
     new_query: function(){
         jQuery.ajax({
                 beforeSend: function(){
-                    jQuery('#contestants_container').html('<img class="image-responsive" style="margin: 0 auto;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 15%">');
+                    jQuery('#contestants_container').html('<img class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 15%;margin: 0 auto;">');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/toolbar.php",
@@ -142,7 +142,7 @@ var toolbar = {
         });
         jQuery("#search_query_input").typeWatch( toolbar.typewatch_options );
         jQuery("#search_query_input").on( 'change', function(){
-            jQuery('#contestants_container').html('<img class="image-responsive" style="margin: 0 auto;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 15%">');
+            jQuery('#contestants_container').html('<img class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 15%; margin: 0 auto;">');
         } );
     }
 };
@@ -392,7 +392,7 @@ function new_contestant(){
     }else{
         jQuery.ajax({
                 beforeSend: function(){
-                    change_text_animate('#bogacontest_login_body', '<div class="text-center"><h3 style="color: white;">Te estamos inscribiendo en el concurso</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
+                    change_text_animate('#bogacontest_login_body', '<div class="text-center"><h3 style="color: white;">Te estamos inscribiendo en el concurso</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif"></div>');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/new_contestant.php",
@@ -403,7 +403,7 @@ function new_contestant(){
             })
             .done(function( msg ) {
                 msg = JSON.parse(msg);
-                change_text_animate('#bogacontest_login_body', '<div class="text-center" style="color: white;"><h3 style="color: white;">' + msg.message + '</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif"></div>');
+                change_text_animate('#bogacontest_login_body', '<div class="text-center" style="color: white;"><h3 style="color: white;">' + msg.message + '</h3><img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif"></div>');
                 jQuery('#bogacontest_up_login_action_after_login').val('redirect');
                 login.action_after_login(msg);
 
@@ -456,7 +456,7 @@ var login = {
     login_with_user_password: function (){
         jQuery.ajax({
             beforeSend: function(){
-                jQuery('#bogacontest_up_login').html('<img class="img-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif">');
+                jQuery('#bogacontest_up_login').html('<img class="img-responsive" style="margin: 0 auto; width: 75px !important;" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif">');
             },
             type: 'POST',
             dataType: 'html',
@@ -494,7 +494,7 @@ var login = {
     register_with_user_password: function (){
         jQuery.ajax({
             beforeSend: function(){
-                jQuery('#bogacontest_up_register').html('<img class="image-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif">');
+                jQuery('#bogacontest_up_register').html('<img class="image-responsive" style="margin: 0 auto; width: 75px !important;" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif">');
             },
             type: 'POST',
             dataType: 'html',

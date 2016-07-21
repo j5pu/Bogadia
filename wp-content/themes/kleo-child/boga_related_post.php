@@ -8,6 +8,7 @@ class boga_related_post
     function __construct()
     {
         add_shortcode( 'RelatedPostSidebar', array($this, 'sidebar_related_post') );
+
         add_filter( 'the_content', array($this, 'inside_content_related_post'));
     }
 
@@ -92,7 +93,7 @@ class boga_related_post
             return implode( '', $paragraphs );
         }
 
-        if ( is_single() && ! is_admin()  && !in_category('Streetstyle') ) {
+        if ( is_single() && ! is_admin()  && !in_category('Streetstyle') && !has_term( 'BogadiaTV', 'post_tag', $this->retrieved_post[0] )) {
             self::query_related_post();
             $likes_posts = self::get_related_post(3);
             $c=0;

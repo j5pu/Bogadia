@@ -374,7 +374,7 @@ var photo_manager = {
                 jQuery('#delete_selected_photo').html(response);
                 if (response == 'Foto borrada con éxito'){
                     jQuery('#gallery_image_container_' + photo_manager.selected_photo).hide('slow');
-                    jQuery('#manager_image_container_' + photo_manager.selected_photo).fadeOut('slow');
+                    jQuery('#manager_image_container_' + photo_manager.selected_photo).velocity('slow');
                     jQuery('#manager_image_container_' + photo_manager.selected_photo).remove();
                     jQuery('#bogacontest_manager_modal').on('hidden.bs.modal', function () {
                         jQuery('#delete_selected_photo').html('Borrar foto');
@@ -444,8 +444,11 @@ var login = {
             e.preventDefault();
         });
         jQuery('#go_back').on('click', function(){
-            jQuery('#second_form').hide('slow');
-            jQuery('#first_form').delay(500).show('slow');
+            jQuery('#second_form').velocity("transition.slideRightBigOut", 500);
+            jQuery('#first_form').velocity("transition.slideLeftBigIn", {
+                delay: 500,
+                duration: 500
+            });
         });
         jQuery('#login_form_form').on('submit', function(e){
             if( !login.validate_email( jQuery('#bogacontest_up_login_email').val()) ) {
@@ -481,11 +484,12 @@ var login = {
             if (data.case == 0)
             {
                 // Continuar con registro
-                jQuery('#first_form').hide('slow');
-                jQuery('#second_form').delay(500).show('slow');
-/*
-                jQuery('#bogacontest_up_login_username').delay(500).focus();
-*/
+                jQuery('#first_form').velocity("transition.slideLeftBigOut", 500);
+                jQuery('#second_form').velocity("transition.slideRightBigIn", {
+                    delay: 500,
+                    duration: 500
+                });
+                jQuery('#bogacontest_up_login_username').focus();
             }
 
             if (data.loggedin == true)

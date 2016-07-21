@@ -87,7 +87,11 @@ function bogacontest_assets(){
     wp_enqueue_script('load_img');
 /*    wp_register_script('masonry', '/wp-content/plugins/boga-contest/assets/js/masonry.pkgd.min.js', array('jquery'));
     wp_enqueue_script('masonry');*/
-    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery', 'typewatch', 'load_img', 'masonry'));
+    wp_register_script('velocity', '/wp-content/plugins/boga-contest/assets/js/velocity.min.js', array('jquery'));
+    wp_enqueue_script('velocity');
+    wp_register_script('velocityui', '/wp-content/plugins/boga-contest/assets/js/velocity.ui.js', array('velocity'));
+    wp_enqueue_script('velocityui');
+    wp_register_script('bogacontest', '/wp-content/plugins/boga-contest/assets/js/bogacontest.js', array('jquery', 'typewatch', 'load_img', 'velocity', 'velocityui'));
     wp_enqueue_script('bogacontest');
     wp_register_style('bogacontest', '/wp-content/plugins/boga-contest/assets/css/bogacontest.css');
     wp_enqueue_style('bogacontest');

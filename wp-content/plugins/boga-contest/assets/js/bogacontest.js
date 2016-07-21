@@ -241,10 +241,7 @@ var photo_manager = {
                     formData.append("contestant_id", jQuery('#upload').data("contestantid"));
                     formData.append("contest_slug", jQuery('#toolbar').data('slug'));
                     progress_bar.move('30%');
-                    setTimeout(function()
-                    {
-                        progress_bar.move('35%');
-                    }, 1000);
+
                     xhr.onreadystatechange=function()
                     {
                         if (xhr.readyState==1){

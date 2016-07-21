@@ -641,13 +641,14 @@ class contestant
                     if ($contestant_position->contestant_id == $this->ID){
                         $this->position = $counter;
                         $this->votes = $contestant_position->votes;
-                        if (is_null($this->votes)){
-                            $this->votes = 0;
-                        }
+
                         break;
                     }
                     $counter++;
                 }
+            }
+            if (is_null($this->votes)){
+                $this->votes = 0;
             }
         }
     }
@@ -720,6 +721,7 @@ class contestant
 /*        echo '<a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';*/
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
         echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h6>';
+        echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-heart" aria-hidden="true"></i></span></h6>';
         echo '</div>';
         echo '</a>';
 /*        echo '<div id="data_border" class="mini_contestant_data">';
@@ -924,7 +926,9 @@ class contestant
             $button_class = 'btn-default';
         }else
         {
+            echo '<a id="main_photo_link" class="main_photo_holder_link" href="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg">';
             echo '<img id="main_photo" class="fake_main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
+            echo '</a>';
             $button_text = '¡Sube tu foto principal!';
             $button_class = 'btn-primary';
         }

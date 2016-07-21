@@ -76,7 +76,7 @@ var vote = {
         }else{
             jQuery.ajax({
                 beforeSend: function(){
-                    vote.button.html('<img src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif" style="width: 4%">');
+                    vote.button.html('<img src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 12%">');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/new_vote.php",
@@ -332,6 +332,10 @@ var photo_manager = {
                             {
                                 selected_progress_bar.hide();
                             }, 1000);
+                            setTimeout(function()
+                            {
+                                selected_progress_bar.move('0%');
+                            }, 1500);
                         }
                     };
                     xhr.open("POST","/wp-content/plugins/boga-contest/new_photo.php",true);
@@ -357,7 +361,7 @@ var photo_manager = {
         jQuery.ajax({
                 beforeSend: function(){
                     console.log('borrando foto');
-                    jQuery('#delete_selected_photo').html('<img class="img-responsive" style="margin: 0 auto; width: 25px !important;" src="/wp-content/plugins/boga-contest/assets/img/spinner2.gif">');
+                    jQuery('#delete_selected_photo').html('<img class="img-responsive" style="margin: 0 auto; width: 50px !important;" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif">');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/delete_photo.php",

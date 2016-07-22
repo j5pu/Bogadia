@@ -303,6 +303,7 @@ class contestant
     public $nice_name;
     public $position;
     public $contest;
+    public $mail;
 
     // Getters y Setters
     public function getContestId()
@@ -449,7 +450,6 @@ class contestant
 
     function new_bogacontestant_notification()
     {
-
         $email_subject = "A por todas " . cut_title($this->name, 15) . "!";
 
         ob_start();
@@ -478,7 +478,7 @@ class contestant
         $message = ob_get_contents();
         ob_end_clean();
 
-        wp_mail($info['user_email'], $email_subject, $message);
+        wp_mail($this->mail, $email_subject, $message);
     }
 
     function create()
@@ -509,11 +509,12 @@ class contestant
     function get()
     {
         global $wpdb;
-        $results = $wpdb->get_row( "SELECT wp_bogacontest_contestant.ID, wp_users.display_name, wp_users.user_nicename FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID WHERE wp_bogacontest_contestant.user_id=". $this->user_id ." AND wp_bogacontest_contestant.contest_id=". $this->contest_id .";", OBJECT );
+        $results = $wpdb->get_row( "SELECT wp_bogacontest_contestant.ID, wp_users.display_name, wp_users.user_nicename, wp_users.user_email FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID WHERE wp_bogacontest_contestant.user_id=". $this->user_id ." AND wp_bogacontest_contestant.contest_id=". $this->contest_id .";", OBJECT );
         if (!empty($results)) {
             $this->ID = $results->ID;
             $this->name = $results->display_name;
             $this->nice_name = $results->user_nicename;
+            $this->mail = $results->user_email;
         }
         return $results;
     }

@@ -719,7 +719,7 @@ class contestant
         echo '<div class="col-md-3 col-sm-4 col-xs-6 mini_image">';
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
         echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 15) .'</span></h6>';
-        echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-heart-outline" aria-hidden="true"></i></span></h6>';
+        echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-star" aria-hidden="true"></i></span></h6>';
         echo '</div>';
         echo '</a>';
     }

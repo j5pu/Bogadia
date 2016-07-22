@@ -338,7 +338,6 @@ function bogacontest_sitemap_index() {
 
 function bogacontest_mail_verify($info)
 {
-    $user_name = cut_title($info['display_name'], 5);
 
     $email_subject = "Verifica tu cuenta " . $info['first_name'] . "!";
 

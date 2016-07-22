@@ -361,7 +361,7 @@ function bogacontest_mail_verify($info)
     $message = ob_get_contents();
     ob_end_clean();
 
-    wp_mail($user_email, $email_subject, $message);
+    wp_mail($info['user_email'], $email_subject, $message);
 }
 
 function bogacontest_new_user_mail($info)

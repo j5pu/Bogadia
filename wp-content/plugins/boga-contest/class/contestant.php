@@ -439,10 +439,46 @@ class contestant
         if (empty($results)){
             self::create();
             self::get();
+            self::new_bogacontestant_notification();
+
         }
         self::get_imgs();
         self::get_votes();
         return $this->ID;
+    }
+
+    function new_bogacontestant_notification()
+    {
+
+        $email_subject = "A por todas " . cut_title($this->name, 15) . "!";
+
+        ob_start();
+        ?>
+
+        <p>Buenas, <?php echo cut_title($this->name, 15)  ?>. Gracias por participar en Bogacontest</p>
+
+        <p>
+            Te deseamos toda la suerte del mundo.
+        </p>
+
+        <p>
+            Tu página web personal es <a href="https://www.bogadia.com/concursos/portada-mayo/<?php echo $this->nice_name ?>">https://www.bogadia.com/concursos/portada-mayo/<?php echo $this->nice_name ?></a>
+        </p>
+
+        <p>
+            Ahí es donde tus amigos y todo el mundo podrá ver tus fotos y, lo más importante, votarte.
+        </p>
+        <p>
+            Si tienes cualquier problema, duda o sugerencia, escribe un mail a info@bogadia.com
+        </p>
+
+        <p>¡Disfruta de bogadia.com! Gracias</p>
+
+        <?php
+        $message = ob_get_contents();
+        ob_end_clean();
+
+        wp_mail($info['user_email'], $email_subject, $message);
     }
 
     function create()
@@ -473,10 +509,11 @@ class contestant
     function get()
     {
         global $wpdb;
-        $results = $wpdb->get_row( "SELECT wp_bogacontest_contestant.ID, wp_users.display_name FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID WHERE wp_bogacontest_contestant.user_id=". $this->user_id ." AND wp_bogacontest_contestant.contest_id=". $this->contest_id .";", OBJECT );
+        $results = $wpdb->get_row( "SELECT wp_bogacontest_contestant.ID, wp_users.display_name, wp_users.user_nicename FROM wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID WHERE wp_bogacontest_contestant.user_id=". $this->user_id ." AND wp_bogacontest_contestant.contest_id=". $this->contest_id .";", OBJECT );
         if (!empty($results)) {
             $this->ID = $results->ID;
             $this->name = $results->display_name;
+            $this->nice_name = $results->user_nicename;
         }
         return $results;
     }

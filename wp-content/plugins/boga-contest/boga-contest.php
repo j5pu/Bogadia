@@ -340,15 +340,15 @@ function bogacontest_mail_verify($info)
 {
     $user_name = cut_title($info['display_name'], 5);
 
-    $email_subject = "Verifica tu cuenta " . $user_name . "!";
+    $email_subject = "Verifica tu cuenta " . $info['first_name'] . "!";
 
     ob_start();
     ?>
 
-    <p>Buenas, <?php echo $user_name ?>. Gracias por registrarte en Bogadia</p>
+    <p>Buenas, <?php echo $info['first_name'] ?>. Gracias por registrarte en Bogadia</p>
 
     <p>
-        Necesitamos que verifiques tu cuenta. <a href="https://www.bogadia.com/wp-content/plugins/boga-contest/email_verify.php?id=<?php echo $info['id'] ?>&hash=<?php echo $info['hash'] ?>>Solo tienes que pulsar aquí.</a>
+        Necesitamos que verifiques tu cuenta. <a href="https://www.bogadia.com/wp-content/plugins/boga-contest/email_verify.php?id=<?php echo $info['id'] ?>&hash=<?php echo $info['hash'] ?>">Solo tienes que pulsar aquí.</a>
     </p>
 
     <p>

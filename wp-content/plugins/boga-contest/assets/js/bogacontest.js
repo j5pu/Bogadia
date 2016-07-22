@@ -14,30 +14,6 @@ var gallery = {
     },
 };
 
-function change_main_photo() {
-    jQuery.ajax({
-            beforeSend: function(){
-                console.log('preparando inscripción');
-            },
-            method: "POST",
-            url: "/wp-content/plugins/boga-contest/new_contestant.php",
-            data: {
-                main: user_id,
-                contest_id: jQuery('#participate').data("contestid")
-            }
-        })
-        .done(function( msg ) {
-            alert('exito ' + msg);
-            if(msg != '0'){
-                window.location = window.location.href + msg;
-            }
-        })
-        .fail(function( msg ) {
-            alert('fallo' + msg);
-        })
-    ;
-}
-
 var progress_bar = {
     move: function (value){
         jQuery("#upload_progress_bar").css('width', value);
@@ -50,6 +26,7 @@ var progress_bar = {
         jQuery("#progress_bar_container").slideUp('slow');
     }
 };
+
 var progress_gallery_bar = {
     move: function (value){
         jQuery("#upload_progress_gallery_bar").css('width', value);
@@ -345,10 +322,10 @@ var photo_manager = {
 
                 },
                 {
-                    maxWidth: 600,
-                    maxHeight: 300,
-                    minWidth: 100,
-                    minHeight: 50,
+                    maxWidth: 900,
+                    maxHeight: 450,
+                    minWidth: 300,
+                    minHeight: 150,
                     canvas: true,
                     orientation: ori,
                 }

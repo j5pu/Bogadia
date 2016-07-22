@@ -182,7 +182,11 @@ function bogacontest_ajax_register()
             echo json_encode(array('loggedin'=>false, 'case'=>5, 'message'=>__('Este e-mail ya ha sido usado')));
     } else
     {
-/*        wp_new_usewp_new_user_notificationr_notification( $user_register, wp_unslash( $info['user_pass'] ) );*/
+        $info['id'] = $user_register;
+        $info['hash'] = md5( $info['user_pass'] . microtime() );
+        add_user_meta( $info['id'], 'hash', $info['hash'] );
+        add_user_meta( $info['id'], 'verified', '0' );
+        bogacontest_mail_verify($info);
         $login_data['user_login'] = $info['user_login'];
         $login_data['user_password'] = $info['user_pass'];
         $login_data['remember'] = true;
@@ -331,6 +335,63 @@ function bogacontest_sitemap_index() {
 
     return $xml;
 }
+
+function bogacontest_mail_verify($info)
+{
+    $user_name = cut_title($info['display_name'], 5);
+
+    $email_subject = "Verifica tu cuenta " . $user_name . "!";
+
+    ob_start();
+    ?>
+
+    <p>Buenas, <?php echo $user_name ?>. Gracias por registrarte en Bogadia</p>
+
+    <p>
+        Necesitamos que verifiques tu cuenta. <a href="https://www.bogadia.com/wp-content/plugins/boga-contest/email_verify.php?id=<?php echo $info['id'] ?>&hash=<?php echo $info['hash'] ?>>Solo tienes que pulsar aquí.</a>
+    </p>
+
+    <p>
+        Tu contraseña es <strong style="color:orange"><?php echo $info['user_pass'] ?></strong> <br>
+    </p>
+
+    <p>¡Disfruta de bogadia.com! Gracias</p>
+
+    <?php
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    wp_mail($user_email, $email_subject, $message);
+}
+
+function bogacontest_new_user_mail($info)
+{
+    $user_name = cut_title($info['display_name'], 5);
+
+    $email_subject = "Verifica tu cuenta " . $user_name . "!";
+
+    ob_start();
+    ?>
+
+    <p>Buenas, <?php echo $user_name ?>. Gracias por registrarte en Bogadia</p>
+
+    <p>
+        Necesitamos que verifiques tu cuenta. <a href="https://www.bogadia.com/wp-content/plugins/boga-contest/email_verify/?id=">Solo tienes que pulsar aquí.</a>
+    </p>
+
+    <p>
+        Tu contraseña es <strong style="color:orange"><?php echo $info['user_pass'] ?></strong> <br>
+    </p>
+
+    <p>¡Disfruta de bogadia.com! Gracias</p>
+
+    <?php
+    $message = ob_get_contents();
+    ob_end_clean();
+
+    wp_mail($user_email, $email_subject, $message);
+}
+
 
 add_filter( 'wpseo_sitemap_index', 'bogacontest_sitemap_index' );
 register_activation_hook( __FILE__, 'bogacontest_install' );

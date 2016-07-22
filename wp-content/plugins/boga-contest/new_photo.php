@@ -9,6 +9,9 @@ require_once('../../../wp-load.php');
 
 $filename = str_replace(' ', '', $_POST['name']);
 
+$filename  = md5( $filename . microtime() );
+
+
 $contestant_folder = WP_CONTENT_DIR .'/uploads/bogacontest/'. $_POST['contest_slug'] .'/'. $_POST['contestant_id'];
 $path = '/wp-content/uploads/bogacontest/'. $_POST['contest_slug'] .'/'. $_POST['contestant_id'] .'/'. $filename;
 if (!file_exists($contestant_folder)) {

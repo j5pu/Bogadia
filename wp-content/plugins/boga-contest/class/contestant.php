@@ -154,9 +154,9 @@ class contest
 
         // PRESENTACION CONCURSO:
         echo '<img class="aligncenter img-responsive" src="http://alo.co/sites/default/files/imagecache/Main_Galeria_Vertical_720_438/_can8835.jpg">';
-        echo '<h1>BogaContest</h1>';
+        echo '<h1>Sé portada de Bogadia</h1>';
         echo '<hr>';
-        echo '<p>¿Tienes carisma? ¿Te consideras una persona con chispa? Es tu momento. En Bogadia queremos romper los estereotipos de los concursos de modelos y apostar por una <strong>belleza real</strong>, lejos de los cánones impuestos. Entra de lleno en el mundo de la moda participando en BogaContest, el primer <strong>concurso de modelos</strong> para <strong>gente como tú</strong>. Podrás convertirte en la <strong>imagen de Bogadia</strong>, ganar un <strong>book de fotos profesional</strong> valorado en 300€ y promoción en todas nuestras <strong>redes sociales</strong>. ¿A qué esperas? ¡Haz click en participar para <strong>crear tu cuenta</strong>!</p>';
+        echo '<p>Entra de lleno en el mundo de la moda participando en BogaContest, el primer <strong>concurso de modelos</strong> para <strong>gente como tú</strong>. Podrás convertirte en la <strong>imagen de Bogadia</strong>, ganar un <strong>book de fotos profesional</strong> valorado en 300€ y promoción en todas nuestras <strong>redes sociales</strong>. ¿A qué esperas? ¡Haz click en participar para <strong>crear tu cuenta</strong>!</p>';
         self::print_participate_button();
 
         // CONCURSANTES
@@ -717,26 +717,11 @@ class contestant
     {
         echo '<a  target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
         echo '<div class="col-md-3 col-sm-4 col-xs-6 mini_image">';
-/*        echo '<div class="">';*/
-/*        echo '<a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'"><img id="contestant-'. $this->ID .'" class="img-responsive" src="'. $this->main_photo .'" ></a>';*/
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
-        echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h6>';
-        echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-heart" aria-hidden="true"></i></span></h6>';
+        echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 5) .'</span></h6>';
+        echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-heart-outline" aria-hidden="true"></i></span></h6>';
         echo '</div>';
         echo '</a>';
-/*        echo '<div id="data_border" class="mini_contestant_data">';
-        echo '<h6 class="text-left">';
-
-        if(!empty($this->position))
-        {
-            echo 'Posición '. $this->position ;
-        }
-
-        echo '<a id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" style="right:0;">'. $this->votes .' votos</a></h6>';
-        echo '<div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';*/
     }
 
     function print_contestant_page()

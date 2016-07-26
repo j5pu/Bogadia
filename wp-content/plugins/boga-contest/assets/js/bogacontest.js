@@ -115,19 +115,15 @@ var toolbar = {
             .done(function( msg ) {
                 jQuery('#contestants_container').html(msg);
                 jQuery.Velocity.RunSequence([
-                    {e: jQuery('#toolbar_loader'), p:'finish'},
-                    {e: jQuery('#toolbar_loader'), p:'fadeOut'},
-                    {e: jQuery('#contestants_container'), p:'finish'},
-                    {e: jQuery('#contestants_container'), p:'fadeIn'}
+                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {sequenceQueue: false }},
+                    {e: jQuery('#contestants_container'), p:'fadeIn', o: {sequenceQueue: false }}
                 ]);
             })
             .fail(function( msg ) {
-                jQuery('#contestants_container').html('Ups! Inténtalo de nuevo.');
+                jQuery('#contestants_container').html('<h3>Ups! Inténtalo de nuevo.</h3>');
                 jQuery.Velocity.RunSequence([
-                    {e: jQuery('#toolbar_loader'), p:'finish'},
-                    {e: jQuery('#toolbar_loader'), p:'fadeOut'},
-                    {e: jQuery('#contestants_container'), p:'finish'},
-                    {e: jQuery('#contestants_container'), p:'fadeIn'}
+                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {sequenceQueue: false }},
+                    {e: jQuery('#contestants_container'), p:'fadeIn', o: {sequenceQueue: false }}
                 ]);
             });
     },

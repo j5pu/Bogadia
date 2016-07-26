@@ -350,10 +350,6 @@ function bogacontest_mail_verify($info)
         Necesitamos que verifiques tu cuenta. <a href="https://www.bogadia.com/wp-content/plugins/boga-contest/email_verify.php?id=<?php echo $info['id'] ?>&hash=<?php echo $info['hash'] ?>">Solo tienes que pulsar aquí.</a>
     </p>
 
-    <p>
-        Tu contraseña es <strong style="color:orange"><?php echo $info['user_pass'] ?></strong> <br>
-    </p>
-
     <p>¡Disfruta de bogadia.com! Gracias</p>
 
     <?php

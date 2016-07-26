@@ -192,3 +192,8 @@ input[type="color"]:focus,
 .progress-bar{
     background-color: #d17b83 !important;
 }
+
+#bogacontest_login_modal > .modal-dialog{
+    position: fixed;
+    width: 100%;
+}

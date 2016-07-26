@@ -592,6 +592,7 @@ jQuery(document).ready(function()
     photo_manager.bind_events();
     gallery.init();
     jQuery('#bogacontest_login_modal').on('show.bs.modal', function(){
+        jQuery.magnificPopup.close();
         jQuery('.modal-dialog').velocity('transition.flipYIn');
     });
 });

@@ -805,9 +805,11 @@ class contestant
         echo '<div class="row">';
         echo '<div class="col-md-3 ">';
         echo '</div>';
-        echo '<div class="col-md-6">';
-        self::print_share_buttons();
-        self::print_vote_button(True);
+        echo '<div id="interaction_buttons_wrapper" class="col-md-6">';
+        if (!$current_user_id == $this->user_id){
+            self::print_share_buttons();
+            self::print_vote_button(True);
+        }
         echo '</div>';
         echo '<div class="col-md-3 ">';
         echo '</div>';

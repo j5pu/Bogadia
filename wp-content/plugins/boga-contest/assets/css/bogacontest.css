@@ -90,10 +90,6 @@
     padding-right: 10px;
 }
 
-#current-user-data-holder{
-    margin-bottom: 100px;
-}
-
 textarea:focus,
 input[type="text"]:focus,
 input[type="password"]:focus,
@@ -203,6 +199,16 @@ input[type="color"]:focus,
     #bogacontest_login_modal{
         top: 8% !important;
     }
+    #interaction_buttons_wrapper{
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        z-index: 9999;
+        background-color: white;
+        width: 100%;
+        border-top: 1px solid rgb(229, 229, 229);
+
+    }
 }
 @media screen and (min-width: 701px){
     #bogacontest_login_modal{
@@ -210,6 +216,9 @@ input[type="color"]:focus,
     }
     .modal-dialog {
         width: 50% !important;
+    }
+    #current-user-data-holder{
+        margin-bottom: 70px;
     }
 }
 #bogacontest_login_modal{

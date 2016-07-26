@@ -199,7 +199,22 @@ input[type="color"]:focus,
     background-color: #d17b83 !important;
 }
 
-#bogacontest_login_modal > .modal-dialog{
+@media screen and (max-width: 700px){
+    #bogacontest_login_modal{
+        top: 8% !important;
+    }
+}
+@media screen and (min-width: 701px){
+    #bogacontest_login_modal{
+        top: 3% !important;
+    }
+    .modal-dialog {
+        width: 50% !important;
+    }
+}
+#bogacontest_login_modal{
     position: fixed;
-    width: 100%;
+}
+#bogacontest_login_modal > div > p {
+    margin: 6px 6px;
 }

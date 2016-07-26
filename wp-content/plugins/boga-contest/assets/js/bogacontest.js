@@ -120,7 +120,11 @@ var toolbar = {
                 ]);
             })
             .fail(function( msg ) {
-                jQuery('#toolbar_loader').velocity('fadeOut');
+                jQuery('#contestants_container').html('Ups! Inténtalo de nuevo.');
+                jQuery.Velocity.RunSequence([
+                    {e: jQuery('#toolbar_loader'), p:'fadeOut'},
+                    {e: jQuery('#contestants_container'), p:'fadeIn'}
+                ]);
             });
     },
     bind_events: function(){

@@ -163,8 +163,9 @@ class contest
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
         self::count_contestans();
         self::print_toolbar();
+        echo '<div class="text-center" style="min-height: 200px">';
+        echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
         echo '<div id="contestants_container" class="row text-center ">';
-/*        echo '<div id="contestants_container" class="col-md-12 text-center">';*/
 
         if (empty($this->contestants))
         {
@@ -175,9 +176,9 @@ class contest
         {
             self::print_contestants();
         }
-
-/*        echo '</div>';*/
         echo '</div>';
+        echo '</div>';
+
         return '';
     }
 
@@ -207,7 +208,9 @@ class contest
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div class="col-md-6 ">';
-        echo '<button id="participate" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->id .'">PARTICIPAR</button>';
+        echo '';
+        echo '';
+        echo '<button id="participate" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->id .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text">PARTICIPAR</span></div></button>';
         echo '</div>';
         echo '<div class="col-md-3 ">';
         echo '</div>';
@@ -252,33 +255,41 @@ class contest
 
         //// Parte del formulario
         echo '<div id="bogacontest_login_body" class="col-xs-7 col-sm-6 col-md-6">';
+        echo '<div id="form_wrapper">';
         ////// Boton facebook
         echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
         echo '<hr>';
         ////// Formulario registro
         echo '<h4 id="register_help_text" style="color: white;"></h4>';
         echo '<small id="email_validate_text" style="display: none; color: chartreuse;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
+
         echo '<div id="first_form">';
         echo '<form id="login_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
         echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
-        echo '<button id="bogacontest_up_login" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Entrar</button>';
+        echo '<button id="bogacontest_up_login" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="login_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_text">Entrar</span></div></button>';
         echo '</form>';
         echo '</div>';
+
         echo '<div id="second_form" style="display: none;">';
         echo '<form id="register_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
-        echo do_shortcode("[bws_google_captcha]");
-        echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'">Registrarme</button>';
+/*        echo do_shortcode("[bws_google_captcha]");*/
+        echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
         echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
         echo '</form>';
         echo '</div>';
+
         echo wp_nonce_field( 'ajax-login-nonce', 'bogacontest_up_login_security' );
         echo wp_nonce_field( 'ajax-register-nonce', 'bogacontest_up_register_security' );
         echo '</div>';
+
         echo '<input id="bogacontest_up_login_action_after_login" class=  "form-control" type="hidden" name="action_after_login" value="0">';
         echo '</div>';
+
         echo '</div>';
+        echo '</div>';
+        echo '<img id="login_succes_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 100px;">';
 
         // Footer del modal
 /*        echo '<div id="bogacontest_login_footer" class="modal-footer">';
@@ -806,7 +817,7 @@ class contestant
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div id="interaction_buttons_wrapper" class="col-md-6">';
-        if (!$current_user_id == $this->user_id){
+        if ($current_user_id != $this->user_id){
             self::print_share_buttons();
             self::print_vote_button(True);
         }

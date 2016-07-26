@@ -165,6 +165,7 @@ input[type="color"]:focus,
     position: absolute;
     bottom: -7px;
     right: 19px;
+    font-size: 11px;
 }
 .mini_image{
     position: relative !important;
@@ -178,7 +179,7 @@ input[type="color"]:focus,
     color: lightgrey;
     padding: 2px 5px 2px 5px;
     background: rgb(0, 0, 0);
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.6);
     letter-spacing: 0.2px;
     border-radius: 13px;
 }
@@ -188,6 +189,7 @@ input[type="color"]:focus,
     position: absolute;
     bottom: -7px;
     left: 19px;
+    font-size: 11px;
 }
 .progress-bar{
     background-color: #d17b83 !important;

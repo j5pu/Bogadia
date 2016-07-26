@@ -161,11 +161,13 @@ input[type="color"]:focus,
 
 .mini-name{
     color: white !important;
+    /*
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    */
     position: absolute;
     bottom: -7px;
     right: 19px;
-    font-size: 11px;
+    font-size: 12px;
 }
 .mini_image{
     position: relative !important;
@@ -180,16 +182,18 @@ input[type="color"]:focus,
     padding: 2px 5px 2px 5px;
     background: rgb(0, 0, 0);
     background: rgba(0, 0, 0, 0.6);
-    letter-spacing: 0.2px;
+    letter-spacing: 0.5px;
     border-radius: 13px;
 }
 .mini-votes {
     color: white !important;
+    /*
     text-shadow: -1px 0 black, 0 1px black, 1px 0 black, 0 -1px black;
+    */
     position: absolute;
     bottom: -7px;
     left: 19px;
-    font-size: 11px;
+    font-size: 12px;
 }
 .progress-bar{
     background-color: #d17b83 !important;

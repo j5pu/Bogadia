@@ -231,7 +231,7 @@ class contest
     function print_login_register_form(){
         /* Imprime el formulario modal de login y registro */
 
-        echo '<div class="modal fade" id="bogacontest_login_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
+        echo '<div class="modal" id="bogacontest_login_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
 
 
         echo '<div  class="modal-dialog">';

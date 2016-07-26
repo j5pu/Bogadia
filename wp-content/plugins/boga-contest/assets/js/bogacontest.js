@@ -591,9 +591,7 @@ jQuery(document).ready(function()
     toolbar.bind_events();
     photo_manager.bind_events();
     gallery.init();
-/*    var container = jQuery('#contestants_container')[0];
-    var masonry = new Masonry(container, {
-        columnWidth: '.item',
-        itemSelector: '.item'
-    });*/
+    jQuery('#bogacontest_login_modal').on('show.bs.modal', function(){
+        jQuery('.modal-dialog').velocity('transition.flipYIn');
+    });
 });

@@ -115,7 +115,7 @@ var toolbar = {
                 }
             })
             .done(function( msg ) {
-                jQuery('#contestants_container').html(msg);
+                jQuery('#contestants_container').html('<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>' + msg);
                 setTimeout(function()
                 {
                     jQuery.Velocity.RunSequence([
@@ -624,6 +624,12 @@ jQuery(document).ready(function()
 
     jQuery('#preview').on('click', function(){
         window.open('/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?preview=true');
+    });
+
+    jQuery('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
+        percentPosition: true
     });
 
 });

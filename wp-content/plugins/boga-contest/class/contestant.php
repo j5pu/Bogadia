@@ -163,9 +163,11 @@ class contest
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
         self::count_contestans();
         self::print_toolbar();
-        echo '<div class="text-center" style="min-height: 200px">';
+        echo '<div class="text-center" style="min-height: 500px">';
         echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
-        echo '<div id="contestants_container" class="row text-center ">';
+/*        echo '<div class="container-fluid">';*/
+        echo '<div id="contestants_container" class="grid">';
+        echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
 
         if (empty($this->contestants))
         {
@@ -176,6 +178,7 @@ class contest
         {
             self::print_contestants();
         }
+        echo '</div>';
         echo '</div>';
         echo '</div>';
 
@@ -764,13 +767,13 @@ class contestant
 
     function print_mini_card($contest_slug)
     {
-        echo '<a  target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
-        echo '<div class="col-md-3 col-sm-4 col-xs-6 mini_image">';
+        echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image">';
+        echo '<a target="_blank" href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
         echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 15) .'</span></h6>';
         echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-star" aria-hidden="true"></i></span></h6>';
-        echo '</div>';
         echo '</a>';
+        echo '</div>';
     }
 
     function print_contestant_page()

@@ -936,10 +936,17 @@ class contestant
             echo '</div>';
             echo '</div>';
         }
+
         echo '<div class="row">';
-        echo '<div id="gallery" class="col-md-12" style="margin: 10px 15px 10px 15px;">';
-
-
+        echo '<div class="col-md-12">';
+        echo '<div id="gallery" class="';
+        if (!$current_user_is_editing){
+            echo 'grid ';
+        }
+        echo '">';
+        if (!$current_user_is_editing){
+            echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
+        }
         if (!empty($this->photos))
         {
             $contador = 0;
@@ -949,7 +956,15 @@ class contestant
             {
                 if($photo->main == 0)
                 {
-                    echo '<div id="gallery_image_container_'. $photo->id .'" class="col-xs-6 col-sm-6 col-md-3 gallery_container" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                    echo '<div id="gallery_image_container_'. $photo->id .'" class="';
+                    if (!$current_user_is_editing){
+                        echo 'grid-item ';
+                    }
+                    echo 'col-xs-6 col-sm-4 col-md-3 gallery_container" style="padding: 0 0 0 0 !important; ';
+                    if ($current_user_is_editing){
+                        echo 'height: 100px; overflow-y: hidden;';
+                    }
+                    echo ' ">';
                     echo '<a class="main_photo_holder_link" href="'. $photo->path .'">';
                     echo '<img id="contestant-'. $contador .'" class="img-responsive contestant-photo" src="'. $photo->path .'" >';
                     echo '</a>';
@@ -975,6 +990,7 @@ class contestant
             echo '</div>';
         }
 
+        echo '</div>';
         echo '</div>';
         echo '</div>';
     }

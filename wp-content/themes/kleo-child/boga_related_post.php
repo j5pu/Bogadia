@@ -31,8 +31,12 @@ class boga_related_post
         $cat_name = $categories[0]->name;
 
         if (!empty($tags) && $cat_name != "Streetstyle") {
-            $tag_ids = array();
-            foreach ($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
+            if (!has_term( 'BogadiaTV', 'post_tag', $this->retrieved_post[0] )){
+                $tag_ids = array();
+                foreach ($tags as $individual_tag) $tag_ids[] = $individual_tag->term_id;
+            }else{
+                $tag_ids = 2546;
+            }
             $args['tag__in'] = $tag_ids;
         }
 

@@ -842,9 +842,7 @@ class contestant
         self::print_contestant_gallery();
 
         echo '</div>';
-        if (!$current_user_is_editing) {
-            $this->contest->print_participate_button();
-        }else{
+        if ($current_user_is_editing) {
             echo '<div style="margin-top: 100px;">';
             echo '<div class="col-md-3 ">';
             echo '</div>';

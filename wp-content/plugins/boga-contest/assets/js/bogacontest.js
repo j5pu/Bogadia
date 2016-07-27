@@ -116,10 +116,13 @@ var toolbar = {
             })
             .done(function( msg ) {
                 jQuery('#contestants_container').html(msg);
-                jQuery.Velocity.RunSequence([
-                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {delay: 1000 }},
-                    {e: jQuery('#contestants_container'), p:'fadeIn'}
-                ]);
+                setTimeout(function()
+                {
+                    jQuery.Velocity.RunSequence([
+                        {e: jQuery('#toolbar_loader'), p:'fadeOut'},
+                        {e: jQuery('#contestants_container'), p:'fadeIn'}
+                    ]);
+                }, 1000);
             })
             .fail(function( msg ) {
                 jQuery('#contestants_container').html('<h3>Ups! Inténtalo de nuevo.</h3>');

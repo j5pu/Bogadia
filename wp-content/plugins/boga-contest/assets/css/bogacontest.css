@@ -209,7 +209,7 @@ input[type="color"]:focus,
         border-top: 1px solid rgb(229, 229, 229);
 
     }
-    #bogacontest_login_modal_dialog{
+    #bogacontest_login_modal_dialog {
         min-height: 300px;
     }
 }
@@ -226,7 +226,9 @@ input[type="color"]:focus,
     #bogacontest_login_modal_dialog{
         min-height: 400px;
     }
-}
+    #gallery{
+        padding-right: 45px !important;
+    }}
 #bogacontest_login_modal{
     position: fixed;
 }

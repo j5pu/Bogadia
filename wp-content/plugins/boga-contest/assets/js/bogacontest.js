@@ -1,3 +1,5 @@
+var upload_button_clicked = 0;
+
 var gallery = {
     photos: [],
     init: function(){
@@ -115,15 +117,15 @@ var toolbar = {
             .done(function( msg ) {
                 jQuery('#contestants_container').html(msg);
                 jQuery.Velocity.RunSequence([
-                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {sequenceQueue: false }},
-                    {e: jQuery('#contestants_container'), p:'fadeIn', o: {sequenceQueue: false }}
+                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {delay: 1000 }},
+                    {e: jQuery('#contestants_container'), p:'fadeIn'}
                 ]);
             })
             .fail(function( msg ) {
                 jQuery('#contestants_container').html('<h3>Ups! Inténtalo de nuevo.</h3>');
                 jQuery.Velocity.RunSequence([
-                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {sequenceQueue: false }},
-                    {e: jQuery('#contestants_container'), p:'fadeIn', o: {sequenceQueue: false }}
+                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {delay: 1000  }},
+                    {e: jQuery('#contestants_container'), p:'fadeIn'}
                 ]);
             });
     },
@@ -162,6 +164,7 @@ var photo_manager = {
 
         jQuery('#upload_alias').on('click', function(){
             photo_manager.upload_to_main = 0;
+            upload_button_clicked = 1;
             jQuery('#upload').val(null);
             jQuery('#upload').click();
         });
@@ -176,26 +179,6 @@ var photo_manager = {
     },
     upload: function(upload_to_main)
     {
-        function dataURItoBlob(dataURI) {
-            // convert base64/URLEncoded data component to raw binary data held in a string
-            var byteString;
-            if (dataURI.split(',')[0].indexOf('base64') >= 0)
-                byteString = atob(dataURI.split(',')[1]);
-            else
-                byteString = unescape(dataURI.split(',')[1]);
-
-            // separate out the mime component
-            var mimeString = dataURI.split(',')[0].split(':')[1].split(';')[0];
-
-            // write the bytes of the string to a typed array
-            var ia = new Uint8Array(byteString.length);
-            for (var i = 0; i < byteString.length; i++) {
-                ia[i] = byteString.charCodeAt(i);
-            }
-
-            return new Blob([ia], {type:mimeString});
-        }
-
         var selected_progress_bar = "";
 
         if (upload_to_main == 1)
@@ -315,6 +298,16 @@ var photo_manager = {
                                 str = str + '</div>';
 
                                 photo_manager.prepend(str);
+                                var upload_button = jQuery('#upload_alias');
+
+                                if (upload_button.hasClass('btn-primary') && upload_button_clicked == 1)
+                                {
+                                    var preview_button = jQuery('#preview');
+                                    upload_button.removeClass('btn-primary');
+                                    upload_button.addClass('btn-default');
+                                    preview_button.removeClass('btn-default ');
+                                    preview_button.addClass('btn-primary');
+                                }
 
                             }
 
@@ -619,4 +612,9 @@ jQuery(document).ready(function()
         jQuery.magnificPopup.close();
         jQuery('.modal-dialog').velocity('transition.flipYIn');
     });
+
+    jQuery('#preview').on('click', function(){
+        window.open('/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?preview=true');
+    });
+
 });

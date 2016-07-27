@@ -274,7 +274,7 @@ class contest
         echo '<div id="second_form" style="display: none;">';
         echo '<form id="register_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
-/*        echo do_shortcode("[bws_google_captcha]");*/
+        do_shortcode("[bws_google_captcha]");
         echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
         echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
         echo '</form>';
@@ -783,6 +783,15 @@ class contestant
         self::get_imgs();
         self::get_votes();
         self::get_position();
+        global $current_user_is_editing;
+        $current_user_is_editing = false;
+        if(isset($_GET['preview'])) {
+           if ($_GET['preview'] == 'true'){
+               $current_user_is_editing = false;
+           }
+        }elseif ($current_user_id == $this->user_id) {
+            $current_user_is_editing = true;
+        }
 
         $this->contest->print_login_register_form();
         self::print_photos_manager();
@@ -791,7 +800,9 @@ class contestant
         echo '<div class="row">';
         echo '<div class="col-md-12">';
         echo '<p id="bogacontest_breadcrumb"><a style="color: #444444 !important;" href="/concursos/'. $this->contest->slug .'">Bogacontest</a> / '. $this->name ;
-        echo '<a id="participate" data-contestid="'. $this->contest->id .'" style="float: right; cursor: pointer; color: #444444 !important;" >Participa</a>';
+        if (!$current_user_is_editing) {
+            echo '<a id="participate" data-contestid="' . $this->contest->id . '" style="float: right; cursor: pointer; color: #444444 !important;" >Participa</a>';
+        }
         echo '</p>';
         echo '</div>';
         echo '</div>';
@@ -817,7 +828,7 @@ class contestant
         echo '<div class="col-md-3 ">';
         echo '</div>';
         echo '<div id="interaction_buttons_wrapper" class="col-md-6">';
-        if ($current_user_id != $this->user_id){
+        if (!$current_user_is_editing){
             self::print_share_buttons();
             self::print_vote_button(True);
         }
@@ -832,6 +843,19 @@ class contestant
         self::print_contestant_gallery();
 
         echo '</div>';
+        if (!$current_user_is_editing) {
+            $this->contest->print_participate_button();
+        }else{
+            echo '<div style="margin-top: 100px;">';
+            echo '<div class="col-md-3 ">';
+            echo '</div>';
+            echo '<div class="col-md-6 ">';
+            echo '<button id="preview" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text"><i class="icon-eye" aria-hidden="true"></i>PREVISUALIZAR</span></div></button>';
+            echo '</div>';
+            echo '<div class="col-md-3 ">';
+            echo '</div>';
+            echo '</div>';
+        }
         echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->contest->slug .'"></div>';
 
 
@@ -892,17 +916,19 @@ class contestant
 
     function print_contestant_gallery()
     {
-        global $current_user_id;
-        echo '<div class="row">';
-        if($current_user_id == $this->user_id)
+        global $current_user_is_editing;
+        if($current_user_is_editing)
         {
+            echo '<div class="row">';
             echo '<div class="col-md-12">';
-            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block">Subir foto a tu galería</button>';
+            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block"><i class="icon-upload" aria-hidden="true"></i>Subir foto a tu galería</button>';
             echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
             echo '<div id="progress_gallery_bar_container" class="progress" style="display: none;"><div id="upload_progress_gallery_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_gallery_bar_text" class="sr-only"></span></div></div>';
-            echo '<button id="delete" type="button" class="btn btn-default btn-block">Borrar foto</button>';
+            echo '<button id="delete" type="button" class="btn btn-default btn-block"><i class="icon-trash" aria-hidden="true"></i>Borrar foto</button>';
+            echo '</div>';
             echo '</div>';
         }
+        echo '<div class="row">';
         echo '<div id="gallery" class="col-md-12" style="margin: 10px 15px 10px 15px;">';
 
 
@@ -947,7 +973,7 @@ class contestant
 
     function print_main_photo()
     {
-        global $current_user_id;
+        global $current_user_is_editing;
         $button_text = '';
         $button_class = '';
 
@@ -957,23 +983,23 @@ class contestant
         if (!empty($this->main_photo))
         {
             echo '<a id="main_photo_link" class="main_photo_holder_link" href="'. $this->main_photo .'">';
-            echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive">';
+            echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive" style="margin: 0 auto;">';
             echo '</a>';
             $button_text = 'Cambia tu foto principal';
             $button_class = 'btn-default';
         }else
         {
             echo '<a id="main_photo_link" class="main_photo_holder_link" href="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg">';
-            echo '<img id="main_photo" class="fake_main_photo" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" class="img-responsive">';
+            echo '<img id="main_photo" class="fake_main_photo img-responsive" src="/wp-content/plugins/boga-contest/assets/img/______2757470_orig.jpg" style="margin: 0 auto;">';
             echo '</a>';
             $button_text = '¡Sube tu foto principal!';
             $button_class = 'btn-primary';
         }
 
         // Boton de subida
-        if($current_user_id == $this->user_id)
+        if($current_user_is_editing)
         {
-            echo '<button id="upload_main_alias" type="button" class="btn '. $button_class .' btn-block">'. $button_text .'</button>';
+            echo '<button id="upload_main_alias" type="button" class="btn '. $button_class .' btn-block"><i class="icon-upload" aria-hidden="true"></i>'. $button_text .'</button>';
             echo '<input id="upload_main" accept="image/*" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
             echo '<div id="progress_bar_container" class="progress" style="display: none;"><div id="upload_progress_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_bar_text" class="sr-only"></span></div></div>';
         }

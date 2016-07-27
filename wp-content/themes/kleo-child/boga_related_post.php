@@ -36,7 +36,7 @@ class boga_related_post
             $args['tag__in'] = $tag_ids;
         }
 
-        if (!empty($categories)) {
+        if (!empty($categories) && !has_term( 'BogadiaTV', 'post_tag', $this->retrieved_post[0] )) {
             $category_ids = array();
             foreach ($categories as $rcat) {
                 $category_ids[] = $rcat->term_id;

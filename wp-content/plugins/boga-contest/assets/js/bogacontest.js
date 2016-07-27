@@ -626,10 +626,12 @@ jQuery(document).ready(function()
         window.open('/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?preview=true');
     });
 
-    jQuery('.grid').masonry({
+    var grid = jQuery('.grid').masonry({
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
         percentPosition: true
     });
-
+    grid.imagesLoaded().progress( function() {
+        grid.masonry('layout');
+    });
 });

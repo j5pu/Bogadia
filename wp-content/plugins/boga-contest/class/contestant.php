@@ -274,7 +274,6 @@ class contest
         echo '<div id="second_form" style="display: none;">';
         echo '<form id="register_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
-        do_shortcode("[bws_google_captcha]");
         echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
         echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
         echo '</form>';
@@ -921,7 +920,13 @@ class contestant
         {
             echo '<div class="row">';
             echo '<div class="col-md-12">';
-            echo '<button id="upload_alias" type="button" class="btn btn-primary btn-block"><i class="icon-upload" aria-hidden="true"></i>Subir foto a tu galería</button>';
+            echo '<button id="upload_alias" type="button" class="btn ';
+            if (empty($this->main_photo)){
+                echo 'btn-default';
+            }else{
+                echo 'btn-primary';
+            }
+            echo ' btn-block"><i class="icon-upload" aria-hidden="true"></i>Subir foto a tu galería</button>';
             echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
             echo '<div id="progress_gallery_bar_container" class="progress" style="display: none;"><div id="upload_progress_gallery_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_gallery_bar_text" class="sr-only"></span></div></div>';
             echo '<button id="delete" type="button" class="btn btn-default btn-block"><i class="icon-trash" aria-hidden="true"></i>Borrar foto</button>';

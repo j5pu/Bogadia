@@ -233,6 +233,8 @@ var photo_manager = {
                             var response = jQuery.parseJSON(xhr.responseText);
                             var image_url = response.url;
                             var post_id = response.id;
+                            var upload_button = jQuery('#upload_alias');
+
 
                             selected_progress_bar.move('70%');
 
@@ -263,6 +265,11 @@ var photo_manager = {
                                 }else{
                                     image_url = 0;
                                     main_photo.removeClass('fake_main_photo');
+                                    if (upload_button.hasClass('btn-default'))
+                                    {
+                                        upload_button.removeClass('btn-default ');
+                                        upload_button.addClass('btn-primary');
+                                    }
                                 }
                             }
                             if (image_url != 0){
@@ -298,7 +305,6 @@ var photo_manager = {
                                 str = str + '</div>';
 
                                 photo_manager.prepend(str);
-                                var upload_button = jQuery('#upload_alias');
 
                                 if (upload_button.hasClass('btn-primary') && upload_button_clicked == 1)
                                 {

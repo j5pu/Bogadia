@@ -166,8 +166,9 @@ class contest
         echo '<div class="text-center" style="min-height: 500px">';
         echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
 /*        echo '<div class="container-fluid">';*/
-        echo '<div id="contestants_container" class="grid">';
+        echo '<div class="grid">';
         echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
+        echo '<div id="contestants_container">';
 
         if (empty($this->contestants))
         {
@@ -178,6 +179,7 @@ class contest
         {
             self::print_contestants();
         }
+        echo '</div>';
         echo '</div>';
         echo '</div>';
         echo '</div>';

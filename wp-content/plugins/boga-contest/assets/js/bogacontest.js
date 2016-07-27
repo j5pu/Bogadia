@@ -1,4 +1,4 @@
-var upload_button_clicked = 0;
+var grid = 0;
 
 var gallery = {
     photos: [],
@@ -115,7 +115,24 @@ var toolbar = {
                 }
             })
             .done(function( msg ) {
-                jQuery('#contestants_container').html('<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>' + msg);
+                jQuery('#contestants_container').html(msg);
+                setTimeout(function()
+                {
+                    jQuery.Velocity.RunSequence([
+                        {e: jQuery('#toolbar_loader'), p:'fadeOut'},
+                        {e: jQuery('#contestants_container'), p:'fadeIn'}
+                    ]);
+                    setTimeout(function()
+                    {
+                        grid.masonry('reloadItems');
+                        grid.imagesLoaded().progress( function() {
+                            grid.masonry('layout');
+                        });
+                    }, 500);
+                }, 500);
+            })
+            .fail(function( msg ) {
+                jQuery('#contestants_container').html('<h3>Ups! Inténtalo de nuevo.</h3>');
                 setTimeout(function()
                 {
                     jQuery.Velocity.RunSequence([
@@ -123,13 +140,6 @@ var toolbar = {
                         {e: jQuery('#contestants_container'), p:'fadeIn'}
                     ]);
                 }, 1000);
-            })
-            .fail(function( msg ) {
-                jQuery('#contestants_container').html('<h3>Ups! Inténtalo de nuevo.</h3>');
-                jQuery.Velocity.RunSequence([
-                    {e: jQuery('#toolbar_loader'), p:'fadeOut', o: {delay: 1000  }},
-                    {e: jQuery('#contestants_container'), p:'fadeIn'}
-                ]);
             });
     },
     bind_events: function(){
@@ -626,7 +636,7 @@ jQuery(document).ready(function()
         window.open('/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?preview=true');
     });
 
-    var grid = jQuery('.grid').masonry({
+    grid = jQuery('.grid').masonry({
         itemSelector: '.grid-item',
         columnWidth: '.grid-sizer',
         percentPosition: true

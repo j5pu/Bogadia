@@ -197,9 +197,26 @@ var photo_manager = {
         if (upload_to_main == 1)
         {
             selected_progress_bar = progress_bar;
+            var options = {
+                maxWidth: 900,
+                maxHeight: 450,
+                minWidth: 300,
+                minHeight: 150,
+                canvas: true,
+                orientation: ori,
+                aspectRatio: 16/9
+            }
         }else
         {
             selected_progress_bar = progress_gallery_bar;
+            var options =                 {
+                maxWidth: 900,
+                maxHeight: 450,
+                minWidth: 300,
+                minHeight: 150,
+                canvas: true,
+                orientation: ori,
+            }
         }
 
         var nonce = jQuery('#upload').data('nonce');
@@ -348,14 +365,7 @@ var photo_manager = {
 
 
                 },
-                {
-                    maxWidth: 900,
-                    maxHeight: 450,
-                    minWidth: 300,
-                    minHeight: 150,
-                    canvas: true,
-                    orientation: ori,
-                }
+                options
             );
         });
 

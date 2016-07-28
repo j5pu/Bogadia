@@ -4,11 +4,11 @@ Plugin Name: BogaShare
 Description: Muestra el cajon de compartir a traves de api para el concurso de share
 */
 
-function show_bogashare_dialog() {
+/*function show_bogashare_dialog() {
     if(is_single() && !is_single(35229)) {
         include 'includes/insterstitial.php';
     }
-}
+}*/
 function show_bogashare_mobile_button(){
     if(wp_is_mobile()){
         if(is_single() && !is_single(35229)) {
@@ -16,7 +16,7 @@ function show_bogashare_mobile_button(){
         }
     }
 }
-add_action('wp_head', 'show_bogashare_dialog');
+/*add_action('wp_head', 'show_bogashare_dialog');*/
 add_action('wp_footer', 'show_bogashare_mobile_button');
 
 function bogashare_assets(){

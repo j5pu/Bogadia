@@ -135,17 +135,11 @@ jQuery(document).ready(function(){
             });
         }, 3000);
 
+/*
         jQuery('#bogashareModal').modal({show:true, backdrop: 'static'});
+*/
         jQuery('.share_submit').html('Compartiendo... <img id="bogashare_spinner" src="/wp-content/plugins/boga-share/assets/img/spinner2.gif" style="display: none;">');
         jQuery('#bogashare_spinner').delay(100).fadeIn('slow');
-
-    }else{
-        if(!bogashare){
-            setTimeout(function(){
-                jQuery('#bogashareModal').modal({show:true, backdrop: 'static'});
-                ga('send', 'event', 'Bogashare', 'Interstitial', 'Mostrar');
-            }, 8000);
-        }
     }
     jQuery('.share_submit').on('click', function(){
         ga('send', 'event', 'Bogashare', 'Compartir', 'Click');

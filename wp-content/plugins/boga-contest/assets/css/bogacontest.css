@@ -152,7 +152,7 @@ input[type="color"]:focus,
 }
 
 #bogacontest_breadcrumb{
-    margin: 0 0 10px !important;
+    margin: 0 !important;
     font-size: 70%;
 }
 

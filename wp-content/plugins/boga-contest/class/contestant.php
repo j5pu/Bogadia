@@ -801,18 +801,6 @@ class contestant
             self::print_photos_manager();
         }
 
-        // Navegación
-/*        echo '<div class="row">';
-        echo '<div class="col-md-12">';
-        echo '<p id="bogacontest_breadcrumb"><a style="color: #444444 !important;" href="/concursos/'. $this->contest->slug .'">Bogacontest</a> / '. $this->name ;
-        if (!$current_user_is_editing) {
-            echo '<a id="participate" data-contestid="' . $this->contest->id . '" style="float: right; cursor: pointer; color: #444444 !important;" >Participa</a>';
-        }
-        echo '</p>';
-        echo '</div>';
-        echo '</div>';*/
-
-
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. $current_user_id .'" data-contestantuserid="'. $this->user_id .'">';
         // COLUMNA IZQUIERDA
         // Foto principal y nombre
@@ -866,6 +854,17 @@ class contestant
         echo '</div>';
 
         echo '</div>';
+        // Navegación
+        echo '<div class="row" style="margin-top: 100px">';
+        echo '<div class="col-md-12">';
+        echo '<p id="bogacontest_breadcrumb"><a style="color: #444444 !important;" href="/concursos/'. $this->contest->slug .'">Bogacontest</a> / '. $this->name ;
+        if (!$current_user_is_editing) {
+            echo '<a id="participate" data-contestid="' . $this->contest->id . '" style="float: right; cursor: pointer; color: #444444 !important;" >Participa</a>';
+        }
+        echo '</p>';
+        echo '</div>';
+        echo '</div>';
+
 
         return '';
     }

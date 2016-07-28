@@ -293,7 +293,7 @@ var photo_manager = {
                                 var num_photos = jQuery('.contestant-photo').length;
                                 var str = '';
 
-                                str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-6 col-sm-6 col-md-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+                                str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4 col-lg-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
                                 str = str + '<a class="main_photo_holder_link"  href="' + image_url + '">';
                                 str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
                                 str = str + '</a>';

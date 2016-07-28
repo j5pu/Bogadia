@@ -256,3 +256,6 @@ input[type="color"]:focus,
 .modal-dialog {
     z-index: 1060;
 }
+#main_photo{
+    width: 100%;
+}

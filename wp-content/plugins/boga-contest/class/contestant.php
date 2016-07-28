@@ -926,7 +926,7 @@ class contestant
         if($current_user_is_editing)
         {
             echo '<div class="row">';
-            echo '<div id="button_upload_col" class="col-md-6">';
+            echo '<div id="button_upload_col" class="col-sm-6 col-md-6">';
             echo '<button id="upload_alias" type="button" class="btn ';
             if (empty($this->main_photo)){
                 echo 'btn-default';
@@ -937,7 +937,7 @@ class contestant
             echo '<input id="upload" type="file" class="form-control" data-nonce="'. wp_create_nonce("media-form")  .'" style="display: none;" data-contestantid="'. $this->ID .'">';
             echo '<div id="progress_gallery_bar_container" class="progress" style="display: none;"><div id="upload_progress_gallery_bar" class="progress-bar progress-bar-striped active" role="progressbar" aria-valuenow="45" aria-valuemin="0" aria-valuemax="100" style="width: 0;"><span id="upload_progress_gallery_bar_text" class="sr-only"></span></div></div>';
             echo '</div>';
-            echo '<div id="button_delete_col" class="col-md-6">';
+            echo '<div id="button_delete_col" class="col-sm-6 col-md-6">';
             echo '<button id="delete" type="button" class="btn btn-default btn-block"><i class="icon-trash" aria-hidden="true"></i>Borrar foto</button>';
             echo '</div>';
             echo '</div>';
@@ -980,20 +980,20 @@ class contestant
             }
         }else
         {
-            echo '<div class="row gallery-row" style="">';
-            echo '<div id="fake_photo_1" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+/*            echo '<div class="row gallery-row" style="">';*/
+            echo '<div id="fake_photo_1" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-0" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
             echo '</div>';
-            echo '<div id="fake_photo_2" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_2" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-1" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/pro_justice___facebook_no_profile_by_officialprojustice-d6zqggi.jpg" >';
             echo '</div>';
-            echo '<div id="fake_photo_3" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_3" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-2" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/sexy_facebook_avatar_by_tesne-d3feuml.jpg" >';
             echo '</div>';
 /*            echo '<div id="fake_photo_4" class="col-xs-6 col-sm-6 col-md-3 fake_photo" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-3" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
             echo '</div>';*/
-            echo '</div>';
+/*            echo '</div>';*/
         }
 
 /*        echo '</div>';*/

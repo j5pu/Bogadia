@@ -267,3 +267,6 @@ input[type="color"]:focus,
 #main_photo{
     width: 100%;
 }
+#bogacontest_manager_modal{
+    z-index: 2000;
+}

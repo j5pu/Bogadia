@@ -580,6 +580,34 @@ function kleo_woo_out_of_stock() {
 }
 
 
+/***************************************************
+:: Content-product hooks
+ ***************************************************/
+
+remove_action('woocommerce_shop_loop_item_title', 'woocommerce_template_loop_product_title', 10 );
+add_action('woocommerce_shop_loop_item_title', 'kleo_woo_template_loop_product_cats', 9 );
+add_action('woocommerce_shop_loop_item_title', 'kleo_woo_template_loop_product_title', 10 );
+
+
+/**
+ * Show the product categories in the product loop.
+ */
+function kleo_woo_template_loop_product_cats() {
+	global $product, $post;
+	$size = sizeof( get_the_terms( $post->ID, 'product_cat' ) );
+	echo $product->get_categories( ', ', '<span class="posted_in">' . _n( '', '', $size, 'woocommerce' ) . ' ', '</span>' );
+}
+
+/**
+ * Show the product title in the product loop.
+ */
+function kleo_woo_template_loop_product_title() {
+	echo '<h3><a href="'. get_the_permalink() .'">' . get_the_title() . '</a></h3>';
+}
+
+
+
+
 
 /***************************************************
 :: Product images
@@ -762,31 +790,66 @@ if ( ! function_exists( 'kleo_social_share' ) ) {
 		<div class="share-links">
 			<div class="hr-title hr-full"><abbr><?php _e("Social share", "kleo_framework"); ?></abbr></div>
 
-			<span class="kleo-facebook">
-				<a href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>" class="post_share_facebook" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600');return false;">
+			<?php if  ( sq_option( 'blog_social_share_facebook', 1 ) ) :  ?>
+				<span class="kleo-facebook">
+                <a href="http://www.facebook.com/sharer.php?u=<?php the_permalink(); ?>" class="post_share_facebook"
+                   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=220,width=600');return false;">
                     <i class="icon-facebook"></i>
                 </a>
-			</span>
-			<span class="kleo-twitter">
-				<a href="https://twitter.com/share?url=<?php the_permalink(); ?>" class="post_share_twitter" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=260,width=600');return false;">
+            </span>
+			<?php endif; ?>
+
+			<?php if  ( sq_option( 'blog_social_share_twitter', 1 ) ) :  ?>
+				<span class="kleo-twitter">
+                <a href="https://twitter.com/share?url=<?php the_permalink(); ?>" class="post_share_twitter"
+                   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=260,width=600');return false;">
                     <i class="icon-twitter"></i>
                 </a>
-			</span>
-			<span class="kleo-googleplus">
-				<a href="https://plus.google.com/share?url=<?php the_permalink(); ?>" onclick="javascript:window.open(this.href, '', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+            </span>
+			<?php endif; ?>
+
+			<?php if  ( sq_option( 'blog_social_share_googleplus', 1 ) ) :  ?>
+				<span class="kleo-googleplus">
+                <a href="https://plus.google.com/share?url=<?php the_permalink(); ?>"
+                   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                     <i class="icon-gplus"></i>
                 </a>
-			</span>
-			<span class="kleo-pinterest">
-				<a href="http://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php if(function_exists('the_post_thumbnail')) echo wp_get_attachment_url(get_post_thumbnail_id()); ?>&description=<?php echo get_the_title(); ?>">
+            </span>
+			<?php endif; ?>
+
+			<?php if  ( sq_option( 'blog_social_share_pinterest', 1 ) ) :  ?>
+				<span class="kleo-pinterest">
+                <a href="http://pinterest.com/pin/create/button/?url=<?php the_permalink(); ?>&media=<?php if (function_exists('the_post_thumbnail')) echo wp_get_attachment_url(get_post_thumbnail_id()); ?>&description=<?php echo strip_tags(get_the_title()); ?>"
+                   onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
                     <i class="icon-pinterest-circled"></i>
                 </a>
-			</span>
-			<span class="kleo-mail">
-				<a href="mailto:?subject=<?php echo strip_tags(get_the_title()); ?>&body=<?php echo strip_tags(get_the_excerpt()); ?> <?php the_permalink(); ?>" class="post_share_email" target="_blank" >
+            </span>
+			<?php endif; ?>
+
+			<?php if  ( sq_option( 'blog_social_share_linkedin', 0 ) ) :  ?>
+				<span class="kleo-linkedin">
+                    <a href="https://www.linkedin.com/shareArticle?url=<?php the_permalink(); ?>" class="post_share_linkedin"
+                       onclick="javascript:window.open(this.href,'', 'menubar=no,toolbar=no,resizable=yes,scrollbars=yes,height=600,width=600');return false;">
+                        <i class="icon-linkedin"></i>
+                    </a>
+                </span>
+			<?php endif; ?>
+
+			<?php if  ( sq_option( 'blog_social_share_whatsapp', 0 ) ) :  ?>
+				<span class="kleo-whatsapp visible-xs-inline visible-sm-inline">
+                <a href="whatsapp://send?text=<?php the_permalink(); ?>" data-action="share/whatsapp/share">
+                    <i class="icon-whatsapp"></i>
+                </a>
+            </span>
+			<?php endif; ?>
+
+			<?php if  ( sq_option( 'blog_social_share_mail', 1 ) ) :  ?>
+				<span class="kleo-mail">
+                <a href="mailto:?subject=<?php echo strip_tags(get_the_title()); ?>&body=<?php the_permalink(); ?>" class="post_share_email">
                     <i class="icon-mail"></i>
                 </a>
-			</span>
+            </span>
+			<?php endif; ?>
 		</div>
 
 	<?php
@@ -943,27 +1006,42 @@ if (!function_exists('kleo_woo_get_mini_cart')) {
 
 			foreach ($woocommerce->cart->cart_contents as $cart_item_key => $cart_item) {
 
-				$cart_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+				$_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
+				$product_id   = apply_filters( 'woocommerce_cart_item_product_id', $cart_item['product_id'], $cart_item, $cart_item_key );
 
-				$product_title  = $cart_product->get_title();
-				$product_short_title = (strlen($product_title) > 25) ? substr($product_title, 0, 22) . '...' : $product_title;
-				$product_short_title = apply_filters( 'woocommerce_cart_item_name', $product_short_title, $cart_item, $cart_item_key );
+				if ( $_product && $_product->exists() && $cart_item['quantity'] > 0 && apply_filters( 'woocommerce_cart_item_visible', true, $cart_item, $cart_item_key ) ) {
 
-				$thumbnail = apply_filters( 'woocommerce_cart_item_thumbnail', $cart_product->get_image(), $cart_item, $cart_item_key );
-				$product_price = apply_filters( 'woocommerce_cart_item_price', woocommerce_price($cart_product->get_price()), $cart_item, $cart_item_key );
-				$product_quantity = apply_filters( 'woocommerce_cart_item_quantity', $cart_item['quantity'], $cart_item_key, $cart_item );
+					$cart_product = apply_filters( 'woocommerce_cart_item_product', $cart_item['data'], $cart_item, $cart_item_key );
 
-				if ($cart_product->exists() && $cart_item['quantity']>0) {
-					$cart_output .= '<div class="cart-product clearfix">';
-					$cart_output .= '<figure><a class="cart-product-img" href="'.get_permalink($cart_item['product_id']).'">'.$thumbnail.'</a></figure>';
-					$cart_output .= '<div class="cart-product-details">';
-					$cart_output .= '<div class="cart-product-title"><a href="'.get_permalink($cart_item['product_id']).'">' . $product_short_title . '</a></div>';
-					$cart_output .= '<div class="cart-product-price">' . __("Price", "woocommerce") . ' ' . $product_price . '</div>';
-					$cart_output .= '<div class="cart-product-quantity">' . __('Quantity', 'woocommerce') . ' ' . $product_quantity . '</div>';
-					$cart_output .= '</div>';
-					$cart_output .= kleo_woo_get_quickview_button( $cart_item['product_id'], false );
-					$cart_output .= apply_filters( 'woocommerce_cart_item_remove_link', sprintf('<a href="%s" class="remove" title="%s">&times;</a>', esc_url( $woocommerce->cart->get_remove_url( $cart_item_key ) ), __('Remove this item', 'woocommerce') ), $cart_item_key );
-					$cart_output .= '</div>';
+					$product_title       = $cart_product->get_title();
+					$product_short_title = ( strlen( $product_title ) > 25 ) ? substr( $product_title, 0, 22 ) . '...' : $product_title;
+					$product_short_title = apply_filters( 'woocommerce_cart_item_name', $product_short_title, $cart_item, $cart_item_key );
+
+					$thumbnail        = apply_filters( 'woocommerce_cart_item_thumbnail', $cart_product->get_image(), $cart_item, $cart_item_key );
+					$product_price    = apply_filters( 'woocommerce_cart_item_price', woocommerce_price( $cart_product->get_price() ), $cart_item, $cart_item_key );
+					$product_quantity = apply_filters( 'woocommerce_cart_item_quantity', $cart_item['quantity'], $cart_item_key, $cart_item );
+
+					if ( $cart_product->exists() && $cart_item['quantity'] > 0 ) {
+						$cart_output .= '<div class="cart-product clearfix">';
+						$cart_output .= '<figure><a class="cart-product-img" href="' . get_permalink( $cart_item['product_id'] ) . '">' . $thumbnail . '</a></figure>';
+						$cart_output .= '<div class="cart-product-details">';
+						$cart_output .= '<div class="cart-product-title"><a href="' . get_permalink( $cart_item['product_id'] ) . '">' . $product_short_title . '</a></div>';
+						$cart_output .= '<div class="cart-product-price">' . __( "Price", "woocommerce" ) . ' ' . $product_price . '</div>';
+						$cart_output .= '<div class="cart-product-quantity">' . __( 'Quantity', 'woocommerce' ) . ' ' . $product_quantity . '</div>';
+						$cart_output .= '</div>';
+						$cart_output .= kleo_woo_get_quickview_button( $cart_item['product_id'], false );
+
+						$cart_output .= apply_filters( 'woocommerce_cart_item_remove_link', sprintf(
+							'<a href="%s" class="remove" title="%s" data-product_id="%s" data-product_sku="%s">&times;</a>',
+							esc_url( WC()->cart->get_remove_url( $cart_item_key ) ),
+							__( 'Remove this item', 'woocommerce' ),
+							esc_attr( $product_id ),
+							esc_attr( $_product->get_sku() )
+						), $cart_item_key );
+						//$cart_output .= apply_filters( 'woocommerce_cart_item_remove_link', sprintf( '<a href="%s" class="remove" title="%s">&times;</a>', esc_url( $woocommerce->cart->get_remove_url( $cart_item_key ) ), __( 'Remove this item', 'woocommerce' ) ), $cart_item_key );
+
+						$cart_output .= '</div>';
+					}
 				}
 			}
 
@@ -1770,3 +1848,16 @@ add_action( 'wp_footer', 'kleo_woocommerce_wp_footer' );
 /* Remove product loop link wrapper */
 remove_action( 'woocommerce_before_shop_loop_item', 'woocommerce_template_loop_product_link_open', 10 );
 remove_action( 'woocommerce_after_shop_loop_item', 'woocommerce_template_loop_product_link_close', 5 );
+
+
+/* Srcset fix for variations */
+add_filter('woocommerce_available_variation', 'sq_remove_img_srcset_variations');
+
+function sq_remove_img_srcset_variations( $attr ) {
+	if (! empty($attr)) {
+		unset($attr['image_srcset']);
+		unset($attr['image_sizes']);
+	}
+
+	return $attr;
+}

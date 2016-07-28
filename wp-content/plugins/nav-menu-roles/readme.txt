@@ -3,9 +3,9 @@
 Contributors: helgatheviking
 Donate link: https://www.paypal.me/helgatheviking
 Tags: menu, menus, nav menu, nav menus
-Requires at least: 4.4.0
-Tested up to: 4.4.0
-Stable tag: 1.7.9
+Requires at least: 4.5.0
+Tested up to: 4.5.1
+Stable tag: 1.8.2
 License: GPLv3
 
 Hide custom menu items based on user roles. PLEASE READ THE FAQ IF YOU ARE NOT SEEING THE SETTINGS.
@@ -23,9 +23,8 @@ In WordPress menu items and pages are completely separate entities. Nav Menu Rol
 = Usage =
 
 1. Go to Appearance > Menus
-1. Edit the menu items accordingly.  First select whether you'd like to display the item to all logged in users, all logged out users or to customize by role.
-1. If you chose customize by role, keep in mind that the role doesn't limit the item strictly to that role, but to everyone who has that role's capability. For example: an item set to "Subscriber" will be visible by Subscribers *and* by admins. Think of this more as a minimum role required to see an item. 
-1. If you choose 'By Role' and don't check any boxes, the item will be visible to everyone like normal.
+1. Set the "Display Mode" to either "logged in users", "logged out users", or "everyone". "Everyone" is the default.
+1. If you wish to customize by role, set the "Display Mode" to "Logged In Users" and under "Restrict menu item to a minimum role" check the boxes next to the desired roles. **Keep in mind that the role doesn't limit the item strictly to that role, but to everyone who has that role's capability.** For example: an item set to "Subscriber" will be visible by Subscribers *and* by admins. Think of this more as a minimum role required to see an item. 
 
 = Support =
 
@@ -62,6 +61,8 @@ WordPress does not have sufficient hooks in this area of the admin and until the
 5. BeTheme
 6. Yith Menu
 7. Jupiter Theme
+8. iMedica theme
+9. Prostyler EVO theme
 
 
 = <a id="compatibility"></a>Workaround #1 =
@@ -85,30 +86,22 @@ Should you wish to attempt this patch yourself, you can modify your conflicting 
 
 **Reminder: I do not provide support for fixing your plugin/theme. If you aren't comfortable with the following instructions, contact the developer of the conflicting plugin/theme!**
 
-1. Find the class that extends the `Walker_Nav_Menu`. As a hint, it is filtering `wp_edit_nav_menu_walker` and you might even be getting a warning about it from Nav Menu Roles. Example: 
+  1\. Find the class that extends the `Walker_Nav_Menu`. The fastest way to do this is to search your whole plugin/theme folder for `extends Walker_Nav_Menu`. When you find the file that contains this text you willl know which file you need to edit. Once you find it here's what the beginning of that class will look like:
 
-`
-add_filter( 'wp_edit_nav_menu_walker', 'sample_edit_nav_menu_walker');
-function sample_edit_nav_menu_walker( $walker ) {
-    return 'Walker_Nav_Menu_Edit_Roles'; // this is the class name
-}
-`
+`class YOUR_THEME_CUSTOM_WALKER extends Walker_Nav_Menu {}`
 
-2. Find the file for the extending class. In my plugin this is in a file located at `inc/class.Walker_Nav_Menu_Edit_Roles.php`. I can't know *where* this file is in your plugin/theme. Please don't ask me, but here's what the beginning of that class will look like:
-
-`class Walker_Nav_Menu_Edit_Roles extends Walker_Nav_Menu {}`
-
-Note that the class name is the same as the class name you found in step 1.
-
-3. Find the `start_el()` method
+  2\. Find the `start_el()` method
 
 In that file you will eventually see a class method that looks like:
 
-`function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {`
+`function start_el( &$output, $item, $depth = 0, $args = array(), $id = 0 ) {
+  // some stuff truncated for brevity
+}
+`
 
-4. Paste my action hook somewhere in this method!
+  3\. Paste my action hook somewhere in this method!
 
-In Nav Menu Roles, I have placed the hook directly after the description, ex:
+In Nav Menu Roles, I have placed the hook directly after the description, like so:
 
 `
 <p class="field-description description description-wide">
@@ -205,6 +198,15 @@ However, the Import plugin only imports certain post meta for menu items.  As of
 1. No duplicate posts will be created but all menu post meta (including your Nav Menu Roles info) will be imported
 
 == Changelog ==
+
+= 1.8.2 = 
+* Reduce number of parameters passed to `add_action_links` filter
+
+= 1.8.1 = 
+* Switch input names to use a counter [nav-menu-role][100][1]. For some reason [nav-menu-role][100][] doesn't post an array and hypenated names [nav-menu-role][100][gold-plan] wreak havoc on the save routine. Shouldn't impact anyone not using hyphenated role names. 
+
+= 1.8.0 = 
+* Fix style issue in WordPress 4.5
 
 = 1.7.9 = 
 * revert priority of walker back to default because themes are not actually using the hook to add their own fields. sadface. 

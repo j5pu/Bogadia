@@ -1,21 +1,59 @@
 <?php
-$posts_query = $el_class = $args = $my_query = $speed = $mode = $swiper_options = $layout = $query_offset = '';
-$content = $link = $layout = $thumb_size = $link_target = $slides_per_view = $wrap = '';
-$autoplay = $hide_pagination_control = $hide_prev_next_buttons = $title = '';
-$posts = array();
-extract(shortcode_atts(array(
-    'el_class' => '',
-    'posts_query' => '',
-    'autoplay' => 'no',
-    'speed' => '',
-    'min_items' => 3,
-    'max_items' => 6,
-    'height' => '',
-    'query_offset' => '0',
-    'layout' => ''
-), $atts));
-list($args, $my_query) = vc_build_loop_query($posts_query);
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
+/**
+ * Shortcode attributes
+ * @var $atts
+ * @var $el_class
+ * @var $posts_query
+ * @var $mode
+ * @var $speed
+ * @var $slides_per_view
+ * @var $wrap
+ * @var $autoplay
+ * @var $hide_pagination_control
+ * @var $hide_prev_next_buttons
+ * @var $layout
+ * @var $link_target
+ * @var $thumb_size
+ * @var $partial_view
+ * @var $title
+ * Shortcode class
+ * @var $this WPBakeryShortCode_Vc_Carousel
+ */
+$el_class = $posts_query = $mode = $speed = $slides_per_view =
+$wrap = $autoplay = $hide_pagination_control = $hide_prev_next_buttons =
+$layout = $link_target = $thumb_size = $partial_view = $title = '';
 
+/* KLEO Added */
+$query_offset = $layout = $min_items = $max_items = $height = '';
+/* END Kleo Added */
+
+global $vc_teaser_box;
+
+$args = $my_query = '';
+$posts = array();
+$atts = vc_map_get_attributes( $this->getShortcode(), $atts );
+extract( $atts );
+
+/* KLEO Added */
+if ( $min_items == '') {
+	$min_items = '3';
+}
+if ( $max_items == '') {
+	$max_items = '6';
+}
+/* END Kleo Added */
+
+global $vc_posts_grid_exclude_id;
+$vc_posts_grid_exclude_id[] = get_the_ID(); // fix recursive nesting
+if ( is_array( $posts_query ) ) {
+	$posts_query['post_status'] = 'publish';
+} else {
+	$posts_query .= '|post_status:publish';
+}
+list( $args, $my_query ) = vc_build_loop_query( $posts_query, get_the_ID() );
 if ( (int)$query_offset > 0 ) {
 	$args['offset'] = $query_offset;
 }

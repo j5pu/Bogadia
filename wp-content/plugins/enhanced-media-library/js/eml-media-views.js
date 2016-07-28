@@ -43,6 +43,8 @@ window.eml = window.eml || { l10n: {} };
                 library.saveMenuOrder();
             }
 
+            library.reset( library.models );
+
             selection.trigger( 'selection:unsingle', selection.model, selection );
             selection.trigger( 'selection:single', selection.model, selection );
         },
@@ -61,7 +63,7 @@ window.eml = window.eml || { l10n: {} };
                 $('.attachment-filters:has(option[value!="all"]:selected)').val( 'all' ).change();
             }
 
-    		if ( this.get( 'autoSelect' ) ) {
+            if ( this.get( 'autoSelect' ) ) {
 
                 if ( wp.Uploader.queue.length == 1 && selection.length ) {
                     selection.reset();
@@ -97,7 +99,18 @@ window.eml = window.eml || { l10n: {} };
         render: function() {
 
             var compat = this.model.get('compat'),
-                $compat_el = this.$el;
+                $compat_el = this.$el,
+                tcount = this.model.get('tcount');
+
+
+            _.each( tcount, function( count, term_id ) {
+
+                var $option = $( '.eml-taxonomy-filters option[value="'+term_id+'"]' ),
+                    text = $option.text();
+
+                text = text.replace( /\(.*?\)/, '('+count+')' );
+                $option.text( text );
+            });
 
             if ( ! compat || ! compat.item ) {
                 return;
@@ -146,6 +159,7 @@ window.eml = window.eml || { l10n: {} };
                 selection = this.controller.state().get( 'selection' ),
                 resetFilterButton = this.controller.content.get().toolbar.get( 'resetFilterButton' ),
 
+
                 all = $('.attachment-filters').length,
                 unchanged = $('.attachment-filters').map(function(){
                     return this.value
@@ -162,6 +176,12 @@ window.eml = window.eml || { l10n: {} };
             if ( filter && selection && selection.length && wp.Uploader.queue.length !== 1 ) {
                 selection.reset();
             }
+
+
+            if ( filter && media.view.settings.mediaTrash ) {
+                this.controller.toolbar.get().$('.media-selection').toggleClass( 'trash', 'trash' === filter.props.status );
+            }
+
 
             if ( _.isUndefined( resetFilterButton ) ) {
                 return;
@@ -225,7 +245,7 @@ window.eml = window.eml || { l10n: {} };
         createFilters: function() {
 
             var uncategorizedProps,
-                taxonomies = _.keys( eml.l10n.taxonomies );
+                taxonomies = _.intersection( _.keys( eml.l10n.taxonomies ), eml.l10n.filter_taxonomies );
 
 
             original.AttachmentFilters.All.createFilters.apply( this, arguments );
@@ -269,7 +289,7 @@ window.eml = window.eml || { l10n: {} };
         createFilters: function() {
 
             var uncategorizedProps,
-                taxonomies = _.keys( eml.l10n.taxonomies );
+                taxonomies = _.intersection( _.keys( eml.l10n.taxonomies ), eml.l10n.filter_taxonomies );
 
 
             original.AttachmentFilters.Uploaded.createFilters.apply( this, arguments );
@@ -325,7 +345,7 @@ window.eml = window.eml || { l10n: {} };
             });
 
             filters.all = {
-                text: eml.l10n.filter_by + self.options.singularName,
+                text: eml.l10n.filter_by + ' ' + self.options.singularName,
                 props: {
                     uncategorized : null,
                     orderby       : eml.l10n.media_orderby,
@@ -337,7 +357,7 @@ window.eml = window.eml || { l10n: {} };
             filters['all']['props'][self.options.taxonomy] = null;
 
             filters.in = {
-                text: '&#8212; ' + eml.l10n.in + self.options.pluralName + ' &#8212;',
+                text: '&#8212; ' + eml.l10n.in + ' ' + self.options.pluralName + ' &#8212;',
                 props: {
                     uncategorized : null,
                     orderby       : eml.l10n.media_orderby,
@@ -349,7 +369,7 @@ window.eml = window.eml || { l10n: {} };
             filters['in']['props'][self.options.taxonomy] = 'in';
 
             filters.not_in = {
-                text: '&#8212; ' + eml.l10n.not_in + self.options.singularName + ' &#8212;',
+                text: '&#8212; ' + eml.l10n.not_in + ' ' + self.options.singularName + ' &#8212;',
                 props: {
                     uncategorized : null,
                     orderby       : eml.l10n.media_orderby,
@@ -370,6 +390,12 @@ window.eml = window.eml || { l10n: {} };
 
         id: 'reset-all-filters',
 
+        initialize: function() {
+
+            media.view.Button.prototype.initialize.apply( this, arguments );
+            this.controller.on( 'select:activate select:deactivate', this.toogleResetFilters, this );
+        },
+
         click: function( event ) {
 
             if ( '#' === this.attributes.href ) {
@@ -379,7 +405,11 @@ window.eml = window.eml || { l10n: {} };
             $('.attachment-filters:has(option[value!="all"]:selected)').each( function( index ) {
                 $(this).val( 'all' ).change();
             });
-		}
+		},
+
+        toogleResetFilters: function() {
+            this.$el.toggleClass( 'hidden' );
+        }
     });
 
 
@@ -401,11 +431,6 @@ window.eml = window.eml || { l10n: {} };
             original.AttachmentsBrowser.initialize.apply( this, arguments );
 
             this.on( 'ready', this.fixLayout, this );
-
-            $( window ).on( 'resize', _.debounce( _.bind( this.fixLayout, this ), 15 ) );
-
-            // ACF compatibility
-            $( document ).on( 'click', '.acf-expand-details', _.debounce( _.bind( this.fixLayout, this ), 250 ) );
         },
 
         fixLayout: function() {
@@ -414,31 +439,7 @@ window.eml = window.eml || { l10n: {} };
                 $attachments = $browser.find('.attachments'),
                 $uploader = $browser.find('.uploader-inline'),
                 $toolbar = $browser.find('.media-toolbar'),
-                $messages = $('.eml-media-css .updated:visible, .eml-media-css .error:visible');
-
-
-            if ( eml.l10n.wp_version < '4.0' ) {
-
-                if ( 'absolute' == $attachments.css( 'position' ) &&
-                    $browser.height() > $toolbar.height() + 20 ) {
-
-                    $attachments.css( 'top', $toolbar.height() + 20 + 'px' );
-                    $uploader.css( 'top', $toolbar.height() + 20 + 'px' );
-                }
-                else if ( 'absolute' == $attachments.css( 'position' ) ) {
-                    $attachments.css( 'top', '50px' );
-                    $uploader.css( 'top', '50px' );
-                }
-                else if ( 'relative' == $attachments.css( 'position' ) ) {
-                    $attachments.css( 'top', '0' );
-                    $uploader.css( 'top', '0' );
-                }
-
-                // TODO: find a better place for it, something like fixLayoutOnce
-                $toolbar.find('.media-toolbar-secondary').prepend( $toolbar.find('.instructions') );
-
-                return;
-            }
+                $messages = $('.eml-media-css .updated:visible, .eml-media-css .error:visible, .eml-media-css .notice:visible');
 
 
             if ( ! this.controller.isModeActive( 'select' ) &&
@@ -535,7 +536,7 @@ window.eml = window.eml || { l10n: {} };
 
                 $.each( eml.l10n.taxonomies, function( taxonomy, values ) {
 
-                    if ( values.term_list ) {
+                    if ( -1 !== _.indexOf( eml.l10n.filter_taxonomies, taxonomy ) && values.term_list ) {
 
                         self.toolbar.set( taxonomy+'FilterLabel', new media.view.Label({
                             value: eml.l10n.filter_by + values.singular_name,

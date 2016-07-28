@@ -5,7 +5,7 @@ Plugin URI: https://github.com/Tabrisrp/wps-hide-login
 Description: Protect your website by changing the login URL and preventing access to wp-login.php page and wp-admin directory while not logged-in
 Author: Remy Perona for WPServeur
 Author URI: http://profiles.wordpress.org/tabrisrp/
-Version: 1.1.6
+Version: 1.1.7
 Text Domain: wps-hide-login
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
@@ -388,14 +388,7 @@ if ( defined( 'ABSPATH' )
 			global $pagenow;
 
 			if ( is_admin() && ! is_user_logged_in() && ! defined( 'DOING_AJAX' ) && $pagenow !== 'admin-post.php' ) {
-    			require_once(ABSPATH . 'wp-admin/includes/admin.php');
-				status_header(404);
-
-                $template = get_404_template();
-                if ( $template = apply_filters( 'template_include', $template ) ) {
-                    include( $template );
-	            }
-                exit;
+                wp_die( __( 'This has been disabled', 'wps-hide-login' ), 403 );
 			}
 
 			$request = parse_url( $_SERVER['REQUEST_URI'] );

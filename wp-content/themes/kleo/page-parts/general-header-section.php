@@ -20,7 +20,7 @@ $top_menu = wp_nav_menu( array(
         'theme_location'    => 'top',
         'depth'             => 2,
         'container'         => 'div',
-        'container_class'   => 'top-menu col-sm-12 col-md-7 no-padd',
+        'container_class'   => 'top-menu col-xs-12 col-sm-7 no-padd',
         'menu_class'        => '',
         'fallback_cb'       => '',
         'walker'            => new kleo_walker_nav_menu(),
@@ -64,7 +64,7 @@ $primary_menu = wp_nav_menu( array(
 							$social_icons_class = ' hidden-xs hidden-sm';
 						}
 						?>
-						<div id="top-social" class="col-sm-12 col-md-5 no-padd<?php echo $social_icons_class; ?>">
+						<div id="top-social" class="col-xs-12 col-sm-5 no-padd<?php echo $social_icons_class; ?>">
 							<?php if ( $social_icons == 1 ) {
 								echo $social_icons_data;
 							} ?>

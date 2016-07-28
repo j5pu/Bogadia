@@ -78,8 +78,13 @@ $kleo_post_format = get_cfield( 'media_type' ) ? get_cfield( 'media_type' ) : 't
                 case 'slider':
 
                     $slides = get_cfield('slider');
+                    $extra_class = '';
+                    if (sq_option('portfolio_slider_action') == 'modal') {
+                        $extra_class = ' modal-gallery';
+                    }
+
                     echo '<div class="kleo-banner-slider">'
-                        .'<div class="kleo-banner-items" >';
+                        .'<div class="kleo-banner-items'. $extra_class .'" >';
                     if ( $slides ) {
                         global $portfolio_img_width, $portfolio_img_height;
                         $img_width = isset($portfolio_img_width) ? $portfolio_img_width : $kleo_config['post_gallery_img_width'];
@@ -92,11 +97,15 @@ $kleo_post_format = get_cfield( 'media_type' ) ? get_cfield( 'media_type' ) : 't
                                 if (! $image ) {
                                     $image = $slide;
                                 }
+
+                                if (sq_option('portfolio_slider_action') == 'modal') {
+                                    $href = 'href="' . $slide . '"';
+                                } else {
+                                    $href = 'href="' . get_the_permalink() . '"';
+                                }
+                                
                                 echo '<article>
-                                    <a href="'. get_the_permalink() .'">
-                                        <img src="'.$image.'" alt="">'
-                                        . kleo_get_img_overlay()
-                                    . '</a>
+                                    <a ' . $href . '><img src="' . $image . '" alt="">' . kleo_get_img_overlay() . '</a>
                                 </article>';
                             }
                         }

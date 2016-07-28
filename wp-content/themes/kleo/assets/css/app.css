@@ -1252,6 +1252,10 @@ a .link-icon {
   margin-left: 10px;
   border-radius: 0;
 }
+.top-bar .dropdown-menu {
+	z-index: 10001;
+}
+
 .dropdown-menu > .active > a,
 .dropdown-menu > .active > a:hover,
 .dropdown-menu > .active > a:focus {}
@@ -1286,9 +1290,7 @@ a .link-icon {
 .kleo-main-header .navbar-collapse {
 	float: right;
 }
-/*.kleo-main-header.header-normal .navbar-nav > li:last-child > a {
-	margin-right: 0;
-}*/
+
 .kleo-main-header.header-normal .navbar-collapse {
 	padding-right: 0;
 }
@@ -1427,6 +1429,10 @@ a .link-icon {
 }
 .navbar-transparent .kleo-main-header .nav li.kleo-megamenu .dropdown-submenu ul {
 	background-color: transparent;
+}
+
+.navbar-transparent.navbar-hover-opacity .kleo-main-header:hover {
+	background: rgba(0,0,0,0.2);
 }
 
 /* End Megamenu */
@@ -3982,6 +3988,7 @@ div .wp-caption { max-width: 100%; font-size: 11px; font-style: italic; border-w
         position: fixed;
         width: 100%;
         z-index: 200;
+
 	}
 
 
@@ -3989,6 +3996,7 @@ div .wp-caption { max-width: 100%; font-size: 11px; font-style: italic; border-w
 	.pagination-sticky #older-nav:after {
 
 		line-height: 40px;
+        position: absolute;
 	}
 	.pagination-sticky #older-nav:after {
 		position: absolute;
@@ -4007,6 +4015,7 @@ div .wp-caption { max-width: 100%; font-size: 11px; font-style: italic; border-w
 		height: 40px;
 		border-radius: 0;
 	}
+
 	.pagination-sticky #newer-nav,
 	.pagination-sticky.member-navigation #newer-nav {
 		right: 0;
@@ -4026,6 +4035,10 @@ div .wp-caption { max-width: 100%; font-size: 11px; font-style: italic; border-w
 	}
 	.pagination-sticky .outter-title {
 		height: 30px;
+		display: -webkit-flex;
+		display: -ms-flexbox;
+		display: flex;
+        width: 100%;
 	}
 	.pagination-sticky .entry-title {
 		display: block;
@@ -4040,6 +4053,10 @@ div .wp-caption { max-width: 100%; font-size: 11px; font-style: italic; border-w
 		width: 100%;
 		padding-right: 30px;
 	}
+    .pagination-sticky #newer-nav .outter-title {
+        padding-left: 30px;
+    }
+
 	.pagination-sticky.member-navigation .entry-title {
 		width: 100%;
 	}
@@ -9932,6 +9949,16 @@ blockquote cite {
 }
 .wpb_wrapper .panel + .panel {
     margin-top: 5px;
+}
+
+.panel-title h1,
+.panel-title h2,
+.panel-title h3,
+.panel-title h4,
+.panel-title h5,
+.panel-title h6,
+.panel-title p {
+	margin: 0;
 }
 
 /* Kleo panel theme*/

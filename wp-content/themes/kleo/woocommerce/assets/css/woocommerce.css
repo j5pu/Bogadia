@@ -3555,17 +3555,76 @@ body.woocommerce-checkout .blockUI { z-index:10 !important; }
 .woocommerce .widget_price_filter .ui-slider-horizontal .ui-slider-range-max,.woocommerce-page .widget_price_filter .ui-slider-horizontal .ui-slider-range-max {
   right: -1px;
 }
-
-.single-product .twentythirteen #reply-title,.single-product .twentythirteen #respond #commentform,.single-product .twentythirteen .entry-summary {
-  padding: 0;
+.woocommerce .widget_rating_filter ul {
+	margin: 0;
+	padding: 0;
+	border: 0;
+	list-style: none
 }
 
-.single-product .twentythirteen p.stars {
-  clear: both;
+.woocommerce .widget_rating_filter ul li.chosen a:before, .woocommerce-account ul.digital-downloads li:before {
+	margin-right: .618em;
+	font-family: WooCommerce;
+	speak: none;
+	font-variant: normal;
+	text-transform: none;
+	line-height: 1;
+	-webkit-font-smoothing: antialiased;
+	text-decoration: none
 }
 
-.twentyfourteen ul.products li.product {
-  margin-top: 0!important;
+.woocommerce .widget_rating_filter ul li {
+	padding: 0 0 1px;
+	list-style: none
+}
+
+.woocommerce .widget_rating_filter ul li:after, .woocommerce .widget_rating_filter ul li:before {
+	content: " ";
+	display: table
+}
+
+.woocommerce .widget_rating_filter ul li a {
+	padding: 1px 0;
+	text-decoration: none
+}
+
+.woocommerce .widget_rating_filter ul li .star-rating {
+	float: none;
+	display: inline-block
+}
+
+.woocommerce .widget_rating_filter ul li.chosen a:before {
+	font-weight: 400;
+	content: "";
+	color: #a00
+}
+
+.woocommerce-MyAccount-navigation ul {
+	list-style: none;
+	padding-left: 0;
+}
+
+.woocommerce-account .woocommerce-MyAccount-navigation {
+	float: left;
+	width: 30%
+}
+
+.woocommerce-account .woocommerce-MyAccount-content {
+	float: right;
+	width: 68%
+}
+.woocommerce-account .woocommerce-MyAccount-navigation li.woocommerce-MyAccount-navigation-link {
+	padding-bottom: 5px;
+}
+@media (max-width: 768px) {
+	.woocommerce-account .woocommerce-MyAccount-navigation,
+	.woocommerce-account .woocommerce-MyAccount-content{
+		float: none;
+		width: 100%;
+	}
+	.woocommerce-account .woocommerce-MyAccount-navigation {
+		border-bottom: 1px solid #e5e5e5;
+	}
 }
 
 @media (-webkit-min-device-pixel-ratio:2),(min-resolution:192dpi) {

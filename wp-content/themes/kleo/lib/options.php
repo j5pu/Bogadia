@@ -84,6 +84,38 @@ $args['footer_credit'] = ' ';
 $args['page_permissions'] = 'manage_options';
 
 
+
+$args['hints'] = array(
+	'icon'              => 'el el-question-sign',
+	'icon_position'     => 'left',
+	'icon_color'        => '#348DFC',
+	'icon_size'         => 'normal',
+
+	'tip_style'         => array(
+		'color'     => 'light',
+		'shadow'    => true,
+		'rounded'   => false,
+		'style'     => '',
+	),
+	'tip_position'      => array(
+		'my' => 'top left',
+		'at' => 'bottom left',
+	),
+	'tip_effect' => array(
+		'show' => array(
+			'effect'    => 'slide',
+			'duration'  => '500',
+			'event'     => 'mouseover',
+		),
+		'hide' => array(
+			'effect'    => 'slide',
+			'duration'  => '500',
+			'event'     => 'click mouseleave',
+		),
+	),
+);
+
+
 /* ----------------------------------------------------------------
   DEFAULT Header Colors
 -----------------------------------------------------------------*/
@@ -740,6 +772,38 @@ $sections[] = array(
 );
 
 
+$sections[] = array(
+	'icon' => 'el-icon-plus',
+	'icon_class' => 'icon-large',
+	'title' => __('Modules', 'kleo_framework'),
+	'customizer' => false,
+	'desc' => '<p class="description">' . __('Choose what modules to enable on your site. Make sure to leave only used modules active to increase performance!', 'kleo_framework') . '</p>',
+	'fields' => array(
+
+		array(
+			'id' => 'module_testimonials',
+			'type' => 'switch',
+			'title' => __('Testimonials module', 'kleo_framework'),
+			'subtitle' => __('Enable testimonials module.', 'kleo_framework'),
+			'default' => '1' // 1 = checked | 0 = unchecked
+		),
+		array(
+			'id' => 'module_clients',
+			'type' => 'switch',
+			'title' => __('Clients module', 'kleo_framework'),
+			'subtitle' => __('Enable clients module.', 'kleo_framework'),
+			'default' => '1' // 1 = checked | 0 = unchecked
+		),
+		array(
+			'id' => 'module_portfolio',
+			'type' => 'switch',
+			'title' => __('Portfolio module', 'kleo_framework'),
+			'subtitle' => __('Enable portfolio module.', 'kleo_framework'),
+			'default' => '1' // 1 = checked | 0 = unchecked
+		),
+	)
+);
+
 /* Get post types for Search scope */
 function kleo_search_scope_post_types() {
     $scope_atts = array();
@@ -847,8 +911,23 @@ $sections[] = array(
 						'required' => array('sticky_menu','equals','1'),
 						'title' => __('Transparent Main Menu', 'kleo_framework'),
 						'subtitle' => __('Enable or disable main menu background transparency', 'kleo_framework'),
+						'description' => __('WARNING: This will be removed as a general option. Enable it from Page edit only.', 'kleo_framework'),
 						'default' => '0' // 1 = checked | 0 = unchecked
 				),
+
+
+			array(
+				'id' => 'header_overlay_hover',
+				'type' => 'switch',
+				'title' => __('Increased header opacity when hovered', 'kleo_framework'),
+				'subtitle' => __('For transparent header only and when page is not scrolled. When hovering the header area it will become slightly opaque.', 'kleo_framework'),
+				'default' => '0', // 1 = checked | 0 = unchecked
+				'hint' => array(
+						'title'   => 'Preview',
+						'content' => '<img width=\'300\' src=\'http://seventhqueen.com/support/files/kleo/doc/header-hover-option.gif\'>'
+				),
+			),
+
             array(
                     'id' => 'ajax_search',
                     'type' => 'button_set',
@@ -1121,6 +1200,80 @@ $sections[] = array(
                 'options' => array( '2' => '2', '3' => '3', '4' => '4', '5' => '5', '6' => '6' ),
                 'default' => '3'
             ),
+			array(
+				'id' => 'section-title-blog-img',
+				'type' => 'section',
+				'title' => __( 'Image settings', 'kleo_framework' ),
+				'subtitle' => 'Customise image sizes for the blog. After changing image sizes you need to regenerate thumbnails using https://wordpress.org/plugins/regenerate-thumbnails',
+				'indent' => true, // Indent all options below until the next 'section' option is set.
+
+			),
+
+			array(
+				'id' => 'blog_img_single_width',
+				'type' => 'text',
+				'title' => __('Single post Image Width', 'kleo_framework'),
+				'subtitle' => __( 'Enter the width of the image, default: 480', 'kleo_framework' ),
+				'default' => '1038'
+			),
+			array(
+				'id' => 'blog_img_single_height',
+				'type' => 'text',
+				'title' => __('Single post Image Height', 'kleo_framework'),
+				'subtitle' => __( 'Enter the height of the image in pixels. Unlimited height is 9999. Default: 9999', 'kleo_framework' ),
+				'default' => '9999'
+			),
+
+			array(
+				'id' => 'blog_img_standard_width',
+				'type' => 'text',
+				'title' => __('Standard Image Width', 'kleo_framework'),
+				'subtitle' => __( 'Applies for Gallery format and Carousel. Enter the width of the image in pixels, default: 480', 'kleo_framework' ),
+				'default' => $kleo_config['post_gallery_img_width']
+			),
+			array(
+				'id' => 'blog_img_standard_height',
+				'type' => 'text',
+				'title' => __('Standard Image Height', 'kleo_framework'),
+				'subtitle' => __( 'Applies for Gallery format and Carousel. Enter the height of the image in pixels. Unlimited height is 9999. Default: 270', 'kleo_framework' ),
+				'default' => $kleo_config['post_gallery_img_height']
+			),
+
+			array(
+				'id' => 'blog_img_grid_width',
+				'type' => 'text',
+				'title' => __('Masonry Grid Image Width', 'kleo_framework'),
+				'subtitle' => __( 'Enter the width of the image in pixels, default: 480', 'kleo_framework' ),
+				'default' => $kleo_config['post_gallery_img_width']
+			),
+			array(
+				'id' => 'blog_img_grid_height',
+				'type' => 'text',
+				'title' => __('Masonry Grid Image Height', 'kleo_framework'),
+				'subtitle' => __( 'Enter the height of the image in pixels. Unlimited height is 9999. Default: 9999', 'kleo_framework' ),
+				'default' => '9999'
+			),
+			array(
+				'id' => 'blog_img_small_width',
+				'type' => 'text',
+				'title' => __('Small Left Thumbnail Blog - Image Width', 'kleo_framework'),
+				'subtitle' => __( 'Enter the width of the image in pixels, default: 480', 'kleo_framework' ),
+				'default' => $kleo_config['post_gallery_img_width']
+			),
+			array(
+				'id' => 'blog_img_small_height',
+				'type' => 'text',
+				'title' => __('Small Left Thumbnail Blog - Image Height', 'kleo_framework'),
+				'subtitle' => __( 'Enter the height of the image in pixels. Unlimited height is 9999. Default: 270', 'kleo_framework' ),
+				'default' => $kleo_config['post_gallery_img_height']
+			),
+
+			array(
+				'id' => 'section-title-blog-img-end',
+				'type' => 'section',
+				'indent' => false, // Indent all options below until the next 'section' option is set.
+			),
+
             array(
                 'id' => 'section-title-blog-meta',
                 'type' => 'section',
@@ -1554,160 +1707,174 @@ $sections[] = array(
 		'fields' => $font_fields
 );
 
-$sections[] = array(
-    'icon' => 'el-icon-th-large',
-    'icon_class' => 'icon-large',
-    'title' => __('Portfolio', 'kleo_framework'),
-    'customizer' => false,
-    'desc' => __('<p class="description">Portfolio related settings. Please re-save permalinks when changing slugs or archive page.</p>', 'kleo_framework'),
-    'fields' => array(
+if (sq_option('module_portfolio', 1) == 1 ) {
+	$sections[] = array(
+		'icon'       => 'el-icon-th-large',
+		'icon_class' => 'icon-large',
+		'title'      => __( 'Portfolio', 'kleo_framework' ),
+		'customizer' => false,
+		'desc'       => __( '<p class="description">Portfolio related settings. Please re-save permalinks when changing slugs or archive page.</p>', 'kleo_framework' ),
+		'fields'     => array(
 
-        array(
-            'id' => 'portfolio_custom_archive',
-            'type' => 'switch',
-            'title' => __('Custom page for Portfolio Archive', 'kleo_framework'),
-            'subtitle' => 'This means you need to create a page and assign it below. Re-save permalinks from Settings - Permalinks',
-            'description' => 'Setting it to ON will take the name and slug from the page assigned.',
-            'default' => '0' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'portfolio_page',
-            'type' => 'select',
-            'data' => 'pages',
-            'required' => array('portfolio_custom_archive', 'equals' , '1'),
-            'title' => __('Portfolio Page', 'kleo_framework'),
-            'subtitle' => "You need to add [kleo_portfolio] shortcode to the page or using Visual Composer.",
-            'default' => ''
-        ),
-        array(
-            'id' => 'portfolio_name',
-            'type' => 'text',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Portfolio name', 'kleo_framework'),
-            'subtitle' => "You can replace the name with something else",
-            'default' => 'Portfolio'
-        ),
-        array(
-            'id' => 'portfolio_slug',
-            'type' => 'text',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Portfolio link', 'kleo_framework'),
-            'subtitle' => "You can replace the name with something else. This affects your permalink structure so after changing this you must re-save options in Settings - Permalinks",
-            'default' => 'portfolio'
-        ),
-        array(
-            'id' => 'portfolio_style',
-            'type' => 'select',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Display style for Portfolio page', 'kleo_framework'),
-            'subtitle' => 'How to display the portfolio listed items ',
-            'options' => array(
-                'default' => 'Default',
-                'overlay' => 'Overlay'
-            ),
-            'default' => 'default'
-        ),
-        array(
-            'id' => 'portfolio_title_style',
-            'type' => 'select',
-            'required' => array(
-                array('portfolio_custom_archive','equals','0'),
-                array('portfolio_style','equals','overlay')
-            ),
-            'title' => __('Title style', 'kleo_framework'),
-            'subtitle' => '',
-            'options' => array(
-                'normal' => 'Normal',
-                'hover' => 'Shown only on item hover'
-            ),
-            'default' => 'normal' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'portfolio_excerpt',
-            'type' => 'switch',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Show/Hide subtitle', 'kleo_framework'),
-            'subtitle' => 'Display item excerpt on portfolio page',
-            'default' => '1' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'portfolio_per_row',
-            'type' => 'text',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Number of items per row', 'kleo_framework'),
-            'subtitle' => "A number between 2 and 6",
-            'default' => '4'
-        ),
-        array(
-            'id' => 'portfolio_filter',
-            'type' => 'select',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Show categories filter on portfolio page', 'kleo_framework'),
-            'subtitle' => '',
-            'options' => array(
-                'yes' => 'Yes',
-                'no' => 'No'
-            ),
-            'default' => 'yes'
-        ),
-        array(
-            'id' => 'portfolio_image',
-            'type' => 'text',
-            'required' => array('portfolio_custom_archive', 'equals' , '0'),
-            'title' => __('Thumbnail image size', 'kleo_framework'),
-            'subtitle' => __('Set your portfolio image size in portfolio list. Defined in pixels. If you are using video items, use a 16:9 size format', 'kleo_framework'),
-            'default' => $kleo_config['post_gallery_img_width'] . "x" . $kleo_config['post_gallery_img_height']
-        ),
-	    array(
-		    'id' => 'portfolio_video_height',
-		    'type' => 'text',
-		    'title' => __('Portfolio list Video Height', 'kleo_framework'),
-		    'description' => __('Set your portfolio video height default size. It is used when you only have videos in a page. In portfolio lists where you also have images it will have the image height.', 'kleo_framework'),
-		    'subtitle' => __("Expressed in pixels. Example: 160", "kleo_framework"),
-		    'default' => '160'
-	    ),
-        array(
-            'id' => 'section-title-porto-single',
-            'type' => 'section',
-            'title' => __( 'Portfolio Single Item Page', 'kleo_framework' ),
-            'subtitle' => __( 'Settings for portfolio item page', 'kleo_framework' ),
-            'indent' => true, // Indent all options below until the next 'section' option is set.
-        ),
-        array(
-            'id' => 'portfolio_media_status',
-            'type' => 'switch',
-            'title' => __('Display media on single portfolio page', 'kleo_framework'),
-            'subtitle' => __('If you want to show image/gallery/video before the content on single portfolio page', 'kleo_framework'),
-            'default' => '1' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'portfolio_back_to',
-            'type' => 'switch',
-            'title' => __('Show back to Portfolio icon(bottom of single portfolio item page)', 'kleo_framework'),
-            'subtitle' => '',
-            'default' => '1' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'portfolio_comments',
-            'type' => 'switch',
-            'title' => __('Enable comments on portfolio single page', 'kleo_framework'),
-            'subtitle' => '',
-            'default' => '0' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'portfolio_navigation',
-            'type' => 'switch',
-            'title' => __('Enable portfolio navigation', 'kleo_framework'),
-            'subtitle' => 'Display previous and next portfolio navigation',
-            'default' => '1' // 1 = checked | 0 = unchecked
-        ),
-        array(
-            'id' => 'section-title-porto-single-end',
-            'type' => 'section',
-            'indent' => false, // Indent all options below until the next 'section' option is set.
-        ),
-    )
-);
+			array(
+				'id'          => 'portfolio_custom_archive',
+				'type'        => 'switch',
+				'title'       => __( 'Custom page for Portfolio Archive', 'kleo_framework' ),
+				'subtitle'    => 'This means you need to create a page and assign it below. Re-save permalinks from Settings - Permalinks',
+				'description' => 'Setting it to ON will take the name and slug from the page assigned.',
+				'default'     => '0' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'       => 'portfolio_page',
+				'type'     => 'select',
+				'data'     => 'pages',
+				'required' => array( 'portfolio_custom_archive', 'equals', '1' ),
+				'title'    => __( 'Portfolio Page', 'kleo_framework' ),
+				'subtitle' => "You need to add [kleo_portfolio] shortcode to the page or using Visual Composer.",
+				'default'  => ''
+			),
+			array(
+				'id'       => 'portfolio_name',
+				'type'     => 'text',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Portfolio name', 'kleo_framework' ),
+				'subtitle' => "You can replace the name with something else",
+				'default'  => 'Portfolio'
+			),
+			array(
+				'id'       => 'portfolio_slug',
+				'type'     => 'text',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Portfolio link', 'kleo_framework' ),
+				'subtitle' => "You can replace the name with something else. This affects your permalink structure so after changing this you must re-save options in Settings - Permalinks",
+				'default'  => 'portfolio'
+			),
+			array(
+				'id'       => 'portfolio_style',
+				'type'     => 'select',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Display style for Portfolio page', 'kleo_framework' ),
+				'subtitle' => 'How to display the portfolio listed items ',
+				'options'  => array(
+					'default' => 'Default',
+					'overlay' => 'Overlay'
+				),
+				'default'  => 'default'
+			),
+			array(
+				'id'       => 'portfolio_title_style',
+				'type'     => 'select',
+				'required' => array(
+					array( 'portfolio_custom_archive', 'equals', '0' ),
+					array( 'portfolio_style', 'equals', 'overlay' )
+				),
+				'title'    => __( 'Title style', 'kleo_framework' ),
+				'subtitle' => '',
+				'options'  => array(
+					'normal' => 'Normal',
+					'hover'  => 'Shown only on item hover'
+				),
+				'default'  => 'normal' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'       => 'portfolio_excerpt',
+				'type'     => 'switch',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Show/Hide subtitle', 'kleo_framework' ),
+				'subtitle' => 'Display item excerpt on portfolio page',
+				'default'  => '1' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'       => 'portfolio_per_row',
+				'type'     => 'text',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Number of items per row', 'kleo_framework' ),
+				'subtitle' => "A number between 2 and 6",
+				'default'  => '4'
+			),
+			array(
+				'id'       => 'portfolio_filter',
+				'type'     => 'select',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Show categories filter on portfolio page', 'kleo_framework' ),
+				'subtitle' => '',
+				'options'  => array(
+					'yes' => 'Yes',
+					'no'  => 'No'
+				),
+				'default'  => 'yes'
+			),
+			array(
+				'id'       => 'portfolio_image',
+				'type'     => 'text',
+				'required' => array( 'portfolio_custom_archive', 'equals', '0' ),
+				'title'    => __( 'Thumbnail image size', 'kleo_framework' ),
+				'subtitle' => __( 'Set your portfolio image size in portfolio list. Defined in pixels. If you are using video items, use a 16:9 size format', 'kleo_framework' ),
+				'default'  => $kleo_config['post_gallery_img_width'] . "x" . $kleo_config['post_gallery_img_height']
+			),
+			array(
+				'id'          => 'portfolio_video_height',
+				'type'        => 'text',
+				'title'       => __( 'Portfolio list Video Height', 'kleo_framework' ),
+				'description' => __( 'Set your portfolio video height default size. It is used when you only have videos in a page. In portfolio lists where you also have images it will have the image height.', 'kleo_framework' ),
+				'subtitle'    => __( "Expressed in pixels. Example: 160", "kleo_framework" ),
+				'default'     => '160'
+			),
+			array(
+				'id'       => 'portfolio_slider_action',
+				'type'     => 'select',
+				'title'    => __( 'Click on Slider images action', 'kleo_framework' ),
+				'subtitle' => 'What to do when you click a Slider image on the archive page or from shortcode. Works only for the Slider media type',
+				'options'  => array(
+					'default' => 'Open portfolio item',
+					'modal'   => 'Open big image in modal'
+				),
+				'default'  => 'default'
+			),
+
+			array(
+				'id'       => 'section-title-porto-single',
+				'type'     => 'section',
+				'title'    => __( 'Portfolio Single Item Page', 'kleo_framework' ),
+				'subtitle' => __( 'Settings for portfolio item page', 'kleo_framework' ),
+				'indent'   => true, // Indent all options below until the next 'section' option is set.
+			),
+			array(
+				'id'       => 'portfolio_media_status',
+				'type'     => 'switch',
+				'title'    => __( 'Display media on single portfolio page', 'kleo_framework' ),
+				'subtitle' => __( 'If you want to show image/gallery/video before the content on single portfolio page', 'kleo_framework' ),
+				'default'  => '1' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'       => 'portfolio_back_to',
+				'type'     => 'switch',
+				'title'    => __( 'Show back to Portfolio icon(bottom of single portfolio item page)', 'kleo_framework' ),
+				'subtitle' => '',
+				'default'  => '1' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'       => 'portfolio_comments',
+				'type'     => 'switch',
+				'title'    => __( 'Enable comments on portfolio single page', 'kleo_framework' ),
+				'subtitle' => '',
+				'default'  => '0' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'       => 'portfolio_navigation',
+				'type'     => 'switch',
+				'title'    => __( 'Enable portfolio navigation', 'kleo_framework' ),
+				'subtitle' => 'Display previous and next portfolio navigation',
+				'default'  => '1' // 1 = checked | 0 = unchecked
+			),
+			array(
+				'id'     => 'section-title-porto-single-end',
+				'type'   => 'section',
+				'indent' => false, // Indent all options below until the next 'section' option is set.
+			),
+		)
+	);
+}
 
 $sections[] = array(
     'icon' => 'el-icon-torso',
@@ -2319,6 +2486,7 @@ $sections[] = array(
 					'type' => 'text',
 					'title' => __('Facebook APP ID', 'kleo_framework'),
 					'subtitle' => __('In order to integrate with Facebook you need to enter your Facebook APP ID<br/>If you don\'t have one, you can create it from: <a target="_blank" href="https://developers.facebook.com/apps">HERE</a> ', 'kleo_framework'),
+					'description' => sprintf( __( "See tutorial <a href='%s'>here</a>", "kleo_framework" ), 'http://seventhqueen.com/support/general/article/create-facebook-app-get-app-id-facebook-login' ),
 					'default' => '',
 					'required' => array('facebook_login', '=' , '1'),
 			),
@@ -2514,7 +2682,7 @@ $sections[] = array(
 						'id' => 'tf_apikey',
 						'type' => 'text',
 						'title' => __('Themeforest API KEY', 'kleo_framework'),
-						'subtitle' => '',
+						'subtitle' => sprintf(__('<a href="%s" target="_blank">See how to get your API Key</a>', 'kleo_framework'), 'http://seventhqueen.com/support/general/article/how-to-get-themeforest-api-key'),
 						'default' => ''
 				)
 		)

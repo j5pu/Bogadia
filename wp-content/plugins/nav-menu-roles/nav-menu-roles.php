@@ -3,7 +3,7 @@
 Plugin Name: Nav Menu Roles
 Plugin URI: http://www.kathyisawesome.com/449/nav-menu-roles/
 Description: Hide custom menu items based on user roles.
-Version: 1.7.9
+Version: 1.8.2
 Author: Kathy Darling
 Author URI: http://www.kathyisawesome.com
 License: GPL2
@@ -54,7 +54,7 @@ class Nav_Menu_Roles {
 	* @constant string version number
 	* @since 1.7.1
 	*/
-	CONST VERSION = '1.7.6';
+	CONST VERSION = '1.8.2';
 
 	/**
 	* Main Nav Menu Roles Instance
@@ -101,12 +101,12 @@ class Nav_Menu_Roles {
 
 		// Admin functions
 		add_action( 'admin_init', array( $this, 'admin_init' ) );
-		
+
 		// load the textdomain
 		add_action( 'plugins_loaded', array( $this, 'load_text_domain' ) );
 
-		// add FAQ and Donate link to plugin 
-		add_filter( 'plugin_row_meta', array( $this, 'add_action_links' ), 10, 4 );
+		// add FAQ and Donate link to plugin
+		add_filter( 'plugin_row_meta', array( $this, 'add_action_links' ), 10, 2 );
 
 		// switch the admin walker
 		add_filter( 'wp_edit_nav_menu_walker', array( $this, 'edit_nav_menu_walker' ) );
@@ -140,7 +140,15 @@ class Nav_Menu_Roles {
 	* @return void
 	*/
 	public function admin_init() {
-		include_once( plugin_dir_path( __FILE__ ) . 'inc/class.Walker_Nav_Menu_Edit_Roles.php');
+
+		if( ! class_exists( 'Walker_Nav_Menu_Edit_Roles' ) ){
+			global $wp_version;
+		    if ( version_compare( $wp_version, '4.5.0', '>=' ) ){
+				include_once( plugin_dir_path( __FILE__ ) . 'inc/class.Walker_Nav_Menu_Edit_Roles_4.5.php');
+			} else {
+				include_once( plugin_dir_path( __FILE__ ) . 'inc/class.Walker_Nav_Menu_Edit_Roles.php');
+			}
+        }
 
 		// Register Importer
 		$this->register_importer();
@@ -156,12 +164,10 @@ class Nav_Menu_Roles {
 	* @return void
 	*/
 	public function register_importer(){
-
-		include_once( plugin_dir_path( __FILE__ ) . 'inc/class.Nav_Menu_Roles_Import.php');
-
 		// Register the new importer
 		if ( defined( 'WP_LOAD_IMPORTERS' ) ) {
 
+			include_once( plugin_dir_path( __FILE__ ) . 'inc/class.Nav_Menu_Roles_Import.php');
 			// Register the custom importer we've created.
 			$roles_import = new Nav_Menu_Roles_Import();
 
@@ -216,7 +222,7 @@ class Nav_Menu_Roles {
 	* Add docu link
 	* @since 1.7.3
 	*/
-	public function add_action_links( $plugin_meta, $plugin_file, $plugin_data, $status ) {
+	public function add_action_links( $plugin_meta, $plugin_file ) {
 		if( $plugin_file == plugin_basename(__FILE__) ){
 			$plugin_meta[] = sprintf( '<a class="dashicons-before dashicons-welcome-learn-more" href="https://wordpress.org/plugins/nav-menu-roles/faq/#conflict">%s</a>', __( 'FAQ', 'nav-menu-roles' ) );
 			$plugin_meta[] = '<a class="dashicons-before dashicons-awards" href="' . self::DONATE_URL . '" target="_blank">' . __( 'Donate', 'nav-menu-roles' ) . '</a>';
@@ -237,8 +243,8 @@ class Nav_Menu_Roles {
 	/**
 	* Add fields to hook added in Walker
 	* This will allow us to play nicely with any other plugin that is adding the same hook
-	* @params obj $item - the menu item 
-	* @params array $args 
+	* @params obj $item - the menu item
+	* @params array $args
 	* @since 1.6.0
 	*/
 	public function custom_fields( $item_id, $item, $depth, $args ) {
@@ -321,19 +327,22 @@ class Nav_Menu_Roles {
 		    <br />
 
 		    <?php
+		    
+		    $i = 1;
 
 		    /* Loop through each of the available roles. */
 		    foreach ( $display_roles as $role => $name ) {
 
 		        /* If the role has been selected, make sure it's checked. */
 		        $checked = checked( true, ( is_array( $checked_roles ) && in_array( $role, $checked_roles ) ), false );
-		        
+
 		        ?>
 
 		        <div class="role-input-holder" style="float: left; width: 33.3%; margin: 2px 0;">
-		        <input type="checkbox" name="nav-menu-role[<?php echo $item->ID ;?>][<?php echo $role; ?>]" id="nav_menu_role-<?php echo $role; ?>-for-<?php echo $item->ID ;?>" <?php echo $checked; ?> value="<?php echo $role; ?>" />
+		        <input type="checkbox" name="nav-menu-role[<?php echo $item->ID ;?>][<?php echo $i; ?>]" id="nav_menu_role-<?php echo $role; ?>-for-<?php echo $item->ID ;?>" <?php echo $checked; ?> value="<?php echo $role; ?>" />
 		        <label for="nav_menu_role-<?php echo $role; ?>-for-<?php echo $item->ID ;?>">
 		        <?php echo esc_html( $name ); ?>
+		        <?php $i++; ?>
 		        </label>
 		        </div>
 
@@ -341,7 +350,7 @@ class Nav_Menu_Roles {
 
 		</div>
 
-		<?php 
+		<?php
 	}
 
 
@@ -349,7 +358,7 @@ class Nav_Menu_Roles {
 	* Save the roles as menu item meta
 	* @return null
 	* @since 1.4
-	* 
+	*
 	*/
 	public function enqueue_scripts( $hook ){
 		if ( $hook == 'nav-menus.php' ){
@@ -369,21 +378,28 @@ class Nav_Menu_Roles {
 		$allowed_roles = apply_filters( 'nav_menu_roles', $wp_roles->role_names );
 
 		// verify this came from our screen and with proper authorization.
-		if ( ! isset( $_POST['nav-menu-role-nonce'] ) || ! wp_verify_nonce( $_POST['nav-menu-role-nonce'], 'nav-menu-nonce-name' ) )
+		if ( ! isset( $_POST['nav-menu-role-nonce'] ) || ! wp_verify_nonce( $_POST['nav-menu-role-nonce'], 'nav-menu-nonce-name' ) ){
 			return;
-
+		}
+		
 		$saved_data = false;
 
 		if ( isset( $_POST['nav-menu-logged-in-out'][$menu_item_db_id]  )  && $_POST['nav-menu-logged-in-out'][$menu_item_db_id] == 'in' && ! empty ( $_POST['nav-menu-role'][$menu_item_db_id] ) ) {
+			
 			$custom_roles = array();
+			
 			// only save allowed roles
-			foreach( $_POST['nav-menu-role'][$menu_item_db_id] as $role ) {
-				if ( array_key_exists ( $role, $allowed_roles ) ) $custom_roles[] = $role;
+			foreach( (array) $_POST['nav-menu-role'][$menu_item_db_id] as $role ) {
+				if ( array_key_exists ( $role, $allowed_roles ) ) {
+					$custom_roles[] = $role;
+				}
 			}
-			if ( ! empty ( $custom_roles ) ) $saved_data = $custom_roles;
-		} else if ( isset( $_POST['nav-menu-logged-in-out'][$menu_item_db_id]  )  && in_array( $_POST['nav-menu-logged-in-out'][$menu_item_db_id], array( 'in', 'out' ) ) ) {
+			if ( ! empty ( $custom_roles ) ) {
+				$saved_data = $custom_roles;
+			}
+		} else if ( isset( $_POST['nav-menu-logged-in-out'][$menu_item_db_id]  ) && in_array( $_POST['nav-menu-logged-in-out'][$menu_item_db_id], array( 'in', 'out' ) ) ) {
 			$saved_data = $_POST['nav-menu-logged-in-out'][$menu_item_db_id];
-		} 
+		}
 
 		if ( $saved_data ) {
 			update_post_meta( $menu_item_db_id, '_nav_menu_role', $saved_data );
@@ -443,7 +459,7 @@ class Nav_Menu_Roles {
 						$visible = false;
 						if ( is_array( $item->roles ) && ! empty( $item->roles ) ) {
 							foreach ( $item->roles as $role ) {
-								if ( current_user_can( $role ) ) 
+								if ( current_user_can( $role ) )
 									$visible = true;
 							}
 						}
@@ -458,7 +474,7 @@ class Nav_Menu_Roles {
 
 			// unset non-visible item
 			if ( ! $visible ) {
-				$hide_children_of[] = $item->ID; // store ID of item 
+				$hide_children_of[] = $item->ID; // store ID of item
 				unset( $items[$key] ) ;
 			}
 
@@ -476,11 +492,11 @@ class Nav_Menu_Roles {
 	*/
 	public function maybe_upgrade() {
 		$db_version = get_option( 'nav_menu_roles_db_version', false );
-		
+
 		// 1.7.7 upgrade: changed the debug notice so the old transient is invalid
 		if ( $db_version === false || version_compare( '1.7.7', $db_version, '<' ) ) {
 		    update_option( 'nav_menu_roles_db_version', self::VERSION );
-		} 
+		}
 	}
 
 } // end class

@@ -27,8 +27,8 @@ window.eml = window.eml || { l10n: {} };
     });
 
     // on change of an extension during creation
-    $(document).on('blur', '.wpuxss-eml-clone-mime .wpuxss-eml-type', function()
-    {
+    $( document ).on( 'blur', '.wpuxss-eml-clone-mime .wpuxss-eml-type', function() {
+
         var extension = $(this).val().toLowerCase(),
         mime_type_tr = $(this).closest('tr');
 
@@ -43,8 +43,8 @@ window.eml = window.eml || { l10n: {} };
 
 
     // on change of a mime type during creation
-    $(document).on('blur', '.wpuxss-eml-clone-mime .wpuxss-eml-mime', function()
-    {
+    $( document ).on( 'blur', '.wpuxss-eml-clone-mime .wpuxss-eml-mime', function() {
+
         var mime_type = $(this).val().toLowerCase(),
         mime_type_tr = $(this).closest('tr');
 
@@ -52,43 +52,41 @@ window.eml = window.eml || { l10n: {} };
     });
 
     // mime types restoration warning
-    $(document).on('click', '#wpuxss_eml_restore_mimes_backup', function()
-    {
+    $( document ).on( 'click', '#wpuxss_eml_restore_mimes_backup', function() {
+
         if ( confirm(eml.l10n.mime.mime_deletion_confirm) )
-        {
             return true;
-        }
 
         return false;
     });
 
     // on mime types form submit
-    $('#wpuxss-eml-form-mimetypes').submit(function( event )
-    {
+    $('#wpuxss-eml-form-mimetypes').submit(function( event ) {
+
         submit_it = true;
         alert_text = '';
 
-        $('.wpuxss-eml-clone-mime').each(function( index )
-        {
-            if ( !$('.wpuxss-eml-type',this).val() || $('.wpuxss-eml-type',this).val() == '' || !$('.wpuxss-eml-mime',this).val() || $('.wpuxss-eml-mime',this).val() == '' )
-            {
+        $('.wpuxss-eml-clone-mime').each(function( index ) {
+
+            if ( !$('.wpuxss-eml-type',this).val() || $('.wpuxss-eml-type',this).val() == '' || !$('.wpuxss-eml-mime',this).val() || $('.wpuxss-eml-mime',this).val() == '' ) {
+
                 submit_it = false;
                 alert_text = eml.l10n.mime.mime_error_empty_fields;
             }
-            else if ( $('[id="'+$('.wpuxss-eml-type',this).val()+'"]').length > 0 || $('.wpuxss-eml-mime[value="'+$('.wpuxss-eml-mime',this).val()+'"]').length > 0 )
-            {
+            else if ( $('[id="'+$('.wpuxss-eml-type',this).val()+'"]').length > 0 || $('.wpuxss-eml-mime[value="'+$('.wpuxss-eml-mime',this).val()+'"]').length > 0 ) {
+
                 submit_it = false;
                 alert_text = eml.l10n.mime.mime_error_duplicate;
             }
 
-            if ( !$('.wpuxss-eml-singular',this).val() || $('.wpuxss-eml-singular',this).val() == '' || !$('.wpuxss-eml-plural',this).val() || $('.wpuxss-eml-plural',this).val() == '' )
-            {
+            if ( !$('.wpuxss-eml-singular',this).val() || $('.wpuxss-eml-singular',this).val() == '' || !$('.wpuxss-eml-plural',this).val() || $('.wpuxss-eml-plural',this).val() == '' ) {
+
                 $('.wpuxss-eml-singular',this).val($('.wpuxss-eml-mime',this).val());
                 $('.wpuxss-eml-plural',this).val($('.wpuxss-eml-mime',this).val());
             }
         });
 
-        if ( !submit_it && alert_text != '' ) alert(alert_text);
+        if ( ! submit_it && alert_text != '' ) alert(alert_text);
 
         return submit_it;
     });

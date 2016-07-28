@@ -1,5 +1,5 @@
 <?php
-define( 'KLEO_THEME_VERSION', '4.0.6' );
+define( 'KLEO_THEME_VERSION', '4.0.8' );
 
 /* Configuration array */
 global $kleo_config;
@@ -91,8 +91,8 @@ $theme_args = array(
         array(
 				'name'			=> 'Visual Composer', // The plugin name
 				'slug'			=> 'js_composer', // The plugin slug (typically the folder name)
-				'version'			=> kleo_get_plugin_version( 'js_composer', '4.11.2', $kleo_rem_plugin_transient ), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
-				'source'			=> kleo_get_plugin_src( 'js_composer', '4.11.2', false ), // The plugin source
+				'version'			=> kleo_get_plugin_version( 'js_composer', '4.12', $kleo_rem_plugin_transient ), // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+				'source'			=> kleo_get_plugin_src( 'js_composer', '4.12', false ), // The plugin source
 				'required'			=> true, // If false, the plugin is only 'recommended' instead of required
 				'force_activation'		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 				'force_deactivation'	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
@@ -113,7 +113,7 @@ $theme_args = array(
 				'slug'			=> 'k-elements', // The plugin slug (typically the folder name)
 				'source'			=> get_template_directory() . '/lib/inc/k-elements.zip', // The plugin source
 				'required'			=> true, // If false, the plugin is only 'recommended' instead of required
-				'version'			=> '4.0.5.1', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
+				'version'			=> '4.0.7', // E.g. 1.0.0. If set, the active plugin must be this version or higher, otherwise a notice is presented
 				'force_activation'		=> false, // If true, plugin is activated upon theme activation and cannot be deactivated until theme switch
 				'force_deactivation'	=> false, // If true, plugin is deactivated upon theme switch, useful for theme-specific plugins
 				'external_url'		=> '', // If set, overrides default API URL and points to an external URL
@@ -337,8 +337,10 @@ function kleo_theme_functions() {
     /* Custom menu items */
     require_if_theme_supports( 'kleo-menu-items', KLEO_LIB_DIR . '/menu-items.php');
 
-    /* Portfolio */
-    require_if_theme_supports( 'kleo-portfolio', KLEO_LIB_DIR . '/portfolio.php');
+	/* Portfolio module */
+	if ( sq_option( 'module_portfolio', 1 ) == 1 ) {
+		require KLEO_LIB_DIR . '/portfolio.php';
+	}
 
     /* Include admin customizations */
     if ( is_admin() ) {
@@ -367,9 +369,17 @@ if ( is_admin() ) {
  ***************************************************/
 
 require_once KLEO_LIB_DIR. '/post-types.php';
-global $kleo_post_types;
-$kleo_post_types = new Post_types();
 
+
+/* Testimonials module */
+if ( sq_option( 'module_testimonials', 1 ) == 1 ) {
+	require KLEO_LIB_DIR . '/testimonials.php';
+}
+
+/* Clients module */
+if ( sq_option( 'module_clients', 1 ) == 1 ) {
+	require KLEO_LIB_DIR . '/clients.php';
+}
 
 
 /***************************************************
@@ -1274,12 +1284,21 @@ if ( ! function_exists( 'kleo_new_excerpt_length' ) ) {
 if ( ! function_exists( 'kleo_excerpt' ) ) {
 	function kleo_excerpt( $limit = 20, $words = true ) {
 
+		$from_content = false;
 		$excerpt_initial = get_the_excerpt();
-		if( $excerpt_initial == '' ){
+
+		if( $excerpt_initial == '' ) {
 			$excerpt_initial = get_the_content();
+			$from_content = true;
 		}
 		$excerpt_initial = preg_replace( '`\[[^\]]*\]`', '', $excerpt_initial );
 		$excerpt_initial = strip_tags( $excerpt_initial );
+
+		/* If we got it from get_the_content -> apply length restriction */
+		if ( $from_content ) {
+			$excerpt_length = apply_filters( 'excerpt_length', $limit );
+			$excerpt_initial = wp_trim_words( $excerpt_initial, $excerpt_length, '' );
+		}
 
         if ( $words ) {
             $excerpt = explode( ' ', $excerpt_initial, $limit );
@@ -1290,8 +1309,7 @@ if ( ! function_exists( 'kleo_excerpt' ) ) {
                 $excerpt = implode( " ", $excerpt ) . '';
             }
         } else {
-            $excerpt = $excerpt_initial;
-            $excerpt = substr( $excerpt, 0, $limit ) . ( strlen( $excerpt ) > $limit ? '...' : '' );
+            $excerpt = substr( $excerpt_initial, 0, $limit ) . ( strlen( $excerpt_initial ) > $limit ? '...' : '' );
         }
 
 		return '<p>' . $excerpt . '</p>';
@@ -1403,32 +1421,35 @@ function kleo_post_nav( $same_cat = false ) {
 }
 endif;
 
-/**
- * Check to see if post meta is enabled for a single post
- * @return int
- */
-function kleo_postmeta_enabled() {
+if (! function_exists( 'kleo_postmeta_enabled' )) {
+	/**
+	 * Check to see if post meta is enabled for a single post
+	 * @return int
+	 */
+	function kleo_postmeta_enabled() {
 
-    if (! is_single() ) {
-        return 1;
-    }
+		if ( ! is_single() ) {
+			return 1;
+		}
 
-    /* If we set it via a shortcode */
-    global $kleo_config;
-    if ( isset( $kleo_config['post_meta_enabled'] ) ) {
-        if ( $kleo_config['post_meta_enabled'] ) {
-            return 1;
-        } else {
-            return 0;
-        }
-    }
+		/* If we set it via a shortcode */
+		global $kleo_config;
+		if ( isset( $kleo_config['post_meta_enabled'] ) ) {
+			if ( $kleo_config['post_meta_enabled'] ) {
+				return 1;
+			} else {
+				return 0;
+			}
+		}
 
-	$meta_status = sq_option( 'blog_meta_status', 1 );
-	
-	if( get_cfield( 'meta_checkbox' ) == 1 ) {
-		$meta_status = 0;
+		$meta_status = sq_option( 'blog_meta_status', 1 );
+
+		if ( get_cfield( 'meta_checkbox' ) == 1 ) {
+			$meta_status = 0;
+		}
+
+		return apply_filters( 'kleo_postmeta_enabled', $meta_status );
 	}
-	return $meta_status;
 }
 
 
@@ -1837,20 +1858,7 @@ function kleo_translateColumnWidth( $width ) {
  */
 function kleo_get_category_list( $category_name, $filter = 0, $category_child = "" ){
 
-    if ( ! $filter ) {
-
-        $get_category = get_categories( array( 'taxonomy' => $category_name	));
-        $category_list = array( '0' => 'All');
-
-        foreach( $get_category as $category ){
-            if (isset($category->slug)) {
-                $category_list[] = $category->slug;
-            }
-        }
-
-        return $category_list;
-
-    } else if ( $category_child != "" && $category_child != "All" ) {
+	if ( $category_child != "" && $category_child != "All" ) {
 
         $childcategory = get_term_by( 'slug', $category_child, $category_name );
         $get_category = get_categories( array( 'taxonomy' => $category_name, 'child_of' => $childcategory->term_id ) );
@@ -1865,17 +1873,31 @@ function kleo_get_category_list( $category_name, $filter = 0, $category_child = 
         return $category_list;
 
     } else {
+		if ( ! $filter ) {
 
-        $get_category = get_categories( array( 'taxonomy' => $category_name));
-        $category_list = array( '0' => 'All');
+			$get_category = get_categories( array( 'taxonomy' => $category_name	));
+			$category_list = array( '0' => 'All');
 
-        foreach( $get_category as $category ){
-            if (isset($category->cat_name)) {
-                $category_list[] = $category->cat_name;
-            }
-        }
+			foreach( $get_category as $category ){
+				if (isset($category->slug)) {
+					$category_list[] = $category->slug;
+				}
+			}
 
-        return $category_list;
+			return $category_list;
+
+		} else {
+			$get_category  = get_categories( array( 'taxonomy' => $category_name ) );
+			$category_list = array( '0' => 'All' );
+
+			foreach ( $get_category as $category ) {
+				if ( isset( $category->cat_name ) ) {
+					$category_list[] = $category->cat_name;
+				}
+			}
+
+			return $category_list;
+		}
 
     }
 }
@@ -2384,7 +2406,7 @@ if( function_exists('get_term_meta') ) {
 		$layouts = array_merge( $kleo_config['blog_layouts'], array( 'kb' => 'Knowledge Base' ) );
 		$category_layout = '';
 
-		if( $category ) {
+		if( $category && is_object( $category ) ) {
 			$category_id = $category->term_id;
 			$category_meta = get_term_meta($category_id, 'kleo_category_display_type');
 			if ( isset( $category_meta[0] ) && isset( $layouts[$category_meta[0]] ) ) {
@@ -2577,6 +2599,7 @@ function kleo_go_pricing_enable_updates() {
 			GW_GoPricing_Update::instance(),
 			'check_update'
 		) );
+		remove_filter( 'plugins_api', array( GW_GoPricing_Update::instance(), 'update_info' ), 10, 3 );
 	}
 }
 

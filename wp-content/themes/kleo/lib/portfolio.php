@@ -7,6 +7,93 @@
 *
 */
 
+
+/* Register Custom Post Type
+ * ================================================== 
+*/
+
+class Portfolio_Post_Type extends Post_types {
+
+    public function __construct() {
+        $this->labels = array();
+        $portfolio_name = sq_option( 'portfolio_name', 'Portfolio' );
+        $this->labels['portfolio'] = array( 'singular' => __( 'Portfolio item', 'kleo_framework' ), 'plural' => __( $portfolio_name, 'kleo_framework' ), 'menu' => __( 'Portfolio', 'kleo_framework' ) );
+
+        add_action( 'init', array( &$this, 'setup_post_type' ), 7 );
+    }
+
+    /**
+     * Setup Portfolio post type
+     * @since  1.5
+     * @return void
+     */
+    public function setup_post_type () {
+
+        $has_archive = sq_option( 'portfolio_custom_archive', '0' ) == '1' ? FALSE : TRUE;
+
+        /* Default WordPress post archive page */
+        if ( $has_archive ) {
+            $slug = sq_option( 'portfolio_slug', 'portfolio' );
+            $slug = apply_filters( 'kleo_portfolio_slug', $slug );
+        }
+        /* Custom page for archive */
+        else {
+            $page_id = sq_option('portfolio_page');
+            $page = get_post($page_id);
+            $slug = $page->post_name;
+        }
+
+        $args = array(
+            'labels' => $this->get_labels( 'portfolio', $this->labels['portfolio']['singular'], $this->labels['portfolio']['plural'], $this->labels['portfolio']['menu'] ),
+            'public' => true,
+            'publicly_queryable' => true,
+            'show_ui' => true,
+            'show_in_menu' => TRUE,
+            'menu_icon' => 'dashicons-format-image',
+            'query_var' => true,
+            'rewrite' => array(
+                'slug' => esc_attr($slug),
+                'feeds' => true,
+                'with_front' => false
+            ),
+            'has_archive' => $has_archive,
+            'hierarchical' => false,
+            'menu_position' => 20, // Below "Pages"
+            'supports' => array( 'title', 'editor', 'thumbnail', 'excerpt', 'comments', 'custom-fields' )
+        );
+
+        register_post_type( 'portfolio', $args );
+
+        register_taxonomy_for_object_type( 'post_tag', 'portfolio' );
+
+
+        $args = array(
+            "label" 						=> _x('Portfolio Categories', 'category label', "kleo_framework"),
+            "singular_label" 				=> _x('Portfolio Category', 'category singular label', "kleo_framework"),
+            'public'                        => true,
+            'hierarchical'                  => true,
+            'show_ui'                       => true,
+            'show_in_nav_menus'             => false,
+            'args'                          => array( 'orderby' => 'term_order' ),
+            'rewrite' => array(
+                'slug'         => apply_filters( 'kleo_portfolio_cat_slug', 'portfolio-category' ),
+                'with_front'   => false,
+                'hierarchical' => true
+            ),
+            'query_var' => true
+        );
+
+        register_taxonomy( 'portfolio-category', 'portfolio', $args );
+
+
+    } // End setup_portfolio_post_type()
+    
+}
+
+$kleo_portfolio = new Portfolio_Post_Type();
+Kleo::set_module( 'portfolio', $kleo_portfolio );
+
+
 /* PORTFOLIO ITEMS
 ================================================== */
 if (!function_exists('kleo_portfolio_items')) {
@@ -137,16 +224,16 @@ if ( ! function_exists( 'kleo_portfolio_filter' ) ) {
         $filter_output = $tax_terms = "";
 
         if ( $parent_category == "" || $parent_category == "all" ) {
-            $tax_terms = kleo_get_category_list( 'portfolio-category', 1 );
+            $tax_terms = kleo_get_category_list( apply_filters( 'kleo_portfolio_cat_slug', 'portfolio-category' ), 0 );
         } else {
-            $tax_terms = kleo_get_category_list( 'portfolio-category', 1, $parent_category );
+            $tax_terms = kleo_get_category_list( apply_filters( 'kleo_portfolio_cat_slug', 'portfolio-category' ), 0, $parent_category );
         }
 
         $filter_output .= '<div class="filter-wrap row clearfix">'. "\n";
         $filter_output .= '<ul class="portfolio-filter-tabs bar-styling filtering col-sm-12 clearfix">'. "\n";
         $filter_output .= '<li class="all selected"><a data-filter="*" href="#"><span class="item-name">'. __("All", "kleo_framework").'</span></a></li>'. "\n";
         foreach ($tax_terms as $tax_term) {
-            $term = get_term_by('slug', $tax_term, 'portfolio-category');
+            $term = get_term_by('slug', $tax_term, apply_filters( 'kleo_portfolio_cat_slug', 'portfolio-category' ));
             if ( $term && ! in_array( $term->term_id, $exclude_categories ) ) {
                 $filter_output .= '<li><a href="#" data-filter=".' . $term->slug . '"><span class="item-name">' . $term->name . '</span></a></li>'. "\n";
             }
@@ -328,4 +415,3 @@ function kleo_portfolio_localize( $obj_array ) {
 
     return $obj_array;
 }
-

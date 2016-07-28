@@ -480,3 +480,12 @@ if ( version_compare( BP_VERSION, '2.4', '>=' ) ) {
 
 /* BP DOCS compatibility */
 add_filter( 'bp_docs_allow_comment_section', '__return_true', 100 );
+
+
+
+/* Remove shortcodes from activity view */
+add_filter( 'bp_get_activity_content_body','kleo_bp_activity_filter', 1 );
+function kleo_bp_activity_filter( $content ) {
+    $content = preg_replace("/\[(.*?)(?:(\/))?\](?:(.+?)\[\/\2\])?/s",'', $content);
+    return $content;
+}

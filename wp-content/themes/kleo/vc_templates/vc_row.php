@@ -66,6 +66,7 @@ if ( ! defined( 'ABSPATH' ) ) {
  * @var $this WPBakeryShortCode_VC_Row
  */
 $el_class = $full_height = $parallax_speed_bg = $parallax_speed_video = $full_width = $equal_height = $flex_row = $columns_placement = $content_placement = $parallax = $parallax_image = $css = $el_id = $video_bg = $video_bg_url = $video_bg_parallax = '';
+$disable_element = '';
 $output = $after_output = '';
 
 /* KLEO ADDED */
@@ -90,6 +91,14 @@ $css_classes = array(
 	//$el_class,
 	vc_shortcode_custom_css_class( $css ),
 );
+
+if ( 'yes' === $disable_element ) {
+	if ( vc_is_page_editable() ) {
+		$css_classes[] = 'vc_hidden-lg vc_hidden-xs vc_hidden-sm vc_hidden-md';
+	} else {
+		return '';
+	}
+}
 
 if (vc_shortcode_custom_css_has_property( $css, array('border', 'background') ) || $video_bg || $parallax) {
 	$css_classes[]='vc_row-has-fill';
@@ -432,7 +441,7 @@ if ( ! empty( $my_style ) ) {
 }
 /* END KLEO ADDED */
 
-$css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( $css_classes ) ), $this->settings['base'], $atts ) );
+$css_class = preg_replace( '/\s+/', ' ', apply_filters( VC_SHORTCODE_CUSTOM_CSS_FILTER_TAG, implode( ' ', array_filter( array_unique( $css_classes ) ) ), $this->settings['base'], $atts ) );
 $wrapper_attributes[] = 'class="' . esc_attr( trim( $css_class ) ) . '"';
 
 $output .= '<section class="' . implode( ' ', $section_classes )  . '" ' . $my_style . ' ' . implode( ' ', $container_attributes ) . '>';

@@ -1,14 +1,14 @@
 === Google Captcha (reCAPTCHA) by BestWebSoft ===
 Contributors: bestwebsoft
 Donate link: http://bestwebsoft.com/donate/
-Tags: anti, anti-spam, antispam, antispam security, anti-spam security, antispambot, arithmetic actions, block spam, bot, bots, best google captcha, best recaptcha, best google recaptcha, best wordpress captcha, recaptcha, capcha, captha, catcha, captcha theme, captcha bank, captcha, captcha plugin, recaptcha plugin, captcha protection, recaptcha protection, comment captcha, comment, comments, cpatcha, digitize books, digitize newspapers, digitize radio shows, e-mail, email, email address, filter, form, forms, form captcha, forgot password captcha, free, gogle, google, google captcha, google recaptcha, login, lost password, login captcha, login recaptcha, mail, match captcha, plugin, protect, protection, popular captcha, popular recaptcha, protection shield, re captcha, re-captcha, register, registration, registration spam, robot, robots, register captcha, rest password captcha, registration captcha security, spam, secure, security, signup, signup spam, spam blocker, spam comments, spam filter, spambot, shield, simple captcha, simple recaptcha, spam control, spam protection, text captcha, user, user registration spam, users, web form protection, wordpress google captcha, wp google recapthca, wp recaptcha, wordpress protection, wordpress security loss password captcha, register captcha, wp captcha
+Tags: antispam, captcha, capcha, security, website security, google captcha, google captcha plugin, recaptcha, recaptcha plugin, add recaptcha, recaptcha protection, spam protection
 Requires at least: 3.8
-Tested up to: 4.5
-Stable tag: 1.23
+Tested up to: 4.5.3
+Stable tag: 1.25
 License: GPLv3 or later
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
-This plugin allows you to implement Google Captcha (reCAPTCHA) into web forms.
+Protect WordPress website forms from spam entries with Google Captcha (reCaptcha).
 
 == Description ==
 
@@ -64,7 +64,7 @@ There is also a premium version of the plugin <a href="http://bestwebsoft.com/pr
 * Spanish (es_ES) (thanks to <a href="mailto:cloudzeroxyz@gmail.com">Cloudzeroxyz</a>)
 * Ukrainian (uk)
 
-If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> for <a href="http://support.bestwebsoft.com" target="_blank">BestWebSoft</a> and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO files <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
+Some of these translations are not complete. We are constantly adding new features which should be translated. If you would like to create your own language pack or update the existing one, you can send <a href="http://codex.wordpress.org/Translating_WordPress" target="_blank">the text of PO and MO files</a> for <a href="http://support.bestwebsoft.com/hc/en-us/requests/new" target="_blank">BestWebSoft</a> and we'll add it to the plugin. You can download the latest version of the program for work with PO and MO files <a href="http://www.poedit.net/download.php" target="_blank">Poedit</a>.
 
 = Technical support =
 
@@ -78,7 +78,7 @@ We can fix some things for free for the users who provide translation of our plu
 
 1. Upload the `google-captcha` folder to the `/wp-content/plugins/` directory.
 2. Activate the plugin via the 'Plugins' menu in WordPress.
-3. Plugin settings are located in "BWS Plugins" > "Google Captcha".
+3. Plugin settings are located in "BWS Panel" > "Google Captcha".
 4. Create a form in post and insert the shortcode [bws_google_captcha] into the form.
 
 <a href="https://docs.google.com/document/d/1Nrccb-OLDN80yYjz_6-JPErdpZoslqfPV-g2IZ-GD0A/edit" target="_blank">View a Step-by-step Instruction on Google Captcha (reCAPTCHA) Installation</a>.
@@ -136,16 +136,23 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 
 == Screenshots ==
 
-1. Google Captcha (reCAPTCHA) Settings page.
-2. Login form with Google Captcha (reCAPTCHA).
-3. Registration form with Google Captcha (reCAPTCHA).
-4. Lost password form with Google Captcha (reCAPTCHA).
-5. Comments form with Google Captcha (reCAPTCHA).
-6. Contact Form with Google Captcha (reCAPTCHA).
-7. The form with Google Captcha (reCAPTCHA) version 1.
-8. The form with Google Captcha (reCAPTCHA) dark theme.
+1. Login form with Google Captcha (reCAPTCHA).
+2. Registration form with Google Captcha (reCAPTCHA).
+3. Lost password form with Google Captcha (reCAPTCHA).
+4. Comments form with Google Captcha (reCAPTCHA).
+5. Contact Form with Google Captcha (reCAPTCHA).
+6. The form with Google Captcha (reCAPTCHA) version 1.
+7. The form with Google Captcha (reCAPTCHA) dark theme.
+8. Google Captcha (reCAPTCHA) Settings page. 
 
 == Changelog ==
+
+= V1.25 - 15.07.2016 =
+* Update : BWS panel section was updated.
+
+= V1.24 - 27.06.2016 =
+* Update : Functionality to use Captcha with Contact Form Multi was updated.
+* Update : BWS Panel section is updated.
 
 = V1.23 - 19.04.2016 =
 * NEW : Ability to test entered site key and secret key.
@@ -256,6 +263,12 @@ Please make sure that the problem hasn't been discussed yet on our forum (<a hre
 * NEW : Ability to add Google Captcha (reCAPTCHA) into standard forms was added.
 
 == Upgrade Notice ==
+
+= V1.25 =
+Usability improved.
+
+= V1.24 =
+Functionality to use Captcha with Contact Form Multi was updated. BWS Panel section is updated.
 
 = V1.23 =
 Ability to test entered site key and secret key. Ability to add custom styles.

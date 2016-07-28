@@ -4,7 +4,7 @@ Contributors: tabrisrp, WPServeur
 Tags: rename, login, wp-login, wp-login.php, custom login url
 Requires at least: 4.1
 Tested up to: 4.5
-Stable tag: 1.1.6
+Stable tag: 1.1.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -63,6 +63,9 @@ This case can come from plugins modifying your .htaccess files to add or change 
 First step is to check your .htaccess file and compare it to a regular one, to see if the problem comes from it.
 
 == Changelog ==
+
+= 1.1.7 =
+* Fix: change fake 404 on wp-admin when not logged-in to a 403 forbidden to prevent fatal errors with various themes & plugins
 
 = 1.1.6 =
 * Fix: bug with Yoast SEO causing a Fatal Error and blank screen when loading /wp-admin/ without being logged-in

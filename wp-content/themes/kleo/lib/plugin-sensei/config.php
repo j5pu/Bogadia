@@ -10,6 +10,11 @@ remove_all_actions('sensei_message_single_title');
 remove_all_actions('sensei_quiz_single_title');
 add_theme_support( 'sensei' );
 
+remove_action( 'sensei_single_course_content_inside_before' ,array('Sensei_Course', 'the_title' ) );
+remove_action( 'sensei_single_quiz_content_inside_before' ,array('Sensei_Quiz', 'the_title' ), 20 );
+remove_action( 'sensei_single_lesson_content_inside_before' , array('Sensei_Lesson', 'the_title' ), 15 );
+remove_action('sensei_archive_before_course_loop', array( 'Sensei_Course', 'archive_header' ), 10 );
+
 
 add_action('sensei_before_main_content', 'kleo_sensei_wrapper_start', 10);
 function kleo_sensei_wrapper_start() {
@@ -41,11 +46,11 @@ function kleo_sensei_title($args){
         }
     }
     if( is_singular('course') ){
-        remove_all_actions('sensei_course_image');
+        //remove_all_actions('sensei_course_image');
         remove_all_actions('sensei_course_single_title');
     }
     if( is_singular('lesson') ){
-        remove_all_actions('sensei_lesson_image');
+       // remove_all_actions('sensei_lesson_image');
         remove_all_actions('sensei_lesson_single_title');
     }
     if( isset( $wp_query->query_vars['learner_profile'] ) ) {

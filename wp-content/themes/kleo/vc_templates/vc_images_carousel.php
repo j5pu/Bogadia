@@ -10,6 +10,7 @@ extract(shortcode_atts(array(
     'el_class' => '',
     'min_items' => '1',
     'max_items' => '1',
+	'items_width' => '',
     'autoplay' => '',
     'hide_pagination_control' => '',
     'hide_prev_next_buttons' => '',
@@ -58,6 +59,9 @@ $data_attr .= ' data-autoplay="' . $autoplay . '"';
 $data_attr .= ' data-speed="' . $speed . '"';
 $data_attr .= ' data-scroll-fx="' . $scroll_fx . '"';
 $data_attr .= ' data-items-height="variable"';
+if ( $items_width != '' ) {
+	$data_attr .= ' data-items-width="' . (int)$items_width . '"';
+}
 
 ?>
 

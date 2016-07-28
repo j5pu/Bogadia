@@ -142,13 +142,14 @@
                 if ( kleo_get_post_thumbnail_url() != '' ) {
                     echo '<div class="post-image">';
 
-                    $img_url = kleo_get_post_thumbnail_url();
+                    /*$img_url = kleo_get_post_thumbnail_url();
                     $image = aq_resize( $img_url, $kleo_config['post_gallery_img_width'], null, true, true, true );
                     if( ! $image ) {
                         $image = $img_url;
-                    }
+                    }*/
                     echo '<a href="'. get_permalink() .'" class="element-wrap">'
-                        . '<img src="' . $image . '" alt="'. get_the_title() .'">'
+                        //. '<img src="' . $image . '" alt="'. get_the_title() .'">'
+                         . kleo_get_post_thumbnail( null, 'kleo-post-small-thumb' )
                         . kleo_get_img_overlay()
                         . '</a>';
 

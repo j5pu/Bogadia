@@ -1,12 +1,12 @@
 <?php
 /*
 Plugin Name: Google Captcha (reCAPTCHA) by BestWebSoft
-Plugin URI: http://bestwebsoft.com/products/
-Description: Plugin Google Captcha intended to prove that the visitor is a human being and not a spam robot.
+Plugin URI: http://bestwebsoft.com/products/google-captcha/
+Description: Protect WordPress website forms from spam entries with Google Captcha (reCaptcha).
 Author: BestWebSoft
 Text Domain: google-captcha
 Domain Path: /languages
-Version: 1.23
+Version: 1.25
 Author URI: http://bestwebsoft.com/
 License: GPLv3 or later
 */
@@ -31,7 +31,7 @@ License: GPLv3 or later
 if ( ! function_exists( 'gglcptch_admin_menu' ) ) {
 	function gglcptch_admin_menu() {
 		bws_general_menu();
-		$gglcptch_settings = add_submenu_page( 'bws_plugins', __( 'Google Captcha Settings', 'google-captcha' ), 'Google Captcha', 'manage_options', 'google-captcha.php', 'gglcptch_settings_page' );
+		$gglcptch_settings = add_submenu_page( 'bws_panel', __( 'Google Captcha Settings', 'google-captcha' ), 'Google Captcha', 'manage_options', 'google-captcha.php', 'gglcptch_settings_page' );
 		add_action( 'load-' . $gglcptch_settings, 'gglcptch_add_tabs' );
 	}
 }

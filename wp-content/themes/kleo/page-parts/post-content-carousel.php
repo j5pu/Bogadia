@@ -127,14 +127,15 @@ global $kleo_config;
 			
 			if ( kleo_get_post_thumbnail_url() != '' ) {
 				echo '<div class="post-image">';
-				$img_url = kleo_get_post_thumbnail_url();
-				$image = aq_resize( $img_url, $kleo_config['post_gallery_img_width'], $kleo_config['post_gallery_img_height'], true, true, true );
-				if( $image ) {
+				//$img_url = kleo_get_post_thumbnail_url();
+				//$image = aq_resize( $img_url, $kleo_config['post_gallery_img_width'], $kleo_config['post_gallery_img_height'], true, true, true );
+				//if( $image ) {
 					echo '<a href="'. get_permalink() .'" class="element-wrap">'
-						. '<img src="'.$image.'" alt="'. get_the_title() .'">'
+						//. '<img src="'.$image.'" alt="'. get_the_title() .'">'
+					     . kleo_get_post_thumbnail( null, 'kleo-post-gallery' )
 						. kleo_get_img_overlay()
 						. '</a>';	
-				}
+				//}
 				echo '</div><!--end post-image-->';
 			}
 			

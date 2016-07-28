@@ -10,6 +10,8 @@ class Kleo {
     private $custom_css;
 
     private $tgm_plugins;
+
+	static $modules = array();
     
 	/**
 	 * Constructor method for the Kleo class. It controls the load order of the required files for running 
@@ -17,7 +19,7 @@ class Kleo {
 	 *
 	 * @since 1.0.0
 	 */
-	function __construct($args) {
+	function __construct( $args ) {
 
 		$this->args = $args;
         
@@ -82,6 +84,37 @@ class Kleo {
 		/* If is a AJAX request */
 		define('IS_AJAX', isset($_SERVER['HTTP_X_REQUESTED_WITH']) && strtolower($_SERVER['HTTP_X_REQUESTED_WITH']) == 'xmlhttprequest');
 
+	}
+
+	/**
+	 * Set a module init
+	 * @param $name
+	 * @param $value
+	 */
+	static function set_module( $name, $value ) {
+		self::$modules[$name] = $value;
+	}
+
+	/**
+	 * Get a module initialization
+	 * @param $name
+	 *
+	 * @return bool|mixed
+	 */
+	static function get_module( $name ) {
+		if ( isset( self::$modules[ $name ] ) ) {
+			return self::$modules[ $name ];
+		}
+
+		return false;
+	}
+
+	/**
+	 * Get all initialized modules
+	 * @return array
+	 */
+	static function get_modules() {
+		return self::$modules;
 	}
 
 	/**
@@ -476,17 +509,16 @@ class Kleo {
      */
     public function themeforest_themes_update($updates) {
         if (isset($updates->checked)) {
-            if (!class_exists('Pixelentity_Themes_Updater')) {
+            if ( ! class_exists( 'Pixelentity_Themes_Updater' ) ) {
                 require_once(KLEO_DIR ."/inc/pixelentity-themes-updater/class-pixelentity-themes-updater.php");
             }
-            $username = sq_option('tf_username',false) ? sq_option('tf_username') : null;
-            $apikey = sq_option('tf_apikey', false) ? sq_option('tf_apikey') : null;
+            $username = sq_option( 'tf_username', false ) ? trim(sq_option( 'tf_username' )) : null;
+            $apikey = sq_option('tf_apikey', false) ? trim(sq_option('tf_apikey')) : null;
 
-            $updater = new Pixelentity_Themes_Updater($username,$apikey);
+            $updater = new Pixelentity_Themes_Updater( $username,$apikey );
             $updates = $updater->check($updates);
         }
         return $updates;
     }
     
 }
-?>

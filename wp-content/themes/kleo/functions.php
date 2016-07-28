@@ -50,6 +50,9 @@ define('SK_ENVATO_SECRET', 'RqjBt/YyaTOjDq+lKLWhL10sFCMCJciT9SPUKLBBmso=');
  * @since Kleo Framework 1.0
  */
 function kleo_setup() {
+    
+    
+    global $kleo_config;
 
     /*
      * Makes theme available for translation.
@@ -79,7 +82,25 @@ function kleo_setup() {
     /* This theme uses a custom image size for featured images, displayed on "standard" posts. */
     add_theme_support( 'post-thumbnails' );
     set_post_thumbnail_size( 672, 9999 ); // Unlimited height, soft crop
-    add_image_size( 'kleo-full-width', 1038, 9999 );
+
+    add_image_size( 'kleo-full-width',
+        sq_option( 'blog_img_single_width', 1038 ),
+        sq_option( 'blog_img_single_height', 9999 )
+    ); //default 480x270
+    add_image_size( 'kleo-post-gallery', 
+        sq_option( 'blog_img_standard_width', $kleo_config['post_gallery_img_width'] ),
+        sq_option( 'blog_img_standard_height', $kleo_config['post_gallery_img_height'] )
+    ); //default 480x270
+    add_image_size( 'kleo-post-grid',
+        sq_option( 'blog_img_grid_width', $kleo_config['post_gallery_img_width'] ),
+        sq_option( 'blog_img_grid_height', 9999 )
+    ); //default 480xauto-height
+    add_image_size( 'kleo-post-small-thumb',
+        sq_option( 'blog_img_small_width', $kleo_config['post_gallery_img_width'] ),
+        sq_option( 'blog_img_small_height', 9999 )
+    ); //default 480xauto-height
+
+
     /*
      * Switch default core markup for search form, comment form, and comments
      * to output valid HTML5.
@@ -99,7 +120,6 @@ function kleo_setup() {
     add_theme_support( 'kleo-facebook-login' );
     add_theme_support( 'kleo-mega-menu' );
     add_theme_support( 'kleo-menu-items' );
-    add_theme_support( 'kleo-portfolio' );
 
     /* Third-party plugins */
     add_theme_support( 'bbpress' );
@@ -1015,7 +1035,7 @@ if ( !function_exists( 'kleo_prepare_layout' ) ) {
             }
             //Remove search icon
             if (get_cfield('hide_search_icon') && get_cfield('hide_search_icon') == 1 ) {
-                remove_filter('wp_nav_menu_items', 'kleo_search_menu_item', 10);
+                remove_filter('wp_nav_menu_items', 'kleo_search_menu_item', 200, 2);
             }
 
             //title section css
@@ -1174,15 +1194,17 @@ function kleo_body_classes($classes = '') {
     if ( ( sq_option('sticky_menu', 1) == 1 && sq_option( 'transparent_logo', 1 ) == 1 )
          || ( is_singular() && get_cfield( 'transparent_menu' )) ) {
         $classes[] = 'navbar-transparent';
-    }
 
-    if ( is_singular() && get_cfield( 'transparent_menu' ) ) {
-        $classes[] = 'navbar-transparent';
         if ( get_cfield('transparent_menu_color') === 'black' ) {
             $classes[] = 'on-light-bg';
         } else {
             $classes[] = 'on-dark-bg';
         }
+
+        if (sq_option('header_overlay_hover', 0) == 1) {
+            $classes[] = 'navbar-hover-opacity';
+        }
+
     }
 
     if (sq_option('sitewide_animations', 'enabled') == 'disable-all') {

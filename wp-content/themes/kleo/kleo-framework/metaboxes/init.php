@@ -87,8 +87,8 @@ class kleo_Meta_Box {
 		add_action( 'admin_menu', array( &$this, 'add' ) );
 		add_action( 'save_post', array( &$this, 'save' ) );
 
-		add_filter( 'cmb_show_on', array( &$this, 'add_for_id' ), 10, 2 );
-		add_filter( 'cmb_show_on', array( &$this, 'add_for_page_template' ), 10, 2 );
+		add_filter( 'kleo_cmb_show_on', array( &$this, 'add_for_id' ), 10, 2 );
+		add_filter( 'kleo_cmb_show_on', array( &$this, 'add_for_page_template' ), 10, 2 );
 	}
 
     /**
@@ -112,7 +112,7 @@ class kleo_Meta_Box {
             );
         }
         $cmb_url = set_url_scheme( $cmb_url );
-        return trailingslashit( apply_filters('cmb_meta_box_url', $cmb_url ) );
+        return trailingslashit( apply_filters('kleo_cmb_meta_box_url', $cmb_url ) );
     }
 
 	function add_post_enctype() {
@@ -132,14 +132,14 @@ class kleo_Meta_Box {
 		$this->_meta_box['show_on'] = empty( $this->_meta_box['show_on'] ) ? array('key' => false, 'value' => false) : $this->_meta_box['show_on'];
 
 		foreach ( $this->_meta_box['pages'] as $page ) {
-			if( apply_filters( 'cmb_show_on', true, $this->_meta_box ) )
+			if( apply_filters( 'kleo_cmb_show_on', true, $this->_meta_box ) )
 				add_meta_box( $this->_meta_box['id'], $this->_meta_box['title'], array(&$this, 'show'), $page, $this->_meta_box['context'], $this->_meta_box['priority']) ;
 		}
 	}
 
 	/**
 	 * Show On Filters
-	 * Use the 'cmb_show_on' filter to further refine the conditions under which a metabox is displayed.
+	 * Use the 'kleo_cmb_show_on' filter to further refine the conditions under which a metabox is displayed.
 	 * Below you can limit it by ID and page template
 	 */
 
@@ -198,7 +198,7 @@ class kleo_Meta_Box {
         $tabs = array();
         
 		// Use nonce for verification
-		echo '<input type="hidden" name="wp_meta_box_nonce" value="', wp_create_nonce( basename(__FILE__) ), '" />';
+		echo '<input type="hidden" name="wp_kleo_meta_box_nonce" value="', wp_create_nonce( basename(__FILE__) ), '" />';
 		echo '<table class="form-table cmb_metabox">';
 
 		foreach ( $this->_meta_box['fields'] as $field ) {
@@ -571,7 +571,7 @@ MYJS;
                                         
                                         
 				default:
-					do_action('cmb_render_' . $field['type'] , $field, $meta);
+					do_action('kleo_cmb_render_' . $field['type'] , $field, $meta);
 			}
             
 			if ( $field['type'] != "tab") {
@@ -607,7 +607,7 @@ MYJS;
 	function save( $post_id)  {
 
 		// verify nonce
-		if ( ! isset( $_POST['wp_meta_box_nonce'] ) || !wp_verify_nonce( $_POST['wp_meta_box_nonce'], basename(__FILE__) ) ) {
+		if ( ! isset( $_POST['wp_kleo_meta_box_nonce'] ) || !wp_verify_nonce( $_POST['wp_kleo_meta_box_nonce'], basename(__FILE__) ) ) {
 			return $post_id;
 		}
 
@@ -661,7 +661,7 @@ MYJS;
 				$new = strtotime( $string );
 			}
 
-			$new = apply_filters('cmb_validate_' . $field['type'], $new, $post_id, $field);
+			$new = apply_filters('kleo_cmb_validate_' . $field['type'], $new, $post_id, $field);
 
 			// validate meta value
 			if ( isset( $field['validate_func']) ) {
@@ -725,8 +725,8 @@ function kleo_cmb_scripts( $hook ) {
 		wp_localize_script( 'kleo-cmb-scripts', 'cmb_ajax_data', array( 'ajax_nonce' => wp_create_nonce( 'ajax_nonce' ), 'post_id' => get_the_ID() ) );
 		wp_enqueue_script( 'kleo-cmb-scripts' );
 		wp_enqueue_script('media-upload');
-		wp_register_style( 'cmb-styles', KLEO_META_BOX_URL . 'style.css', $cmb_style_array );
-		wp_enqueue_style( 'cmb-styles' );
+		wp_register_style( 'kleo-cmb-styles', KLEO_META_BOX_URL . 'style.css', $cmb_style_array );
+		wp_enqueue_style( 'kleo-cmb-styles' );
 	}
 }
 add_action( 'admin_enqueue_scripts', 'kleo_cmb_scripts', 10 );

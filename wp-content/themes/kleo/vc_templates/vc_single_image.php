@@ -101,7 +101,7 @@ switch ( $source ) {
             $img = wpb_getImageBySize( array(
                 'attach_id' => $img_id,
                 'thumb_size' => $img_size,
-                'class' => 'vc_single_image-img'
+                'class' => 'vc_single_image-img',
             ) );
         } else {
             $img = NULL;

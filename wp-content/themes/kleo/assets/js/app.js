@@ -511,6 +511,9 @@ var kleoPage = {
             kleoPage.refreshContentTabs(this);
         } );
 
+        /* Open tab or accordion by hash url */
+        kleoPage.openTabHash();
+
         //tours
         if ($('.wpb_tour').length) {
             $('.tour_next_slide').click(function() {
@@ -640,6 +643,52 @@ var kleoPage = {
             $google_maps_frame.attr('src', $google_maps_frame.attr('src'));
             $google_maps.addClass('map_ready');
         }
+    },
+    openTabHash: function () {
+        /* Open the tab or accordion */
+        var hash = location.hash,
+            hashPieces = hash.split('?'),
+            prefix = "link_";
+
+        if (hash && hash != '') {
+            var activeTab = $('.nav-tabs a[href="' + hashPieces[0].replace(prefix,"") + '"]');
+            var activeTour = $('.nav-tab a[href="' + hashPieces[0].replace(prefix,"") + '"]');
+            var activeToggle = $('.panel-group a[href="' + hashPieces[0].replace(prefix,"") + '"]');
+
+            if (activeTab.length) {
+                activeTab.tab('show');
+            }
+            if (activeTour.length) {
+                activeTour.tab('show');
+            }
+            if (activeToggle.length) {
+                if (! activeToggle.hasClass("collapsed")) {
+                    activeToggle.trigger('click');
+                }
+            }
+        }
+
+        /* Change the hash on tab/accordion open */
+
+        var tabs = $('.nav-tabs a, .nav-tab a'),
+            panels = $('.panel-group .panel-collapse');
+
+        // for tabs
+        tabs.on('shown.bs.tab', function (e) {
+            window.location.hash = e.target.hash.replace("#", "#" + prefix);
+        });
+        tabs.on('hidden.bs.tab', function (e) {
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+        });
+        // for accordion
+        panels.on('shown.bs.collapse', function (e) {
+            if ($(this).attr('id')) {
+                window.location.hash = "#" + prefix + $(this).attr('id');
+            }
+        });
+        panels.on('hidden.bs.collapse', function (e) {
+            history.pushState("", document.title, window.location.pathname + window.location.search);
+        });
     },
 
     portfolioVideo: function() {
@@ -1196,7 +1245,7 @@ var kleoPage = {
 
     doingLikesRequest: false,
 	likes: function() {
-		$('.item-likes').on('click', function() {
+		$('#main-container').on('click', '.item-likes', function() {
             var link = $(this);
 
             if(link.hasClass('liked') || kleoPage.doingLikesRequest === true)  {
@@ -1689,18 +1738,21 @@ var kleoShop = {
 					},
 					success: function(response)
 					{
-						$(".kleo-toggle-menu.shop-drop .kleo-toggle-submenu").html(response.cart);
-						$(".kleo-toggle-menu.shop-drop .cart-items > span, .mheader .cart-items > span").html(response.count);
-						
-						if (response.count == '') {
-							$(".kleo-toggle-menu.shop-drop .cart-items").removeClass('has-products');
-                            $(".kleo-toggle-menu.shop-drop .kleo-notifications").removeClass('new-alert');
-                            $(".kleo-toggle-menu.shop-drop .kleo-notifications").addClass('no-alert');
-						} else {
-							$(".kleo-toggle-menu.shop-drop .cart-items").addClass('has-products');
-                            $(".kleo-toggle-menu.shop-drop .kleo-notifications").addClass('new-alert');
-                            $(".kleo-toggle-menu.shop-drop .kleo-notifications").removeClass('no-alert');
-						}
+                        if( response.hasOwnProperty("cart") && response.hasOwnProperty("count") ) {
+                            
+                            $(".kleo-toggle-menu.shop-drop .kleo-toggle-submenu").html(response.cart);
+                            $(".kleo-toggle-menu.shop-drop .cart-items > span, .mheader .cart-items > span").html(response.count);
+
+                            if (response.count == '') {
+                                $(".kleo-toggle-menu.shop-drop .cart-items").removeClass('has-products');
+                                $(".kleo-toggle-menu.shop-drop .kleo-notifications").removeClass('new-alert');
+                                $(".kleo-toggle-menu.shop-drop .kleo-notifications").addClass('no-alert');
+                            } else {
+                                $(".kleo-toggle-menu.shop-drop .cart-items").addClass('has-products');
+                                $(".kleo-toggle-menu.shop-drop .kleo-notifications").addClass('new-alert');
+                                $(".kleo-toggle-menu.shop-drop .kleo-notifications").removeClass('no-alert');
+                            }
+                        }
 						
 						/* widget cart */
 						if ($('.widget_shopping_cart_content').length && response.hasOwnProperty('widget')) {
@@ -2021,13 +2073,16 @@ var kleoHeader = {
         $('.kleo-main-header .nav > li a[href^="#"], .kleo-scroll-to').on('click', function(event) {
 
             var target = '';
+            var speed = 1000;
+            if ($(this).attr('data-speed') && $(this).data('speed') != '') {
+                speed = $(this).data('speed');
+            }
 
             if ($(this).is("a")) {
                  target = kleoHeader.getRelatedContent(this);
             } else {
                 target = kleoHeader.getRelatedContent($(this).find('a[href^="#"]'));
             }
-
 
             var topHeight = 0;
 
@@ -2047,7 +2102,7 @@ var kleoHeader = {
                 event.preventDefault();
                 $('html, body').animate({
                     scrollTop: target.offset().top - topHeight
-                }, 1000);
+                }, speed);
             }
         });
         if ( kleoHeader.getRelatedNavigation(this) ) {

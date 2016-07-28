@@ -28,6 +28,8 @@ tr.bottom-border td {
 .admin-color-fresh .redux-sidebar .redux-group-menu li.activeChild.hasSubSections ul.subsection li a {
     background: #444;
 }
+.redux-hint-qtip {float: right !important;}
+
 
 /* Visual composer */
 

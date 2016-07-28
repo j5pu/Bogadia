@@ -6,11 +6,45 @@ window.eml = window.eml || { l10n: {} };
 
     var media = wp.media,
         Attachments = media.model.Attachments,
-        Query = media.model.Query;
+        Query = media.model.Query,
+        original = {};
 
 
 
     _.extend( eml.l10n, wpuxss_eml_media_models_l10n );
+
+
+
+    original.Attachment = {
+
+        sync: media.model.Attachment.prototype.sync
+    };
+
+    _.extend( media.model.Attachment.prototype, {
+
+        sync: function( method, model, options ) {
+
+            var result = original.Attachment.sync.apply( this, arguments );
+
+
+            if ( 'delete' === method ) {
+
+                result.done( function( resp ) {
+
+                    _.each( resp.tcount, function( count, term_id ) {
+
+                        var $option = $( '.eml-taxonomy-filters option[value="'+term_id+'"]' ),
+                            text = $option.text();
+
+                        text = text.replace( /\(.*?\)/, '('+count+')' );
+                        $option.text( text );
+                    });
+                });
+            }
+
+            return result;
+        }
+    });
 
 
 
@@ -65,37 +99,11 @@ window.eml = window.eml || { l10n: {} };
 
             this.filters.order = function( attachment ) {
 
-                var orderby = this.props.get('orderby'),
-                    order = this.props.get('order');
-
-
                 if ( ! this.comparator ) {
                     return true;
                 }
 
-                if ( 'title' === orderby ) {
-                    return attachment.get( 'modified' )  >= this.created;
-
-                // We want any items that can be placed before the last
-                // item in the set. If we add any items after the last
-                // item, then we can't guarantee the set is complete.
-                } else if ( this.length ) {
-                    return 1 !== this.comparator( attachment, this.last(), { ties: true });
-
-                // Handle the case where there are no items yet and
-                // we're sorting for recent items. In that case, we want
-                // changes that occurred after we created the query.
-                } else if ( 'DESC' === order && ( 'date' === orderby || 'modified' === orderby ) ) {
-                    return attachment.get( orderby ) >= this.created;
-
-                // If we're sorting by menu order and we have no items,
-                // accept any items that have the default menu order (0).
-                } else if ( 'ASC' === order && 'menuOrder' === orderby ) {
-                    return attachment.get( orderby ) === 0;
-                }
-
-                // Otherwise, we don't want any items yet.
-                return false;
+                return attachment.get( 'menuOrder' ) === 0;
             };
 
             // Observe the central `wp.Uploader.queue` collection to watch for

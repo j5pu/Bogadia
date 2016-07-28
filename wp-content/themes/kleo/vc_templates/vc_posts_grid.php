@@ -1,26 +1,40 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+    die( '-1' );
+}
+
+/**
+ * Shortcode attributes
+ * @var $atts
+ * @var $title
+ * @var $grid_columns_count
+ * @var $grid_teasers_count
+ * @var $grid_layout
+ * @var $grid_link_target
+ * @var $filter
+ * @var $grid_thumb_size
+ * @var $grid_layout_mode
+ * @var $el_class
+ * @var $loop
+ * @var $content - shortcode content
+ * Shortcode class
+ * @var $this WPBakeryShortCode_VC_Posts_Grid
+ */
+$title = $grid_columns_count = $grid_teasers_count = $grid_layout =
+$grid_link_target = $filter = $grid_thumb_size = $grid_layout_mode = $el_class = $loop = '';
+
+
+/* KLEO Added */
 global $kleo_config;
+$post_layout = $query_offset = $show_thumb = $inline_meta = $show_footer = '';
+/* END KLEO Added */
 
-$grid_link = $grid_layout_mode = $title = $filter = $post_layout = $query_offset = $show_thumb = $inline_meta = $show_footer = '';
+
+global $vc_teaser_box;
+$grid_link = '';
 $posts = array();
-extract(shortcode_atts(array(
-    'title' => '',
-    'columns' => 4,
-    'el_class' => '',
-    'orderby' => NULL,
-    'order' => 'DESC',
-    'loop' => '',
-    'query_offset' => '0',
-    'post_layout' => 'grid',
-    'show_thumb' => 'yes',
-    'show_meta' => 'yes',
-    'inline_meta' => 'no',
-    'show_excerpt' => 'yes',
-    'show_switcher' => 'no',
-    'show_footer' => 'yes',
-    'switcher_layouts' => array_values(array_flip($kleo_config['blog_layouts']))
-), $atts));
-
+$atts = vc_map_get_attributes( $this->getShortcode(), $atts );
+extract( $atts );
 
 if( empty( $loop ) ) return;
 $this->getLoop( $loop );

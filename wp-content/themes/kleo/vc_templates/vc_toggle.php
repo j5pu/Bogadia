@@ -1,4 +1,7 @@
 <?php
+if ( ! defined( 'ABSPATH' ) ) {
+	die( '-1' );
+}
 /**
  * Shortcode attributes
  * @var $atts
@@ -26,8 +29,11 @@
  * Shortcode class
  * @var $this WPBakeryShortCode_VC_Toggle
  */
+$title = $el_class = $style = $color = $size = $open = $css_animation = $css = $el_id = '';
+$output = '';
 
-$output = $span_closed_data = '';
+/* KLEO ADDED */
+$span_closed_data = $use_custom_heading = '';
 
 $inverted = false;
 $atts = vc_map_get_attributes( $this->getShortcode(), $atts );
@@ -97,13 +103,22 @@ $css_class .= $icon_position;
 
 $elem_id = kleo_vc_elem_increment();
 
+if ( 'true' === $use_custom_heading) {
+	$custom_heading = visual_composer()->getShortCode( 'vc_custom_heading' );
+
+	$data = vc_map_integrate_parse_atts( $this->shortcode, 'vc_custom_heading', $atts, 'custom_' );
+	$data['text'] = $atts['title'];
+	$title = $custom_heading->render( array_filter( $data ) );
+}
+
 $output .= '<div class="panel panel-default panel-toggle '.$css_class.'"' .
     (isset( $el_id ) && ! empty( $el_id ) ? " id='" . esc_attr( $el_id ) . "'" : "") . '>
 		<div class="panel-heading">
 			<div class="panel-title">
-				<a class="accordion-toggle" data-toggle="collapse" href="#acc-' . $elem_id . '-d">' . $title .
-                    '<span class="icon-closed'.$icon_closed.'"'.$span_closed_data.'></span>
-                    <span class="icon-opened'.($open != ' in' ? ' hide ' : ' ').$icon.'"></span>
+				<a class="accordion-toggle" data-toggle="collapse" href="#acc-' . $elem_id . '-d">' . 
+                $title .
+                '<span class="icon-closed'.$icon_closed.'"' . $span_closed_data . '></span>' .
+                '<span class="icon-opened'.($open != ' in' ? ' hide ' : ' ') . $icon . '"></span>
 				</a>
 			</div>
 		</div>

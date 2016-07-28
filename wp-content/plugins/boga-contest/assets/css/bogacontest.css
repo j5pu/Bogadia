@@ -133,6 +133,7 @@ input[type="color"]:focus,
 .vote{
     margin-top: 15px !important;
     margin-bottom: 15px !important;
+    z-index: 1060 !important;
 }
 
 .bogacontest_social
@@ -197,7 +198,7 @@ input[type="color"]:focus,
     background-color: #d17b83 !important;
 }
 
-@media screen and (max-width: 700px){
+@media screen and (max-width: 767px){
     #bogacontest_login_modal{
         top: 0 !important;
         z-index: 9000;
@@ -205,18 +206,17 @@ input[type="color"]:focus,
     #interaction_buttons_wrapper{
         position: fixed;
         bottom: 0;
-        left: 0;
-        z-index: 1050;
+        left: 15px;
+        z-index: 1040;
         background-color: white;
         width: 100%;
         border-top: 1px solid rgb(229, 229, 229);
-
     }
     #bogacontest_login_modal_dialog {
         min-height: 300px;
     }
 }
-@media screen and (min-width: 701px) {
+@media screen and (min-width: 768px) {
     #bogacontest_login_modal {
         top: 3% !important;
     }
@@ -232,10 +232,12 @@ input[type="color"]:focus,
     #bogacontest_login_modal_dialog {
         min-height: 400px;
     }
-
-    /*    #gallery{
-            padding-right: 45px !important;
-        }}*/
+    #button_upload_col{
+        padding: 0 1px 0 15px;
+    }
+    #button_delete_col{
+        padding: 0 15px 0 1px;
+    }
 }
 #bogacontest_login_modal{
     position: fixed;

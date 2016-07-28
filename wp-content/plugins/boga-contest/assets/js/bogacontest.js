@@ -203,8 +203,8 @@ var photo_manager = {
                 minWidth: 300,
                 minHeight: 150,
                 canvas: true,
+                aspectRatio: 16/9,
                 orientation: ori,
-                aspectRatio: 16/9
             }
         }else
         {
@@ -368,8 +368,6 @@ var photo_manager = {
                 options
             );
         });
-
-
     },
     delete: function (){
         jQuery.ajax({

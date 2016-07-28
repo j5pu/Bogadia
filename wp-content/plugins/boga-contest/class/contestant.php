@@ -820,19 +820,20 @@ class contestant
         self::print_main_photo();
 
         // TARJETA: NOMBRE, VOTOS, POSICION , COMPARTIR Y VOTAR
+        echo '<div id="interaction_buttons_wrapper">';
         // Nombres, votos y posicion
         echo '<div  class="row" >';
         echo '<div class="col-md-12 text-center">';
-        echo '<h2 style="font-size: 150%;"><span id="">'. $this->name .'</span></h2>';
-        echo '<h5 id="votes-'. $this->ID .'" data-votes="'. $this->votes .'" >'. $this->votes .' votos</h5>';
+        echo '<h2 id="contestant_name" style="font-size: 150%;">'. $this->name .'';
+        echo ' <small id="votes-'. $this->ID .'" data-votes="'. $this->votes .'"  >'. $this->votes .' votos</small>';
         if(!empty($this->position))
         {
-            echo '<h5>'. $this->position .'º puesto</h5>';
+            echo ' <small >Puesto nº '. $this->position .'</small>';
         }
-        echo '</div>';
+        echo '</h2></div>';
         echo '</div>';
         // Botones
-        echo '<div id="interaction_buttons_wrapper" class="row">';
+        echo '<div  class="row">';
         echo '<div  class="col-md-12">';
         if (!$current_user_is_editing){
             self::print_share_buttons();
@@ -850,6 +851,7 @@ class contestant
 
         echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->contest->slug .'"></div>';
         echo '</div>';
+        echo '</div>';
         // FIN TARJETA
 
 
@@ -857,7 +859,7 @@ class contestant
 
 
         // Galeria
-        echo '<div class="col-sm-7 col-md-7 col-lg-8">';
+        echo '<div id="rigth_column" class="col-sm-7 col-md-7 col-lg-8">';
         self::print_contestant_gallery();
         echo '</div>';
 

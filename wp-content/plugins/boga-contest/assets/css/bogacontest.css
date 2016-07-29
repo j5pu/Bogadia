@@ -212,9 +212,18 @@ input[type="color"]:focus,
         background-color: white;
         width: 100%;
         /*
-        border-top: 1px solid rgb(229, 229, 229);
-        */
         padding: 5px 15px 5px 15px;
+        */
+    }
+    #interaction_buttons{
+        bottom: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        z-index: 1050;
+        background-color: white;
+        padding: 10px 0px 10px 0px;
+        margin: 0;
     }
     #bogacontest_login_modal_dialog {
         min-height: 300px;

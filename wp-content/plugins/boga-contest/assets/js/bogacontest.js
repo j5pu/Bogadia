@@ -657,18 +657,19 @@ jQuery(document).ready(function()
         var currentScroll = jQuery(window).scrollTop();
 
         if ((end_image - currentScroll) > start_card){
-/*                jQuery('#interaction_buttons_wrapper').css({
-                    position: 'fixed',
-                });*/
-            jQuery('#interaction_buttons').removeClass('fixed_to_bottom');
-            jQuery('#interaction_buttons_wrapper').addClass('fixed_to_bottom');
-
-        }else{
-            jQuery('#interaction_buttons_wrapper').removeClass('fixed_to_bottom');
-            jQuery('#interaction_buttons').addClass('fixed_to_bottom');
+            jQuery('#interaction_buttons_wrapper').css({
+                position: 'fixed',
+            });
             jQuery('#interaction_buttons').css({
-                left: '15px',
-                padding: '0 0 15px 0',
+                position: 'static',
+            });
+        }else{
+            jQuery('#interaction_buttons_wrapper').css({
+                position: 'static'
+            });
+            jQuery('#interaction_buttons').css({
+                position: 'fixed',
+
             });
         }
     });

@@ -649,7 +649,7 @@ jQuery(document).ready(function()
         jQuery("#interaction_buttons_wrapper").css("top",Math.max(0,2-jQuery(this).scrollTop()));
     });*/
 
-    var screenHeight = jQuery(window).height();
+/*    var screenHeight = jQuery(window).height();
     var start_card = jQuery('#interaction_buttons_wrapper').offset().top;
     var end_image = jQuery('#image_bottom').offset().top;
 
@@ -672,6 +672,6 @@ jQuery(document).ready(function()
 
             });
         }
-    });
+    });*/
 
 });

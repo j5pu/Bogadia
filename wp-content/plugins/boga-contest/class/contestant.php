@@ -741,6 +741,7 @@ class contestant
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
         echo '<em class="icon-twitter bogacontest_social"></em>';
+/*        */?><!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="Bogadiamag" data-lang="es" data-size="large">Twittear</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>--><?php
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
         echo '<i class="icon-instagramm bogacontest_social"></i>';
@@ -806,11 +807,12 @@ class contestant
         // Foto principal y nombre
         echo '<div class="col-sm-5 col-md-5 col-lg-4">';
         self::print_main_photo();
+        echo '<div id="image_bottom"></div>';
 
         // TARJETA: NOMBRE, VOTOS, POSICION , COMPARTIR Y VOTAR
-        echo '<div id="interaction_buttons_wrapper">';
+        echo '<div id="interaction_buttons_wrapper" class="fixed_to_bottom" style="padding-bottom: 0px;">';
         // Nombres, votos y posicion
-        echo '<div  class="row" >';
+        echo '<div class="row" >';
         echo '<div class="col-md-12 text-center">';
         echo '<h2 id="contestant_name" style="font-size: 150%;">'. $this->name .'';
         echo ' <small id="votes-'. $this->ID .'" data-votes="'. $this->votes .'"  >'. $this->votes .' votos</small>';
@@ -821,23 +823,20 @@ class contestant
         echo '</h2></div>';
         echo '</div>';
         // Botones
-        echo '<div  class="row">';
-        echo '<div  class="col-md-12">';
+        echo '<div id="interaction_buttons" class="row">';
+        echo '<div class="col-md-12">';
         if (!$current_user_is_editing){
             self::print_share_buttons();
             self::print_vote_button(True);
         }else{
             echo '<div style="margin-top: 10px; margin-bottom: 10px;">';
-
             echo '<button id="preview" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text"><i class="icon-eye" aria-hidden="true"></i>PREVISUALIZAR</span></div></button>';
-
             echo '</div>';
-
         }
         echo '</div>';
         echo '</div>';
 
-        echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->contest->slug .'"></div>';
+        echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->contest->slug .'" style="margin-bottom: 0px;"></div>';
         echo '</div>';
         echo '</div>';
         // FIN TARJETA

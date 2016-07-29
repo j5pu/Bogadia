@@ -644,4 +644,33 @@ jQuery(document).ready(function()
     grid.imagesLoaded().progress( function() {
         grid.masonry('layout');
     });
+/*
+    jQuery(window).scroll(function(){
+        jQuery("#interaction_buttons_wrapper").css("top",Math.max(0,2-jQuery(this).scrollTop()));
+    });*/
+
+    var screenHeight = jQuery(window).height();
+    var start_card = jQuery('#interaction_buttons_wrapper').offset().top;
+    var end_image = jQuery('#image_bottom').offset().top;
+
+    jQuery(window).scroll(function() {
+        var currentScroll = jQuery(window).scrollTop();
+
+        if ((end_image - currentScroll) > start_card){
+/*                jQuery('#interaction_buttons_wrapper').css({
+                    position: 'fixed',
+                });*/
+            jQuery('#interaction_buttons').removeClass('fixed_to_bottom');
+            jQuery('#interaction_buttons_wrapper').addClass('fixed_to_bottom');
+
+        }else{
+            jQuery('#interaction_buttons_wrapper').removeClass('fixed_to_bottom');
+            jQuery('#interaction_buttons').addClass('fixed_to_bottom');
+            jQuery('#interaction_buttons').css({
+                left: '15px',
+                padding: '0 0 15px 0',
+            });
+        }
+    });
+
 });

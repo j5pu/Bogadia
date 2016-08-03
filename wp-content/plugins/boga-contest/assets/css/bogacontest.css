@@ -1,9 +1,3 @@
-/*
-#main-container > div > div > div > div > h1{
-    display: none;
-}
-*/
-
 .login_overlay{
     height: 100%;
     width: 100%;
@@ -35,10 +29,10 @@
 }
 
 #bogacontest_fb_login{
-    background-color: #3b5998;
+    background-color: #3b5998 !important;
     color: white;
     margin-bottom: 10px;
-    margin-top: 10px;
+    margin-top: 50px;
     border-color: #3b5998;
     border-radius: 7px;
     width: 100%;
@@ -50,10 +44,12 @@
 }
 
 #bogacontest_login_modal_dialog{
+    /*
     background-image: url("../img/login.jpg");
+    */
     background-size: 100%;
     background-repeat: no-repeat;
-    background-color: #181820;
+    background-color: white;
 }
 
 #bogacontest_login_header{
@@ -62,6 +58,7 @@
 
 #bogacontest_login_footer{
     border-top: none;
+    color: grey;
 }
 /*
 #bogacontest_login_body{
@@ -235,6 +232,14 @@ input[type="color"]:focus,
         margin-bottom: 0px !important;
         margin-top: 5px !important;
     }
+    #participate {
+        background-image:url('/wp-content/plugins/boga-contest/assets/img/cartel_prueba_movil_fullhd6-min.png');
+        width:100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        padding-top: 177.77%;
+        height: 0;
+    }
 }
 @media screen and (min-width: 768px) {
     #bogacontest_login_modal {
@@ -258,9 +263,14 @@ input[type="color"]:focus,
     #button_delete_col{
         padding: 0 15px 0 1px;
     }
-}
-#bogacontest_login_modal{
-    position: fixed;
+    #participate {
+        background-image:url('/wp-content/plugins/boga-contest/assets/img/Sintitulo-1-min.png');
+        width:100%;
+        background-repeat: no-repeat;
+        background-size: 100%;
+        padding-top: 56.25%;
+        height: 0;
+    }
 }
 #bogacontest_login_modal > div > p {
     margin: 6px 6px;
@@ -270,9 +280,6 @@ input[type="color"]:focus,
     margin: 0 auto !important;
 }
 
-#participate{
-    margin-bottom: 50px;
-}
 .modal-dialog {
     z-index: 1060;
 }
@@ -284,4 +291,7 @@ input[type="color"]:focus,
 }
 .main-color .btn-primary, .main-color #buddypress li span.unread-count, .main-color #buddypress #groups-list .item-avatar .member-count {
     background-color: #e3007c !important;
+}
+#participate{
+    padding-bottom: 50px !important;
 }

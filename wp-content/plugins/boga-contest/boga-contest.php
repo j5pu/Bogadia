@@ -389,7 +389,6 @@ function bogacontest_new_user_mail($info)
     wp_mail($user_email, $email_subject, $message);
 }
 
-
 add_filter( 'wpseo_sitemap_index', 'bogacontest_sitemap_index' );
 register_activation_hook( __FILE__, 'bogacontest_install' );
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');

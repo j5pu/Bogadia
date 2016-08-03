@@ -406,7 +406,7 @@ function new_contestant(){
                     ]);
                     jQuery('#login_succes_loader').velocity('fadeIn');
 
-                    jQuery('#form_wrapper').html('<div class="text-center"><h3 style="color: white;">Te estamos inscribiendo en el concurso</h3></div>');
+                    jQuery('#form_wrapper').html('<div class="text-center"><h3 style="color: grey;">Te estamos inscribiendo en el concurso</h3></div>');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/new_contestant.php",
@@ -417,12 +417,12 @@ function new_contestant(){
             })
             .done(function( msg ) {
                 msg = JSON.parse(msg);
-                jQuery('#form_wrapper').html('<div class="text-center" style="color: white;"><h3 style="color: white;">' + msg.message + '</h3></div>');
+                jQuery('#form_wrapper').html('<div class="text-center" style="color: grey;"><h3 style="color: grey;">' + msg.message + '</h3></div>');
                 jQuery('#bogacontest_up_login_action_after_login').val('redirect');
                 login.action_after_login(msg);
             })
             .fail(function( msg ) {
-                alert('fallo' + msg);
+                jQuery('#form_wrapper').html('<div class="text-center" style="color: grey;"><h3 style="color: grey;">' + 'Upps! Ha ocurrido un error. Vuelve a intentarlo por favor.' + '</h3></div>');
             })
         ;
     }
@@ -619,8 +619,9 @@ jQuery(document).ready(function()
         vote.button = jQuery(this);
         vote.new_vote();
     });
-    jQuery('#participate').on('click', function(){
+    jQuery('#participate, #participate_menu').on('click', function(e){
         new_contestant();
+        e.preventDefault();
     });
 
     login.bind_events();

@@ -137,16 +137,19 @@ input[type="color"]:focus,
 .bogacontest_social
 {
     display: inline-block;
-    border-radius: 60px;
-    box-shadow: 0px 0px 2px #888;
+/*    border-radius: 60px;
+    box-shadow: 0px 0px 2px #888;*/
     width: 25px !important;
     cursor: pointer;
     padding-left: 1px;
+    color: #e3007c;
 }
 
 .bogacontest_social_row{
+    /*
     margin-top: 15px !important;
-    margin-bottom: 15px !important;
+    */
+    margin-bottom: 10px !important;
 }
 
 #bogacontest_breadcrumb{

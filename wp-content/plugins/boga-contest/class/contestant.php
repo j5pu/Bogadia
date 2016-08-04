@@ -739,19 +739,20 @@ class contestant
             $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
             return strtr(rawurlencode($str), $revert);
         }
-
+        $url = 'https://www.bogadia.com/concursos/'. $this->contest->slug .'/'. $this->nice_name ;
+        $title = 'Vota a '. $this->nice_name .' y gana 50€';
         echo '<div class="row bogacontest_social_row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a href="http://www.facebook.com/sharer/sharer.php?u=[URL]&title=[TITLE]"><em class="icon-facebook bogacontest_social"></em></a>';
+        echo '<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a href="http://twitter.com/intent/tweet?status=Bogadia+https://www.bogadia.com"><em class="icon-twitter bogacontest_social"></em></a>';
+        echo '<a target="_blank" href="http://twitter.com/intent/tweet?status='. $title .'+'. $url .'+@Bogadiamag"><em class="icon-twitter bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a href="whatsapp://send?text='. encodeURIComponent('[TITLE]') .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
+        echo '<a target="_blank" href="whatsapp://send?text='. encodeURIComponent($url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=[MEDIA]&url=[URL]&is_video=false&description=[TITLE]"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
+        echo '<a target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media='. $this->main_photo .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
         echo '</div>';
         echo '</div>';
     }
@@ -846,8 +847,11 @@ class contestant
         // FIN COLUMNA IZQUIERDA
 
 
-        // Galeria
         echo '<div id="rigth_column" class="col-sm-7 col-md-7 col-lg-8">';
+        // Galeria
+        if(($current_user_id == $this->user_id) && !(isset($_GET['edit']))){
+            echo '<div class="alert alert-success"><strong>¡Todo listo!</strong> Ya estás participando. Recuerda que puedes subir más fotos cuando quieras. ¡Comparte esta página con tus amigos para que te voten y entren en el sorteo de 50€!</div>';
+        }
         self::print_contestant_gallery();
         echo '</div>';
 

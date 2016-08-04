@@ -9,7 +9,7 @@ require_once('../../../wp-load.php');
 
 $filename = str_replace(' ', '', $_POST['name']);
 
-$filename  = md5( $filename . microtime() );
+$filename  = md5( $filename . microtime() ) . '.jpeg';
 
 
 $contestant_folder = WP_CONTENT_DIR .'/uploads/bogacontest/'. $_POST['contest_slug'] .'/'. $_POST['contestant_id'];

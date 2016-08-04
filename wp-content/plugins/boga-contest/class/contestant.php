@@ -469,7 +469,7 @@ class contestant
         ob_start();
         ?>
 
-        <p>Buenas, <?php echo cut_title($this->name, 15)  ?>. Gracias por participar en Bogacontest</p>
+        <p>Buenas, <?php echo cut_title($this->name, 15)  ?>. Gracias por participar en el concurso de modelos de bogadia</p>
 
         <p>
             Te deseamos toda la suerte del mundo.
@@ -481,6 +481,9 @@ class contestant
 
         <p>
             Ahí es donde tus amigos y todo el mundo podrá ver tus fotos y, lo más importante, votarte.
+        </p>
+        <p>
+            Recuerda que puedes añadir más fotos y cambiar tu imagen principal siempre que quieras.
         </p>
         <p>
             Si tienes cualquier problema, duda o sugerencia, escribe un mail a info@bogadia.com
@@ -746,10 +749,10 @@ class contestant
         echo '<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="http://twitter.com/intent/tweet?status='. $title .'+'. $url .'+@Bogadiamag"><em class="icon-twitter bogacontest_social"></em></a>';
+        echo '<a target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .'+'. $url .'+@Bogadiamag') .'"><em class="icon-twitter bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="whatsapp://send?text='. encodeURIComponent($title . $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
+        echo '<a target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
         echo '<a target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=https://www.bogadia.com'. $this->main_photo .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogacontest_social"></i></a>';

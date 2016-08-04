@@ -185,7 +185,7 @@ function bogacontest_ajax_register()
     } else
     {
         $info['id'] = $user_register;
-        $info['hash'] = md5( $info['user_pass'] . microtime() );
+        $info['hash'] = md5( $info['user_nicename'] . microtime() );
         add_user_meta( $info['id'], 'hash', $info['hash'] );
         add_user_meta( $info['id'], 'verified', '0' );
         bogacontest_mail_verify($info);
@@ -361,34 +361,31 @@ function bogacontest_mail_verify($info)
     wp_mail($info['user_email'], $email_subject, $message);
 }
 
-function bogacontest_new_user_mail($info)
-{
-    $user_name = cut_title($info['display_name'], 5);
+function WPSEO_OpenGraph_Image() {
+    global $wpseo_og;
+    global $meta_data_container;
 
-    $email_subject = "Verifica tu cuenta " . $user_name . "!";
+    if(!empty($meta_data_container)) {
+        // will get a array with images
+        $opengraph_images = new WPSEO_OpenGraph_Image($wpseo_og->options);
 
-    ob_start();
-    ?>
+        foreach ($opengraph_images->get_images() as $img) {
+            // this block of code will first convert url of image to local path
+            // for faster process of image sizes later
+            $upload_dir = wp_upload_dir();
+            $img_src = str_replace($upload_dir['baseurl'], $upload_dir['basedir'], $img);
+            $size = getimagesize($img_src);
 
-    <p>Buenas, <?php echo $user_name ?>. Gracias por registrarte en Bogadia</p>
+            // display of this tags with Yoast SEO plugin
+            $wpseo_og->og_tag('og:image:width', $size[0]);
+            $wpseo_og->og_tag('og:image:height', $size[1]);
+        }
+    }
 
-    <p>
-        Necesitamos que verifiques tu cuenta. <a href="https://www.bogadia.com/wp-content/plugins/boga-contest/email_verify/?id=">Solo tienes que pulsar aquí.</a>
-    </p>
-
-    <p>
-        Tu contraseña es <strong style="color:orange"><?php echo $info['user_pass'] ?></strong> <br>
-    </p>
-
-    <p>¡Disfruta de bogadia.com! Gracias</p>
-
-    <?php
-    $message = ob_get_contents();
-    ob_end_clean();
-
-    wp_mail($user_email, $email_subject, $message);
 }
 
+
+add_filter("wpseo_opengraph", "WPSEO_OpenGraph_Image");
 add_filter( 'wpseo_sitemap_index', 'bogacontest_sitemap_index' );
 register_activation_hook( __FILE__, 'bogacontest_install' );
 add_filter('rewrite_rules_array','wp_insertMyRewriteRules');
@@ -406,3 +403,4 @@ add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_register', 'bogacontest_ajax_register' );
 add_action( 'wp_ajax_nopriv_wp_ajax_upload_attachment', 'wp_ajax_upload_attachment' );
 add_action( 'init', 'allow_origin' );
+/*add_action('wp_head','fb_img_dimensions');*/

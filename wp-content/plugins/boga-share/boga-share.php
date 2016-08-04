@@ -57,19 +57,30 @@ function bogashare_install() {
 register_activation_hook( __FILE__, 'bogashare_install' );
 
 
-/*function show_bogashare_contestants(){
-    global $wpdb;
-    $results = $wpdb->get_results( "SELECT user_fb_id FROM wp_bogashare", OBJECT );
-    $contestans_fb_ids = array();
-    foreach($results as $result){
-        array_push($contestans_fb_ids, $result->user_fb_id);
+/*add_filter( 'the_content', array($this, 'inside_content_share_banner'));*/
+function inside_content_share_banner( $content ) {
+    function prefix_insert_after_paragraph( $insertion, $paragraph_id, $content ) {
+        $closing_p = '</p>';
+        $paragraphs = explode( $closing_p, $content );
+        foreach ($paragraphs as $index => $paragraph) {
+
+            if ( trim( $paragraph ) ) {
+                $paragraphs[$index] .= $closing_p;
+            }
+
+            if ( $paragraph_id == $index + 1 ) {
+                $paragraphs[$index] .= $insertion;
+            }
+        }
+
+        return implode( '', $paragraphs );
     }
-    $contestans_fb_ids = array_unique($contestans_fb_ids);
-    $results = $wpdb->get_results( "SELECT user_id,meta_value,display_name FROM wp_usermeta INNER JOIN wp_users ON wp_usermeta.user_id = wp_users.ID WHERE meta_key = '_fbid' AND meta_value IN (" . implode(',', array_map('intval', $contestans_fb_ids)) . ")", OBJECT );
-    echo '<ul class="media-list">';
-    foreach($results as $contestant){
-        echo '<li class="media col-xs-6 col-sm-4 portada_posts"><div class="media"><a href="https://www.facebook.com/'. $contestant->meta_value . '"><img class="media-object img-responsive" src="https://graph.facebook.com/'. $contestant->meta_value . '/picture?type=large"></a></div><div class="media-body"><h4 class="media-heading">'. $contestant->display_name . '</h4></div></li>';
+
+    if ( is_single() && ! is_admin()  && !in_category('Streetstyle') && !has_term( 'BogadiaTV', 'post_tag', $this->retrieved_post[0] )) {
+
+        $ad_code = '<div style="max-width: 100%; float: left; margin:0px 20px 20px 0px;"><h5 style="margin:0px auto; font-size: 14px; text-align: center;"><strong>ARTÍCULOS DE INTERÉS</strong></h5><hr style="margin: 0px 0px 5px 0px;" />'.$post_re.'</div>';
+
+        return prefix_insert_after_paragraph( $ad_code, 2, $content );
     }
-    echo '</ul>';
+    return $content;
 }
-add_shortcode('bogashare_contestants', 'show_bogashare_contestants');*/

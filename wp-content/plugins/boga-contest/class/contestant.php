@@ -735,19 +735,23 @@ class contestant
     // Imprimir
     function print_share_buttons()
     {
+        function encodeURIComponent($str) {
+            $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
+            return strtr(rawurlencode($str), $revert);
+        }
+
         echo '<div class="row bogacontest_social_row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-facebook bogacontest_social"></em>';
+        echo '<a href="http://www.facebook.com/sharer/sharer.php?u=[URL]&title=[TITLE]"><em class="icon-facebook bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<em class="icon-twitter bogacontest_social"></em>';
-/*        */?><!--<a href="https://twitter.com/share" class="twitter-share-button" data-via="Bogadiamag" data-lang="es" data-size="large">Twittear</a> <script>!function(d,s,id){var js,fjs=d.getElementsByTagName(s)[0],p=/^http:/.test(d.location)?'http':'https';if(!d.getElementById(id)){js=d.createElement(s);js.id=id;js.src=p+'://platform.twitter.com/widgets.js';fjs.parentNode.insertBefore(js,fjs);}}(document, 'script', 'twitter-wjs');</script>--><?php
+        echo '<a href="http://twitter.com/intent/tweet?status=Bogadia+https://www.bogadia.com"><em class="icon-twitter bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<i class="icon-instagramm bogacontest_social"></i>';
+        echo '<a href="whatsapp://send?text='. encodeURIComponent('[TITLE]') .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<i class="icon-pinterest-circled bogacontest_social"></i>';
+        echo '<a target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=[MEDIA]&url=[URL]&is_video=false&description=[TITLE]"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
         echo '</div>';
         echo '</div>';
     }
@@ -789,12 +793,10 @@ class contestant
         self::get_position();
         global $current_user_is_editing;
         $current_user_is_editing = false;
-        if(isset($_GET['preview'])) {
-           if ($_GET['preview'] == 'true'){
-               $current_user_is_editing = false;
+        if(isset($_GET['edit'])) {
+           if ($_GET['edit'] == 'true' && ($current_user_id == $this->user_id)){
+               $current_user_is_editing = true;
            }
-        }elseif ($current_user_id == $this->user_id) {
-            $current_user_is_editing = true;
         }
 
         $this->contest->print_login_register_form();
@@ -826,19 +828,11 @@ class contestant
         echo '<div id="interaction_buttons" class="row">';
         echo '<div class="col-md-12">';
         if (!$current_user_is_editing){
-            if(isset($_GET['preview'])) {
-                if ($_GET['preview'] == 'true'){
-                    echo '<div style="margin-top: 10px; margin-bottom: 10px;">';
-                    echo '<a href="/concursos/'. $this->contest->slug .'#contestants_forest_header"><button id="finalize" type="button" class="btn btn-primary btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text"><i class="icon-eye" aria-hidden="true"></i>FINALIZAR INSCRIPCIÓN</span></div></button></a>';
-                    echo '</div>';
-                }
-            }elseif ($current_user_id == $this->user_id) {
-                self::print_share_buttons();
-                self::print_vote_button(True);
-            }
+            self::print_share_buttons();
+            self::print_vote_button(True);
         }else{
             echo '<div style="margin-top: 10px; margin-bottom: 10px;">';
-            echo '<button id="preview" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text"><i class="icon-eye" aria-hidden="true"></i>PREVISUALIZAR</span></div></button>';
+            echo '<button id="edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text"><i class="icon-eye" aria-hidden="true"></i>FINALIZAR</span></div></button>';
             echo '</div>';
         }
         echo '</div>';
@@ -872,33 +866,34 @@ class contestant
         echo '</div>';
         echo '</div>';*/
 
+        if(!$current_user_is_editing){
+            // CONCURSANTES
+            echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
+            $this->contest->count_contestans();
+            $this->contest->print_toolbar();
+            $this->contest->get_contest_slug_from_url();
+            $this->contest->get_contestants('RAND()', '', '');
+            $this->contest->get_ranking();
+            echo '<div class="text-center" style="min-height: 500px">';
+            echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
+            echo '<div class="grid">';
+            echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
+            echo '<div id="contestants_container">';
 
-        // CONCURSANTES
-        echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
-        $this->contest->count_contestans();
-        $this->contest->print_toolbar();
-        $this->contest->get_contest_slug_from_url();
-        $this->contest->get_contestants('RAND()', '', '');
-        $this->contest->get_ranking();
-        echo '<div class="text-center" style="min-height: 500px">';
-        echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
-        echo '<div class="grid">';
-        echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
-        echo '<div id="contestants_container">';
-
-        if (empty($this->contest->contestants))
-        {
-            echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
-            return '';
+            if (empty($this->contest->contestants))
+            {
+                echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
+                return '';
+            }
+            else
+            {
+                $this->contest->print_contestants();
+            }
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
+            echo '</div>';
         }
-        else
-        {
-            $this->contest->print_contestants();
-        }
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
-        echo '</div>';
 
 
         return '';
@@ -1000,9 +995,11 @@ class contestant
                     if (!$current_user_is_editing){
                         echo 'grid-item ';
                     }
-                    echo 'col-xs-6 col-sm-6 col-md-6 col-lg-6 gallery_container" style="padding: 1px !important; ';
                     if ($current_user_is_editing){
+                        echo 'col-xs-4 col-sm-4 col-md-4 col-lg-3 gallery_container" style="padding: 1px !important; ';
                         echo 'height: 100px; overflow-y: hidden;';
+                    }else{
+                        echo 'col-xs-6 col-sm-6 col-md-6 col-lg-6 gallery_container" style="padding: 1px !important; ';
                     }
                     echo ' ">';
                     echo '<a class="main_photo_holder_link" href="'. $photo->path .'">';
@@ -1014,15 +1011,15 @@ class contestant
             }
         }else
         {
-            echo '<div id="fake_photo_1" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_1" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-0" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/facebook-girl-avatar.png" >';
             echo '</div>';
-            echo '<div id="fake_photo_2" class="col-xs-6 col-sm-6 col-md-6 col-lg-6 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_2" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-1" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/pro_justice___facebook_no_profile_by_officialprojustice-d6zqggi.jpg" >';
             echo '</div>';
-/*            echo '<div id="fake_photo_3" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
+            echo '<div id="fake_photo_3" class="col-xs-4 col-sm-4 col-md-4 col-lg-3 fake_photo" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
             echo '<img id="contestant-2" class="img-responsive contestant-photo" src="/wp-content/plugins/boga-contest/assets/img/sexy_facebook_avatar_by_tesne-d3feuml.jpg" >';
-            echo '</div>';*/
+            echo '</div>';
         }
         echo '</div>';
     }

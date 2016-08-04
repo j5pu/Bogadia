@@ -219,134 +219,141 @@ var photo_manager = {
                 fileInputElement.files[0],
                 function (img) {
                     selected_progress_bar.move('20%');
-                    var image_resize = img.toDataURL('image/jpeg', 0.9);
+                    var context = img.getContext("2d");
 
-                    formData.append("action", "upload-attachment");
-                    formData.append("async-upload", image_resize);
-                    formData.append("name", fileInputElement.files[0].name);
-                    formData.append("_wpnonce", nonce);
-                    formData.append("main", upload_to_main);
-                    formData.append("contestant_id", jQuery('#upload').data("contestantid"));
-                    formData.append("contest_slug", jQuery('#toolbar').data('slug'));
-                    progress_bar.move('30%');
+                    var logo = new Image();
+                    logo.onload = function () {
+                        context.drawImage(logo, 10, 10, 200, 151.06);
 
-                    xhr.onreadystatechange=function()
-                    {
-                        if (xhr.readyState==1){
-                            progress_bar.move('40%');
-                        }
-                        if (xhr.readyState==2){
-                            progress_bar.move('50%');
-                        }
-                        if (xhr.readyState==3){
-                            progress_bar.move('60%');
-                        }
-                        if (xhr.readyState==4 && xhr.status==200)
+
+                        var image_resize = img.toDataURL('image/jpeg', 0.9);
+
+                        formData.append("action", "upload-attachment");
+                        formData.append("async-upload", image_resize);
+                        formData.append("name", fileInputElement.files[0].name);
+                        formData.append("_wpnonce", nonce);
+                        formData.append("main", upload_to_main);
+                        formData.append("contestant_id", jQuery('#upload').data("contestantid"));
+                        formData.append("contest_slug", jQuery('#toolbar').data('slug'));
+                        progress_bar.move('30%');
+
+                        xhr.onreadystatechange=function()
                         {
-                            var response = jQuery.parseJSON(xhr.responseText);
-                            var image_url = response.url;
-                            var post_id = response.id;
-                            var upload_button = jQuery('#upload_alias');
-
-
-                            selected_progress_bar.move('70%');
-
-                            // Colocamos la nueva imagen en la galeria
-                            if (upload_to_main == 1)
+                            if (xhr.readyState==1){
+                                progress_bar.move('40%');
+                            }
+                            if (xhr.readyState==2){
+                                progress_bar.move('50%');
+                            }
+                            if (xhr.readyState==3){
+                                progress_bar.move('60%');
+                            }
+                            if (xhr.readyState==4 && xhr.status==200)
                             {
-                                // si la foto se sube como principal
-                                var main_photo = jQuery("#main_photo");
-                                var old_photo = main_photo.attr('src');
-                                main_photo.attr('src', image_url);
-                                jQuery('#main_photo_link').attr('href', image_url);
-                                main_photo.attr('id', 'main_photo');
-                                main_photo.parent().attr('id', 'gallery_image_container_' + post_id);
-                                main_photo.parent().css('visibility', 'visible');
-                                var main_upload_button = jQuery('#upload_main_alias');
+                                var response = jQuery.parseJSON(xhr.responseText);
+                                var image_url = response.url;
+                                var post_id = response.id;
+                                var upload_button = jQuery('#upload_alias');
 
-                                if (main_upload_button.hasClass('btn-primary'))
+
+                                selected_progress_bar.move('70%');
+
+                                // Colocamos la nueva imagen en la galeria
+                                if (upload_to_main == 1)
                                 {
-                                    main_upload_button.html('Cambia tu foto principal');
-                                    main_upload_button.removeClass('btn-primary');
-                                    main_upload_button.addClass('btn-default');
-                                }
-                                jQuery('meta[property="og:image"]').attr(image_url);
-                                jQuery('meta[property="twitter:image"]').attr(image_url);
+                                    // si la foto se sube como principal
+                                    var main_photo = jQuery("#main_photo");
+                                    var old_photo = main_photo.attr('src');
+                                    main_photo.attr('src', image_url);
+                                    jQuery('#main_photo_link').attr('href', image_url);
+                                    main_photo.attr('id', 'main_photo');
+                                    main_photo.parent().attr('id', 'gallery_image_container_' + post_id);
+                                    main_photo.parent().css('visibility', 'visible');
+                                    var main_upload_button = jQuery('#upload_main_alias');
 
-                                if(!main_photo.hasClass('fake_main_photo')){
-                                    image_url = old_photo;
-                                }else{
-                                    image_url = 0;
-                                    main_photo.removeClass('fake_main_photo');
-                                    if (upload_button.hasClass('btn-default'))
+                                    if (main_upload_button.hasClass('btn-primary'))
                                     {
-                                        upload_button.removeClass('btn-default ');
-                                        upload_button.addClass('btn-primary');
+                                        main_upload_button.html('Cambia tu foto principal');
+                                        main_upload_button.removeClass('btn-primary');
+                                        main_upload_button.addClass('btn-default');
+                                    }
+                                    jQuery('meta[property="og:image"]').attr(image_url);
+                                    jQuery('meta[property="twitter:image"]').attr(image_url);
+
+                                    if(!main_photo.hasClass('fake_main_photo')){
+                                        image_url = old_photo;
+                                    }else{
+                                        image_url = 0;
+                                        main_photo.removeClass('fake_main_photo');
+                                        if (upload_button.hasClass('btn-default'))
+                                        {
+                                            upload_button.removeClass('btn-default ');
+                                            upload_button.addClass('btn-primary');
+                                        }
                                     }
                                 }
-                            }
-                            if (image_url != 0){
-                                jQuery('#fake_photo_1, #fake_photo_2, #fake_photo_3, #fake_photo_4').hide('slow');
-                                // Colocamos la nueva foto o la antigua foto principal en la galeria
-                                var gallery = jQuery('#gallery');
+                                if (image_url != 0){
+                                    jQuery('#fake_photo_1, #fake_photo_2, #fake_photo_3, #fake_photo_4').hide('slow');
+                                    // Colocamos la nueva foto o la antigua foto principal en la galeria
+                                    var gallery = jQuery('#gallery');
 
-                                var num_photos = jQuery('.contestant-photo').length;
-                                var str = '';
+                                    var num_photos = jQuery('.contestant-photo').length;
+                                    var str = '';
 
-                                str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4 col-lg-3" style="padding: 0 0 0 0 !important; height: 100px; overflow-y: hidden;">';
-                                str = str + '<a class="main_photo_holder_link"  href="' + image_url + '">';
-                                str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
-                                str = str + '</a>';
-                                str = str + '</div>';
+                                    str = str + '<div id="gallery_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4 col-lg-3" style="padding: 1px !important; height: 100px; overflow-y: hidden;">';
+                                    str = str + '<a class="main_photo_holder_link"  href="' + image_url + '">';
+                                    str = str + '<img id="contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
+                                    str = str + '</a>';
+                                    str = str + '</div>';
 
-                                gallery.prepend(str);
+                                    gallery.prepend(str);
 
-                                progress_bar.move('90%');
+                                    progress_bar.move('90%');
 
-                                // Colocamos la nueva foto o la antigua foto principal en el photo manager
-                                var photo_manager = jQuery('#photo_manager_select');
+                                    // Colocamos la nueva foto o la antigua foto principal en el photo manager
+                                    var photo_manager = jQuery('#photo_manager_select');
 
-                                var num_photos = jQuery('.manager_photo').length;
-                                var str = '';
+                                    var num_photos = jQuery('.manager_photo').length;
+                                    var str = '';
 
 
-                                str = str + '<div id="manager_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4" style="margin-bottom: 15px;">';
-                                str = str + '<label class="manager_photo" >';
-                                str = str + '<input type="radio" name="photo_to_edit" value="' + post_id + '" />';
-                                str = str + '<img id="manager-contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
-                                str = str + '</label>';
-                                str = str + '</div>';
+                                    str = str + '<div id="manager_image_container_' + post_id + '" class="col-xs-4 col-sm-4 col-md-4" style="margin-bottom: 15px;">';
+                                    str = str + '<label class="manager_photo" >';
+                                    str = str + '<input type="radio" name="photo_to_edit" value="' + post_id + '" />';
+                                    str = str + '<img id="manager-contestant-' + (num_photos + 1) + '" class="img-responsive contestant-photo" src="' + image_url + '" >';
+                                    str = str + '</label>';
+                                    str = str + '</div>';
 
-                                photo_manager.prepend(str);
+                                    photo_manager.prepend(str);
 
-                                if (upload_button.hasClass('btn-primary') && upload_button_clicked == 1)
-                                {
-                                    var preview_button = jQuery('#preview');
-                                    upload_button.removeClass('btn-primary');
-                                    upload_button.addClass('btn-default');
-                                    preview_button.removeClass('btn-default ');
-                                    preview_button.addClass('btn-primary');
+                                    if (upload_button.hasClass('btn-primary') && upload_button_clicked == 1)
+                                    {
+                                        var preview_button = jQuery('#edit');
+                                        upload_button.removeClass('btn-primary');
+                                        upload_button.addClass('btn-default');
+                                        preview_button.removeClass('btn-default ');
+                                        preview_button.addClass('btn-primary');
+                                    }
+
                                 }
 
+                                selected_progress_bar.move('100%');
+
+                                setTimeout(function()
+                                {
+                                    selected_progress_bar.hide();
+                                }, 1000);
+                                setTimeout(function()
+                                {
+                                    selected_progress_bar.move('0%');
+                                }, 1500);
                             }
-
-                            selected_progress_bar.move('100%');
-
-                            setTimeout(function()
-                            {
-                                selected_progress_bar.hide();
-                            }, 1000);
-                            setTimeout(function()
-                            {
-                                selected_progress_bar.move('0%');
-                            }, 1500);
-                        }
-                    };
-                    xhr.open("POST","/wp-content/plugins/boga-contest/new_photo.php",true);
-                    xhr.send(formData);
-                    selected_progress_bar.move('20%');
-
-
+                        };
+                        xhr.open("POST","/wp-content/plugins/boga-contest/new_photo.php",true);
+                        xhr.send(formData);
+                        selected_progress_bar.move('20%');
+                    }
+                    logo.src = "/wp-content/plugins/boga-contest/assets/img/logo_tnsprnte-min.png";
                 },
                 {
                     maxWidth: 900,
@@ -604,7 +611,7 @@ var login = {
             new_contestant();
         } else if(action == 'redirect') {
             if (data.contestant_id){
-                window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id;
+                window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true';
             }
         }
     }
@@ -633,8 +640,8 @@ jQuery(document).ready(function()
         jQuery('.modal-dialog').velocity('transition.flipYIn');
     });
 
-    jQuery('#preview').on('click', function(){
-        window.open('/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?preview=true');
+    jQuery('#edit').on('click', function(){
+        window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename');
     });
 
     grid = jQuery('.grid').masonry({

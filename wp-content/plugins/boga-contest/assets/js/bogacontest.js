@@ -656,30 +656,36 @@ jQuery(document).ready(function()
     jQuery(window).scroll(function(){
         jQuery("#interaction_buttons_wrapper").css("top",Math.max(0,2-jQuery(this).scrollTop()));
     });*/
-
-/*    var screenHeight = jQuery(window).height();
-    var start_card = jQuery('#interaction_buttons_wrapper').offset().top;
+    var interaction_buttons = jQuery('#interaction_buttons_wrapper');
     var end_image = jQuery('#image_bottom').offset().top;
 
     jQuery(window).scroll(function() {
         var currentScroll = jQuery(window).scrollTop();
 
-        if ((end_image - currentScroll) > start_card){
-            jQuery('#interaction_buttons_wrapper').css({
+        if (currentScroll > end_image){
+/*            jQuery('#interaction_buttons_wrapper').css({
                 position: 'fixed',
-            });
-            jQuery('#interaction_buttons').css({
+            });*/
+/*            jQuery('#interaction_buttons').css({
                 position: 'static',
-            });
+            });*/
+            if (interaction_buttons.css('display') != 'none') {
+                interaction_buttons.velocity('fadeOut');
+            }
+
         }else{
-            jQuery('#interaction_buttons_wrapper').css({
+/*            jQuery('#interaction_buttons_wrapper').css({
                 position: 'static'
             });
             jQuery('#interaction_buttons').css({
                 position: 'fixed',
 
-            });
+            });*/
+            if (interaction_buttons.css('display') == 'none'){
+                interaction_buttons.velocity('fadeIn');
+            }
+
         }
-    });*/
+    });
 
 });

@@ -809,20 +809,19 @@ class contestant
         // Foto principal y nombre
         echo '<div class="col-sm-5 col-md-5 col-lg-4">';
         self::print_main_photo();
-        echo '<div id="image_bottom"></div>';
 
         // TARJETA: NOMBRE, VOTOS, POSICION , COMPARTIR Y VOTAR
         echo '<div id="interaction_buttons_wrapper" class="fixed_to_bottom" style="padding-bottom: 0px;">';
         // Nombres, votos y posicion
         echo '<div class="row" >';
         echo '<div class="col-md-12 text-center">';
-        echo '<h2 id="contestant_name" style="font-size: 150%;">'. $this->name .'';
+        echo '<h2 id="contestant_name" style="font-size: 150%;">'. $this->name .'</h2>';
         echo ' <small id="votes-'. $this->ID .'" data-votes="'. $this->votes .'"  >'. $this->votes .' votos</small>';
         if(!empty($this->position))
         {
             echo ' <small >Puesto nº '. $this->position .'</small>';
         }
-        echo '</h2></div>';
+        echo '</div>';
         echo '</div>';
         // Botones
         echo '<div id="interaction_buttons" class="row">';
@@ -868,6 +867,8 @@ class contestant
 
         if(!$current_user_is_editing){
             // CONCURSANTES
+            echo '<div id="image_bottom"></div>';
+
             echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
             $this->contest->count_contestans();
             $this->contest->print_toolbar();

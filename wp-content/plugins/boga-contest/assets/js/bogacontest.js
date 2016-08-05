@@ -419,7 +419,7 @@ function new_contestant(){
                     ]);
                     jQuery('#login_succes_loader').velocity('fadeIn');
 
-                    jQuery('#form_wrapper').html('<div class="text-center"><h3 style="color: grey;">Te estamos inscribiendo en el concurso</h3></div>');
+                    jQuery('#form_wrapper').html('<div class="text-center"><h3 style="color: red;">Un momento por favor, estamos comprobando tus datos...</h3></div>');
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/new_contestant.php",
@@ -430,12 +430,12 @@ function new_contestant(){
             })
             .done(function( msg ) {
                 msg = JSON.parse(msg);
-                jQuery('#form_wrapper').html('<div class="text-center" style="color: grey;"><h3 style="color: grey;">' + msg.message + '</h3></div>');
+                jQuery('#form_wrapper').html('<div class="text-center" style="color: grey;"><h3 style="color: red;">' + msg.message + '</h3></div>');
                 jQuery('#bogacontest_up_login_action_after_login').val('redirect');
                 login.action_after_login(msg);
             })
             .fail(function( msg ) {
-                jQuery('#form_wrapper').html('<div class="text-center" style="color: grey;"><h3 style="color: grey;">' + 'Upps! Ha ocurrido un error. Vuelve a intentarlo por favor.' + '</h3></div>');
+                jQuery('#form_wrapper').html('<div class="text-center" style="color: grey;"><h3 style="color: red;">' + 'Upps! Ha ocurrido un error. Vuelve a intentarlo por favor.' + '</h3></div>');
             })
         ;
     }
@@ -469,21 +469,37 @@ var login = {
         });
         jQuery('#login_form_form').on('submit', function(e){
             if( !login.validate_email( jQuery('#bogacontest_up_login_email').val()) ) {
-                jQuery('#email_validate_text').show('slow');
+                jQuery('#email_validate_text').velocity('fadeIn');
             }else{
-                jQuery('#email_validate_text').hide('slow');
-                login.login_with_user_password();
+                jQuery('#email_validate_text').velocity('fadeOut');
+                login.login_with_user_password(1);
+            }
+            e.preventDefault();
+        });
+        jQuery('#bogacontest_up_login_2').on('click', function(e){
+            if( !login.validate_email( jQuery('#bogacontest_up_login_email').val()) ) {
+                jQuery('#email_validate_text').velocity('fadeIn');
+            }else{
+                jQuery('#email_validate_text').velocity('fadeOut');
+                login.login_with_user_password(0);
             }
             e.preventDefault();
         });
     },
-    login_with_user_password: function (){
+    login_with_user_password: function (continue_to_register){
         jQuery.ajax({
             beforeSend: function(){
-                jQuery.Velocity.RunSequence([
-                    {e: jQuery('#login_text'), p:'fadeOut'},
-                    {e: jQuery('#login_loader'), p:'fadeIn'}
-                ]);
+                if (continue_to_register == 1){
+                    jQuery.Velocity.RunSequence([
+                        {e: jQuery('#login_text'), p:'fadeOut'},
+                        {e: jQuery('#login_loader'), p:'fadeIn'}
+                    ]);
+                }else{
+                    jQuery.Velocity.RunSequence([
+                        {e: jQuery('#login_2_text'), p:'fadeOut'},
+                        {e: jQuery('#login_loader_2'), p:'fadeIn'}
+                    ]);
+                }
             },
             type: 'POST',
             dataType: 'html',
@@ -493,18 +509,27 @@ var login = {
                 'email': jQuery('#bogacontest_up_login_email').val(),
                 'password': jQuery('#bogacontest_up_login_password').val(),
                 'security': jQuery('#bogacontest_up_login_security').val(),
-                'contest_id': jQuery('#participate').data("contestid")
+                'contest_id': jQuery('#participate').data("contestid"),
+                'continue_to_register': continue_to_register
             }
         }).done(function(data){
             data = JSON.parse(data);
-            jQuery.Velocity.RunSequence([
-                {e: jQuery('#login_loader'), p:'fadeOut'},
-                {e: jQuery('#login_text'), p:'fadeIn'}
-            ]);
+            if (continue_to_register == 1){
+                jQuery.Velocity.RunSequence([
+                    {e: jQuery('#login_loader'), p:'fadeOut'},
+                    {e: jQuery('#login_text'), p:'fadeIn'}
+                ]);
+            }else{
+                jQuery.Velocity.RunSequence([
+                    {e: jQuery('#login_loader_2'), p:'fadeOut'},
+                    {e: jQuery('#login_2_text'), p:'fadeIn'}
+                ]);
+            }
+
             jQuery('#email_validate_text').html(data.message);
             jQuery('#register_help_text').html(data.message);
 
-            if (data.case == 0)
+            if (data.case == 0 && continue_to_register==1)
             {
                 // Continuar con registro
                 jQuery.Velocity.RunSequence([
@@ -662,36 +687,37 @@ jQuery(document).ready(function()
     jQuery(window).scroll(function(){
         jQuery("#interaction_buttons_wrapper").css("top",Math.max(0,2-jQuery(this).scrollTop()));
     });*/
-    var interaction_buttons = jQuery('#interaction_buttons_wrapper');
+/*    var interaction_buttons = jQuery('#interaction_buttons_wrapper');
     var end_image = jQuery('#image_bottom').offset().top;
 
     jQuery(window).scroll(function() {
         var currentScroll = jQuery(window).scrollTop();
 
         if (currentScroll > end_image){
-/*            jQuery('#interaction_buttons_wrapper').css({
+/!*            jQuery('#interaction_buttons_wrapper').css({
                 position: 'fixed',
-            });*/
-/*            jQuery('#interaction_buttons').css({
+            });*!/
+/!*            jQuery('#interaction_buttons').css({
                 position: 'static',
-            });*/
+            });*!/
             if (interaction_buttons.css('display') != 'none') {
                 interaction_buttons.velocity('fadeOut');
             }
 
-        }else{
-/*            jQuery('#interaction_buttons_wrapper').css({
+        }
+        if (currentScroll < (end_image - 25)){
+/!*            jQuery('#interaction_buttons_wrapper').css({
                 position: 'static'
             });
             jQuery('#interaction_buttons').css({
                 position: 'fixed',
 
-            });*/
+            });*!/
             if (interaction_buttons.css('display') == 'none'){
                 interaction_buttons.velocity('fadeIn');
             }
 
         }
-    });
+    });*/
 
 });

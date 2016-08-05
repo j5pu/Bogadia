@@ -298,3 +298,13 @@ input[type="color"]:focus,
 #participate{
     padding-bottom: 50px !important;
 }
+.toolbar_label > input:checked + span{
+    background-color: #e3007c;
+    border-radius: 60px;
+    color: white;
+    padding: 1px 3px !important;
+}
+.toolbar_label > input{ /* HIDE RADIO */
+    visibility: hidden; /* Makes input not-clickable */
+    position: absolute; /* Remove input from document flow */
+}

@@ -198,9 +198,9 @@ class contest
         echo '<input id="search_query_input" type="text" class="form-control" placeholder="buscar por nombre">';
         echo '</div>';
         echo '<div id="toolbar_filter" class="col-md-4">';
-        echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="votes">Ranking</label></div>';
-        echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="RAND()" checked="checked">Aleatorio</label></div>';
-        echo '<div class="radio-inline"><label><input type="radio" name="optradio" value="wp_bogacontest_contestant.date">Recientes</label></div>';
+        echo '<div class="radio-inline"><label class="toolbar_label"><input type="radio" name="optradio" value="votes"><span>Ranking</span></label></div>';
+        echo '<div class="radio-inline"><label class="toolbar_label"><input type="radio" name="optradio" value="RAND()" checked="checked"><span>Aleatorio</span></label></div>';
+        echo '<div class="radio-inline"><label class="toolbar_label"><input type="radio" name="optradio" value="wp_bogacontest_contestant.date"><span>Recientes</span></label></div>';
         echo '</div>';
         echo '</div>';
     }
@@ -253,9 +253,6 @@ class contest
         // Cuerpo del modal
         echo '<div class="modal-body">';
         echo '<div class="row">';
-        //// Parte de la foto de la modelo
-/*        echo '<div class="col-xs-5 col-sm-6 col-md-6">';
-        echo '</div>';*/
 
         //// Parte del formulario
         echo '<div id="bogacontest_login_body" class="col-xs-12 col-sm-12 col-md-12">';
@@ -263,16 +260,17 @@ class contest
         echo '<div id="form_wrapper">';
         ////// Boton facebook
         echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
-        echo '<hr>';
+        echo '<h4 class="text-center">o</h4>';
         ////// Formulario registro
-        echo '<h4 id="register_help_text" style="color: grey;"></h4>';
-        echo '<small id="email_validate_text" style="display: none; color: grey;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
+        echo '<h4 id="register_help_text" style="color: red;"></h4>';
+        echo '<small id="email_validate_text" style="display: none; color: red;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
 
         echo '<div id="first_form">';
         echo '<form id="login_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
         echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
-        echo '<button id="bogacontest_up_login" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="login_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_text">Entrar</span></div></button>';
+        echo '<button id="bogacontest_up_login" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="login_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_text">Registrarme</span></div></button>';
+        echo '<button id="bogacontest_up_login_2" class="btn btn-default"><div class="text-center" style="min-height: 18px"><img id="login_loader_2" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_2_text">Iniciar sesión</span></div></button>';
         echo '</form>';
         echo '</div>';
 
@@ -450,16 +448,17 @@ class contestant
 
     // Metodos de gestion
     function get_or_create(){
+        $new = 0;
         $results = self::get();
         if (empty($results)){
             self::create();
             self::get();
             self::new_bogacontestant_notification();
-
+            $new = 1;
         }
         self::get_imgs();
         self::get_votes();
-        return $this->ID;
+        return array($this->ID, $new);
     }
 
     function new_bogacontestant_notification()
@@ -823,7 +822,7 @@ class contestant
         echo ' <small id="votes-'. $this->ID .'" data-votes="'. $this->votes .'"  >'. $this->votes .' votos</small>';
         if(!empty($this->position))
         {
-            echo ' <small >Puesto nº '. $this->position .'</small>';
+            echo ' <small>Puesto nº '. $this->position .'</small>';
         }
         echo '</div>';
         echo '</div>';

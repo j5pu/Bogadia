@@ -145,7 +145,12 @@ function bogacontest_ajax_login()
         }
     }else
     {
-        echo json_encode(array('loggedin'=>false, 'case'=>0, 'message'=>__('¡Guay! Solo falta tu nombre completo')));
+        if ($_POST['continue_to_register']=='0'){
+            echo json_encode(array('loggedin'=>false, 'case'=>0, 'message'=>__('¡Upps! Ese e-mail no nos consta. ¿Estás registrado?')));
+
+        }else{
+            echo json_encode(array('loggedin'=>false, 'case'=>0, 'message'=>__('¡Guay! Solo falta tu nombre completo')));
+        }
         die();
     }
 }

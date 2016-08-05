@@ -2,6 +2,10 @@
 require_once('../../../wp-load.php');
 $bogacontestant->setUserId($_POST['user_id']);
 $bogacontestant->setContestId($_POST['contest_id']);
-$ID = $bogacontestant->get_or_create();
-echo json_encode(array('message'=>__('Perfecto. Ya estás participando. Te llevamos a tu perfil.'), 'user_id'=>$_POST['user_id'], 'contestant_id'=>$ID));
+list($ID, $new) = $bogacontestant->get_or_create();
+if ($new == 0){
+    echo json_encode(array('message'=>__('¡Nos alegramos de verte de vuelta!'), 'user_id'=>$_POST['user_id'], 'contestant_id'=>$ID));
+}else{
+    echo json_encode(array('message'=>__('Perfecto. Te llevamos a tu perfil para que subas tus fotos.'), 'user_id'=>$_POST['user_id'], 'contestant_id'=>$ID));
+}
 die();

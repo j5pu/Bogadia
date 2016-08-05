@@ -236,7 +236,7 @@ input[type="color"]:focus,
         margin-top: 5px !important;
     }
     #participate {
-        background-image:url('/wp-content/plugins/boga-contest/assets/img/cartel_prueba_movil_fullhd6-min.png');
+        background-image:url('/wp-content/plugins/boga-contest/assets/img/bannermovil-min.png');
         width:100%;
         background-repeat: no-repeat;
         background-size: 100%;
@@ -267,7 +267,7 @@ input[type="color"]:focus,
         padding: 0 15px 0 1px;
     }
     #participate {
-        background-image:url('/wp-content/plugins/boga-contest/assets/img/Sintitulo-1-min.png');
+        background-image:url('/wp-content/plugins/boga-contest/assets/img/bannerPC-min.png');
         width:100%;
         background-repeat: no-repeat;
         background-size: 100%;

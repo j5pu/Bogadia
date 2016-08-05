@@ -832,9 +832,13 @@ class contestant
         if (!$current_user_is_editing){
             self::print_share_buttons();
             self::print_vote_button(True);
+            if(($current_user_id == $this->user_id) && !(isset($_GET['edit']))){
+                echo '<button id="back_to_edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'" style="margin-left: 0px;"><div class="text-center" style="min-height: 18px"><span id="">Editar mi perfil</span></div></button>';
+            }
+
         }else{
             echo '<div style="margin-top: 10px; margin-bottom: 10px;">';
-            echo '<button id="edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id="participate_text"><i class="icon-eye" aria-hidden="true"></i>FINALIZAR</span></div></button>';
+            echo '<button id="edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id=""><i class="icon-eye" aria-hidden="true"></i>FINALIZAR</span></div></button>';
             echo '</div>';
         }
         echo '</div>';

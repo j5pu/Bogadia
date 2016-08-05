@@ -297,7 +297,7 @@ function bogacontest_meta_img($string){
             global $meta_data_container;
             return $meta_data_container->main_photo ;
         }else{
-            return 'https://www.bogadia.com/wp-content/uploads/2016/05/logo_final_negro-2.png';
+            return 'https://www.bogadia.com/wp-content/plugins/boga-contest/assets/img/logo_tnsprnte-min.png';
         }
     }else{
         return $string;

@@ -657,6 +657,9 @@ jQuery(document).ready(function()
         vote.button = jQuery(this);
         vote.new_vote();
     });
+    jQuery('#back_to_edit').on('click', function(){
+        window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?edit=true';
+    });
     jQuery('#participate, #participate_menu').on('click', function(e){
         new_contestant();
         e.preventDefault();

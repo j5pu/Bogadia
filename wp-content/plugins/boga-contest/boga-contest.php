@@ -399,6 +399,7 @@ add_filter('init','flushRules');
 add_filter( 'wpseo_canonical', 'bogacontest_meta_canonical' );
 add_filter( 'wpseo_title', 'bogacontest_meta_title' );
 add_filter( 'wpseo_opengraph_image', 'bogacontest_meta_img' );
+add_filter( 'wpseo_twitter_image', 'bogacontest_meta_img' );
 add_filter( 'wpseo_metadesc', 'bogacontest_meta_description' );
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
 add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_page') );

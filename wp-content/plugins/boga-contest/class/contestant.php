@@ -748,7 +748,7 @@ class contestant
         echo '<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .'+'. $url .'+@Bogadiamag') .'"><em class="icon-twitter bogacontest_social"></em></a>';
+        echo '<a target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
         echo '<a target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';

@@ -475,7 +475,7 @@ class contestant
         </p>
 
         <p>
-            Tu página web personal es <a href="https://www.bogadia.com/concursos/<?php echo $this->contest->slug ?>/<?php echo $this->nice_name ?>">https://www.bogadia.com/concursos/portada-mayo/<?php echo $this->nice_name ?></a>
+            Tu página web personal es <a href="https://www.bogadia.com/concursos/concurso-modelos/<?php echo $this->nice_name ?>">https://www.bogadia.com/concursos/portada-mayo/<?php echo $this->nice_name ?></a>
         </p>
 
         <p>

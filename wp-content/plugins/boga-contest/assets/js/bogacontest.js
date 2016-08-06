@@ -425,7 +425,8 @@ function new_contestant(){
                 url: "/wp-content/plugins/boga-contest/new_contestant.php",
                 data: {
                     user_id: user_id,
-                    contest_id: jQuery('#participate').data("contestid")
+                    contest_id: jQuery('#participate').data("contestid"),
+                    contest_slug: jQuery('#toolbar').data('slug')
                 }
             })
             .done(function( msg ) {

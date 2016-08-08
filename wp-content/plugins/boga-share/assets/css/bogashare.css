@@ -164,7 +164,38 @@ button#close-buton.close{
 #mobile_share_button{
     position: fixed;
     bottom: 0;
-    background-color: #E0E0E0;
-    width: 100%;
-    max-height: 100%;
+    right: 15px;
+    background-color: white;
+    border-top: 1px solid lightgrey;
+    padding-top: 15px;
+    padding-bottom: 12px;
+    /* padding-top: 24px; */
+    height: 53px;
+}
+.bogashare_social
+{
+    display: inline-block;
+    border-radius: 60px;
+    /* box-shadow: 0px 0px 2px #888; */
+    width: 25px !important;
+    cursor: pointer;
+    padding: 9px 11px;
+    color: white;
+    font-size: 21px;
+}
+.bogashare_icon_holder{
+    margin: 15px 1px !important;
+    padding-left: 5px;
+    padding-right: 5px;
+}
+.bogashare_vote
+{
+    display: inline-block;
+    border-radius: 60px;
+     box-shadow: 0px 0px 2px #888;
+    width: 25px !important;
+    cursor: pointer;
+    padding: 9px 11px;
+    color: lightgrey;
+    font-size: 21px;
 }

@@ -1,5 +1,6 @@
 <?php
 class boga_related_post
+
 {
     var $related_post = array();
     var $retrieved_post = array();
@@ -64,6 +65,7 @@ class boga_related_post
                     $this->retrieved_post = null;
                 }else{
                     break;
+
                 }
             }
         }
@@ -158,7 +160,7 @@ class boga_related_post
             $title = self::cut_title(get_the_title($post_id));
             //$img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
 /*            $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );*/
-            echo '<li id="post-'. $post_id .'" class="post-item col-sm-4 boga-related">'
+            echo '<li id="post-'. $post_id .'" class="post-item col-xs-6 col-sm-4 boga-related">'
                 . '<article>'
                 . '<div class="post-image">'
                 . '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'

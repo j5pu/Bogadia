@@ -9,13 +9,14 @@ Description: Muestra el cajon de compartir a traves de api para el concurso de s
         include 'includes/insterstitial.php';
     }
 }*/
-function show_bogashare_mobile_button(){
+/*function show_bogashare_mobile_button(){
     if(wp_is_mobile()){
         if(is_single() && !is_single(35229)) {
             include 'includes/mobile_bottom_share_button.php';
+            echo $share_buttons;
         }
     }
-}
+}*/
 /*add_action('wp_head', 'show_bogashare_dialog');*/
 add_action('wp_footer', 'show_bogashare_mobile_button');
 

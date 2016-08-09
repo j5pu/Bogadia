@@ -16,118 +16,80 @@
     font-size: 16px;
     height: 40px;
 }
-@media screen and (max-width: 399px) {
-    #flores_img{
-        max-width: 160%;
-        margin-left: -86px;
-    }
-    #share_submit_insterstitial {
-        left: 31px;
-        bottom: 189px;
-        position: relative;
-        width: 240px;
-        height: 30px;
-        font-size: 11px;
-    }
-    #mas_info{
-        left: 123px;
-        bottom: 219px;
-        position: relative;
-        font-size: 12px;
-    }
-}
-@media screen and (min-width: 350px) and (max-width: 400px) {
-    #flores_img{
-        max-width: 160%;
-        margin-left: -101px;
-    }
-    #share_submit_insterstitial {
-        left: 66px;
-        bottom: 217px;
-        position: relative;
-        width: 240px;
-        height: 30px;
-        font-size: 11px;
-    }
-    #mas_info{
-        left: 157px;
-        bottom: 250px;
-        position: relative;
-        font-size: 12px;
-    }
-}
-@media screen and (min-width: 401px) and (max-width: 499px) {
-    #flores_img{
-        max-width: 160%;
-        margin-left: -108px;
-    }
-    #share_submit_insterstitial {
-        left: 86px;
-        bottom: 232px;
-        position: relative;
-        width: 240px;
-        height: 30px;
-        font-size: 12px;
-    }
-    #mas_info{
-        left: 176px;
-        bottom: 258px;
-        position: relative;
-        font-size: 11px;
-    }
-}
-@media screen and (min-width: 500px) and (max-width: 599px){
-    #flores_img{
-        max-width: 142%;
-        margin-left: -45px;
-    }
-    #share_submit_insterstitial{
-        left: 144px;
-        bottom: 224px;
-        position: relative;
-        width: 230px;
-        height: 30px;
-        font-size: 12px;
+
+@media screen and (max-width: 767px){
+    #mobile_share_button{
+        position: fixed;
+        bottom: 0;
+        right: 15px;
+        background-color: white;
+        border-top: 1px solid rgb(229, 229, 229);
+        padding-top: 15px;
+        padding-bottom: 12px;
+        /* padding-top: 24px; */
+        height: 53px;
+        width: 100%;
 
     }
-    #mas_info{
-        left: 228px;
-        bottom: 254px;
-        position: relative;
-        font-size: 12px;
+    .bogashare_social
+    {
+        display: inline-block;
+        border-radius: 60px;
+        /* box-shadow: 0px 0px 2px #888; */
+        width: 25px !important;
+        cursor: pointer;
+        padding: 9px 11px;
+        color: white;
+        font-size: 21px;
     }
-}
-@media screen and (min-width: 600px) and (max-width: 767px){
-    #share_submit_insterstitial{
-        left: 192px;
-        bottom: 224px;
-        position: relative;
-        width: 230px;
-        height: 30px;
-        font-size: 12px;
-
-    }
-    #mas_info{
-        left: 275px;
-        bottom: 254px;
-        position: relative;
-        font-size: 12px;
+    .bogashare_vote
+    {
+        display: inline-block;
+        border-radius: 60px;
+        box-shadow: 0px 0px 2px #888;
+        width: 25px !important;
+        cursor: pointer;
+        padding: 9px 11px;
+        color: lightgrey;
+        font-size: 21px;
     }
 }
 @media screen and (min-width: 768px) {
-    #share_submit_insterstitial {
-        left: 24%;
-        bottom: 224px;
-        position: relative;
-        width: 50%;
-        height: 30px;
-        font-size: 12px;
+    #mobile_share_button{
+        position: static;
+        background-color: white;
+        /*
+        border-bottom: 1px solid rgb(229, 229, 229);
+        */
+        padding-top: 15px;
+        padding-bottom: 12px;
+        height: 53px;
+        margin-bottom: 10px;
     }
-    #mas_info{
-        left: 256px;
-        bottom: 250px;
-        position: relative;
-        font-size: 12px;
+    .bogashare_social
+    {
+        display: inline-block;
+        border-radius: 60px;
+        /* box-shadow: 0px 0px 2px #888; */
+        width: 25px !important;
+        cursor: pointer;
+        padding: 5px 7px;
+        color: white;
+        font-size: 21px;
+    }
+    .bogashare_vote
+    {
+        display: inline-block;
+        border-radius: 60px;
+        box-shadow: 0px 0px 2px #888;
+        width: 25px !important;
+        cursor: pointer;
+        padding: 5px 7px;
+        color: lightgrey;
+        font-size: 21px;
+    }
+    #whatsapp_share_button{
+        display: none;
     }
 }
 #bogashareModal{
@@ -161,41 +123,10 @@ button#close-buton.close{
 #mas_info{
     font-family: bogashare;
 }
-#mobile_share_button{
-    position: fixed;
-    bottom: 0;
-    right: 15px;
-    background-color: white;
-    border-top: 1px solid lightgrey;
-    padding-top: 15px;
-    padding-bottom: 12px;
-    /* padding-top: 24px; */
-    height: 53px;
-}
-.bogashare_social
-{
-    display: inline-block;
-    border-radius: 60px;
-    /* box-shadow: 0px 0px 2px #888; */
-    width: 25px !important;
-    cursor: pointer;
-    padding: 9px 11px;
-    color: white;
-    font-size: 21px;
-}
+
+
 .bogashare_icon_holder{
     margin: 15px 1px !important;
     padding-left: 5px;
     padding-right: 5px;
-}
-.bogashare_vote
-{
-    display: inline-block;
-    border-radius: 60px;
-     box-shadow: 0px 0px 2px #888;
-    width: 25px !important;
-    cursor: pointer;
-    padding: 9px 11px;
-    color: lightgrey;
-    font-size: 21px;
 }

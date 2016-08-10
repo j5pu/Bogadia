@@ -169,7 +169,7 @@ class boga_related_post
                 . '</a>'
                 . '</div><!--end post-image-->'
                 . '<div class="entry-content">'
-                . '<h4 class="post-title entry-title"><a title="'. $title .'" href="'. $link .'">'. $title .'</a></h4>'
+                . '<h5 class="post-title entry-title"><a title="'. $title .'" href="'. $link .'">'. $title .'</a></h5>'
                 . '</div>'
                 . '</article>'
                 . '</li>';

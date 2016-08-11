@@ -4,11 +4,11 @@ Plugin Name: BogaShare
 Description: Muestra el cajon de compartir a traves de api para el concurso de share
 */
 
-/*function show_bogashare_dialog() {
+function show_bogashare_dialog() {
     if(is_single() && !is_single(35229)) {
         include 'includes/insterstitial.php';
     }
-}*/
+}
 /*function show_bogashare_mobile_button(){
     if(wp_is_mobile()){
         if(is_single() && !is_single(35229)) {
@@ -17,7 +17,7 @@ Description: Muestra el cajon de compartir a traves de api para el concurso de s
         }
     }
 }*/
-/*add_action('wp_head', 'show_bogashare_dialog');*/
+add_action('wp_head', 'show_bogashare_dialog');
 add_action('wp_footer', 'show_bogashare_mobile_button');
 
 function bogashare_assets(){
@@ -71,10 +71,10 @@ function mte_add_incontent_ad($content)
         }else{
             $src .= 'landscape-'. mt_rand(1,2) .'.png';
         }
-        
+
         $content_block = explode('<p>',$content);
         if(!empty($content_block[3]))
-        {	$content_block[3] .= '<img class="img-responsive" src="'. $src .'">';
+        {	$content_block[3] .= '<img id="bogashare_banner" class="img-responsive" src="'. $src .'">';
         }
         for($i=1;$i<count($content_block);$i++)
         {	$content_block[$i] = '<p>'.$content_block[$i];

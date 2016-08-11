@@ -74,8 +74,8 @@ class boga_related_post
     }
 
     function cut_title($title){
-        if ( mb_strlen( $title, 'utf8' ) > 40 ) {
-            $last_space = strrpos( substr( $title, 0, 40 ), ' ' ); // find the last space within 35 characters
+        if ( mb_strlen( $title, 'utf8' ) > 30 ) {
+            $last_space = strrpos( substr( $title, 0, 30 ), ' ' ); // find the last space within 35 characters
             return substr( $title, 0, $last_space ) . ' ...';
         }
         return $title;

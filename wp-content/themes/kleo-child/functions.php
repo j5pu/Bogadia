@@ -273,12 +273,9 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
 		$share_buttons .= '<a class="bogashare_icon_holder" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogashare_social" style="background-color: #00aced;"></em></a>';
 		$share_buttons .= '<a class="bogashare_icon_holder" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media='. $image .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogashare_social" style="background-color: #bd081c;"></i></a>';
 		$share_buttons .= '</div>';
-/*		$share_buttons .= '<div class="text-right col-xs-2" style="right: 15px;">';
-/*		$share_buttons .= '<a class="bogashare_icon_holder" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="bogashare_vote icon-heart" style="color: ;"></i></a>';*/
-/*		$share_buttons .= do_shortcode('[ratings]');
-		$share_buttons .= '</div>';*/
 		$share_buttons .= '</div>';
 		echo $share_buttons;
+		global $share_buttons;
 
         if ( $author_links != '' ) {
             $meta_list[] = '<small class="meta-links">' . $author_links . '</small>';

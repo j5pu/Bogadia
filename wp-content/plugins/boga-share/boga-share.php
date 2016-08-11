@@ -59,29 +59,27 @@ register_activation_hook( __FILE__, 'bogashare_install' );
 
 
 /*add_filter( 'the_content', array($this, 'inside_content_share_banner'));*/
-function inside_content_share_banner( $content ) {
-    function prefix_insert_after_paragraph( $insertion, $paragraph_id, $content ) {
-        $closing_p = '</p>';
-        $paragraphs = explode( $closing_p, $content );
-        foreach ($paragraphs as $index => $paragraph) {
 
-            if ( trim( $paragraph ) ) {
-                $paragraphs[$index] .= $closing_p;
-            }
 
-            if ( $paragraph_id == $index + 1 ) {
-                $paragraphs[$index] .= $insertion;
-            }
+add_filter('the_content', 'mte_add_incontent_ad');
+function mte_add_incontent_ad($content)
+{
+    $src = '/wp-content/plugins/boga-share/assets/img/';
+    if(is_single()){
+        if (wp_is_mobile()){
+            $src .= 'banner-prueba-'. mt_rand(11,23) .'-min.png';
+        }else{
+            $src .= 'landscape-'. mt_rand(1,2) .'.png';
         }
-
-        return implode( '', $paragraphs );
-    }
-
-    if ( is_single() && ! is_admin()  && !in_category('Streetstyle') && !has_term( 'BogadiaTV', 'post_tag', $this->retrieved_post[0] )) {
-
-        $ad_code = '<div style="max-width: 100%; float: left; margin:0px 20px 20px 0px;"><h5 style="margin:0px auto; font-size: 14px; text-align: center;"><strong>ARTÍCULOS DE INTERÉS</strong></h5><hr style="margin: 0px 0px 5px 0px;" />'.$post_re.'</div>';
-
-        return prefix_insert_after_paragraph( $ad_code, 2, $content );
+        
+        $content_block = explode('<p>',$content);
+        if(!empty($content_block[3]))
+        {	$content_block[3] .= '<img class="img-responsive" src="'. $src .'">';
+        }
+        for($i=1;$i<count($content_block);$i++)
+        {	$content_block[$i] = '<p>'.$content_block[$i];
+        }
+        $content = implode('',$content_block);
     }
     return $content;
 }

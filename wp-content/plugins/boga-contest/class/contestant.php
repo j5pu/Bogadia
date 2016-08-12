@@ -113,7 +113,6 @@ class contest
             $direction = 'DESC';
         }
 
-
         $variables = "wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." ";
         $tables = "wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." ";
         $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $not_in ." ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT 25". $offset ;
@@ -143,7 +142,7 @@ class contest
         if (empty($this->ranking))
         {
             global $wpdb;
-            $this->ranking = $wpdb->get_results("SELECT contestant_id, COUNT(*) as votes FROM wp_bogacontest_votes GROUP BY contestant_id ORDER BY votes DESC;", OBJECT);
+            $this->ranking = $wpdb->get_results("SELECT contestant_id, COUNT(*) as votes FROM wp_bogacontest_votes INNER JOIN wp_bogacontest_contestant ON wp_bogacontest_votes.contestant_id=wp_bogacontest_contestant.ID WHERE wp_bogacontest_contestant.contest_id='". $this->id ."' GROUP BY contestant_id ORDER BY votes DESC;", OBJECT);
         }
     }
 

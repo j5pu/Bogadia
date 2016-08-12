@@ -116,7 +116,7 @@ class contest
 
         $variables = "wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." ";
         $tables = "wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." ";
-        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $not_in ." ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT 3". $offset ;
+        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $not_in ." ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT 25". $offset ;
         $query = "SELECT ". $variables . " FROM ". $tables ." WHERE ". $conditions .";";
 
         // Ejecución

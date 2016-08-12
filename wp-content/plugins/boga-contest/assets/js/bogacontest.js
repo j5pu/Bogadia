@@ -87,10 +87,14 @@ var vote = {
 var toolbar = {
     filter: '',
     search: '',
+    offset: 1,
+    exclude: [],
     typewatch_options: {
     callback: function ()
     {
         toolbar.search = jQuery("#search_query_input").val();
+        toolbar.exclude = [];
+        toolbar.offset = 1;
         toolbar.new_query();
         document.activeElement.blur();
     },
@@ -101,35 +105,63 @@ var toolbar = {
     new_query: function(){
         jQuery.ajax({
                 beforeSend: function(){
-                    jQuery.Velocity.RunSequence([
-                        {e: jQuery('#contestants_container'), p:'fadeOut'},
-                        {e: jQuery('#toolbar_loader'), p:'fadeIn'}
-                    ]);
+                    if (toolbar.exclude === undefined || toolbar.exclude.length == 0) {
+                        jQuery.Velocity.RunSequence([
+                            {e: jQuery('#contestants_container'), p: 'fadeOut'},
+                            {e: jQuery('#toolbar_loader'), p: 'fadeIn'}
+                        ]);
+                    }else{
+                        jQuery.Velocity.RunSequence([
+                            {e: jQuery('#toolbar_loader'), p: 'fadeIn'}
+                        ]);
+                    }
                 },
                 method: "POST",
                 url: "/wp-content/plugins/boga-contest/toolbar.php",
                 data: {
                     filter: toolbar.filter,
                     search: toolbar.search,
+                    exclude: toolbar.exclude,
+                    offset: toolbar.offset,
                     slug: jQuery('#toolbar').data('slug')
                 }
             })
             .done(function( msg ) {
-                jQuery('#contestants_container').html(msg);
-                setTimeout(function()
-                {
-                    jQuery.Velocity.RunSequence([
-                        {e: jQuery('#toolbar_loader'), p:'fadeOut'},
-                        {e: jQuery('#contestants_container'), p:'fadeIn'}
-                    ]);
+                if (toolbar.exclude === undefined || toolbar.exclude.length == 0){
+                    jQuery('#contestants_container').html(msg);
                     setTimeout(function()
                     {
-                        grid.masonry('reloadItems');
-                        grid.imagesLoaded().progress( function() {
-                            grid.masonry('layout');
-                        });
+                        jQuery.Velocity.RunSequence([
+                            {e: jQuery('#toolbar_loader'), p:'fadeOut'},
+                            {e: jQuery('#contestants_container'), p:'fadeIn'}
+                        ]);
+                        setTimeout(function()
+                        {
+                            grid.masonry('reloadItems');
+                            grid.imagesLoaded().progress( function() {
+                                grid.masonry('layout');
+                            });
+                        }, 500);
                     }, 500);
-                }, 500);
+                }else{
+                    var $data = jQuery(msg);
+
+                    jQuery('#contestants_container').append($data);
+                    setTimeout(function()
+                    {
+                        jQuery.Velocity.RunSequence([
+                            {e: jQuery('#toolbar_loader'), p:'fadeOut'},
+                        ]);
+                        setTimeout(function()
+                        {
+
+                            jQuery('#contestants_container').imagesLoaded(function() {
+                                grid.masonry('appended', $data, true);
+                            });
+                        }, 500);
+                        toolbar.exclude = [];
+                    }, 500);
+                }
             })
             .fail(function( msg ) {
                 jQuery('#contestants_container').html('<h3>Ups! Inténtalo de nuevo.</h3>');
@@ -145,6 +177,17 @@ var toolbar = {
     bind_events: function(){
         jQuery("input[type=radio][name=optradio]").on('click', function(){
             toolbar.filter = jQuery("input[type=radio][name=optradio]:checked").val();
+            toolbar.exclude = [];
+            toolbar.offset = 1;
+            toolbar.new_query();
+        });
+        jQuery("#load_more").on('click', function(){
+            jQuery('.mini_image').each(function(){
+                toolbar.exclude.push(jQuery(this).data('contestant_id'));
+            });
+            toolbar.offset += 1;
+            toolbar.filter = jQuery("input[type=radio][name=optradio]:checked").val();
+
             toolbar.new_query();
         });
         jQuery("#search_query_input").typeWatch( toolbar.typewatch_options );

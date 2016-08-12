@@ -275,10 +275,10 @@ function bogacontest_meta_title($string)
             }
 
             $meta_data_container = $wpdb->get_row("SELECT wp_users.display_name, wp_users.user_nicename, wp_bogacontest_img.path AS main_photo FROM wp_bogacontest_contestant LEFT JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID LEFT JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID LEFT JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id WHERE " . $query_lookup_field . " AND wp_bogacontest.ID='" . $contest->id . "' AND wp_bogacontest_img.main='1';", OBJECT);
-            return $meta_data_container->display_name .' - Aspirante a portada de Bogadia';
+            return $meta_data_container->display_name .' - Aspirante a portada de Bogadia - Concurso de modelos';
         }else
         {
-            return 'Concurso de modelos - Portada de Bogadia';
+            return 'Concurso de modelos - Ser portada de Bogadia';
         }
     } else
     {
@@ -313,9 +313,9 @@ function bogacontest_meta_description($string){
         if (!empty($contestant_name_or_id))
         {
             global $meta_data_container;
-            return '¡Necesito tu voto para ganar! Ayúdame a ser portada de Bogadia' ;
+            return '¡Necesito tu voto para ganar el concurso de modelos de Bogadia! Ayúdame a ser portada. '. $meta_data_container->display_name;
         }else{
-            return 'Entra de lleno en el mundo de la moda participando en BogaContest, el primer concurso de modelos para gente como tú.';
+            return 'Entra de lleno en el mundo de la moda participando en el concurso de modelos de Bogadia. Para nuestra portada buscamos gente como tú.';
         }
     }else{
         return $string;

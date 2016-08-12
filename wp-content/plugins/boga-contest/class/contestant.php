@@ -69,7 +69,7 @@ class contest
     }
 
     // Métodos
-    function get_contestants($by, $direction, $search)
+    function get_contestants($by, $direction, $search, $exclude, $off)
     {
         /* Rescata de base de datos Concursantes. Acepta buscar por nombre, ordenar por algún atributo y/o de menor a mayor y viceversa */
 
@@ -78,6 +78,8 @@ class contest
         $query_filter_var = "";
         $group_by = "";
         $left_join = "";
+        $not_in = "";
+        $offset = "";
 
         // Composición de la query
         if (!empty($search))
@@ -96,14 +98,25 @@ class contest
                 $group_by = 'GROUP BY wp_bogacontest_votes.contestant_id';
                 $left_join = 'LEFT JOIN wp_bogacontest_votes ON wp_bogacontest_contestant.ID=wp_bogacontest_votes.contestant_id';
             }
+            if($by == 'RAND()'){
+                if (!empty($exclude)){
+                    $not_in = "AND wp_bogacontest_contestant.ID NOT IN ( '" . implode($exclude, "', '") . "' )";
+                }
+
+            }else{
+                if (!empty($off)){
+                    $offset = " OFFSET ". ($off * 3);
+                }
+            }
 
             $by = 'ORDER BY ' . $by ;
             $direction = 'DESC';
         }
 
+
         $variables = "wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." ";
         $tables = "wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." ";
-        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT 50" ;
+        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $not_in ." ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT 3". $offset ;
         $query = "SELECT ". $variables . " FROM ". $tables ." WHERE ". $conditions .";";
 
         // Ejecución
@@ -164,7 +177,6 @@ class contest
         self::count_contestans();
         self::print_toolbar();
         echo '<div class="text-center" style="min-height: 500px">';
-        echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
         echo '<div class="grid">';
         echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
         echo '<div id="contestants_container">';
@@ -180,6 +192,8 @@ class contest
         }
         echo '</div>';
         echo '</div>';
+        echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
+/*        echo '<button id="load_more" class="btn btn-default">Cargar más</button>';*/
         echo '</div>';
         echo '</div>';
 
@@ -776,7 +790,7 @@ class contestant
 
     function print_mini_card($contest_slug)
     {
-        echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image">';
+        echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image" data-contestant_id="'. $this->ID .'">';
         echo '<a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
         echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h6>';

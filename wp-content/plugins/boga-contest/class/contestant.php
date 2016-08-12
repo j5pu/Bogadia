@@ -105,7 +105,7 @@ class contest
 
             }else{
                 if (!empty($off)){
-                    $offset = " OFFSET ". ($off * 3);
+                    $offset = " OFFSET ". ($off * 25);
                 }
             }
 

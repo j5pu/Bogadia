@@ -87,14 +87,14 @@ var vote = {
 var toolbar = {
     filter: '',
     search: '',
-    offset: 1,
+    offset: 0,
     exclude: [],
     typewatch_options: {
     callback: function ()
     {
         toolbar.search = jQuery("#search_query_input").val();
         toolbar.exclude = [];
-        toolbar.offset = 1;
+        toolbar.offset = 0;
         toolbar.new_query();
         document.activeElement.blur();
     },
@@ -178,7 +178,7 @@ var toolbar = {
         jQuery("input[type=radio][name=optradio]").on('click', function(){
             toolbar.filter = jQuery("input[type=radio][name=optradio]:checked").val();
             toolbar.exclude = [];
-            toolbar.offset = 1;
+            toolbar.offset = 0;
             toolbar.new_query();
         });
         jQuery("#load_more").on('click', function(){

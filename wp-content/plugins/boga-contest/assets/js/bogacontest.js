@@ -142,7 +142,7 @@ var toolbar = {
                                 grid.masonry('layout');
                             });
                         }, 500);
-                    }, 500);
+                    }, 1000);
                 }else{
                     var $data = jQuery(msg);
 

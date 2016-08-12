@@ -126,7 +126,7 @@ class contest
         {
             $this->contestants = $results;
             if ($by == 'votes') {
-                $this->ranking;
+                $this->ranking = $results;
             }
             return $results;
         } else

@@ -123,7 +123,8 @@ var toolbar = {
                     search: toolbar.search,
                     exclude: toolbar.exclude,
                     offset: toolbar.offset,
-                    slug: jQuery('#toolbar').data('slug')
+                    slug: jQuery('#toolbar').data('slug'),
+                    contest_id: jQuery('#participate').data("contestid")
                 }
             })
             .done(function( msg ) {

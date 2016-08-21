@@ -738,7 +738,9 @@ jQuery(document).ready(function()
     gallery.init();
     jQuery('#bogacontest_login_modal').on('show.bs.modal', function(){
         jQuery.magnificPopup.close();
-        jQuery('.modal-dialog').velocity('transition.flipYIn');
+        var modal = jQuery('.modal-dialog');
+        modal.velocity('transition.flipYIn');
+        modal.velocity("scroll", { duration: 1000, easing: "spring" })
     });
 
     jQuery('#edit').on('click', function(){

@@ -749,7 +749,7 @@ jQuery(document).ready(function()
         percentPosition: true
     });
     contestant_grid.imagesLoaded().progress( function() {
-        grid.masonry('layout');
+        contestant_grid.masonry('layout');
     });
 
     grid = jQuery('.grid').masonry({

@@ -150,21 +150,23 @@ var toolbar = {
                     }, 1000);
                 }else{
                     var $data = jQuery(msg);
-
+                    $data.velocity('fadeOut');
                     jQuery('#contestants_container').append($data);
 
-                    setTimeout(function()
-                    {
+                    $data.imagesLoaded().progress(function(imgLoad, image) {
+                        var $item = jQuery( image.img ).parents('.grid-item');
+                        $item.velocity('fadeIn');
+                        setTimeout(function(){
+                            grid.masonry('appended', $item);
+                        }, 250);
 
-                        jQuery('#contestants_container').imagesLoaded(function() {
-                            grid.masonry('appended', $data, true);
-                            toolbar.hide_show_load_more();
-                            jQuery.Velocity.RunSequence([
-                                {e: jQuery('#load_more_loader'), p: 'fadeOut'},
-                                {e: jQuery('#load_more_text'), p: 'fadeIn'}
-                            ]);
-                        });
-                    }, 1000);
+                    }).done( function( instance ) {
+                        toolbar.hide_show_load_more();
+                        jQuery.Velocity.RunSequence([
+                            {e: jQuery('#load_more_loader'), p: 'fadeOut'},
+                            {e: jQuery('#load_more_text'), p: 'fadeIn'}
+                        ]);
+                    });
                     toolbar.exclude = [];
                 }
             })

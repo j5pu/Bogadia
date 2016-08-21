@@ -74,12 +74,14 @@ class contest
         /* Rescata de base de datos Concursantes. Acepta buscar por nombre, ordenar por algún atributo y/o de menor a mayor y viceversa */
 
         global $wpdb;
+        global $limit;
         $query_search = "";
         $query_filter_var = "";
         $group_by = "";
         $left_join = "";
         $not_in = "";
         $offset = "";
+        $limit = 25;
 
         // Composición de la query
         if (!empty($search))
@@ -105,7 +107,7 @@ class contest
 
             }else{
                 if (!empty($off)){
-                    $offset = " OFFSET ". ($off * 25);
+                    $offset = " OFFSET ". ($off * $limit);
                 }
             }
 
@@ -115,8 +117,8 @@ class contest
 
         $variables = "wp_users.display_name, wp_users.user_nicename, wp_users.ID as user_id,wp_bogacontest_img.path as main_photo, wp_bogacontest_contestant.ID, wp_bogacontest.ID as contest_id ". $query_filter_var ." ";
         $tables = "wp_bogacontest_contestant INNER JOIN wp_users ON wp_bogacontest_contestant.user_id=wp_users.ID INNER JOIN wp_bogacontest ON wp_bogacontest.ID=wp_bogacontest_contestant.contest_id INNER JOIN wp_bogacontest_img ON wp_bogacontest_img.contestant_id=wp_bogacontest_contestant.ID ". $left_join ." ";
-        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $not_in ." ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT 25". $offset ;
-        $query = "SELECT ". $variables . " FROM ". $tables ." WHERE ". $conditions .";";
+        $conditions = "wp_bogacontest.slug='". $this->slug ."' AND wp_bogacontest_img.main=1 ". $not_in ." ". $query_search ." ". $group_by . " " . $by ." ". $direction ." LIMIT ". $limit . $offset ;
+        $query = "SELECT ". $variables ." FROM ". $tables ." WHERE ". $conditions .";";
 
         // Ejecución
         $results = $wpdb->get_results( $query, OBJECT );
@@ -160,24 +162,30 @@ class contest
         /* Imprime la pagina individual de un concurso */
 
         self::get_contest_slug_from_url();
-        self::get_contestants('RAND()', '', '');
-        self::get_ranking();
+
         self::print_login_register_form();
 
         // PRESENTACION CONCURSO:
         echo '<section id="participate" data-contestid="'. $this->id .'">';
-/*        self::print_participate_button();*/
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';
 
+        self::print_contestant_forest();
+
+    }
+
+    function print_contestant_forest(){
+        self::get_contestants('RAND()', '', '', '', '');
+        self::get_ranking();
         // CONCURSANTES
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
         self::count_contestans();
         self::print_toolbar();
         echo '<div class="text-center" style="min-height: 500px">';
+        echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
         echo '<div class="grid">';
-        echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
+        echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3 text-center"></div>';
         echo '<div id="contestants_container">';
 
         if (empty($this->contestants))
@@ -191,8 +199,7 @@ class contest
         }
         echo '</div>';
         echo '</div>';
-        echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
-/*        echo '<button id="load_more" class="btn btn-default">Cargar más</button>';*/
+        echo '<button id="load_more" class="btn btn-default" style="display: none;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más concursantes</span></div></button>';
         echo '</div>';
         echo '</div>';
 
@@ -202,10 +209,11 @@ class contest
     function print_toolbar()
     {
         /* Imprime la barra de filtrado y busqueda de concursantes */
+        global $limit;
 
         echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->slug .'">';
         echo '<div id="toolbar_counter" class="col-md-4">';
-        echo '<small>'. $this->total_contestants .' concursantes</small>';
+        echo '<small id="toolbar_counter_number" data-total_contestant="'. $this->total_contestants .'" data-limit="'. $limit .'">'. $this->total_contestants .' concursantes</small>';
         echo '</div>';
         echo '<div id="toolbar_search" class="col-md-4">';
         echo '<input id="search_query_input" type="text" class="form-control" placeholder="buscar por nombre">';
@@ -307,7 +315,7 @@ class contest
 
         // Footer del modal
         echo '<div id="bogacontest_login_footer" class="modal-footer">';
-        echo '<small>Al registrarte aceptas nuestra <a href="/wp-content/plugins/boga-contest/assets/pdf/politicadeprivacidadconcursomodelosBogadia.pdf">política de privacidad</a> y <a href="/wp-content/plugins/boga-contest/assets/pdf/BaseslegalesConcursodemodelosAgosto.pdf">bases legales</a>. Además, afirmas ser mayor de edad o mayor de 14 años y cuentas con autorización paterna.</small>';
+        echo '<small>Al registrarte aceptas nuestra <a href="/wp-content/plugins/boga-contest/assets/pdf/politicadeprivacidadconcursomodelosBogadia.pdf">política de privacidad</a> y <a href="/wp-content/plugins/boga-contest/assets/pdf/BaseslegalesConcursodemodelosAgosto.pdf">bases legales</a>. Además, afirmas ser mayor de edad o mayor de 14 años y que cuentas con autorización paterna.</small>';
         echo '</div>';
 
         echo '</div>';
@@ -481,14 +489,14 @@ class contestant
         ob_start();
         ?>
 
-        <p>Buenas, <?php echo cut_title($this->name, 15)  ?>. Gracias por participar en el concurso de modelos de bogadia</p>
+        <p>Buenas <?php echo cut_title($this->name, 15)  ?>. Gracias por participar en el concurso de modelos de bogadia</p>
 
         <p>
             Te deseamos toda la suerte del mundo.
         </p>
 
         <p>
-            Tu página web personal es <a href="https://www.bogadia.com/concursos/concurso-modelos/<?php echo $this->nice_name ?>">https://www.bogadia.com/concursos/concurso-modelos/<?php echo $this->nice_name ?></a>
+            Tu página web personal es <a href="https://www.bogadia.com/concursos/<?php echo $this->contest->slug ?>/<?php echo $this->nice_name ?>">https://www.bogadia.com/concursos/<?php echo $this->contest->slug ?>/<?php echo $this->nice_name ?></a>
         </p>
 
         <p>
@@ -789,9 +797,9 @@ class contestant
 
     function print_mini_card($contest_slug)
     {
-        echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image" data-contestant_id="'. $this->ID .'">';
+        echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image" data-contestant_id="'. $this->ID .'"   width="500px" height="281px">';
         echo '<a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
-        echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" >';
+        echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'">';
         echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h6>';
         echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-star" aria-hidden="true"></i></span></h6>';
         echo '</a>';
@@ -889,34 +897,11 @@ class contestant
         echo '</div>';*/
 
         if(!$current_user_is_editing){
-            // CONCURSANTES
-            echo '<div id="image_bottom"></div>';
+            $this->contest->print_contestant_forest();
+            echo '<section id="participate" data-contestid="'. $this->contest->id .'">';
 
-            echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
-            $this->contest->count_contestans();
-            $this->contest->print_toolbar();
-            $this->contest->get_contest_slug_from_url();
-            $this->contest->get_contestants('RAND()', '', '');
-            $this->contest->get_ranking();
-            echo '<div class="text-center" style="min-height: 500px">';
-            echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
-            echo '<div class="grid">';
-            echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
-            echo '<div id="contestants_container">';
-
-            if (empty($this->contest->contestants))
-            {
-                echo '<p>¡Hola! Eres el primero en llegar. ¡Ánimate a participar!</p>';
-                return '';
-            }
-            else
-            {
-                $this->contest->print_contestants();
-            }
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
-            echo '</div>';
+            echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
+            echo '</section>';
         }
 
 

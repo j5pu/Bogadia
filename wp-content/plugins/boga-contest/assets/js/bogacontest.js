@@ -97,6 +97,7 @@ var toolbar = {
         toolbar.offset = 0;
         toolbar.new_query();
         document.activeElement.blur();
+        toolbar.hide_show_load_more();
     },
     wait: 1000,
     highlight: true,
@@ -112,7 +113,8 @@ var toolbar = {
                         ]);
                     }else{
                         jQuery.Velocity.RunSequence([
-                            {e: jQuery('#toolbar_loader'), p: 'fadeIn'}
+                            {e: jQuery('#load_more_text'), p: 'fadeOut'},
+                            {e: jQuery('#load_more_loader'), p: 'fadeIn'}
                         ]);
                     }
                 },
@@ -142,26 +144,27 @@ var toolbar = {
                             grid.imagesLoaded().progress( function() {
                                 grid.masonry('layout');
                             });
+                            toolbar.hide_show_load_more();
                         }, 500);
                     }, 1000);
                 }else{
                     var $data = jQuery(msg);
 
                     jQuery('#contestants_container').append($data);
+
                     setTimeout(function()
                     {
-                        jQuery.Velocity.RunSequence([
-                            {e: jQuery('#toolbar_loader'), p:'fadeOut'},
-                        ]);
-                        setTimeout(function()
-                        {
 
-                            jQuery('#contestants_container').imagesLoaded(function() {
-                                grid.masonry('appended', $data, true);
-                            });
-                        }, 500);
-                        toolbar.exclude = [];
-                    }, 500);
+                        jQuery('#contestants_container').imagesLoaded(function() {
+                            grid.masonry('appended', $data, true);
+                            toolbar.hide_show_load_more();
+                            jQuery.Velocity.RunSequence([
+                                {e: jQuery('#load_more_loader'), p: 'fadeOut'},
+                                {e: jQuery('#load_more_text'), p: 'fadeIn'}
+                            ]);
+                        });
+                    }, 1000);
+                    toolbar.exclude = [];
                 }
             })
             .fail(function( msg ) {
@@ -195,6 +198,22 @@ var toolbar = {
         jQuery("#search_query_input").on( 'change', function(){
             jQuery('#contestants_container').html('<img class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 15%; margin: 0 auto;">');
         } );
+        toolbar.hide_show_load_more();
+    },
+    hide_show_load_more: function(){
+        var total_contestants = jQuery('#toolbar_counter_number').data('total_contestant');
+        var current_contestants = jQuery('.mini_image').length;
+        var load_button = jQuery('#load_more');
+
+        if (total_contestants > current_contestants){
+            if (load_button.css('display') == 'none') {
+                load_button.velocity('fadeIn');
+            }
+        }else{
+            if (load_button.css('display') != 'none') {
+                load_button.velocity('fadeOut');
+            }
+        }
     }
 };
 

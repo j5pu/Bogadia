@@ -269,9 +269,9 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
 		$share_buttons = '<div id="mobile_share_button" class="row">';
 		$share_buttons .= '<div class="text-center col-xs-12">';
 		$share_buttons .= '<a id="whatsapp_share_button" class="bogashare_icon_holder" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogashare_social" style="background-color: #43d854;"></i></a>';
-		$share_buttons .= '<a class="bogashare_icon_holder" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogashare_social" style="background-color: #3b5998;"></em></a>';
-		$share_buttons .= '<a class="bogashare_icon_holder" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogashare_social" style="background-color: #00aced;"></em></a>';
-		$share_buttons .= '<a class="bogashare_icon_holder" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media='. $image .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogashare_social" style="background-color: #bd081c;"></i></a>';
+		$share_buttons .= '<a id="facebook_share_button" class="bogashare_icon_holder" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogashare_social" style="background-color: #3b5998;"></em></a>';
+		$share_buttons .= '<a id="twitter_share_button" class="bogashare_icon_holder" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogashare_social" style="background-color: #00aced;"></em></a>';
+		$share_buttons .= '<a id="pinterest_share_button" class="bogashare_icon_holder" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media='. $image .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogashare_social" style="background-color: #bd081c;"></i></a>';
 		$share_buttons .= '</div>';
 		$share_buttons .= '</div>';
 		echo $share_buttons;

@@ -750,6 +750,14 @@ jQuery(document).ready(function()
     grid.imagesLoaded().progress( function() {
         grid.masonry('layout');
     });
+    contestant_grid = jQuery('.contestant_grid').masonry({
+        itemSelector: '.contestant_grid-item',
+        columnWidth: '.contestant_grid-sizer',
+        percentPosition: true
+    });
+    grid.imagesLoaded().progress( function() {
+        grid.masonry('layout');
+    });
 /*
     jQuery(window).scroll(function(){
         jQuery("#interaction_buttons_wrapper").css("top",Math.max(0,2-jQuery(this).scrollTop()));

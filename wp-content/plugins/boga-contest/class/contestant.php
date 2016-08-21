@@ -182,10 +182,10 @@ class contest
         echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
         self::count_contestans();
         self::print_toolbar();
-        echo '<div class="text-center" style="min-height: 500px">';
+        echo '<div class="text-center" style="min-height: 500px; margin-bottom: 50px;">';
         echo '<img id="toolbar_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="width: 200px;margin: 0 auto; display: none;">';
         echo '<div class="grid">';
-        echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3 text-center"></div>';
+        echo '<div class="grid-sizer col-xs-6 col-sm-4 col-md-3"></div>';
         echo '<div id="contestants_container">';
 
         if (empty($this->contestants))
@@ -199,7 +199,7 @@ class contest
         }
         echo '</div>';
         echo '</div>';
-        echo '<button id="load_more" class="btn btn-default" style="display: none;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más concursantes</span></div></button>';
+        echo '<button id="load_more" class="btn btn-default" style="display: none; margin: 0 auto;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más concursantes</span></div></button>';
         echo '</div>';
         echo '</div>';
 
@@ -985,11 +985,11 @@ class contestant
 
         echo '<div id="gallery" class="';
         if (!$current_user_is_editing){
-            echo 'grid ';
+            echo 'contestant_grid ';
         }
         echo '">';
         if (!$current_user_is_editing){
-            echo '<div class="grid-sizer col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>';
+            echo '<div class="contestant_grid-sizer col-xs-6 col-sm-6 col-md-6 col-lg-6"></div>';
         }
         if (!empty($this->photos))
         {
@@ -1002,7 +1002,7 @@ class contestant
                 {
                     echo '<div id="gallery_image_container_'. $photo->id .'" class="';
                     if (!$current_user_is_editing){
-                        echo 'grid-item ';
+                        echo 'contestant_grid-item ';
                     }
                     if ($current_user_is_editing){
                         echo 'col-xs-4 col-sm-4 col-md-4 col-lg-3 gallery_container" style="padding: 1px !important; ';

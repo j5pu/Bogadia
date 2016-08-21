@@ -1,4 +1,5 @@
 var grid = 0;
+var contestant_grid = 0;
 
 var gallery = {
     photos: [],
@@ -742,17 +743,18 @@ jQuery(document).ready(function()
         window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename');
     });
 
-    grid = jQuery('.grid').masonry({
-        itemSelector: '.grid-item',
-        columnWidth: '.grid-sizer',
-        percentPosition: true
-    });
-    grid.imagesLoaded().progress( function() {
-        grid.masonry('layout');
-    });
     contestant_grid = jQuery('.contestant_grid').masonry({
         itemSelector: '.contestant_grid-item',
         columnWidth: '.contestant_grid-sizer',
+        percentPosition: true
+    });
+    contestant_grid.imagesLoaded().progress( function() {
+        grid.masonry('layout');
+    });
+
+    grid = jQuery('.grid').masonry({
+        itemSelector: '.grid-item',
+        columnWidth: '.grid-sizer',
         percentPosition: true
     });
     grid.imagesLoaded().progress( function() {

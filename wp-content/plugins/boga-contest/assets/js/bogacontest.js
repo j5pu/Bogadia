@@ -150,7 +150,7 @@ var toolbar = {
                     }, 1000);
                 }else{
                     var $data = jQuery(msg);
-                    $data.velocity('fadeOut');
+                    $data.velocity('fadeOut', { duration: 50 });
                     jQuery('#contestants_container').append($data);
 
                     $data.imagesLoaded().progress(function(imgLoad, image) {

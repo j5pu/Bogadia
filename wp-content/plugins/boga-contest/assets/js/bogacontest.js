@@ -158,7 +158,7 @@ var toolbar = {
                         $item.velocity('fadeIn');
                         setTimeout(function(){
                             grid.masonry('appended', $item);
-                        }, 250);
+                        }, 500);
 
                     }).done( function( instance ) {
                         toolbar.hide_show_load_more();

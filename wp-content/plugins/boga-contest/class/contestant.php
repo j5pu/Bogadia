@@ -199,7 +199,7 @@ class contest
         }
         echo '</div>';
         echo '</div>';
-        echo '<button id="load_more" class="btn btn-default" style="display: none; margin: 0 auto;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más concursantes</span></div></button>';
+        echo '<button id="load_more" class="btn btn-primary" style="display: none; margin: 0 auto;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más concursantes</span></div></button>';
         echo '</div>';
         echo '</div>';
 

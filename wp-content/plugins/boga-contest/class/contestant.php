@@ -163,15 +163,15 @@ class contest
 
         self::get_contest_slug_from_url();
 
-        self::print_login_register_form();
 
         // PRESENTACION CONCURSO:
-        echo '<section id="participate" data-contestid="'. $this->id .'" title="Casting para ser modelo de Bogadia">';
+        echo '<section id="participate" data-contestid="'. $this->id .'" title="Casting para ser modelo de Bogadia - Concurso de portada">';
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';
 
         self::print_contestant_forest();
+        self::print_login_register_form();
 
     }
 
@@ -823,7 +823,6 @@ class contestant
            }
         }
 
-        $this->contest->print_login_register_form();
         if ($current_user_is_editing){
             self::print_photos_manager();
         }
@@ -903,6 +902,7 @@ class contestant
             echo '</section>';
         }
 
+        $this->contest->print_login_register_form();
 
         return '';
     }

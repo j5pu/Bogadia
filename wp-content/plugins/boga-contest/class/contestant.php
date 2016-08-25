@@ -166,7 +166,7 @@ class contest
         self::print_login_register_form();
 
         // PRESENTACION CONCURSO:
-        echo '<section id="participate" data-contestid="'. $this->id .'">';
+        echo '<section id="participate" data-contestid="'. $this->id .'" title="Casting para ser modelo de Bogadia">';
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';
@@ -179,7 +179,7 @@ class contest
         self::get_contestants('RAND()', '', '', '', '');
         self::get_ranking();
         // CONCURSANTES
-        echo '<h2 id="contestants_forest_header"><span id="contestants_forest_header_span">Así van las votaciones </span> </h2>';
+        echo '<h1 id="contestants_forest_header"><span id="contestants_forest_header_span">Modelos en este casting </span> </h1>';
         self::count_contestans();
         self::print_toolbar();
         echo '<div class="text-center" style="min-height: 500px; margin-bottom: 50px;">';
@@ -199,7 +199,7 @@ class contest
         }
         echo '</div>';
         echo '</div>';
-        echo '<button id="load_more" class="btn btn-primary" style="display: none; margin: 0 auto;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más concursantes</span></div></button>';
+        echo '<button id="load_more" class="btn btn-primary" style="display: none; margin: 0 auto;"><div class="text-center" style="min-height: 18px"><img id="load_more_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 74px;"><span id="load_more_text">Cargar más modelos</span></div></button>';
         echo '</div>';
         echo '</div>';
 
@@ -213,7 +213,7 @@ class contest
 
         echo '<div id="toolbar" class="row form-group text-center" data-slug="'. $this->slug .'">';
         echo '<div id="toolbar_counter" class="col-md-4">';
-        echo '<small id="toolbar_counter_number" data-total_contestant="'. $this->total_contestants .'" data-limit="'. $limit .'">'. $this->total_contestants .' concursantes</small>';
+        echo '<small id="toolbar_counter_number" data-total_contestant="'. $this->total_contestants .'" data-limit="'. $limit .'">'. $this->total_contestants .' modelos</small>';
         echo '</div>';
         echo '<div id="toolbar_search" class="col-md-4">';
         echo '<input id="search_query_input" type="text" class="form-control" placeholder="buscar por nombre">';
@@ -799,7 +799,7 @@ class contestant
     {
         echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image" data-contestant_id="'. $this->ID .'"   width="500px" height="281px">';
         echo '<a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
-        echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'">';
+        echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" alt="foto de '. $this->name .', modelo de Bogadia">';
         echo '<h6 class="mini-name"><span class="mini_span">'. cut_title($this->name, 10) .'</span></h6>';
         echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-star" aria-hidden="true"></i></span></h6>';
         echo '</a>';
@@ -839,7 +839,7 @@ class contestant
         // Nombres, votos y posicion
         echo '<div class="row" >';
         echo '<div class="col-md-12 text-center">';
-        echo '<h2 id="contestant_name" style="font-size: 150%;">'. $this->name .'</h2>';
+        echo '<h1 id="contestant_name" style="font-size: 150%;">'. $this->name .'</h1>';
         echo ' <small id="votes-'. $this->ID .'" data-votes="'. $this->votes .'"  >'. $this->votes .' votos</small>';
         if(!empty($this->position))
         {
@@ -856,7 +856,6 @@ class contestant
             if(($current_user_id == $this->user_id) && !(isset($_GET['edit']))){
                 echo '<button id="back_to_edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'" style="margin-left: 0px;"><div class="text-center" style="min-height: 18px"><span id="">Editar mi perfil</span></div></button>';
             }
-
         }else{
             echo '<div style="margin-top: 10px; margin-bottom: 10px;">';
             echo '<button id="edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'"><div class="text-center" style="min-height: 18px"><img id="participate_loader" class="image-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 10%;margin: 0 auto; display: none; max-height: 18px;"><span id=""><i class="icon-eye" aria-hidden="true"></i>FINALIZAR</span></div></button>';
@@ -1045,7 +1044,7 @@ class contestant
         if (!empty($this->main_photo))
         {
             echo '<a id="main_photo_link" class="main_photo_holder_link" href="'. $this->main_photo .'">';
-            echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive" style="margin: 0 auto;">';
+            echo '<img id="main_photo" src="'. $this->main_photo .'" class="img-responsive" style="margin: 0 auto;" alt="foto principal de '. $this->name .', modelo de Bogadia">';
             echo '</a>';
             $button_text = 'Cambia tu foto principal';
             $button_class = 'btn-default';

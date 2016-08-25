@@ -278,7 +278,7 @@ function bogacontest_meta_title($string)
             return $meta_data_container->display_name .' - Aspirante a portada de Bogadia - Concurso de modelos';
         }else
         {
-            return 'Concurso de modelos - Ser portada de Bogadia';
+            return 'Casting de modelos online - Ser portada de Bogadia';
         }
     } else
     {
@@ -315,7 +315,7 @@ function bogacontest_meta_description($string){
             global $meta_data_container;
             return '¡Necesito tu voto para ganar el concurso de modelos de Bogadia! Ayúdame a ser portada. '. $meta_data_container->display_name;
         }else{
-            return 'Entra de lleno en el mundo de la moda participando en el concurso de modelos de Bogadia. Para nuestra portada buscamos gente como tú.';
+            return 'Gana un book profesional participando en el concurso de modelos de Bogadia, casting de modelaje online. Para nuestra portada buscamos gente como tú. Sé modelo.';
         }
     }else{
         return $string;

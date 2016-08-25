@@ -351,6 +351,7 @@ var photo_manager = {
 
                                 if(!main_photo.hasClass('fake_main_photo')){
                                     image_url = old_photo;
+                                    ga('send', 'event', 'bogacontest', 'contestant_change_main_photo', 'upload_photo');
                                 }else{
                                     image_url = 0;
                                     main_photo.removeClass('fake_main_photo');
@@ -360,6 +361,7 @@ var photo_manager = {
                                         upload_button.addClass('btn-primary');
                                     }
                                     first_time_main_photo_set = 1;
+                                    ga('send', 'event', 'bogacontest', 'new_contestant_upload_main_photo', 'upload_photo');
                                 }
                             }
                             if (image_url != 0){
@@ -712,9 +714,11 @@ var login = {
         } else if(action == 'redirect') {
             if (data.contestant_id){
                 if (data.new == 1){
-                    window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true';
-                }else{
+                    ga('send', 'event', 'bogacontest', 'new_contestant_register', 'register');
                     window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true&new=true';
+                }else{
+                    ga('send', 'event', 'bogacontest', 'contestant_editting', 'login');
+                    window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true';
                 }
             }
         }
@@ -751,8 +755,10 @@ jQuery(document).ready(function()
 
     jQuery('#edit').on('click', function(){
         if(first_time_main_photo_set == 1){
+            ga('send', 'event', 'bogacontest', 'new_contestant_finish', 'click');
             window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '/?status=complete';
         }else{
+            ga('send', 'event', 'bogacontest', 'contestant_edit_finish', 'click');
             window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename');
         }
     });

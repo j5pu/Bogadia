@@ -8,8 +8,9 @@ $bogacontestant->setContest($bogacontest);
 
 list($ID, $new) = $bogacontestant->get_or_create();
 if ($new == 0){
-    echo json_encode(array('message'=>__('¡Nos alegramos de verte de vuelta!'), 'user_id'=>$_POST['user_id'], 'contestant_id'=>$ID));
+    $message = '¡Nos alegramos de verte de vuelta!';
 }else{
-    echo json_encode(array('message'=>__('Perfecto. Te llevamos a tu perfil para que subas tus fotos.'), 'user_id'=>$_POST['user_id'], 'contestant_id'=>$ID));
+    $message = 'Perfecto. Te llevamos a tu perfil para que subas tus fotos.';
 }
+echo json_encode(array('message'=>__($message), 'user_id'=>$_POST['user_id'], 'contestant_id'=>$ID, 'new'=>$new));
 die();

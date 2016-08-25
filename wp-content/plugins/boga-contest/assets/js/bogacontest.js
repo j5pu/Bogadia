@@ -1,5 +1,6 @@
 var grid = 0;
 var contestant_grid = 0;
+var first_time_main_photo_set = 0;
 
 var gallery = {
     photos: [],
@@ -358,6 +359,7 @@ var photo_manager = {
                                         upload_button.removeClass('btn-default ');
                                         upload_button.addClass('btn-primary');
                                     }
+                                    first_time_main_photo_set = 1;
                                 }
                             }
                             if (image_url != 0){
@@ -709,7 +711,11 @@ var login = {
             new_contestant();
         } else if(action == 'redirect') {
             if (data.contestant_id){
-                window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true';
+                if (data.new == 1){
+                    window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true';
+                }else{
+                    window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + data.contestant_id + '?edit=true&new=true';
+                }
             }
         }
     }
@@ -744,7 +750,11 @@ jQuery(document).ready(function()
     });
 
     jQuery('#edit').on('click', function(){
-        window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename');
+        if(first_time_main_photo_set == 1){
+            window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '/?status=complete';
+        }else{
+            window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename');
+        }
     });
 
     contestant_grid = jQuery('.contestant_grid').masonry({
@@ -761,8 +771,12 @@ jQuery(document).ready(function()
         columnWidth: '.grid-sizer',
         percentPosition: true
     });
-    grid.imagesLoaded().progress( function() {
-        grid.masonry('layout');
+    grid.imagesLoaded().progress( function(imgLoad, image) {
+        var $item = jQuery( image.img ).parents('.grid-item');
+        $item.velocity('fadeIn');
+        setTimeout(function(){
+            grid.masonry('layout');
+        }, 500);
     });
 /*
     jQuery(window).scroll(function(){

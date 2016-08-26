@@ -162,16 +162,22 @@ class contest
         /* Imprime la pagina individual de un concurso */
 
         self::get_contest_slug_from_url();
+        self::print_contest_presentation();
+        self::print_contestant_forest();
+        self::print_login_register_form();
 
+    }
+
+    function print_contest_presentation(){
 
         // PRESENTACION CONCURSO:
+        echo '<h1 class="text-center"><strong>Concurso</strong> de <strong>modelos</strong></h1>';
+        echo '<h2 class="text-center">Primer <strong>casting online</strong> para gente como tú</h2>';
         echo '<section id="participate" data-contestid="'. $this->id .'" title="Casting para ser modelo de Bogadia - Concurso de portada">';
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';
-
-        self::print_contestant_forest();
-        self::print_login_register_form();
+        echo '<p id="description">Sube tu foto, consigue votos y conviértete en <strong>modelo</strong> de la portada de nuestra revista mediante nuestro <strong>casting online</strong>. Ganarás un <strong>book</strong> profesional valorado en 300 Euros y entrar de lleno en el mundo de la moda.</p>';
 
     }
 
@@ -179,7 +185,7 @@ class contest
         self::get_contestants('RAND()', '', '', '', '');
         self::get_ranking();
         // CONCURSANTES
-        echo '<h1 id="contestants_forest_header"><span id="contestants_forest_header_span">Modelos en este casting </span> </h1>';
+        echo '<h3 id="contestants_forest_header"><span id="contestants_forest_header_span">Modelos en este casting </span> </h3>';
         self::count_contestans();
         self::print_toolbar();
         echo '<div class="text-center" style="min-height: 500px; margin-bottom: 50px;">';
@@ -298,6 +304,7 @@ class contest
         echo '<div id="second_form" style="display: none;">';
         echo '<form id="register_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
+        echo '<div class="g-recaptcha" data-sitekey="6LcZlygTAAAAAEkuQ_eJ6sLMVL6l6hGLtSdelq_Q"></div>';
         echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
         echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
         echo '</form>';
@@ -315,12 +322,13 @@ class contest
 
         // Footer del modal
         echo '<div id="bogacontest_login_footer" class="modal-footer">';
-        echo '<small>Al registrarte aceptas nuestra <a href="/wp-content/plugins/boga-contest/assets/pdf/politicadeprivacidadconcursomodelosBogadia.pdf">política de privacidad</a> y <a href="/wp-content/plugins/boga-contest/assets/pdf/BaseslegalesConcursodemodelosAgosto.pdf">bases legales</a>. Además, afirmas ser mayor de edad o mayor de 14 años y que cuentas con autorización paterna.</small>';
+        echo '<small>Al registrarte aceptas nuestra <a href="/wp-content/plugins/boga-contest/assets/pdf/politicadeprivacidadconcursomodelosBogadia.pdf" style="text-decoration: underline;">política de privacidad</a> y <a href="/wp-content/plugins/boga-contest/assets/pdf/BaseslegalesConcursodemodelosAgosto.pdf" style="text-decoration: underline;">bases legales</a>. Además, afirmas ser mayor de edad o mayor de 14 años y que cuentas con autorización paterna.</small>';
         echo '</div>';
 
         echo '</div>';
         echo '</div>';
         echo '</div>';
+        echo '<script src=\'https://www.google.com/recaptcha/api.js\'></script>';
     }
 }
 
@@ -896,10 +904,7 @@ class contestant
 
         if(!$current_user_is_editing){
             $this->contest->print_contestant_forest();
-            echo '<section id="participate" data-contestid="'. $this->contest->id .'">';
-
-            echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
-            echo '</section>';
+            $this->contest->print_contest_presentation();
         }
 
         $this->contest->print_login_register_form();

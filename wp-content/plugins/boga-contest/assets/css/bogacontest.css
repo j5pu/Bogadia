@@ -80,7 +80,9 @@
     border-bottom: 3px solid #000;
     line-height:0.1em;
     margin:30px 0 20px;
+    /*
     font-size: 28px !important;
+    */
 }
 
 #contestants_forest_header_span{
@@ -248,11 +250,11 @@ input[type="color"]:focus,
         margin-top: 5px !important;
     }
     #participate {
-        background-image:url('/wp-content/plugins/boga-contest/assets/img/bannermovil-min.png');
+        background-image:url('/wp-content/plugins/boga-contest/assets/img/MODELO_MOVIL_con_botones-min.jpg');
         width:100%;
         background-repeat: no-repeat;
         background-size: 100%;
-        padding-top: 177.77%;
+        padding-top: 117.77%;
         height: 0;
     }
 }
@@ -279,12 +281,16 @@ input[type="color"]:focus,
         padding: 0 15px 0 1px;
     }
     #participate {
-        background-image:url('/wp-content/plugins/boga-contest/assets/img/bannerPC-min.png');
+        background-image:url('/wp-content/plugins/boga-contest/assets/img/MODELO_PC_CON_BOTONES-min.jpg');
         width:100%;
         background-repeat: no-repeat;
         background-size: 100%;
-        padding-top: 56.25%;
+        padding-top: 42.5%;
         height: 0;
+    }
+    #contestants_forest_header{
+
+        font-size: 28px !important;
     }
 }
 #bogacontest_login_modal > div > p {
@@ -307,9 +313,6 @@ input[type="color"]:focus,
 .main-color .btn-primary, .main-color #buddypress li span.unread-count, .main-color #buddypress #groups-list .item-avatar .member-count {
     background-color: #e3007c !important;
 }
-#participate{
-    padding-bottom: 50px !important;
-}
 .toolbar_label > input:checked + span{
     background-color: #e3007c;
     border-radius: 60px;
@@ -319,4 +322,8 @@ input[type="color"]:focus,
 .toolbar_label > input{ /* HIDE RADIO */
     visibility: hidden; /* Makes input not-clickable */
     position: absolute; /* Remove input from document flow */
+}
+
+#description{
+    margin-bottom: 50px;
 }

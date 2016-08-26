@@ -390,6 +390,7 @@ function WPSEO_OpenGraph_Image() {
 }
 
 
+
 add_filter("wpseo_opengraph", "WPSEO_OpenGraph_Image");
 add_filter( 'wpseo_sitemap_index', 'bogacontest_sitemap_index' );
 register_activation_hook( __FILE__, 'bogacontest_install' );

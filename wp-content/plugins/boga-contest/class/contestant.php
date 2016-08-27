@@ -909,7 +909,7 @@ class contestant
 
         $this->contest->print_login_register_form();
         if(isset($_GET['status'])) {
-            if ($_GET['status'] == 'complete'){
+            if ($_GET['status'] == 'complete' && ($current_user_id == $this->user_id)){
                 $pixel_code = '<!-- Facebook Pixel Code -->';
                 $pixel_code .= '<script>';
                 $pixel_code .= '!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?';

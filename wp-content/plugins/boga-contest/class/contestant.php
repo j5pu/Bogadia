@@ -177,7 +177,7 @@ class contest
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';
-        echo '<p id="description">Sube tu foto, consigue votos y conviértete en <strong>modelo</strong> de la portada de nuestra revista mediante nuestro <strong>casting online</strong>. Ganarás un <strong>book</strong> profesional valorado en 300 Euros y entrar de lleno en el mundo de la moda.</p>';
+        echo '<p id="description">Sube tu foto, consigue votos y conviértete en <strong>modelo</strong> de la portada de nuestra revista mediante nuestro <strong>casting online</strong>. Ganarás un <strong>book</strong> profesional valorado en 300 Euros y entrar de lleno en el mundo de la moda. Además, se seleccionará a l@s que serán imagen de los diseñadores que colaborarán en el lanzamiento de nuestra tienda online.</p>';
 
     }
 

@@ -53,7 +53,15 @@ if ( defined('WP_INSTALLING') && WP_INSTALLING == true && ! function_exists('kle
 	<link rel="stylesheet" href="<?php echo get_template_directory_uri(); ?>/assets/css/fontello-ie7.css">
 	<![endif]-->
 	
-	<?php if(function_exists('bp_is_active')) { bp_head(); } ?>	
+	<?php if(function_exists('bp_is_active')) { bp_head(); } ?>
+	<script type="text/javascript">
+		var $mcGoal = {'settings':{'uuid':'dc8ea90691abd391d5265a9db','dc':'us7'}};
+		(function() {
+			var sp = document.createElement('script'); sp.type = 'text/javascript'; sp.async = true; sp.defer = true;
+			sp.src = ('https:' == document.location.protocol ? 'https://s3.amazonaws.com/downloads.mailchimp.com' : 'http://downloads.mailchimp.com') + '/js/goal.min.js';
+			var s = document.getElementsByTagName('script')[0]; s.parentNode.insertBefore(sp, s);
+		})();
+	</script>
 	
 	<?php wp_head(); ?>
 </head>

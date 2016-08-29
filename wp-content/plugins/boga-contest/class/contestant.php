@@ -329,6 +329,22 @@ class contest
         echo '</div>';
         echo '</div>';
 /*        echo '<script src=\'https://www.google.com/recaptcha/api.js\'></script>';*/
+        // facebook pixel
+        $pixel_code = '<!-- Facebook Pixel Code -->';
+        $pixel_code .= '<script>';
+        $pixel_code .= '!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?';
+        $pixel_code .= 'n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;';
+        $pixel_code .= "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;";
+        $pixel_code .= 't.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,';
+        $pixel_code .= "document,'script','https://connect.facebook.net/en_US/fbevents.js');";
+        $pixel_code .= "fbq('init', '1749402588641150');";
+        $pixel_code .= "fbq('track'";
+        $pixel_code .= ', "PageView");</script>';
+        $pixel_code .= '<noscript><img height="1" width="1" style="display:none"';
+        $pixel_code .= 'src="https://www.facebook.com/tr?id=1749402588641150&ev=PageView&noscript=1"';
+        $pixel_code .= '/></noscript>';
+        $pixel_code .= '<!-- End Facebook Pixel Code -->';
+        echo $pixel_code;
     }
 }
 
@@ -910,21 +926,7 @@ class contestant
         $this->contest->print_login_register_form();
         if(isset($_GET['status'])) {
             if ($_GET['status'] == 'complete' && ($current_user_id == $this->user_id)){
-                $pixel_code = '<!-- Facebook Pixel Code -->';
-                $pixel_code .= '<script>';
-                $pixel_code .= '!function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?';
-                $pixel_code .= 'n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;';
-                $pixel_code .= "n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;";
-                $pixel_code .= 't.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,';
-                $pixel_code .= "document,'script','https://connect.facebook.net/en_US/fbevents.js');";
-                $pixel_code .= "fbq('init', '1749402588641150');";
-                $pixel_code .= "fbq('track'";
-                $pixel_code .= ', "PageView");</script>';
-                $pixel_code .= '<noscript><img height="1" width="1" style="display:none"';
-                $pixel_code .= 'src="https://www.facebook.com/tr?id=1749402588641150&ev=PageView&noscript=1"';
-                $pixel_code .= '/></noscript>';
-                $pixel_code .= '<!-- End Facebook Pixel Code -->';
-                echo $pixel_code;
+
             }
         }
 

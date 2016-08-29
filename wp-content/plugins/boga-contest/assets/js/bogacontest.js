@@ -77,6 +77,14 @@ var vote = {
                     var vote_div = jQuery('#votes-' + vote.contestant_id);
                     var votes = parseInt(vote_div.data('votes'));
                     vote_div.html((votes + 1) + ' votos');
+                    ga('send', 'event', 'bogacontest', 'vote', 'click');
+                    $mcGoal.processEvent('vote');
+                    fbq('trackCustom', 'vote', {
+                        voter_id: vote.voter_id,
+                        contestant_id: vote.contestant_id,
+                        value: 0.00,
+                        currency: 'USD'
+                    });
                 }
             })
             .fail(function( msg ) {
@@ -362,6 +370,13 @@ var photo_manager = {
                                     }
                                     first_time_main_photo_set = 1;
                                     ga('send', 'event', 'bogacontest', 'new_contestant_upload_main_photo', 'upload_photo');
+                                    $mcGoal.processEvent('new_contestant_upload_main_photo');
+                                    fbq('track', 'CompleteRegistration', {
+                                        content_name: 'new_contestant',
+                                        status: 'main_photo_uploaded',
+                                        value: 0.00,
+                                        currency: 'USD'
+                                    });
                                 }
                             }
                             if (image_url != 0){

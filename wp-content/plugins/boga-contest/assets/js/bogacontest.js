@@ -740,6 +740,21 @@ var login = {
     }
 };
 
+function bogacontest_bind_share_buttons(){
+    jQuery('#bogacontest_whatsapp').on('click', function(){
+        ga('send', 'event', 'bogacontest', 'click_whatsapp', 'share');
+    });
+    jQuery('#bogacontest_facebook').on('click', function(){
+        ga('send', 'event', 'bogacontest', 'click_facebook', 'share');
+    });
+    jQuery('#bogacontest_twitter').on('click', function(){
+        ga('send', 'event', 'bogacontest', 'click_twitter', 'share');
+    });
+    jQuery('#bogacontest_pinterest').on('click', function(){
+        ga('send', 'event', 'bogacontest', 'click_pinterest', 'share');
+    });
+}
+
 jQuery(document).ready(function()
 {
     jQuery('.vote').on('click', function(){
@@ -756,7 +771,7 @@ jQuery(document).ready(function()
         new_contestant();
         e.preventDefault();
     });
-
+    bogacontest_bind_share_buttons();
     login.bind_events();
     toolbar.bind_events();
     photo_manager.bind_events();

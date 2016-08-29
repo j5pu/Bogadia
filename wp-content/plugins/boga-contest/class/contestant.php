@@ -790,16 +790,16 @@ class contestant
         $title = 'Vota a '. $this->name .' y gana 50€';
         echo '<div class="row bogacontest_social_row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogacontest_social"></em></a>';
+        echo '<a id="bogacontest_facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogacontest_social"></em></a>';
+        echo '<a id="bogacontest_twitter" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
+        echo '<a id="bogacontest_whatsapp" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=https://www.bogadia.com'. $this->main_photo .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
+        echo '<a id="bogacontest_pinterest" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=https://www.bogadia.com'. $this->main_photo .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
         echo '</div>';
         echo '</div>';
     }

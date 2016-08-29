@@ -4,19 +4,19 @@ function after_share(){
 
 function bind_share_buttons(){
     jQuery('#whatsapp_share_button').on('click', function(){
-        ga('send', 'event', 'Bogashare2', 'click_whatsapp', 'click');
+        ga('send', 'event', 'Bogashare2', 'click_whatsapp', 'share');
         after_share()
     });
     jQuery('#facebook_share_button').on('click', function(){
-        ga('send', 'event', 'Bogashare2', 'click_facebook', 'click');
+        ga('send', 'event', 'Bogashare2', 'click_facebook', 'share');
         after_share()
     });
     jQuery('#twitter_share_button').on('click', function(){
-        ga('send', 'event', 'Bogashare2', 'click_twitter', 'click');
+        ga('send', 'event', 'Bogashare2', 'click_twitter', 'share');
         after_share()
     });
     jQuery('#pinterest_share_button').on('click', function(){
-        ga('send', 'event', 'Bogashare2', 'click_pinterest', 'click');
+        ga('send', 'event', 'Bogashare2', 'click_pinterest', 'share');
         after_share()
     });
 }

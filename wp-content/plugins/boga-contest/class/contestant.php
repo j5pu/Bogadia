@@ -172,7 +172,7 @@ class contest
         $this->slug = 'concurso-modelos';
         $this->id = 4;
         echo '<h1 class="text-center">¡<strong>Vota</strong> a la <strong>modelo</strong> que será la portada de nuestra revista en Septiembre y podras ganar 100 € / 120 US $!</h1>';
-        echo '<h2 class="text-center">Vota a tus favoritos en nuestro casting online para modelos y gana dinero con nosotros.</h2>';
+        echo '<h2 class="text-center">Vota a tus favoritos en nuestro casting online para modelos y gana dinero con nosotros</h2>';
         echo '<p>Entre todas las personas que voten se sortearán estos <strong>tres premios:</strong>';
         echo '<ul>';
         echo '<li>1º Premio: 100€ </li>';
@@ -192,6 +192,7 @@ class contest
 
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';
+        echo '<p> </p>';
 
     }
 

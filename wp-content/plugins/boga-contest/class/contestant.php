@@ -168,6 +168,33 @@ class contest
 
     }
 
+    function print_vote_page(){
+        $this->slug = 'concurso-modelos';
+        $this->id = 4;
+        echo '<h1 class="text-center">¡<strong>Vota</strong> a la <strong>modelo</strong> que será la portada de nuestra revista en Septiembre y podras ganar 100 € / 120 US $!</h1>';
+        echo '<h2 class="text-center">Vota a tus favoritos en nuestro casting online para modelos y gana dinero con nosotros.</h2>';
+        echo '<p>Entre todas las personas que voten se sortearán estos <strong>tres premios:</strong>';
+        echo '<ul>';
+        echo '<li>1º Premio: 100€ </li>';
+        echo '<li>2º Premio: 50€</li>';
+        echo '<li>3º Premio: 25€</li>';
+        echo '</ul>';
+        echo 'Además, <strong>si compartes en tus redes sociales</strong> la candidatura del modelo o los modelos que hayas votado, <strong>entrarás en el concurso de 50€ adicionales</strong>.</p>';
+        echo '<p>Puedes votar hasta el día 15 de septiembre, será entonces cuando se cierren las votaciones. <strong>Cuanto más votes y compartas las candidaturas, ¡más posibilidades tienes de ganar!</strong></p>';
+        echo '<p>Recuerda que con tus votos estás eligiendo quién protagonizará la portada de septiembre de Bogadia y se llevará un book de fotos valorado en 300€.</p>';
+        echo '<p><strong>¡Participa y sé parte de nuestro jurado!</strong></p>';
+        echo '<small>Concurso ante notario. Los ganadores del concurso serán publicados en nuestra web con el método y las reglas el 18 de Septiembre. Bases legales en nuestra web.</small>';
+        echo '<small id="description">Se pagará por paypal en pagos internacionales y/o cuenta bancaria en España.</small>';
+
+        self::print_contestant_forest();
+        self::print_login_register_form();
+        echo '<section id="participate" data-contestid="'. $this->id .'" title="Casting para ser modelo de Bogadia - Concurso de portada">';
+
+        echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
+        echo '</section>';
+
+    }
+
     function print_contest_presentation(){
 
         // PRESENTACION CONCURSO:

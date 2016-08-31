@@ -432,6 +432,7 @@ add_filter( 'wpseo_metadesc', 'bogacontest_meta_description' );
 remove_filter('template_redirect', 'redirect_canonical'); // stop redirecting
 add_shortcode( 'bogacontestant', array($bogacontestant, 'print_contestant_page') );
 add_shortcode( 'bogacontest', array($bogacontest, 'print_contest_page') );
+add_shortcode( 'bogacontest_vote', array($bogacontest, 'print_vote_page') );
 add_action('wp_enqueue_scripts', 'bogacontest_assets');
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_login', 'bogacontest_ajax_login' );
 add_action( 'wp_ajax_nopriv_bogacontest_ajax_register', 'bogacontest_ajax_register' );

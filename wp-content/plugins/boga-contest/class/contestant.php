@@ -264,6 +264,8 @@ class contest
 
     function print_login_register_form(){
         /* Imprime el formulario modal de login y registro */
+        echo '<script src=\'https://www.google.com/recaptcha/api.js\'></script>';
+
 
         echo '<div class="modal" id="bogacontest_login_modal" tabindex="-1" role="dialog" aria-labelledby="interstitialLabel" aria-hidden="true">';
 
@@ -304,7 +306,7 @@ class contest
         echo '<div id="second_form" style="display: none;">';
         echo '<form id="register_form_form" method="post" action="">';
         echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
-/*        echo '<div class="g-recaptcha" data-sitekey="6LcZlygTAAAAAEkuQ_eJ6sLMVL6l6hGLtSdelq_Q"></div>';*/
+        echo '<div class="g-recaptcha" data-sitekey="6LcZlygTAAAAAEkuQ_eJ6sLMVL6l6hGLtSdelq_Q"></div>';
         echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
         echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
         echo '</form>';
@@ -328,7 +330,6 @@ class contest
         echo '</div>';
         echo '</div>';
         echo '</div>';
-/*        echo '<script src=\'https://www.google.com/recaptcha/api.js\'></script>';*/
         // facebook pixel
         $pixel_code = '<!-- Facebook Pixel Code -->';
         $pixel_code .= '<script>';

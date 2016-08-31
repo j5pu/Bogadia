@@ -160,53 +160,80 @@ function bogacontest_ajax_register()
     global $wpdb;
     check_ajax_referer( 'ajax-register-nonce', 'security' );
 
-    $info = array();
-    $info['display_name'] = cut_title($_POST['username'], 250);
-    $info['user_nicename'] = sanitize_title(cut_title($_POST['username'], 50));
-    $info['user_login'] = cut_by($info['user_nicename'], '-') . '-' . cut_email(sanitize_email($_POST['email'])) . '-' . time();
+    $url = 'https://www.google.com/recaptcha/api/siteverify';
+    $data = array('secret' => '6LcZlygTAAAAACR1R_5IG9qDg8GCaH3tHV2eok0S', 'response' => $_POST['g-recaptcha-response']);
 
-    if($wpdb->get_row("SELECT user_nicename FROM wp_users WHERE user_nicename = '" . $info['user_nicename'] . "'", 'ARRAY_A'))
-    {
-        $info['user_nicename'] = $info['user_login'];
+    // use key 'http' even if you send the request to https://...
+    $options = array(
+        'http' => array(
+            'header'  => "Content-type: application/x-www-form-urlencoded\r\n",
+            'method'  => 'POST',
+            'content' => http_build_query($data)
+        )
+    );
+    $context  = stream_context_create($options);
+    $result = file_get_contents($url, false, $context);
+    if ($result === FALSE) {
+        echo json_encode(array('loggedin'=>false, 'case'=>8, 'message'=>__('No hemos podido comprobar si eres un robot. Inténtalo de nuevo.')));
+        die();
     }
 
-    $info['nickname'] = $info['first_name'] = cut_by($info['display_name'], ' ');
-    $info['user_pass'] = sanitize_text_field($_POST['password']);
-    $info['user_email'] = sanitize_email( $_POST['email']);
+    var_dump($result);
 
-    // Register the user
-    $user_register = wp_insert_user( $info );
+    $result = json_decode($result);
+    if($result->success == false){
+        echo json_encode(array('loggedin'=>false, 'case'=>9, 'message'=>__('¿Eres un robot? Si no lo eres, inténtalo de nuevo.')));
+    }else{
+        $info = array();
+        $info['display_name'] = cut_title($_POST['username'], 250);
+        $info['user_nicename'] = sanitize_title(cut_title($_POST['username'], 50));
+        $info['user_login'] = cut_by($info['user_nicename'], '-') . '-' . cut_email(sanitize_email($_POST['email'])) . '-' . time();
 
-    if ( is_wp_error($user_register) )
-    {
-        $error  = $user_register->get_error_codes()	;
-
-        if(in_array('empty_user_login', $error))
-            echo json_encode(array('loggedin'=>false, 'case'=>3, 'message'=>__($user_register->get_error_message('empty_user_login'))));
-        elseif(in_array('existing_user_login',$error))
-            echo json_encode(array('loggedin'=>false, 'case'=>4, 'message'=>__('Cambia tu nombre por un mote, o modifícalo un poco por favor.')));
-        elseif(in_array('existing_user_email',$error))
-            echo json_encode(array('loggedin'=>false, 'case'=>5, 'message'=>__('Este e-mail ya ha sido usado')));
-    } else
-    {
-        $info['id'] = $user_register;
-        $info['hash'] = md5( $info['user_nicename'] . microtime() );
-        add_user_meta( $info['id'], 'hash', $info['hash'] );
-        add_user_meta( $info['id'], 'verified', '0' );
-        bogacontest_mail_verify($info);
-        $login_data['user_login'] = $info['user_login'];
-        $login_data['user_password'] = $info['user_pass'];
-        $login_data['remember'] = true;
-        $user_signon = wp_signon($login_data, is_ssl() ? true : false);
-
-        if ( is_wp_error($user_signon) )
+        if($wpdb->get_row("SELECT user_nicename FROM wp_users WHERE user_nicename = '" . $info['user_nicename'] . "'", 'ARRAY_A'))
         {
-            echo json_encode(array('loggedin'=>false, 'case'=>6, 'message'=>__('Upps! Te has registrado correctamente pero no hemos podido auntenticarte')));
+            $info['user_nicename'] = $info['user_login'];
+        }
+
+        $info['nickname'] = $info['first_name'] = cut_by($info['display_name'], ' ');
+        $info['user_pass'] = sanitize_text_field($_POST['password']);
+        $info['user_email'] = sanitize_email( $_POST['email']);
+
+        // Register the user
+        $user_register = wp_insert_user( $info );
+
+        if ( is_wp_error($user_register) )
+        {
+            $error  = $user_register->get_error_codes()	;
+
+            if(in_array('empty_user_login', $error))
+                echo json_encode(array('loggedin'=>false, 'case'=>3, 'message'=>__($user_register->get_error_message('empty_user_login'))));
+            elseif(in_array('existing_user_login',$error))
+                echo json_encode(array('loggedin'=>false, 'case'=>4, 'message'=>__('Cambia tu nombre por un mote, o modifícalo un poco por favor.')));
+            elseif(in_array('existing_user_email',$error))
+                echo json_encode(array('loggedin'=>false, 'case'=>5, 'message'=>__('Este e-mail ya ha sido usado')));
         } else
         {
-            echo json_encode(array('loggedin'=>true, 'case'=>7, 'message'=>__('Perfecto '. $info['nickname']  . '. Ya estás registrado.'), 'user_id'=>$user_signon->ID, 'contestant_id'=>''));
+            $info['id'] = $user_register;
+            $info['hash'] = md5( $info['user_nicename'] . microtime() );
+            add_user_meta( $info['id'], 'hash', $info['hash'] );
+            add_user_meta( $info['id'], 'verified', '0' );
+            bogacontest_mail_verify($info);
+            $login_data['user_login'] = $info['user_login'];
+            $login_data['user_password'] = $info['user_pass'];
+            $login_data['remember'] = true;
+            $user_signon = wp_signon($login_data, is_ssl() ? true : false);
+
+            if ( is_wp_error($user_signon) )
+            {
+                echo json_encode(array('loggedin'=>false, 'case'=>6, 'message'=>__('Upps! Te has registrado correctamente pero no hemos podido auntenticarte')));
+            } else
+            {
+                echo json_encode(array('loggedin'=>true, 'case'=>7, 'message'=>__('Perfecto '. $info['nickname']  . '. Ya estás registrado.'), 'user_id'=>$user_signon->ID, 'contestant_id'=>''));
+            }
         }
+
     }
+
     die();
 }
 

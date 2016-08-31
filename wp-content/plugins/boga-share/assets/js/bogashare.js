@@ -33,6 +33,6 @@ jQuery(document).ready(function() {
     jQuery('#bogacontest_login_modal').on('hidden.bs.modal', function () {
         jQuery('#mobile_share_button').velocity('fadeIn');
         bind_share_buttons()
-    })
+    });
     bind_share_buttons()
 });

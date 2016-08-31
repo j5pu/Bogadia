@@ -178,7 +178,7 @@ function bogacontest_ajax_register()
         die();
     }
 
-    var_dump($result);
+/*    var_dump($result);*/
 
     $result = json_decode($result);
     if($result->success == false){

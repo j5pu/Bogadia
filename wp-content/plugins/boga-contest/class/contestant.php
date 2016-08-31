@@ -787,22 +787,27 @@ class contestant
             $revert = array('%21'=>'!', '%2A'=>'*', '%27'=>"'", '%28'=>'(', '%29'=>')');
             return strtr(rawurlencode($str), $revert);
         }
-        $url = 'https://www.bogadia.com/concursos/'. $this->contest->slug .'/'. $this->nice_name ;
-        $title = 'Vota a '. $this->name .' y gana 50€';
+
+        $title = 'Vota a '. $this->name .' y gana 50€ #modeloBogadia @Bogadiamag';
         echo '<div class="row bogacontest_social_row">';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a id="bogacontest_facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogacontest_social"></em></a>';
+        echo '<a id="bogacontest_facebook" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $this->print_affiliate_link('facebook') .'"><em class="icon-facebook bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a id="bogacontest_twitter" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogacontest_social"></em></a>';
+        echo '<a id="bogacontest_twitter" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $this->print_affiliate_link('twitter') ) .'"><em class="icon-twitter bogacontest_social"></em></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a id="bogacontest_whatsapp" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
+        echo '<a id="bogacontest_whatsapp" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $this->print_affiliate_link('whatsapp') ) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogacontest_social"></i></a>';
         echo '</div>';
         echo '<div class="col-xs-3 col-sm-3 col-md-3 text-center">';
-        echo '<a id="bogacontest_pinterest" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=https://www.bogadia.com'. $this->main_photo .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
+        echo '<a id="bogacontest_pinterest" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media=https://www.bogadia.com'. $this->main_photo .'&url='. $this->print_affiliate_link('pinterest') .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogacontest_social"></i></a>';
         echo '</div>';
         echo '</div>';
+    }
+
+    function print_affiliate_link($redsocial){
+        global $current_user_id;
+        return 'https://www.bogadia.com/concursos/'. $this->contest->slug .'/'. $this->nice_name .'?utm_source='. $redsocial .'&utm_medium=www.bogadia.com&utm_term='. $current_user_id .'&utm_content='. $this->ID .'&utm_campaign=SHARE' ;
     }
 
     function print_vote_button($primary)

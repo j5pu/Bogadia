@@ -340,7 +340,7 @@ function bogacontest_meta_description($string){
         if (!empty($contestant_name_or_id))
         {
             global $meta_data_container;
-            return '¡Necesito tu voto para ganar el concurso de modelos de Bogadia! Ayúdame a ser portada. '. $meta_data_container->display_name;
+            return '¡Necesito tu voto para ganar el concurso de modelos de Bogadia! Ayúdame a ser portada. '. $meta_data_container->display_name .'. #modeloBogadia @Bogadiamag';
         }else{
             return 'Gana un book profesional participando en el concurso de modelos de Bogadia, casting de modelaje online. Para nuestra portada buscamos gente como tú. Sé modelo.';
         }

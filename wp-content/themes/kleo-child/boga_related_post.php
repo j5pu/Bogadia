@@ -74,8 +74,8 @@ class boga_related_post
     }
 
     function cut_title($title){
-        if ( mb_strlen( $title, 'utf8' ) > 30 ) {
-            $last_space = strrpos( substr( $title, 0, 30 ), ' ' ); // find the last space within 35 characters
+        if ( mb_strlen( $title, 'utf8' ) > 50 ) {
+            $last_space = strrpos( substr( $title, 0, 50 ), ' ' ); // find the last space within 35 characters
             return substr( $title, 0, $last_space ) . ' ...';
         }
         return $title;
@@ -160,7 +160,7 @@ class boga_related_post
             $title = self::cut_title(get_the_title($post_id));
             //$img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
 /*            $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );*/
-            echo '<li id="post-'. $post_id .'" class="post-item col-xs-6 col-sm-4 boga-related">'
+            echo '<li id="post-'. $post_id .'" class="post-item col-sm-4 boga-related">'
                 . '<article>'
                 . '<div class="post-image">'
                 . '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'

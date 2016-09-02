@@ -11,6 +11,11 @@ if ($verified == 1 || !empty($fb_id)){
     echo $bogacontestant->anotate_vote($_POST['voter_id']);
 }else{
     echo 'Revisa tu e-mail y verifica tu cuenta';
+    include 'boga-contest.php';
+    $hash = get_user_meta($id, 'hash');
+    $info['id'] = $_POST['voter_id'];
+    $info['hash'] = $hash[0];
+    bogacontest_mail_verify($info);
 }
 
 

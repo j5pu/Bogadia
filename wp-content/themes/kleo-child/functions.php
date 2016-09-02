@@ -177,6 +177,11 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
      */
     function kleo_entry_meta( $echo = true, $att = array() ) {
 
+		function print_affiliate_link_post($redsocial, $url, $post){
+			global $current_user_id;
+			return $url .'?utm_source='. $redsocial .'&utm_medium=www.bogadia.com&utm_term='. $current_user_id .'&utm_content='. $post->ID .'&utm_campaign=SHARE_POST' ;
+		}
+
         global $kleo_config;
         $meta_list = array();
         $author_links = '';
@@ -264,14 +269,14 @@ if ( ! function_exists( 'kleo_entry_meta' ) ) :
 		}
 		$post = $GLOBALS['post'];
 		$url = get_permalink($post->ID) ;
-		$title = $post->post_title;
+		$title = $post->post_title .' @bogadiamag';
 		$image = wp_get_attachment_image_src( get_post_thumbnail_id( $post->ID ), 'single-post-thumbnail' )[0];
 		$share_buttons = '<div id="mobile_share_button" class="row">';
 		$share_buttons .= '<div class="text-center col-xs-12">';
-		$share_buttons .= '<a id="whatsapp_share_button" class="bogashare_icon_holder" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. $url) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogashare_social" style="background-color: #43d854;"></i></a>';
-		$share_buttons .= '<a id="facebook_share_button" class="bogashare_icon_holder" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. $url .'"><em class="icon-facebook bogashare_social" style="background-color: #3b5998;"></em></a>';
-		$share_buttons .= '<a id="twitter_share_button" class="bogashare_icon_holder" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. $url .' @Bogadiamag') .'"><em class="icon-twitter bogashare_social" style="background-color: #00aced;"></em></a>';
-		$share_buttons .= '<a id="pinterest_share_button" class="bogashare_icon_holder" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media='. $image .'&url='. $url .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogashare_social" style="background-color: #bd081c;"></i></a>';
+		$share_buttons .= '<a id="whatsapp_share_button" class="bogashare_icon_holder" target="_blank" href="whatsapp://send?text='. encodeURIComponent($title .' '. print_affiliate_link_post('whatsapp', $url, $post)) .'" data-action="share/whatsapp/share"><i class="icon-whatsapp bogashare_social" style="background-color: #43d854;"></i></a>';
+		$share_buttons .= '<a id="facebook_share_button" class="bogashare_icon_holder" target="_blank" href="http://www.facebook.com/sharer/sharer.php?u='. print_affiliate_link_post('facebook', $url, $post) .'"><em class="icon-facebook bogashare_social" style="background-color: #3b5998;"></em></a>';
+		$share_buttons .= '<a id="twitter_share_button" class="bogashare_icon_holder" target="_blank" href="http://twitter.com/intent/tweet?status='. encodeURIComponent($title .' '. print_affiliate_link_post('twitter', $url, $post) ) .'"><em class="icon-twitter bogashare_social" style="background-color: #00aced;"></em></a>';
+		$share_buttons .= '<a id="pinterest_share_button" class="bogashare_icon_holder" target="_blank" href="http://pinterest.com/pin/create/bookmarklet/?media='. $image .'&url='. print_affiliate_link_post('pinterest', $url, $post) .'&is_video=false&description='. $title .'"><i class="icon-pinterest-circled bogashare_social" style="background-color: #bd081c;"></i></a>';
 		$share_buttons .= '</div>';
 		$share_buttons .= '</div>';
 		echo $share_buttons;

@@ -8,16 +8,20 @@ $verified = get_user_meta($voter_id, 'verified');
 $fb_id = get_user_meta($voter_id, '_fbid');
 
 
-if ($verified == 1 || !empty($fb_id)){
+if ($verified[0] == '1' || !empty($fb_id)){
     echo $bogacontestant->anotate_vote($voter_id);
 }else{
-    echo 'Revisa tu e-mail y verifica tu cuenta';
-/*    include 'boga-contest.php';
-    $hash = get_user_meta($id, 'hash');
-    $info['id'] = $voter_id;
-    $info['hash'] = $hash[0];
-    $user_info = get_userdata($info['id']);
-    $info['user_email'] = $user_info->user_email;
-    $info['first_name'] = $user_info->first_name;
-    bogacontest_mail_verify($info);*/
+    echo 'Te hemos enviado un mail. Revisa tu correo.';
+
+    $sended_mail = get_user_meta($voter_id, 'send_mail_verify');
+
+    if ($sended_mail[0] = '0' || empty($sended_mail)){
+        $hash = get_user_meta($voter_id, 'hash');
+        $info['id'] = $voter_id;
+        $info['hash'] = $hash[0];
+        $user_info = get_userdata($voter_id);
+        $info['user_email'] = $user_info->user_email;
+        $info['first_name'] = $user_info->first_name;
+        bogacontest_mail_verify($info);
+    }
 }

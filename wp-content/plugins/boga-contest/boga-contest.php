@@ -391,6 +391,7 @@ function bogacontest_mail_verify($info)
     ob_end_clean();
 
     wp_mail($info['user_email'], $email_subject, $message);
+    add_user_meta( $info['id'], 'send_mail_verify', '1' );
 }
 
 function WPSEO_OpenGraph_Image() {

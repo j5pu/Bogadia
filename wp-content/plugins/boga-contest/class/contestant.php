@@ -968,7 +968,7 @@ class contestant
             $this->contest->print_contest_presentation();
         }
 
-        $this->contest->print_login_register_form(1);
+        $this->contest->print_login_register_form(0);
         if(isset($_GET['status'])) {
             if ($_GET['status'] == 'complete' && ($current_user_id == $this->user_id)){
 

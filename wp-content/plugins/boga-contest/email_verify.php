@@ -13,7 +13,7 @@ get_template_part( 'page-parts/general-before-wrap' );
 if ($hash[0] == $_GET['hash']){
     update_user_meta($id, 'verified', '1');
     echo '<img class="img-responsive" style="margin:0 auto;" src="assets/img/sonrisa.png">';
-    echo '<h3 class="text-center">Cuenta verificada. Muchas gracias</h3>';
+    echo '<h3 class="text-center">Cuenta verificada. Ya puedes votar las veces que quieras. Muchas gracias</h3>';
 
 }else{
     echo '<img class="img-responsive" style="margin:0 auto;" src="assets/img/sad.png">';

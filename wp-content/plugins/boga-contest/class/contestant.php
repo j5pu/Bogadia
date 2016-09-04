@@ -164,7 +164,7 @@ class contest
         self::get_contest_slug_from_url();
         self::print_contest_presentation();
         self::print_contestant_forest();
-        self::print_login_register_form(0);
+        self::print_login_register_form();
 
     }
 
@@ -290,7 +290,7 @@ class contest
         }
     }
 
-    function print_login_register_form($only_facebook){
+    function print_login_register_form(){
         /* Imprime el formulario modal de login y registro */
         echo '<script src=\'https://www.google.com/recaptcha/api.js\'></script>';
 
@@ -317,30 +317,37 @@ class contest
         echo '<div id="form_wrapper">';
         ////// Boton facebook
         echo '<button id="bogacontest_fb_login" type="button" class="btn btn-primary btn-lg"><em class="icon-facebook"></em> | Entrar con facebook</button>';
-        if ($only_facebook == 0){
-            echo '<h4 class="text-center">o</h4>';
-            ////// Formulario registro
-            echo '<h4 id="register_help_text" style="color: red;"></h4>';
-            echo '<small id="email_validate_text" style="display: none; color: red;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
+        echo '<h4 class="text-center">o</h4>';
+        ////// Formulario registro
+        echo '<h4 id="register_help_text" style="color: red;"></h4>';
+        echo '<small id="email_validate_text" style="display: none; color: red;">¡Hey! Revisa el email que has introducido, parece que hay algo mal</small>';
 
-            echo '<div id="first_form">';
-            echo '<form id="login_form_form" method="post" action="">';
-            echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
-            echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
-            echo '<button id="bogacontest_up_login" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="login_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_text">Registrarme</span></div></button>';
-            echo '<button id="bogacontest_up_login_2" class="btn btn-default"><div class="text-center" style="min-height: 18px"><img id="login_loader_2" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_2_text">Iniciar sesión</span></div></button>';
-            echo '</form>';
-            echo '</div>';
+        echo '<div id="first_form">';
+        echo '<form id="login_form_form" method="post" action="">';
+        echo '<input id="bogacontest_up_login_email" class="form-control" type="email" name="email" placeholder="Correo electrónico">';
+        echo '<input id="bogacontest_up_login_password" class="form-control" type="password" name="password" placeholder="Contraseña">';
+        echo '<button id="bogacontest_up_login" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="login_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_text">Registrarme</span></div></button>';
+        echo '<button id="bogacontest_up_login_2" class="btn btn-default"><div class="text-center" style="min-height: 18px"><img id="login_loader_2" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/BoganimationN2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="login_2_text">Iniciar sesión</span></div></button>';
+        echo '</form>';
+        echo '</div>';
 
-            echo '<div id="second_form" style="display: none;">';
-            echo '<form id="register_form_form" method="post" action="">';
-            echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
-            echo '<div class="g-recaptcha" data-sitekey="6LcZlygTAAAAAEkuQ_eJ6sLMVL6l6hGLtSdelq_Q"></div>';
-            echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
-            echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
-            echo '</form>';
-            echo '</div>';
-        }
+        echo '<div id="second_form" style="display: none;">';
+        echo '<form id="e-mail_validate_form" method="post" action="">';
+        echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
+        echo '<div class="g-recaptcha" data-sitekey="6LcZlygTAAAAAEkuQ_eJ6sLMVL6l6hGLtSdelq_Q"></div>';
+        echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
+        echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
+        echo '</form>';
+        echo '</div>';
+
+        echo '<div id="second_form" style="display: none;">';
+        echo '<form id="register_form_form" method="post" action="">';
+        echo '<input id="bogacontest_up_login_username" class="form-control" type="text" name="username" placeholder="Nombre completo" >';
+        echo '<div class="g-recaptcha" data-sitekey="6LcZlygTAAAAAEkuQ_eJ6sLMVL6l6hGLtSdelq_Q"></div>';
+        echo '<button id="bogacontest_up_register" type="submit" class="btn btn-primary " data-ajaxurl="'. admin_url( 'admin-ajax.php' ) .'"><div class="text-center" style="min-height: 18px"><img id="register_loader" class="img-responsive" src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="margin: 0 auto; display: none; width: 54px;"><span id="register_text">Registrarme</span></div></button>';
+        echo '<button id="go_back" class="btn btn-default">Volver atrás</button>';
+        echo '</form>';
+        echo '</div>';
 
         echo wp_nonce_field( 'ajax-login-nonce', 'bogacontest_up_login_security' );
         echo wp_nonce_field( 'ajax-register-nonce', 'bogacontest_up_register_security' );
@@ -959,7 +966,7 @@ class contestant
             $this->contest->print_contest_presentation();
         }
 
-        $this->contest->print_login_register_form(1);
+        $this->contest->print_login_register_form();
         if(isset($_GET['status'])) {
             if ($_GET['status'] == 'complete' && ($current_user_id == $this->user_id)){
 

@@ -15,7 +15,7 @@ if ($verified[0] == '1' || !empty($fb_id)){
     $sended_mail = get_user_meta($voter_id, 'send_mail_verify');
 
     if ($sended_mail[0] = '0' || empty($sended_mail)){
-        echo '. Te hemos enviado un mail';
+/*        echo '. Te hemos enviado un mail';*/
 
         $info['id'] = $voter_id;
         $user_info = get_userdata($voter_id);
@@ -31,6 +31,6 @@ if ($verified[0] == '1' || !empty($fb_id)){
         }
         bogacontest_mail_verify($info);
     }else{
-        echo '. Recuerda verificar tu cuenta';
+/*        echo '. Recuerda verificar tu cuenta';*/
     }
 }

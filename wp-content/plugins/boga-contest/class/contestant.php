@@ -857,6 +857,8 @@ class contestant
 
     function print_mini_card($contest_slug)
     {
+        global $current_user_id;
+
         echo '<div class="grid-item col-xs-6 col-sm-4 col-md-3 mini_image" data-contestant_id="'. $this->ID .'"   width="500px" height="281px">';
         echo '<a href="/concursos/'. $contest_slug .'/'. $this->nice_name .'">';
         echo '<img id="contestant-'. $this->ID .'"  src="'. $this->main_photo .'" alt="foto de '. $this->name .', modelo de Bogadia">';
@@ -864,6 +866,7 @@ class contestant
         echo '<h6 class="mini-votes"><span class="mini_span">'. $this->votes .' <i class="icon-star" aria-hidden="true"></i></span></h6>';
         echo '</a>';
         echo '</div>';
+
     }
 
     function print_contestant_page()
@@ -954,6 +957,9 @@ class contestant
         echo '</div>';
         echo '</div>';*/
 
+        if ($current_user_id == 20 || $current_user_id == 11 || $current_user_id == 56){
+            self::get_voters();
+        }
         if(!$current_user_is_editing){
             $this->contest->print_contestant_forest();
             $this->contest->print_contest_presentation();
@@ -1128,5 +1134,19 @@ class contestant
         }
         echo '</div>';
         echo '</div>';
+    }
+
+    function get_voters()
+    {
+        global $wpdb;
+
+        $query = 'SELECT user_email FROM wp_users INNER JOIN wp_bogacontest_votes ON wp_bogacontest_votes.voter_id=wp_users.ID WHERE contestant_id=' . $this->ID . ' GROUP BY wp_users.ID;';
+        $results = $wpdb->get_results($query, OBJECT);
+        echo '<h2>Votantes de '. $this->name .'</h2>';
+        echo '<ul class="list-group">';
+        foreach ($results as $voter) {
+            echo '<li class="list-group-item"> '. $voter->user_email . ' </li>';
+        }
+        echo '</ul>';
     }
 }

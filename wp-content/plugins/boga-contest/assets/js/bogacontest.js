@@ -1,6 +1,7 @@
 var grid = 0;
 var contestant_grid = 0;
 var first_time_main_photo_set = 0;
+var delete_contestant_clicks = 0;
 
 var gallery = {
     photos: [],
@@ -86,6 +87,43 @@ var vote = {
                         currency: 'USD'
                     });
                 }
+            })
+            .fail(function( msg ) {
+                alert('fallo' + msg);
+            });
+        }
+    }
+};
+
+var delete_contestant = {
+    voter_id: '',
+    contestant_id: '',
+    user_id: '',
+    button: '',
+    new_vote: function(){
+        delete_contestant.voter_id = jQuery('#current-user-data-holder').data('currentuserid');
+        if(delete_contestant.voter_id == '0') {
+            jQuery('#bogacontest_login_modal').modal({show:true});
+            jQuery('#bogacontest_up_login_action_after_login').val('vote');
+        }else{
+            jQuery.ajax({
+                beforeSend: function(){
+                    jQuery.Velocity.RunSequence([
+                        {e: jQuery('#vote_text'), p:'fadeOut'},
+                        {e: jQuery('#vote_loader'), p:'fadeIn'},
+                    ]);
+                    delete_contestant.button.html('<img src="/wp-content/plugins/boga-contest/assets/img/Boganimation2.gif" style="width: 12%">');
+                },
+                method: "POST",
+                url: "/wp-content/plugins/boga-contest/delete_contestant.php",
+                data: {
+                    voter_id: delete_contestant.voter_id,
+                    contestant_id: delete_contestant.contestant_id,
+                    user_id: delete_contestant.user_id
+                }
+            })
+            .done(function( msg ) {
+                delete_contestant.button.html(msg);
             })
             .fail(function( msg ) {
                 alert('fallo' + msg);
@@ -766,6 +804,18 @@ jQuery(document).ready(function()
         vote.voter_id = jQuery('#current-user-data-holder').data('currentuserid');
         vote.button = jQuery(this);
         vote.new_vote();
+    });
+    jQuery('#delete_contestant').on('click', function(){
+        delete_contestant_clicks ++;
+        if (delete_contestant_clicks == 2){
+            delete_contestant.contestant_id = jQuery(this).data('id');
+            delete_contestant.user_id = jQuery(this).data("contestantuserid");
+            delete_contestant.voter_id = jQuery('#current-user-data-holder').data('currentuserid');
+            delete_contestant.button = jQuery(this);
+            delete_contestant.new_vote();
+        }else{
+            jQuery(this).html('Pulsa de nuevo para confirmar');
+        }
     });
     jQuery('#back_to_edit').on('click', function(){
         window.location = '/concursos/' + jQuery('#toolbar').data('slug') + '/' + jQuery(this).data('nicename') + '?edit=true';

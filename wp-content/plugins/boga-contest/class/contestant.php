@@ -630,7 +630,12 @@ class contestant
     function delete()
     {
         global $wpdb;
-        $wpdb->delete( 'wp_bogacontest_contestant', array( 'ID' => $this->ID ) );
+        $result = $wpdb->delete( 'wp_bogacontest_contestant', array( 'ID' => $this->ID ), array( '%d' ) );
+        if ($result==false){
+            return 'No se ha podido borrar al usuario';
+        }else{
+            return 'Usuario borrado';
+        }
     }
 
     function create_img($main, $path)
@@ -959,6 +964,7 @@ class contestant
 
         if ($current_user_id == 20 || $current_user_id == 11 || $current_user_id == 56){
             self::get_voters();
+            echo '<button id="delete_contestant" class="btn-primary btn" data-id="'. $this->ID .'" data-contestantuserid="'. $this->user_id .'">BORRAR CONCURSANTE</button>';
         }
         if(!$current_user_is_editing){
             $this->contest->print_contestant_forest();

@@ -27,7 +27,7 @@ function sincronize_buddypress(){
         copy($filename, $avatar_folder .'/main-bpthumb.jpg');
 
         if ( function_exists( 'bp_update_user_last_activity' ) ) {
-            bp_update_user_last_activity($contestant->ID);
+            bp_update_user_last_activity($contestant->id);
         }
         echo'-';
         $counter++;

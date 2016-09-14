@@ -417,7 +417,18 @@ function WPSEO_OpenGraph_Image() {
 
 }
 
-
+function wpdocs_register_my_custom_menu_page() {
+    add_menu_page(
+        __( 'Custom Menu Title', 'textdomain' ),
+        'Concurso de modelos',
+        'manage_options',
+        'boga-contest/admin/boga-contest_admin.php',
+        '',
+        plugins_url( 'myplugin/images/icon.png' ),
+        6
+    );
+}
+add_action( 'admin_menu', 'wpdocs_register_my_custom_menu_page' );
 
 add_filter("wpseo_opengraph", "WPSEO_OpenGraph_Image");
 add_filter( 'wpseo_sitemap_index', 'bogacontest_sitemap_index' );

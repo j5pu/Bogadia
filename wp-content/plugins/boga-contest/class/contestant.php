@@ -1155,4 +1155,6 @@ class contestant
         }
         echo '</ul>';
     }
+
+
 }

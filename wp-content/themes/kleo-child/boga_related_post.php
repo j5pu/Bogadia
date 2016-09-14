@@ -82,24 +82,24 @@ class boga_related_post
     }
 
     function inside_content_related_post( $content ) {
-        function prefix_insert_after_paragraph( $insertion, $paragraph_id, $content ) {
-            $closing_p = '</p>';
-            $paragraphs = explode( $closing_p, $content );
-            foreach ($paragraphs as $index => $paragraph) {
 
-                if ( trim( $paragraph ) ) {
-                    $paragraphs[$index] .= $closing_p;
+        if ( is_single() && ! is_admin()  && (in_category('Belleza') || in_category('Lifestyle') || in_category('Moda') || in_category('Humor')) ) {
+            function prefix_insert_after_paragraph( $insertion, $paragraph_id, $content ) {
+                $closing_p = '</p>';
+                $paragraphs = explode( $closing_p, $content );
+                foreach ($paragraphs as $index => $paragraph) {
+
+                    if ( trim( $paragraph ) ) {
+                        $paragraphs[$index] .= $closing_p;
+                    }
+
+                    if ( $paragraph_id == $index + 1 ) {
+                        $paragraphs[$index] .= $insertion;
+                    }
                 }
 
-                if ( $paragraph_id == $index + 1 ) {
-                    $paragraphs[$index] .= $insertion;
-                }
+                return implode( '', $paragraphs );
             }
-
-            return implode( '', $paragraphs );
-        }
-
-        if ( is_single() && ! is_admin()  && !in_category('Streetstyle') && !has_term( 'BogadiaTV', 'post_tag', $this->retrieved_post[0] )) {
             self::query_related_post();
             $likes_posts = self::get_related_post(3);
             $c=0;
@@ -145,39 +145,42 @@ class boga_related_post
     }
 
     function main_related_post(){
-        self::query_related_post();
-        $related_posts = self::get_related_post(9);
+        if ( is_single() && ! is_admin()  && (in_category('Belleza') || in_category('Lifestyle') || in_category('Moda') || in_category('Humor')) ){
+            self::query_related_post();
+            $related_posts = self::get_related_post(9);
 
-        echo '<section class="container-wrap">'
-            . '<div class="container">'
-            . '<div class="related-wrap">'
-            . '<div class="hr-title hr-long"><abbr>ARTÍCULOS RELACIONADOS</abbr></div>'
-            . '<ul style="list-style-type: none; padding-left: 0px;">';
+            echo '<section class="container-wrap">'
+                . '<div class="container">'
+                . '<div class="related-wrap">'
+                . '<div class="hr-title hr-long"><abbr>ARTÍCULOS RELACIONADOS</abbr></div>'
+                . '<ul style="list-style-type: none; padding-left: 0px;">';
 
-        foreach( $related_posts as $likes_post ) {
-            $post_id = $likes_post;
-            $link = get_permalink($post_id);
-            $title = self::cut_title(get_the_title($post_id));
-            //$img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
-/*            $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );*/
-            echo '<li id="post-'. $post_id .'" class="post-item col-sm-4 boga-related">'
-                . '<article>'
-                . '<div class="post-image">'
-                . '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'
-                //. '<img src="'. $img_url .'" alt="'. $title .'" class="attachment-thumbnail wp-post-image">'
-                . get_the_post_thumbnail( $post_id, 'medium' )
-                . '</a>'
-                . '</div><!--end post-image-->'
-                . '<div class="entry-content">'
-                . '<h5 class="post-title entry-title"><a title="'. $title .'" href="'. $link .'">'. $title .'</a></h5>'
+            foreach( $related_posts as $likes_post ) {
+                $post_id = $likes_post;
+                $link = get_permalink($post_id);
+                $title = self::cut_title(get_the_title($post_id));
+                //$img_url = wp_get_attachment_url(get_post_thumbnail_id($post_id));
+    /*            $img_url = get_the_post_thumbnail( $post_id, 'thumbnail' );*/
+                echo '<li id="post-'. $post_id .'" class="post-item col-sm-4 boga-related">'
+                    . '<article>'
+                    . '<div class="post-image">'
+                    . '<a title="'. $title .'" href="'. $link .'" class="element-wrap">'
+                    //. '<img src="'. $img_url .'" alt="'. $title .'" class="attachment-thumbnail wp-post-image">'
+                    . get_the_post_thumbnail( $post_id, 'medium' )
+                    . '</a>'
+                    . '</div><!--end post-image-->'
+                    . '<div class="entry-content">'
+                    . '<h5 class="post-title entry-title"><a title="'. $title .'" href="'. $link .'">'. $title .'</a></h5>'
+                    . '</div>'
+                    . '</article>'
+                    . '</li>';
+            }
+
+            echo '</ul>'
                 . '</div>'
-                . '</article>'
-                . '</li>';
-        }
+                . '</div>'
+                . '</section>';
 
-        echo '</ul>'
-            . '</div>'
-            . '</div>'
-            . '</section>';
+        }
     }
 }

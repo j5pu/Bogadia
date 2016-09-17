@@ -171,8 +171,8 @@ class contest
 /*            echo '<img class="media-object" src="/wp-content/uploads/bogacontest/concurso-modelos/278/8d5c56ea3b0119709a747a3559425c68.jpeg" alt="Ganadora del concurso de modelos">';*/
           echo '</a>';
           echo '<div class="media-body">';
-            echo '<h4 class="media-heading">En proceso de verificación</h4>';
-            echo 'Estamos analizando la validez de todos los votos y usuarios. La ganadora será anunciada el sábado 17 de Septiembre a las 21:00 horas (Madrid)';
+            echo '<h4 class="media-heading">Seguimos en proceso de verificación </h4>';
+            echo 'Estamos analizando la validez de todos los votos y usuarios. La ganadora será anunciada el Lunes 19 de Septiembre a las 22:00 horas (Madrid). Por favor, disculpa las molestias.';
           echo '</div>';
         echo '</div>';
 

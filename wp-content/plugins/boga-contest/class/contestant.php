@@ -935,7 +935,7 @@ class contestant
         echo '<div class="col-md-12">';
         if (!$current_user_is_editing){
             self::print_share_buttons();
-            self::print_vote_button(True);
+/*            self::print_vote_button(True);*/
             if(($current_user_id == $this->user_id) && !(isset($_GET['edit']))){
                 echo '<button id="back_to_edit" type="button" class="btn btn-default btn-block" data-contestid="'. $this->contest->id .'" data-nicename="'. $this->nice_name .'" style="margin-left: 0px;"><div class="text-center" style="min-height: 18px"><span id="">Editar mi perfil</span></div></button>';
             }

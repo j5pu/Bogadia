@@ -164,17 +164,6 @@ class contest
         self::get_contest_slug_from_url();
         self::print_contest_presentation();
 
-        echo '<h3 id="contestants_forest_header"><span id="contestants_forest_header_span">Ganadora </span> </h3>';
-
-        echo '<div class="media">';
-          echo '<a class="media-left" href="#">';
-/*            echo '<img class="media-object" src="/wp-content/uploads/bogacontest/concurso-modelos/278/8d5c56ea3b0119709a747a3559425c68.jpeg" alt="Ganadora del concurso de modelos">';*/
-          echo '</a>';
-          echo '<div class="media-body">';
-            echo '<h4 class="media-heading">Seguimos en proceso de verificación </h4>';
-            echo 'Estamos analizando la validez de todos los votos y usuarios. La ganadora será anunciada el Lunes 19 de Septiembre a las 22:00 horas (Madrid). Por favor, disculpa las molestias.';
-          echo '</div>';
-        echo '</div>';
 
 
 
@@ -221,6 +210,8 @@ class contest
         echo '<div id="current-user-data-holder" class="row" data-currentuserid="'. get_current_user_id() .'" data-is_mobile="'. wp_is_mobile()  .'">';
         echo '</section>';*/
         echo '<img class="img-responsive" style="width: 50%;" src="https://www.bogadia.com/wp-content/uploads/2016/05/logo_final_negro-2.png" >';
+        echo '<img class="img-responsive" style="padding-top: 10px;" src="/wp-content/plugins/boga-contest/assets/img/IMAGEN_GANADORA_CONCURSO.jpg" alt="Ganadora del concurso de modelos">';
+
         echo '<p id="description">Sube tu foto, consigue votos y conviértete en <strong>modelo</strong> de la portada de nuestra revista mediante nuestro <strong>casting online</strong>. Ganarás un <strong>book</strong> profesional valorado en 300 Euros y entrar de lleno en el mundo de la moda. Además, se seleccionará a l@s que serán imagen de los diseñadores que colaborarán en el lanzamiento de nuestra tienda online.</p>';
 
     }
